@@ -1,10 +1,12 @@
 {
-  "name": "wgforge_2021_frontend",
+  "name": "wgforge-2021-frontend",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "WGForge 2021 Frontend Course Final Task",
+  "main": "main.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "webpack serve --progress",
+    "build": "webpack --config webpack.config.prod.js",
+    "build:dev": "webpack"
   },
   "repository": {
     "type": "git",
@@ -18,7 +20,23 @@
   },
   "homepage": "https://github.com/mineralsfree/WGForge_2021_Frontend#readme",
   "devDependencies": {
+    "@types/node": "^16.11.10",
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^5.1.1",
+    "css-loader": "^6.5.1",
+    "file-loader": "^6.2.0",
+    "html-webpack-plugin": "^5.5.0",
+    "node-sass": "^6.0.1",
+    "postcss-loader": "^6.2.0",
+    "postcss-preset-env": "^7.0.1",
+    "prettier": "^2.4.1",
+    "sass-loader": "^12.3.0",
+    "style-loader": "^3.3.1",
+    "ts-loader": "^9.2.6",
+    "typescript": "^4.5.2",
     "webpack": "^5.64.3",
-    "webpack-cli": "^4.9.1"
+    "webpack-cli": "^4.9.1",
+    "webpack-dev-server": "^4.5.0",
+    "webpack-merge": "^5.8.0"
   }
 }
