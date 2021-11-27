@@ -1,9 +1,18 @@
+$page-width: 1200px;
+
+// FONTS
 $font-size: 1rem;
 $font-family: 'Inter', sans-serif;
 
+// COLORS
 $font-color: #121212;
 $main-light-color: #ffffff;
+$main-dark-color: #778899;
 $background-color: #5f9ea0;
 $red-color: #ff0000;
+$brand-color: #1900ff;
 
-$page-width: 650px;
+// MEDIA
+$desktop-width: 1200px;
+$tablet-width: 1023px;
+$mobile-width: 700px; 

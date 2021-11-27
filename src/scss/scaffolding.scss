@@ -1,15 +1,16 @@
 html {
   font-size: $font-size;
   font-family: $font-family;
-  background: $main-light-color;
   color: $font-color;
   line-height: 1.4;
+  
+  background: $main-light-color;
 }
 
 body {
-  margin: auto;
+  margin: 0;
+
   text-align: center;
-  max-width: $page-width;
 }
 
 h1 {
@@ -18,13 +19,17 @@ h1 {
 
 .image {
   display: inline-block;
-  height: 100px;
   width: 100px;
+  height: 100px;
+  
   background-image: url('../assets/images/example.png');
   background-size: cover;
 }
 
 #root {
+  max-width: 650px;
+  margin: auto;
+
   background-color: $background-color;
 }
 
@@ -38,4 +43,10 @@ h1 {
 
 #button {
   margin: 20px;
+}
+
+.link {
+  color: inherit;
+
+  text-decoration: none;
 }
