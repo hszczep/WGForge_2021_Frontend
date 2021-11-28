@@ -1,5 +1,6 @@
 import { errorPage } from './pages/error-page';
 
+import appController from '../controller/app.controller'; 
 import routes from './routes/routes';
 
 import { getLocationPath, isRouteHasPath } from './common/router.helper';
@@ -28,8 +29,12 @@ class Router {
     const { page } = this.findPageByPath(currentPath);
     this.previousPage = page;
 
+    appController.spinner.show(); 
+
     this.mainContainer.innerHTML = '';
     const pageMarkup: string = page.render();
+
+    appController.spinner.hide(); 
 
     this.mainContainer.insertAdjacentHTML('afterbegin', pageMarkup);
     if (page.init) page.init();
