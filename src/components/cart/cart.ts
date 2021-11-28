@@ -1,4 +1,4 @@
-class cartComponent {
+class CartComponent {
   constructor() {
     this.init = this.init.bind(this);
     this.unmount = this.unmount.bind(this);
@@ -14,8 +14,8 @@ class cartComponent {
   }
 
   render() {
-   
+
   }
 }
 
-export default new cartComponent();
+export default new CartComponent();

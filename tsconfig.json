@@ -6,13 +6,13 @@
     "allowSyntheticDefaultImports": true,
     "sourceMap": true,
     "module": "es6",
-    "target": "ES2016",
+    "target": "es6",
     "allowJs": true,
     "typeRoots": [
       "custom_typings"
     ],
-    "lib": [ "es2018", "dom" ],
+    "lib": [ "DOM", "ES6", "DOM.Iterable", "ScriptHost" ],
   },
-  "include": ["src"],
+  "include": ["src/**/*", "global.d.ts"],
   "exclude": ["dist", "node_modules"]
 }

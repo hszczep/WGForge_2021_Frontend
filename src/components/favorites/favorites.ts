@@ -1,4 +1,4 @@
-class favoritesComponent {
+class FavoritesComponent {
   constructor() {
     this.init = this.init.bind(this);
     this.unmount = this.unmount.bind(this);
@@ -14,8 +14,8 @@ class favoritesComponent {
   }
 
   render() {
-   
+
   }
 }
 
-export default new favoritesComponent();
+export default new FavoritesComponent();

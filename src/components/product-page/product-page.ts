@@ -1,4 +1,4 @@
-class productPageComponent {
+class ProductPageComponent {
   constructor() {
     this.init = this.init.bind(this);
     this.unmount = this.unmount.bind(this);
@@ -14,8 +14,8 @@ class productPageComponent {
   }
 
   render() {
-   
+
   }
 }
 
-export default new productPageComponent();
+export default new ProductPageComponent();

@@ -7,7 +7,8 @@
     "serve": "webpack serve --progress",
     "build": "webpack --config webpack.config.prod.js",
     "build:dev": "webpack",
-    "lint": "eslint -c .eslintrc.json --no-eslintrc --ignore-path .eslintignore --ext .ts ."
+    "lint": "eslint src/**/*.{js,ts}",
+    "lint:fix": "eslint src/**/*.{js,ts} --fix"
   },
   "repository": {
     "type": "git",
@@ -22,13 +23,14 @@
   "homepage": "https://github.com/mineralsfree/WGForge_2021_Frontend#readme",
   "devDependencies": {
     "@types/node": "^16.11.10",
-    "@typescript-eslint/eslint-plugin": "^5.0.0",
-    "@typescript-eslint/parser": "^5.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.4.0",
+    "@typescript-eslint/parser": "^5.4.0",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^5.1.1",
     "css-loader": "^6.5.1",
-    "eslint": "^8.1.0",
+    "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-airbnb-typescript": "^16.0.0",
     "eslint-plugin-import": "^2.25.3",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
