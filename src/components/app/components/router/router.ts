@@ -13,7 +13,7 @@ class Router {
   previousPage: IPage = null;
 
   constructor() {
-    this.rout = this.rout.bind(this);
+    this.route = this.route.bind(this);
   }
 
   findPageByPath(currentPath: string) {
@@ -22,7 +22,7 @@ class Router {
         || { path: '/error', page: errorPage };
   }
 
-  rout() {
+  route() {
     if (this.previousPage && this.previousPage.unmount) this.previousPage.unmount();
 
     const currentPath = getLocationPath();
@@ -34,7 +34,7 @@ class Router {
     this.mainContainer.innerHTML = '';
     const pageMarkup: string = page.render();
 
-    appController.spinner.hide(); 
+    appController.spinner.hide();
 
     this.mainContainer.insertAdjacentHTML('afterbegin', pageMarkup);
     if (page.init) page.init();
@@ -42,8 +42,8 @@ class Router {
 
   init() {
     this.mainContainer = document.querySelector('.app');
-    window.addEventListener('hashchange', this.rout);
-    this.rout();
+    window.addEventListener('hashchange', this.route);
+    this.route();
   }
 }
 

@@ -36,14 +36,6 @@
 }
 
 @keyframes spinner__inner {
-  0% {
-    transform: rotate(0deg);
-  }
-
-  50% {
-    transform: rotate(30deg);
-  }
-
   100% {
     transform: rotate(60deg);
   }
@@ -88,7 +80,6 @@
 .spinner__gear {
   width: 264px;
   height: 264px;
-  display: inline-block;
   display: flex;
   justify-content: center;
   align-items: center;
