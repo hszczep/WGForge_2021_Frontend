@@ -1,9 +1,9 @@
+@import './variables';
+@import './mixins';
+@import './scaffolding';
+@import './navigation';
+
 @font-face {
-  font-family: 'Inter';
+  font-family: Inter;
   src: url('../assets/fonts/Inter.ttf');
 }
-
-@import './variables.scss';
-@import './mixins.scss';
-@import './scaffolding.scss';
-@import './navigation.scss';

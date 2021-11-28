@@ -7,7 +7,7 @@
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(214, 234, 248, 0.9);
+  background-color: rgb(214 234 248 / 90%);
   z-index: 9999;
 }
 
@@ -23,15 +23,15 @@
   animation: blink 0.35s linear infinite;
 }
 
-@-webkit-keyframes blink {
+@keyframes blink {
   100% {
-    color: rgba(34, 34, 34, 0);
+    color: rgb(34 34 34 / 0%);
   }
 }
 
 @keyframes blink {
   100% {
-    color: rgba(34, 34, 34, 0);
+    color: rgb(34 34 34 / 0%);
   }
 }
 
@@ -39,6 +39,10 @@
   100% {
     transform: rotate(60deg);
   }
+}
+
+.spinner__inner div {
+  box-sizing: content-box;
 }
 
 .spinner__inner > div {
@@ -94,10 +98,6 @@
   transform: translateZ(0) scale(1);
   backface-visibility: hidden;
   transform-origin: 0 0;
-}
-
-.spinner__inner div {
-  box-sizing: content-box;
 }
 
 .display-none {

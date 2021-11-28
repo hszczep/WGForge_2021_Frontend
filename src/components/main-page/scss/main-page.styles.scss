@@ -1,14 +1,14 @@
-@import '../../../scss/variables.scss';
+@import '../../../scss/variables';
 
 .main-page__navigation-link {
-  color: #ffffff;
+  color: #fff;
   background-color: #808080;
-  border-right: 1px solid #ffffff;
+  border-right: 1px solid #fff;
 
   &:hover,
   &:focus,
   &:active {
-    background-color: #000000;
+    background-color: #000;
   }
 }
 
