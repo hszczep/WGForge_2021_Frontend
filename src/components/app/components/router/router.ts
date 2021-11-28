@@ -34,7 +34,7 @@ class Router {
     this.mainContainer.innerHTML = '';
     const pageMarkup: string = page.render();
 
-    appController.spinner.hide(); 
+    appController.spinner.hide();
 
     this.mainContainer.insertAdjacentHTML('afterbegin', pageMarkup);
     if (page.init) page.init();
