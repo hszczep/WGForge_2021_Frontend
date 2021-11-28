@@ -54,10 +54,7 @@ class TestComponent {
 
   async renderContainer(container: Element, fetchToAPIMethod: () => Promise<unknown>) {
     const data = await fetchToAPIMethod();
-    container.insertAdjacentHTML(
-      'afterbegin',
-      `<span class="bold red">My IP data:</span> ${JSON.stringify(data)}`,
-    );
+    container.insertAdjacentHTML('afterbegin', `<span class="bold red">My IP data:</span> ${JSON.stringify(data)}`);
   }
 
   render() {

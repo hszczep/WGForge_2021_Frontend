@@ -17,9 +17,7 @@ class Router {
   }
 
   findPageByPath(currentPath: string) {
-    return routes
-      .find((route: IRoute) => isRouteHasPath(route, currentPath))
-        || { path: '/error', page: errorPage };
+    return routes.find((route: IRoute) => isRouteHasPath(route, currentPath)) || { path: '/error', page: errorPage };
   }
 
   route() {

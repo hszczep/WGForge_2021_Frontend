@@ -7,11 +7,9 @@ class MainPageComponent {
     this.unmount = this.unmount.bind(this);
   }
 
-  init() {
-  }
+  init() {}
 
-  unmount() {
-  }
+  unmount() {}
 
   render() {
     return `

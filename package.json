@@ -8,7 +8,8 @@
     "build": "webpack --config webpack.config.prod.js",
     "build:dev": "webpack",
     "lint": "eslint src/**/*.{js,ts}",
-    "lint:fix": "eslint src/**/*.{js,ts} --fix"
+    "lint:fix": "eslint src/**/*.{js,ts} --fix",
+    "prettier": "prettier --write ./src/**/*.{js,ts} ./src/**/*.{scss,css}"
   },
   "repository": {
     "type": "git",
@@ -31,6 +32,7 @@
     "eslint": "^7.32.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^16.0.0",
+    "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.25.3",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",

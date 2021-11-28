@@ -36,7 +36,7 @@ export class Spinner {
           </div>
         </div>
         <span class="spinner__description">загрузка...</span>
-      `,
+      `
     );
   }
 

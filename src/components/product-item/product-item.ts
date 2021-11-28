@@ -4,13 +4,9 @@ class ProductItemComponent {
     this.render = this.render.bind(this);
   }
 
-  init() {
+  init() {}
 
-  }
-
-  render() {
-
-  }
+  render() {}
 }
 
 export default new ProductItemComponent();

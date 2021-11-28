@@ -1,6 +1,6 @@
 import { IPage } from './page.model';
 
 export interface IRoute {
-  path: string,
-  page: IPage,
+  path: string;
+  page: IPage;
 }

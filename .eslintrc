@@ -10,12 +10,13 @@
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "airbnb-base",
-    "airbnb-typescript/base"
+    "airbnb-typescript/base",
+    "prettier"
   ],
   "parserOptions": {
     "ecmaVersion": 2020,
     "sourceType": "module",
-    "project": ["tsconfig.*?.json"] 
+    "project": ["tsconfig.*?.json"]
   },
   "rules": {
     "import/prefer-default-export": "off",
@@ -24,7 +25,7 @@
     "lines-between-class-members": "off",
     "@typescript-eslint/lines-between-class-members": "off",
     "@typescript-eslint/indent": ["error", 2],
-    "@typescript-eslint/no-unused-vars": "error",  
+    "@typescript-eslint/no-unused-vars": "error",
     "@typescript-eslint/no-explicit-any": "error",
     "max-len": ["error", { "code": 120 }]
   },

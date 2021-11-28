@@ -5,17 +5,11 @@ class ProductPageComponent {
     this.render = this.render.bind(this);
   }
 
-  init() {
+  init() {}
 
-  }
+  unmount() {}
 
-  unmount() {
-
-  }
-
-  render() {
-
-  }
+  render() {}
 }
 
 export default new ProductPageComponent();
