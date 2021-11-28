@@ -1,0 +1,17 @@
+@import '../../../scss/variables.scss';
+
+.main-page__navigation-link {
+  color: #ffffff;
+  background-color: #808080;
+  border-right: 1px solid #ffffff;
+
+  &:hover,
+  &:focus,
+  &:active {
+    background-color: #000000;
+  }
+}
+
+.main-page-title {
+  color: $brand-color;
+}
