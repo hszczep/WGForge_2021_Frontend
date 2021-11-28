@@ -7,7 +7,7 @@
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background-color: rgb(214 234 248 / 90%);
+  background-color: rgba(214, 234, 248, 0.9);
   z-index: 9999;
 }
 
@@ -25,13 +25,13 @@
 
 @keyframes blink {
   100% {
-    color: rgb(34 34 34 / 0%);
+    color: rgba(34, 34, 34, 0);
   }
 }
 
 @keyframes blink {
   100% {
-    color: rgb(34 34 34 / 0%);
+    color: rgba(34, 34, 34, 0);
   }
 }
 
