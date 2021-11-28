@@ -1,17 +1,65 @@
 @import '../../../scss/variables.scss';
+@import './main-page.header';
+@import './main-page.footer';
+@import '../../product-item/scss/product-item.styles';
 
-.main-page__navigation-link {
-  color: #ffffff;
-  background-color: #808080;
-  border-right: 1px solid #ffffff;
-
-  &:hover,
-  &:focus,
-  &:active {
-    background-color: #000000;
+.app-field {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: #1c1b15 url(../../../assets/images/bg_fire.png) no-repeat 0 47px;
+  background-size: contain;
+  .app-background-img {
+    position: fixed;
+    top: 47px;
+    left: 0;
+    z-index: 1;
   }
 }
 
-.main-page-title {
-  color: $brand-color;
+.app {
+  flex: 1 1 auto;
+  .content-menu {
+    width: 80%;
+    margin: 15px 10%;
+    display: flex;
+    justify-content: space-between;
+    img {
+      width: 160px;
+      height: 86px;
+    }
+    .content-menu__buttons {
+      margin-top: 45px;
+      transform: translateX(9px);
+      button {
+        padding: 5px 9px;
+        margin-left: 30px;
+        font-family: $menu-font-family;
+        font-size: 17px;
+        line-height: 1.2;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: #cccccc;
+        transition: all 200ms;
+        &:hover {
+          color: #ffffff;
+          border-bottom: 4px solid #ffffff;
+          transition: all 200ms;
+        }
+      }
+      .active-menu__button {
+        color: #ffffff;
+        border-bottom: 4px solid #ffffff;
+      }
+    }
+  }
+  .cards-field {
+    width: 80%;
+    margin: 20px 10%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-gap: 1px;
+    grid-auto-flow: row dense;
+  }
 }

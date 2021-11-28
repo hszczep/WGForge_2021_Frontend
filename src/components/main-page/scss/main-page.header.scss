@@ -1,0 +1,72 @@
+@import '../../../scss/variables.scss';
+
+header {
+  width: 100%;
+  height: 47px;
+  display: flex;
+  align-items: center;
+  background: $header-background;
+  nav {
+    display: flex;
+    width: 90%;
+    margin: 0 10%;
+    .logo {
+      width: $logo-width;
+      transition: all 200ms;
+      &:hover {
+        color: $hover-text-color;
+        transition: all 200ms;
+        .logo-icon {
+          fill: $hover-text-color;
+          transition: all 200ms;
+        }
+      }
+      a {
+        font-size: 16px;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        color: $title-text-color;
+      }
+      .logo-icon {
+        width: 19px;
+        height: 19px;
+        transform: translateY(4px);
+        margin-right: 5px;
+        fill: $title-text-color;
+      }
+    }
+    a,
+    span {
+      font-size: 15px;
+      line-height: 30px;
+      font-weight: 400;
+      letter-spacing: 0.025em;
+      color: #919191;
+      transition: all 200ms;
+      &:hover {
+        color: $hover-text-color;
+        transition: all 200ms;
+      }
+    }
+    .nav-menu {
+      width: $nav-menu-width;
+      display: flex;
+      justify-content: flex-end;
+      a {
+        margin-right: 66px;
+      }
+      span {
+        color: #656565;
+      }
+      .quantity {
+        color: #ffffff;
+      }
+      .authentication {
+        a {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}

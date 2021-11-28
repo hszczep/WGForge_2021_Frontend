@@ -1,0 +1,209 @@
+@import "../../../scss/variables.scss";
+@import "../../../scss/mixins.scss";
+
+.card {
+  display: block;
+  position: relative;
+  background-color: $card-background;
+  transition: all 300ms;
+  &:hover {
+    background-color: $card-hover-background;
+    transition: all 300ms;
+    .card-img {
+      opacity: 0.65;
+      transition: all 300ms;
+    }
+    &:hover .card-specifications {
+      bottom: 25%;
+      transition: all 300ms;
+    }
+    .purchase-btn {
+      opacity: 1;
+      transition: all 600ms;
+    }
+  }
+  &__single {
+    padding-top: 100%;
+    .card-img {
+      width: 98%;
+    }
+    .like-btn {
+      right: 20px;
+    }
+  }
+  &__double {
+    padding-top: 50%;
+    grid-column: span 2;
+    .card-img {
+      width: 79%;
+    }
+    .like-btn {
+      right: 4px;
+    }
+  }
+  .card-info {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .card-img {
+      margin-bottom: 15px;
+      transition: all 300ms;
+    }
+    .card-specifications {
+      position: absolute;
+      width: 80%;
+      left: 10%;
+      bottom: 10%;
+      transition: all 300ms;
+      .discount {
+        width: 55px;
+        margin-bottom: 8px;
+        background: $discount-background;
+        color: $discount-text-color;
+        font-size: 12px;
+        line-height: 23px;
+        text-align: center;
+      }
+      .item-text {
+        display: flex;
+        align-items: center;
+        margin-bottom: 10px;
+        font-family: $menu-font-family;
+        font-size: 15px;
+        line-height: 1.2;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.33);
+        color: $title-text-color;
+
+        .flag {
+          display: inline-block;
+
+          &__china {
+            background: url("../../../assets/flags/china.png");
+            @extend %flag-settings;
+          }
+          &__czech {
+            background: url("../../../assets/flags/czech.png");
+            @extend %flag-settings;
+          }
+          &__france {
+            background: url("../../../assets/flags/france.png");
+            @extend %flag-settings;
+          }
+          &__germany {
+            background: url("../../../assets/flags/germany.png");
+            @extend %flag-settings;
+          }
+          &__poland {
+            background: url("../../../assets/flags/poland.png");
+            @extend %flag-settings;
+          }
+          &__sweden {
+            background: url("../../../assets/flags/sweden.png");
+            @extend %flag-settings;
+          }
+          &__uk {
+            background: url("../../../assets/flags/uk.png");
+            @extend %flag-settings;
+          }
+          &__usa {
+            background: url("../../../assets/flags/usa.png");
+            @extend %flag-settings;
+          }
+          &__ussr {
+            background: url("../../../assets/flags/ussr.png");
+            @extend %flag-settings;
+          }
+        }
+        .type {
+          display: inline-block;
+          &__at-spg {
+            background-image: url("../../../assets/types/at-spg.png");
+            @extend %type-settings;
+          }
+          &__heavytank {
+            background-image: url("../../../assets/types/heavytank.png");
+            @extend %type-settings;
+          }
+          &__lighttank {
+            background-image: url("../../../assets/types/lighttank.png");
+            @extend %type-settings;
+          }
+          &__mediumtank {
+            background-image: url("../../../assets/types/mediumtank.png");
+            @extend %type-settings;
+          }
+          &__multirole {
+            background-image: url("../../../assets/types/multirole.png");
+            @extend %type-settings;
+          }
+          &__spg {
+            background-image: url("../../../assets/types/spg.png");
+            @extend %type-settings;
+          }
+        }
+        .level {
+          margin-right: 8px;
+        }
+      }
+      .price {
+        font-family: $menu-font-family;
+        font-size: 15px;
+        line-height: 1.2;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.33);
+        color: $price-color;
+      }
+    }
+  }
+  .like-btn {
+    position: absolute;
+    width: 12%;
+    height: 10%;
+    top: 7%;
+    &__icon {
+      width: 100%;
+      height: 100%;
+      opacity: 0.7;
+      fill: none;
+      transition: all 200ms;
+      &:hover {
+        fill: #ffffff;
+        transition: all 200ms;
+      }
+    }
+  }
+  .like-btn__active {
+    .like-btn__icon {
+      fill: #ffffff;
+      opacity: 0.6;
+    }
+  }
+  .purchase-btn {
+    opacity: 0;
+    width: 100px;
+    height: 40px;
+    position: absolute;
+    bottom: 6%;
+    left: 9%;
+    border-radius: 3px;
+    background: $purchase-button-background;
+    font-family: $menu-font-family;
+    font-size: 12px;
+    line-height: 18px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    color: $purchase-text-color;
+    transition: all 200ms;
+  }
+}

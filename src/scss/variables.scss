@@ -1,18 +1,19 @@
-$page-width: 1200px;
-
 // FONTS
-$font-size: 1rem;
-$font-family: 'Inter', sans-serif;
+$menu-font-family: "Roboto Condensed", sans-serif;
 
 // COLORS
-$font-color: #121212;
-$main-light-color: #ffffff;
-$main-dark-color: #778899;
-$background-color: #5f9ea0;
-$red-color: #ff0000;
-$brand-color: #1900ff;
+$header-background: #000000;
+$footer-background: #000000;
+$card-background: rgba(0, 0, 0, 0.21);
+$card-hover-background: rgba(0, 0, 0, 0.6);
+$title-text-color: #cccccc;
+$hover-text-color: #ffffff;
+$price-color: #d1b482;
+$discount-background: #a61c00;
+$discount-text-color: #ffffff;
+$purchase-button-background: #e95104;
+$purchase-text-color: #ffffff;
 
-// MEDIA
-$desktop-width: 1200px;
-$tablet-width: 1023px;
-$mobile-width: 700px; 
+//SIZE
+$logo-width: 154px;
+$nav-menu-width: calc(100% - #{$logo-width});
