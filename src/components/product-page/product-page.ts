@@ -1,21 +1,15 @@
-class productPageComponent {
+class ProductPageComponent {
   constructor() {
     this.init = this.init.bind(this);
     this.unmount = this.unmount.bind(this);
     this.render = this.render.bind(this);
   }
 
-  init() {
+  init() {}
 
-  }
+  unmount() {}
 
-  unmount() {
-
-  }
-
-  render() {
-   
-  }
+  render() {}
 }
 
-export default new productPageComponent();
+export default new ProductPageComponent();

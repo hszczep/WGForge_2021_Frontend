@@ -1,6 +1,3 @@
-// Test import of styles
-import '../../scss/main.scss';
-
 // Test import of an asset
 import webpackLogo from './assets/images/webpack-logo.svg';
 
@@ -55,12 +52,9 @@ class TestComponent {
     successButton.addEventListener('click', () => audioSuccess.play());
   }
 
-  async renderContainer (container: Element, fetchToAPIMethod: () => Promise<any>) {
+  async renderContainer(container: Element, fetchToAPIMethod: () => Promise<unknown>) {
     const data = await fetchToAPIMethod();
-    container.insertAdjacentHTML(
-      'afterbegin', 
-      `<span class="bold red">My IP data:</span> ${JSON.stringify(data)}`,
-    );
+    container.insertAdjacentHTML('afterbegin', `<span class="bold red">My IP data:</span> ${JSON.stringify(data)}`);
   }
 
   render() {

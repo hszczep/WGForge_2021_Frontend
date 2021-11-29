@@ -1,5 +1,5 @@
 export interface IPage {
-  render: () => string,
-  init?: () => void,
-  unmount?: () => void,
-} 
+  render: () => string;
+  init?: () => void;
+  unmount?: () => void;
+}
