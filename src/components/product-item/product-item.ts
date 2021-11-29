@@ -1,16 +1,12 @@
-class productItemComponent {
+class ProductItemComponent {
   constructor() {
     this.init = this.init.bind(this);
     this.render = this.render.bind(this);
   }
 
-  init() {
+  init() {}
 
-  }
-
-  render() {
-   
-  }
+  render() {}
 }
 
-export default new productItemComponent();
+export default new ProductItemComponent();

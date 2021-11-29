@@ -1,22 +1,17 @@
 import './scss/main-page.styles.scss';
 
-class mainPageComponent {
+class MainPageComponent {
   constructor() {
     this.render = this.render.bind(this);
     this.init = this.init.bind(this);
     this.unmount = this.unmount.bind(this);
   }
 
-  init() {
-    console.log('It is MainPage init()');
-  }
+  init() {}
 
-  unmount() {
-    console.log('It is MainPage unmount()');
-  }
+  unmount() {}
 
   render() {
-    console.log('It is MainPage render()');
     return `
       <section class="main-page">
         <header class="main-page__header">
@@ -31,4 +26,4 @@ class mainPageComponent {
   }
 }
 
-export default new mainPageComponent();
+export default new MainPageComponent();

@@ -1,22 +1,33 @@
 {
-  "extends": ["plugin:prettier/recommended"],
-  "rules": {
-    "max-len": [
-      "error",
-      {
-        "code": 140
-      }
-    ],
-    "prettier/prettier": "error",
-    "semi": ["error", "always"],
-    "quotes": ["error", "single"]
+  "env": {
+    "browser": true,
+    "es2021": true,
+    "node": true
   },
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint", "import"],
+  "extends": [
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended",
+    "airbnb-base",
+    "airbnb-typescript/base",
+    "prettier"
+  ],
   "parserOptions": {
     "ecmaVersion": 2020,
-    "sourceType": "module"
+    "sourceType": "module",
+    "project": ["tsconfig.*?.json"]
   },
-  "plugins": ["prettier"],
-  "env": {
-    "es6": true
-  }
+  "rules": {
+    "import/prefer-default-export": "off",
+    "class-methods-use-this": "off",
+    "no-plusplus": "off",
+    "lines-between-class-members": "off",
+    "@typescript-eslint/lines-between-class-members": "off",
+    "@typescript-eslint/indent": ["error", 2],
+    "@typescript-eslint/no-unused-vars": "error",
+    "@typescript-eslint/no-explicit-any": "error",
+    "max-len": ["error", { "code": 120 }]
+  },
+  "root": true
 }

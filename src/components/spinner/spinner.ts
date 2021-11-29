@@ -6,19 +6,19 @@ const CLASS_NAMES = {
 };
 
 export class Spinner {
-  container: HTMLElement  = null;
+  container: HTMLElement = null;
   additionalClass: string;
-  spinner: HTMLElement  = null;
+  spinner: HTMLElement = null;
 
   constructor(container: HTMLElement, additionalClass = '') {
     this.container = container;
     this.additionalClass = additionalClass;
     this.spinner = null;
 
-    this._create();
+    this.#create();
   }
 
-  _create() {
+  #create() {
     this.spinner = document.createElement('div');
     this.spinner.className = `${CLASS_NAMES.MAIN} ${CLASS_NAMES.HIDDEN} ${this.additionalClass}`;
     this.spinner.insertAdjacentHTML(
@@ -36,7 +36,7 @@ export class Spinner {
           </div>
         </div>
         <span class="spinner__description">загрузка...</span>
-      `,
+      `
     );
   }
 

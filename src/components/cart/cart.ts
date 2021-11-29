@@ -1,21 +1,15 @@
-class cartComponent {
+class CartComponent {
   constructor() {
     this.init = this.init.bind(this);
     this.unmount = this.unmount.bind(this);
     this.render = this.render.bind(this);
   }
 
-  init() {
+  init() {}
 
-  }
+  unmount() {}
 
-  unmount() {
-
-  }
-
-  render() {
-   
-  }
+  render() {}
 }
 
-export default new cartComponent();
+export default new CartComponent();

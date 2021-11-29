@@ -3,13 +3,12 @@ html {
   font-family: $font-family;
   color: $font-color;
   line-height: 1.4;
-  
+
   background: $main-light-color;
 }
 
 body {
   margin: 0;
-
   text-align: center;
 }
 
@@ -21,7 +20,7 @@ h1 {
   display: inline-block;
   width: 100px;
   height: 100px;
-  
+
   background-image: url('../assets/images/example.png');
   background-size: cover;
 }
@@ -47,6 +46,5 @@ h1 {
 
 .link {
   color: inherit;
-
   text-decoration: none;
 }
