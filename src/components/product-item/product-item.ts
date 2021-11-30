@@ -1,8 +1,8 @@
-import './scss/product-item.style.scss';
+// import './scss/product-item.style.scss';
 
 class ProductItemComponent {
   id : string;
-  tier: string;
+  tier: number;
   type: string;
   name: string;
   price: number;
@@ -13,9 +13,9 @@ class ProductItemComponent {
   linkToDiscription: string;
   discount: number;
   flag: string;
-  constructor({tier, type, name, price, nation, images, tank_type, id}) {
+  constructor({tier, type, name, price, nation, images, tank_type, id}:{tier:number, type:string, name:string, price:number, nation:string, images:Array<string>, tank_type:string, id:string}) {
     this.id = id;
-    this.tier = this.convertToRomane(tier); // convert example "4" -> "IV"
+    this.tier = tier; // tier tank, for render convert expample "4" -> "IV"
     this.type = type; //tank, gold ir premium
     this.tankType = tank_type; //ligth, medium, haevy
     this.name = name; // shor name tank
@@ -34,7 +34,7 @@ class ProductItemComponent {
   convertToRomane(number:number):string {
     let map = ['','I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
     return map[number];
-}
+  }
 
   init() {}
 
@@ -48,10 +48,10 @@ class ProductItemComponent {
             <h2 class="item-text">
               <span class="flag ${this.flag}"></span>
               <span class="type ${this.tankType}"></span>
-              <span class="level">${this.tier}</span>
+              <span class="level">${this.convertToRomane(this.tier)}</span>
               <span class="item-name">${this.name}</span>
             </h2>
-            <p class="price">${this.price}</p>
+            <p class="price">$${this.price}</p>
           </div>
         </a>
           <button class="like-btn">
