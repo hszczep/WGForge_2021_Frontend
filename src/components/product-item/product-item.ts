@@ -44,9 +44,9 @@ class ProductItemComponent {
         <a href="${(this.linkToDiscription)}" class="card-info">
           <img class="card-img" src="${this.images[0]}" alt="${(this.name)}" />
           <div class="card-specifications">
-            <p class="discount">${this.discount}</p>
+            <p class="discount">${this.discount || ''}</p>
             <h2 class="item-text">
-              <span class="flag ${this.flag}"></span>
+              <span class="flag flag__${this.flag}"></span>
               <span class="type ${this.tankType}"></span>
               <span class="level">${this.convertToRomane(this.tier)}</span>
               <span class="item-name">${this.name}</span>
