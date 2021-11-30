@@ -1,9 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
 
-@import './variables.scss';
-@import './mixins.scss';
+@import './variables';
+@import './mixins';
 @import 'normalize';
-@import './scrollbar.scss';
+@import './scrollbar';
 
 body {
   height: 100%;

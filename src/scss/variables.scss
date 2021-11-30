@@ -1,19 +1,31 @@
 // FONTS
-$menu-font-family: "Roboto Condensed", sans-serif;
+$menu-font-family: 'Roboto Condensed', sans-serif;
 
 // COLORS
-$header-background: #000000;
-$footer-background: #000000;
+$header-background: #000;
+$footer-background: #000;
 $card-background: rgba(0, 0, 0, 0.21);
 $card-hover-background: rgba(0, 0, 0, 0.6);
-$title-text-color: #cccccc;
-$hover-text-color: #ffffff;
-$price-color: #d1b482;
+$title-text-color: #ccc;
+$hover-text-color: #fff;
+$price-now-color: #d1b482;
+$old-price-color: #999;
 $discount-background: #a61c00;
-$discount-text-color: #ffffff;
+$discount-text-color: #fff;
 $purchase-button-background: #e95104;
-$purchase-text-color: #ffffff;
+$purchase-text-color: #fff;
 
-//SIZE
-$logo-width: 154px;
-$nav-menu-width: calc(100% - #{$logo-width});
+// ANIMATION
+$app-standard-transition: all 200ms;
+$card-transition: all 300ms;
+
+//  SIZE
+$app-max-media-query: 1260px;
+$app-max-width: 1200px;
+$app-medium-media-query: 940px;
+$app-medium-width: 900px;
+$app-min-media-query: 320px;
+$app-min-width: 300px;
+$footer-social-networks-max-width: 200px;
+$footer-social-networks-medium-width: 170px;
+$footer-social-networks-min-width: 150px;

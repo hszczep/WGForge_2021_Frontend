@@ -1,4 +1,4 @@
-@import '../../../scss/variables.scss';
+@import '../../../scss/variables';
 @import './main-page.header';
 @import './main-page.footer';
 @import '../../product-item/scss/product-item.styles';
@@ -6,9 +6,11 @@
 .app-field {
   min-height: 100%;
   display: flex;
+  align-items: center;
   flex-direction: column;
-  background: #1c1b15 url(../../../assets/images/bg_fire.png) no-repeat 0 47px;
+  background: #1c1b15 url('../../../assets/images/bg_fire.png') no-repeat 0 47px;
   background-size: contain;
+
   .app-background-img {
     position: fixed;
     top: 47px;
@@ -19,18 +21,22 @@
 
 .app {
   flex: 1 1 auto;
+  margin-bottom: 30px;
+
   .content-menu {
-    width: 80%;
-    margin: 15px 10%;
+    width: $app-max-width;
+    margin: 20px 0;
     display: flex;
     justify-content: space-between;
+
     img {
       width: 160px;
-      height: 86px;
+      height: 80px;
     }
+
     .content-menu__buttons {
       margin-top: 45px;
-      transform: translateX(9px);
+
       button {
         padding: 5px 9px;
         margin-left: 30px;
@@ -40,26 +46,88 @@
         font-weight: 400;
         text-transform: uppercase;
         letter-spacing: 0.05em;
-        color: #cccccc;
+        color: #ccc;
         transition: all 200ms;
+
         &:hover {
-          color: #ffffff;
-          border-bottom: 4px solid #ffffff;
+          color: #fff;
+          border-bottom: 4px solid #fff;
           transition: all 200ms;
         }
       }
+
       .active-menu__button {
-        color: #ffffff;
-        border-bottom: 4px solid #ffffff;
+        color: #fff;
+        border-bottom: 4px solid #fff;
       }
     }
   }
+
   .cards-field {
-    width: 80%;
-    margin: 20px 10%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
     grid-gap: 1px;
     grid-auto-flow: row dense;
+  }
+}
+@media all and (max-width: $app-max-media-query) {
+  .app {
+    margin-bottom: 25px;
+
+    .content-menu {
+      width: $app-medium-width;
+      margin: 15px 0;
+
+      img {
+        width: 140px;
+        height: 70px;
+      }
+
+      .content-menu__buttons {
+        margin-top: 35px;
+      }
+    }
+
+    .cards-field {
+      grid-template-columns: 1fr 1fr 1fr;
+    }
+  }
+}
+@media all and (max-width: $app-medium-media-query) {
+  .app {
+    margin-bottom: 20px;
+
+    .content-menu {
+      width: $app-min-width;
+      margin: 10px 0;
+
+      .WoT_logo {
+        margin: 10px 0 0 10px;
+
+        &::before {
+          content: url('../../../assets/images/miniWoTLogo.png');
+        }
+
+        img {
+          display: none;
+        }
+      }
+
+      .content-menu__buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        margin-top: 5px;
+
+        button {
+          margin-left: 20px;
+          margin-bottom: 5px;
+        }
+      }
+    }
+
+    .cards-field {
+      grid-template-columns: 1fr 1fr;
+    }
   }
 }

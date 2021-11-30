@@ -3,12 +3,13 @@
   <head>
     <title>WG Forge Shop 2021</title>
     <link rel="shortcut icon" type="image/png" href="./assets/favicon/favicon.png" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   </head>
   <body>
     <div class="app-field">
-      <header>
+      <header class="header">
         <h1 style="display: none">Word of tanks premium shop</h1>
-        <nav>
+        <nav class="nav">
           <div class="logo">
             <a href="#">
               <svg class="logo-icon">
@@ -18,13 +19,13 @@
             </a>
           </div>
           <div class="nav-menu">
-            <a href="#">
+            <a href="#" id="wish-list">
               Wishlist
-              <span id="wishlist-quantity" class="quantity">(2)</span>
+              <span id="wish-list__quantity" class="quantity">(2)</span>
             </a>
-            <a href="#">
+            <a href="#" id="cart">
               Shopping cart
-              <span id="cart-quantity" class="quantity">(5)</span>
+              <span id="cart__quantity" class="quantity">(5)</span>
             </a>
             <div class="authentication">
               <a href="#">Login</a><span> or</span>
@@ -34,12 +35,12 @@
         </nav>
       </header>
       <div class="app"></div>
-      <footer>
+      <footer class="footer">
         <div class="footer-info">
           <svg class="forge-logo">
             <use xlink:href="assets/images/sprite.svg#forgeLogo"></use>
           </svg>
-          <p>© 2021</p>
+          <p class="create-date">© 2021</p>
           <div class="social-networks-block">
             <a href="https://t.me/wgforge">
               <svg class="networks-logo">
