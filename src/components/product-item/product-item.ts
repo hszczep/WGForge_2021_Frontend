@@ -16,15 +16,15 @@ class ProductItemComponent {
   constructor({tier, type, name, price, nation, images, tank_type, id}:{tier:number, type:string, name:string, price:number, nation:string, images:Array<string>, tank_type:string, id:string}) {
     this.id = id;
     this.tier = tier; // tier tank, for render convert expample "4" -> "IV"
-    this.type = type; //tank, gold ir premium
-    this.tankType = tank_type; //ligth, medium, haevy
+    this.type = type; //tank, gold or premium
+    this.tankType = tank_type.toLowerCase(); //ligth, medium, haevy
     this.name = name; // shor name tank
     this.price = price; //default price $
     this.nation = nation; //country 
     this.flag = `flag__${this.nation}`; // for icon flag
     this.images = images; // link image
     this.size = 1; // add to JSON
-    this.linkToDiscription = `/tank/${this.id}`; // add to JSON
+    this.linkToDiscription = `#/product/${this.id}`; // add to JSON
     this.discount = 0; // add to JSON;
 
     this.render = this.render.bind(this);

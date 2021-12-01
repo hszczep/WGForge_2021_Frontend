@@ -24,18 +24,38 @@ class Router {
     if (this.previousPage && this.previousPage.unmount) this.previousPage.unmount();
 
     const currentPath = getLocationPath();
-    const { page } = this.findPageByPath(currentPath);
-    this.previousPage = page;
 
-    appController.spinner.show();
+    if (/\/product\//.test(currentPath)){
+      const currentGlobalPath = currentPath.match(/\/product\//)[0];
 
-    this.mainContainer.innerHTML = '';
-    const pageMarkup: string = page.render();
+      const { page } = this.findPageByPath(currentGlobalPath);
+      
+      this.previousPage = page;
+      appController.spinner.show();
+  
+      this.mainContainer.innerHTML = '';
+      const pageMarkup: string = page.render();
+      console.log(this.findPageByPath(currentGlobalPath))
+      appController.spinner.hide();
+  
+      this.mainContainer.insertAdjacentHTML('afterbegin', pageMarkup);
+      if (page.init) page.init();
 
-    appController.spinner.hide();
-
-    this.mainContainer.insertAdjacentHTML('afterbegin', pageMarkup);
-    if (page.init) page.init();
+    } else {
+      const { page } = this.findPageByPath(currentPath);
+    
+      this.previousPage = page;
+  
+      appController.spinner.show();
+  
+      this.mainContainer.innerHTML = '';
+      const pageMarkup: string = page.render();
+  
+      appController.spinner.hide();
+  
+      this.mainContainer.insertAdjacentHTML('afterbegin', pageMarkup);
+      if (page.init) page.init();
+    }
   }
 
   init() {
