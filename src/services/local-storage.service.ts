@@ -1,20 +1,20 @@
-import { LOCAL_STORAGE_KEYS } from "./common/services.constants";
+import { LOCAL_STORAGE_KEYS } from './common/services.constants';
 
 class LocalStorageService {
   #setLocalStorageData(value: unknown, key: string = LOCAL_STORAGE_KEYS.USER) {
-    sessionStorage.setItem(key, JSON.stringify(value));
+    localStorage.setItem(key, JSON.stringify(value));
   }
 
   #getFromLocalStorage(key: string = LOCAL_STORAGE_KEYS.USER) {
-    return JSON.parse(sessionStorage.getItem(key));
+    return JSON.parse(localStorage.getItem(key));
   }
 
   #deleteFromLocalStorage(key: string = LOCAL_STORAGE_KEYS.USER) {
-    sessionStorage.removeItem(key);
+    localStorage.removeItem(key);
   }
 
-  setUserInfo(name: string, token: string,) {
-    this.#setLocalStorageData({ name, token });
+  setUserInfo(email: string, token: string) {
+    this.#setLocalStorageData({ email, token });
   }
 
   getUserInfo() {

@@ -1,15 +1,17 @@
+import authUserService from '../../../../services/auth-user.service';
 import { Spinner } from '../../../spinner/spinner';
 
 class Controller {
   spinner: Spinner = null;
 
-  constructor() {
-    this.init();
+  #spinnerInit() {
+    this.spinner = new Spinner(document.body);
+    this.spinner.init();
   }
 
   init() {
-    this.spinner = new Spinner(document.body);
-    this.spinner.init();
+    this.#spinnerInit();
+    authUserService.updateUserState();
   }
 }
 

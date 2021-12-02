@@ -1,1 +1,1 @@
-export const mul = (a: number, b: number) => a * b;
+export const getUserNameFromEmail = (email: string) => email.substring(0, email.indexOf('@'));
