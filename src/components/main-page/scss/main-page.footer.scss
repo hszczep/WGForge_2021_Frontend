@@ -1,0 +1,96 @@
+@import '../../../scss/variables';
+
+.footer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: $footer-background;
+
+  .footer-info {
+    width: $app-max-width;
+    height: 80px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 16px;
+    color: $title-text-color;
+
+    .forge-logo {
+      width: 143px;
+      height: 50px;
+      fill: #ccc;
+    }
+
+    .create-date {
+      cursor: default;
+    }
+
+    .social-networks-block {
+      width: $footer-social-networks-max-width;
+      display: flex;
+      justify-content: space-around;
+      flex-direction: row;
+
+      .networks-logo {
+        width: 40px;
+        height: 40px;
+        fill: $title-text-color;
+        transition: $app-standard-transition;
+
+        &:hover {
+          fill: $hover-text-color;
+          transition: $app-standard-transition;
+        }
+      }
+    }
+  }
+}
+@media all and (max-width: $app-max-media-query) {
+  .footer {
+    .footer-info {
+      width: $app-medium-width;
+      height: 80px;
+
+      .forge-logo {
+        width: 110px;
+        height: 40px;
+      }
+
+      .social-networks-block {
+        width: $footer-social-networks-medium-width;
+
+        .networks-logo {
+          width: 35px;
+          height: 35px;
+        }
+      }
+    }
+  }
+}
+@media all and (max-width: $app-medium-media-query) {
+  .footer {
+    .footer-info {
+      width: $app-min-width;
+      height: 70px;
+
+      .forge-logo {
+        width: 100px;
+        height: 37px;
+      }
+
+      .create-date {
+        display: none;
+      }
+
+      .social-networks-block {
+        width: $footer-social-networks-min-width;
+
+        .networks-logo {
+          width: 30px;
+          height: 30px;
+        }
+      }
+    }
+  }
+}
