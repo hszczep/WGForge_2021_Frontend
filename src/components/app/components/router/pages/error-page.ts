@@ -4,6 +4,8 @@ export const errorPage: IPage = {
   render: () => `
       <div class="navigation">
         <a class="navigation-link link" href="#/">Main page</a>
+        <a class="navigation-link link" href="#/signin">Signin page</a>
+        <a class="navigation-link link" href="#/signup">Signup page</a>
         <a class="navigation-link link" href="#/test">Test page</a>
       </div>
       <p class ="error"><span>404</span> Not found</p>

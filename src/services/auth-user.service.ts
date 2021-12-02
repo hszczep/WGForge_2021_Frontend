@@ -16,7 +16,7 @@ class AuthUserService {
   }
 
   async #singInUser(userCredentials: IUserCredentials): Promise<IUser | false> {
-    const { token } = await mainApiService.loginUser(userCredentials) || { token: null };
+    const { token } = (await mainApiService.loginUser(userCredentials)) || { token: null };
 
     // if (token) {
     //   localStorageService.setUserInfo(userCredentials.email, token);
@@ -52,7 +52,7 @@ class AuthUserService {
         token,
       },
       isLogged: true,
-      isAdmin: user.role === USER.ROLES.ADMIN
+      isAdmin: user.role === USER.ROLES.ADMIN,
     });
 
     console.log(storage.getUserState());

@@ -16,6 +16,8 @@ class MainPageComponent {
       <section class="main-page">
         <header class="main-page__header">
           <nav class="main-page__navigation navigation">
+            <a class="main-page__navigation-link navigation-link link" href="#/signin">Signin page</a>
+            <a class="main-page__navigation-link navigation-link link" href="#/signup">Signup page</a>
             <a class="main-page__navigation-link navigation-link link" href="#/test">Test page</a>
             <a class="main-page__navigation-link navigation-link link" href="#/error">Error page</a>
           </nav>

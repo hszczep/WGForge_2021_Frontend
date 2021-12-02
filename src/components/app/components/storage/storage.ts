@@ -28,7 +28,7 @@ class Storage {
     this.#userState = USER.DEFAULT_STATE;
   }
 
-  init() { }
+  init() {}
 }
 
 export default new Storage();

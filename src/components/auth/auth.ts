@@ -30,11 +30,9 @@ class AuthPageComponent {
 
     const userCredetials: IUserCredentials = this.#getUserCredentias();
 
-    authUserService
-      .loginUser(this.#isRegistration, userCredetials)
-      .then((data) => {
-        console.log(data);
-      });
+    authUserService.loginUser(this.#isRegistration, userCredetials).then((data) => {
+      console.log(data);
+    });
   }
 
   logoutButtonClickHandler() {
@@ -47,7 +45,7 @@ class AuthPageComponent {
       passwordInput: document.querySelector('#js-inputPassword'),
       authForm: document.querySelector('#js-authForm'),
       logoutButton: document.querySelector('#js-logOutBtn'),
-    }
+    };
 
     this.#elements.authForm.addEventListener('submit', this.authFormSubmitHandler);
     this.#elements.logoutButton.addEventListener('click', this.logoutButtonClickHandler);

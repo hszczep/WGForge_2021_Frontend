@@ -62,6 +62,8 @@ class TestComponent {
       <div class="wrapper">
         <div class="navigation">
           <a class="navigation-link link" href="#/">Main page</a>
+          <a class="navigation-link link" href="#/signin">Signin page</a>
+          <a class="navigation-link link" href="#/signup">Signup page</a>
           <a class="navigation-link link" href="#/error">Error page</a>
         </div>
         <p>It is the Test Page!</p>
