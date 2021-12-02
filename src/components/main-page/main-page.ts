@@ -18,17 +18,15 @@ class MainPageComponent {
     console.log('It is MainPage unmount()');
   }
 
-  async render() {
-
-    let listOfProducts = await fetch('https://wg-forge-back.herokuapp.com/api/products').then(res => res.json());
+  render() {
+    let listOfProducts = storage.mainData;
 
     let fragment = document.createElement('div');
     fragment.classList.add('cards-field');
   
-    for (let i = 0; i < 50; i++){
+    for (let i = 0; i < listOfProducts.length; i++){
       let item = new ProductItemComponent(listOfProducts[i]);
       fragment.innerHTML += item.render();
-
     }
 
     return `

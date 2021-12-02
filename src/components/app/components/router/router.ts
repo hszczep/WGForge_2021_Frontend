@@ -20,41 +20,24 @@ class Router {
     return routes.find((route: IRoute) => isRouteHasPath(route, currentPath)) || { path: '/error', page: errorPage };
   }
 
-  async route() {
+  route() {
     if (this.previousPage && this.previousPage.unmount) this.previousPage.unmount();
-
-    const currentPath = getLocationPath();
+    let currentPath = getLocationPath();
 
     if (/\/product\//.test(currentPath)){
-      const currentGlobalPath = currentPath.match(/\/product\//)[0];
+      currentPath = currentPath.match(/\/product\//)[0];
+    } 
+    const { page } = this.findPageByPath(currentPath);
+    this.previousPage = page;
+    appController.spinner.show();
 
-      const { page } = this.findPageByPath(currentGlobalPath);
-      
-      this.previousPage = page;
-      appController.spinner.show();
-  
-      this.mainContainer.innerHTML = '';
-      const pageMarkup: string = await page.render();
-      appController.spinner.hide();
-  
-      this.mainContainer.insertAdjacentHTML('afterbegin', pageMarkup);
-      if (page.init) page.init();
+    this.mainContainer.innerHTML = '';
+    const pageMarkup: string = page.render();
 
-    } else {
-      const { page } = this.findPageByPath(currentPath);
-    
-      this.previousPage = page;
-  
-      appController.spinner.show();
-  
-      this.mainContainer.innerHTML = '';
-      const pageMarkup: string = await page.render();
-  
-      appController.spinner.hide();
-  
-      this.mainContainer.insertAdjacentHTML('afterbegin', pageMarkup);
-      if (page.init) page.init();
-    }
+    appController.spinner.hide();
+
+    this.mainContainer.insertAdjacentHTML('afterbegin', pageMarkup);
+    if (page.init) page.init();    
   }
 
   init() {

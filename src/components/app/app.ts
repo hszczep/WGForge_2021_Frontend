@@ -2,8 +2,8 @@ import storage from './components/storage/storage';
 import router from './components/router/router';
 
 class App {
-  init() {
-    storage.init();
+  async init() {
+    await storage.init();
     router.init();
   }
 }
