@@ -1,5 +1,3 @@
-// import './scss/product-item.style.scss';
-
 class ProductItemComponent {
   id : string;
   tier: number;
@@ -36,28 +34,39 @@ class ProductItemComponent {
   }
 
   render() {
+    let TankNameInfo;
+    if (this.type === 'tank') {
+      TankNameInfo = `
+                  <span class="flag ${this.flag}"></span>
+                  <span class="tank-type ${this.tankType}"></span>
+                  <span class="level">${this.convertToRomane(this.tier)}</span>
+                  <span class="item-name">${this.name}</span>
+      `;
+    } else {
+      TankNameInfo = `
+                  <span class="item-name">${this.name}</span>
+      `;
+    }
     return `
-      <article class="card ${this.size}" id="${(this.id)}">
-        <a href="${(this.linkToDiscription)}" class="card-info">
-          <img class="card-img" src="${this.images[0]}" alt="${(this.name)}" />
-          <div class="card-specifications">
-            <p class="discount">${this.discount || ''}</p>
-            <h2 class="item-text">
-              <span class="flag flag__${this.flag}"></span>
-              <span class="type type__${this.tankType}"></span>
-              <span class="level">${this.convertToRomane(this.tier)}</span>
-              <span class="item-name">${this.name}</span>
-            </h2>
-            <p class="price">$${this.price}</p>
-          </div>
-        </a>
-          <button class="like-btn">
-            <svg class="like-btn__icon">
-              <use xlink:href="assets/images/sprite.svg#like"></use>
-            </svg>
-          </button>
-          <button class="purchase-btn">purchase</button>
-      </article>
+          <article class="card ${this.size}" id="${this.id}">
+            <a href="${this.linkToDiscription}" class="card-info">
+              <img class="card-img" src="${this.images[0]}" alt="${this.name}" />
+              <div class="card-specifications">
+                <p class="discount">${this.discount}</p>
+                <h2 class="item-text">
+                  ${TankNameInfo}
+                </h2>
+                <p class="price">${this.price}</p>
+                <p class="price price-discount">${this.price}</p>
+              </div>
+            </a>
+            <button class="like-btn">
+              <svg class="like-btn__icon">
+                <use xlink:href="assets/images/sprite.svg#like"></use>
+              </svg>
+            </button>
+            <button class="purchase-btn">purchase</button>
+          </article>
     `;
   }
 }

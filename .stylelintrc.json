@@ -5,6 +5,7 @@
     "keyframes-name-pattern": null,
     "declaration-empty-line-before": null,
     "color-function-notation": "legacy",
-    "alpha-value-notation": null
+    "alpha-value-notation": null,
+    "scss/at-import-partial-extension": null
   }
 }

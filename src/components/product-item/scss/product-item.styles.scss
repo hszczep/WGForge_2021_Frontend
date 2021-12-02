@@ -1,0 +1,328 @@
+@import '../../../scss/variables';
+@import '../../../scss/mixins';
+
+.card {
+  display: block;
+  position: relative;
+  background-color: $card-background;
+  transition: all 300ms;
+
+  &__single {
+    padding-top: 100%;
+
+    .card-specifications {
+      left: 27px;
+    }
+
+    .card-img {
+      width: 293px;
+    }
+
+    .like-btn {
+      width: 35px;
+      right: 20px;
+    }
+
+    .purchase-btn {
+      left: 26px;
+    }
+  }
+
+  &__double {
+    padding-top: 50%;
+    grid-column: span 2;
+
+    .card-specifications {
+      left: 54px;
+    }
+
+    .card-img {
+      width: 493px;
+    }
+
+    .like-btn {
+      width: 70px;
+      right: 4px;
+    }
+
+    .purchase-btn {
+      left: 52px;
+    }
+  }
+
+  .card-info {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    .card-img {
+      margin-bottom: 15px;
+      transition: $card-transition;
+    }
+
+    .card-specifications {
+      position: absolute;
+      bottom: 30px;
+      transition: $card-transition;
+
+      .discount {
+        width: 55px;
+        margin-bottom: 8px;
+        background: $discount-background;
+        color: $discount-text-color;
+        font-size: 12px;
+        line-height: 23px;
+        text-align: center;
+      }
+
+      .item-text {
+        display: flex;
+        align-items: center;
+        text-align: left;
+        margin-bottom: 10px;
+        font-family: $menu-font-family;
+        font-size: 15px;
+        line-height: 1.2;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.33);
+        color: $title-text-color;
+
+        .flag {
+          display: inline-block;
+
+          &__china {
+            background: url('../../../assets/flags/china.png');
+            @extend %flag-settings;
+          }
+
+          &__czech {
+            background: url('../../../assets/flags/czech.png');
+            @extend %flag-settings;
+          }
+
+          &__france {
+            background: url('../../../assets/flags/france.png');
+            @extend %flag-settings;
+          }
+
+          &__germany {
+            background: url('../../../assets/flags/germany.png');
+            @extend %flag-settings;
+          }
+
+          &__poland {
+            background: url('../../../assets/flags/poland.png');
+            @extend %flag-settings;
+          }
+
+          &__sweden {
+            background: url('../../../assets/flags/sweden.png');
+            @extend %flag-settings;
+          }
+
+          &__uk {
+            background: url('../../../assets/flags/uk.png');
+            @extend %flag-settings;
+          }
+
+          &__usa {
+            background: url('../../../assets/flags/usa.png');
+            @extend %flag-settings;
+          }
+
+          &__ussr {
+            background: url('../../../assets/flags/ussr.png');
+            @extend %flag-settings;
+          }
+        }
+
+        .tank-type {
+          display: inline-block;
+
+          &__at-spg {
+            background-image: url('../../../assets/types/at-spg.png');
+            @extend %type-settings;
+          }
+
+          &__heavytank {
+            background-image: url('../../../assets/types/heavytank.png');
+            @extend %type-settings;
+          }
+
+          &__lighttank {
+            background-image: url('../../../assets/types/lighttank.png');
+            @extend %type-settings;
+          }
+
+          &__mediumtank {
+            background-image: url('../../../assets/types/mediumtank.png');
+            @extend %type-settings;
+          }
+
+          &__multirole {
+            background-image: url('../../../assets/types/multirole.png');
+            @extend %type-settings;
+          }
+
+          &__spg {
+            background-image: url('../../../assets/types/spg.png');
+            @extend %type-settings;
+          }
+        }
+
+        .level {
+          margin-right: 8px;
+        }
+      }
+
+      .price {
+        display: inline-block;
+        font-family: $menu-font-family;
+        font-size: 15px;
+        line-height: 1.2;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.33);
+        color: $price-now-color;
+      }
+
+      .old-price {
+        color: $old-price-color;
+        text-decoration: line-through;
+        margin-right: 5px;
+      }
+    }
+  }
+
+  .purchase-btn {
+    opacity: 0;
+    width: 100px;
+    height: 40px;
+    position: absolute;
+    bottom: 22px;
+    border-radius: 3px;
+    background: $purchase-button-background;
+    font-family: $menu-font-family;
+    font-size: 12px;
+    line-height: 18px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    color: $purchase-text-color;
+    transition: $app-standard-transition;
+  }
+
+  .like-btn {
+    position: absolute;
+    height: 30px;
+    top: 21px;
+
+    &__icon {
+      width: 100%;
+      height: 100%;
+      opacity: 0.7;
+      fill: none;
+      transition: $app-standard-transition;
+
+      &:hover {
+        fill: #fff;
+        transition: $app-standard-transition;
+      }
+    }
+  }
+
+  .like-btn__active {
+    .like-btn__icon {
+      fill: #fff;
+      opacity: 0.6;
+    }
+  }
+
+  &:hover {
+    background-color: $card-hover-background;
+    transition: $card-transition;
+
+    .card-img {
+      opacity: 0.65;
+      transition: $card-transition;
+    }
+
+    &:hover .card-specifications {
+      bottom: 76px;
+      transition: $card-transition;
+    }
+
+    .purchase-btn {
+      opacity: 1;
+      transition: all 600ms;
+    }
+  }
+}
+@media all and (max-width: $app-medium-media-query) {
+  .card {
+    background-color: $card-hover-background;
+    pointer-events: none;
+
+    &__single {
+      .card-img {
+        width: 140px;
+      }
+
+      .like-btn {
+        right: 5px;
+      }
+    }
+
+    &__double {
+      .card-img {
+        width: 240px;
+      }
+
+      .like-btn {
+        right: 3px;
+      }
+    }
+
+    .like-btn {
+      width: 20px;
+      top: 5px;
+      right: 5px;
+    }
+
+    .card-info {
+      .card-specifications {
+        left: 14px;
+        bottom: 14px;
+
+        .discount {
+          width: 40px;
+          font-size: 12px;
+          margin-bottom: 6px;
+        }
+
+        .item-text {
+          align-items: baseline;
+          margin-bottom: 4px;
+
+          .flag,
+          .tank-type,
+          .level {
+            margin-right: 3px;
+          }
+        }
+      }
+
+      .price {
+        font-size: 14px;
+      }
+    }
+  }
+}
