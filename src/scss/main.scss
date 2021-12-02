@@ -1,9 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Condensed&display=swap');
+
 @import './variables';
 @import './mixins';
-@import './scaffolding';
-@import './navigation';
+@import 'normalize';
+@import './scrollbar';
 
-@font-face {
-  font-family: Inter;
-  src: url('../assets/fonts/Inter.ttf');
+body {
+  height: 100%;
+  font-family: $menu-font-family;
 }
