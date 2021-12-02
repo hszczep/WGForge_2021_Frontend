@@ -20,7 +20,7 @@ class Router {
     return routes.find((route: IRoute) => isRouteHasPath(route, currentPath)) || { path: '/error', page: errorPage };
   }
 
-  route() {
+  async route() {
     if (this.previousPage && this.previousPage.unmount) this.previousPage.unmount();
 
     const currentPath = getLocationPath();
@@ -34,8 +34,7 @@ class Router {
       appController.spinner.show();
   
       this.mainContainer.innerHTML = '';
-      const pageMarkup: string = page.render();
-      console.log(this.findPageByPath(currentGlobalPath))
+      const pageMarkup: string = await page.render();
       appController.spinner.hide();
   
       this.mainContainer.insertAdjacentHTML('afterbegin', pageMarkup);
@@ -49,7 +48,7 @@ class Router {
       appController.spinner.show();
   
       this.mainContainer.innerHTML = '';
-      const pageMarkup: string = page.render();
+      const pageMarkup: string = await page.render();
   
       appController.spinner.hide();
   

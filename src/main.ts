@@ -8,16 +8,16 @@ const appInit = async () => {
   app.init();
   document.removeEventListener('DOMContentLoaded', appInit);
 
-  let mainData = await fetch('https://wg-forge-back.herokuapp.com/api/products').then(res => res.json());
+  // let mainData = await fetch('https://wg-forge-back.herokuapp.com/api/products').then(res => res.json());
 
-  let fragment = document.createElement('div');  
+  // let fragment = document.createElement('div');  
 
-  for (let i = 0; i < 2; i++){
-    let item = new ProductItemComponent(mainData[i]);
-    fragment.innerHTML += item.render();
-  }
+  // for (let i = 0; i < 2; i++){
+  //   let item = new ProductItemComponent(mainData[i]);
+  //   fragment.innerHTML += item.render();
+  // }
 
-  document.body.append(fragment);
+  // document.body.append(fragment);
 };
 
 window.addEventListener('DOMContentLoaded', appInit);

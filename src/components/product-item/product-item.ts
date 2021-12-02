@@ -7,7 +7,7 @@ class ProductItemComponent {
   nation: string;
   images: Array<string>;
   tankType: string;
-  size: number;
+  size: string;
   linkToDiscription: string;
   discount: number;
   flag: string;
@@ -16,12 +16,13 @@ class ProductItemComponent {
     this.tier = tier; // tier tank, for render convert expample "4" -> "IV"
     this.type = type; //tank, gold or premium
     this.tankType = tank_type.toLowerCase(); //ligth, medium, haevy
+    console.log(this.tankType)
     this.name = name; // shor name tank
     this.price = price; //default price $
     this.nation = nation; //country 
     this.flag = `flag__${this.nation}`; // for icon flag
     this.images = images; // link image
-    this.size = 1; // add to JSON
+    this.size = 'single'; // add to JSON
     this.linkToDiscription = `#/product/${this.id}`; // add to JSON
     this.discount = 0; // add to JSON;
 
@@ -35,10 +36,10 @@ class ProductItemComponent {
 
   render() {
     let TankNameInfo;
-    if (this.type === 'tank') {
+    if (this.type === 'machinery') {
       TankNameInfo = `
                   <span class="flag ${this.flag}"></span>
-                  <span class="tank-type ${this.tankType}"></span>
+                  <span class="tank-type tank-type__${this.tankType}"></span>
                   <span class="level">${this.convertToRomane(this.tier)}</span>
                   <span class="item-name">${this.name}</span>
       `;
@@ -48,16 +49,16 @@ class ProductItemComponent {
       `;
     }
     return `
-          <article class="card ${this.size}" id="${this.id}">
+          <article class="card card__${this.size}" id="${this.id}">
             <a href="${this.linkToDiscription}" class="card-info">
               <img class="card-img" src="${this.images[0]}" alt="${this.name}" />
               <div class="card-specifications">
-                <p class="discount">${this.discount}</p>
+                <p class="discount">${this.discount || ''}</p>
                 <h2 class="item-text">
                   ${TankNameInfo}
                 </h2>
-                <p class="price">${this.price}</p>
-                <p class="price price-discount">${this.price}</p>
+                <p class="price">$ ${this.price}</p>
+                <p class="price price-discount">${this.discount ? this.price : ''}</p>
               </div>
             </a>
             <button class="like-btn">

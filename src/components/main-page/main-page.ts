@@ -1,5 +1,8 @@
 import './scss/main-page.styles.scss';
 
+import storage from '../app/components/storage/storage';
+import ProductItemComponent from '../product-item/product-item';
+
 class MainPageComponent {
   constructor() {
     this.render = this.render.bind(this);
@@ -15,9 +18,19 @@ class MainPageComponent {
     console.log('It is MainPage unmount()');
   }
 
-  render() {
-    console.log('It is MainPage render()');
-    // delete all articles after parsing
+  async render() {
+
+    let listOfProducts = await fetch('https://wg-forge-back.herokuapp.com/api/products').then(res => res.json());
+
+    let fragment = document.createElement('div');
+    fragment.classList.add('cards-field');
+  
+    for (let i = 0; i < 50; i++){
+      let item = new ProductItemComponent(listOfProducts[i]);
+      fragment.innerHTML += item.render();
+
+    }
+
     return `
       <div class="content-field">
         <div class="content-menu">
@@ -28,138 +41,8 @@ class MainPageComponent {
             <button>Gold</button>
             <button>Premium account</button>
           </div>
-        </div>
-        <div class="cards-field">
-          <article class="card card__single">
-            <a href="#" class="card-info">
-              <img class="card-img" src="assets/images/is6.png" alt="ИС-6" />
-              <div class="card-specifications">
-                <p class="discount">-10%</p>
-                <h2 class="item-text">
-                  <span class="flag flag__ussr"></span>
-                  <span class="tank-type tank-type__at-spg"></span>
-                  <span class="level">VIII</span>
-                  <span class="item-name">ИС-6</span>
-                </h2>
-                <p class="price old-price">$ 20.99</p>
-                <p class="price price-discount">$ 13.43</p>
-              </div>
-            </a>
-            <button class="like-btn">
-              <svg class="like-btn__icon">
-                <use xlink:href="assets/images/sprite.svg#like"></use>
-              </svg>
-            </button>
-            <button class="purchase-btn">purchase</button>
-          </article>
-          <article class="card card__double">
-            <a href="#" class="card-info">
-              <img class="card-img" src="assets/images/M56.png" alt="M56" />
-              <div class="card-specifications">
-                <p class="discount"></p>
-                <h2 class="item-text">
-                  <span class="flag flag__uk"></span>
-                  <span class="tank-type tank-type__heavytank"></span>
-                  <span class="level">VII</span>
-                  <span class="item-name">M56 dgdrgr grdg drgdrgdrgrdgrd</span>
-                </h2>
-                <p class="price">$ 1.00</p>
-                <p class="price price-discount"></p>
-              </div>
-            </a>
-            <button class="like-btn">
-              <svg class="like-btn__icon">
-                <use xlink:href="assets/images/sprite.svg#like"></use>
-              </svg>
-            </button>
-            <button class="purchase-btn">purchase</button>
-          </article>
-          <article class="card card__double">
-            <a href="#" class="card-info">
-              <img class="card-img" src="assets/images/M56.png" alt="M56" />
-              <div class="card-specifications">
-                <p class="discount"></p>
-                <h2 class="item-text">
-                  <span class="flag flag__czech"></span>
-                  <span class="tank-type tank-type__lighttank"></span>
-                  <span class="level">V</span>
-                  <span class="item-name">M56</span>
-                </h2>
-                <p class="price">$ 66.99</p>
-                <p class="price price-discount"></p>
-              </div>
-            </a>
-            <button class="like-btn">
-              <svg class="like-btn__icon">
-                <use xlink:href="assets/images/sprite.svg#like"></use>
-              </svg>
-            </button>
-            <button class="purchase-btn">purchase</button>
-          </article>
-          <article class="card card__single">
-            <a href="#" class="card-info">
-              <img class="card-img" src="assets/images/is6.png" alt="ИС-6" />
-              <div class="card-specifications">
-                <p class="discount"></p>
-                <h2 class="item-text">
-                  <span class="flag flag__china"></span>
-                  <span class="tank-type tank-type__multirole"></span>
-                  <span class="level">III</span>
-                  <span class="item-name">ИС-9</span>
-                </h2>
-                <p class="price">$ 100.99</p>
-                <p class="price price-discount"></p>
-              </div>
-            </a>
-            <button class="like-btn">
-              <svg class="like-btn__icon">
-                <use xlink:href="assets/images/sprite.svg#like"></use>
-              </svg>
-            </button>
-            <button class="purchase-btn">purchase</button>
-          </article>
-          <article class="card card__single">
-            <a href="#" class="card-info">
-              <img class="card-img" src="assets/images/M56.png" alt="M56" />
-              <div class="card-specifications">
-                <p class="discount"></p>
-                <h2 class="item-text">
-                  <span class="flag flag__sweden"></span>
-                  <span class="tank-type tank-type__mediumtank"></span>
-                  <span class="level">X</span>
-                  <span class="item-name">M56</span>
-                </h2>
-                <p class="price">$ 0.99</p>
-                <p class="price price-discount"></p>
-              </div>
-            </a>
-            <button class="like-btn like-btn__active">
-              <svg class="like-btn__icon">
-                <use xlink:href="assets/images/sprite.svg#like"></use>
-              </svg>
-            </button>
-            <button class="purchase-btn">purchase</button>
-          </article>
-                    <article class="card card__single">
-            <a href="#" class="card-info">
-              <img class="card-img" src="assets/images/M56.png" alt="gold" />
-              <div class="card-specifications">
-                <p class="discount"></p>
-                <h2 class="item-text">
-                  <span class="item-name">360 дней танкового премиум аккаунта</span>
-                </h2>
-                <p class="price">$ 100.99</p>
-                <p class="price price-discount"></p>
-              </div>
-            </a>
-            <button class="like-btn">
-              <svg class="like-btn__icon">
-                <use xlink:href="assets/images/sprite.svg#like"></use>
-              </svg>
-            </button>
-            <button class="purchase-btn">purchase</button>
-          </article>
-        </div>
+        </div>        
+          ${fragment.outerHTML}        
       </div>
     `;
   }

@@ -14,9 +14,9 @@ class ProductPageComponent {
   render() {
     const productId = window.location.hash.slice(1).toLowerCase().replace(/\/product\//, '');
     const {mainData} = storage;
-    const product = mainData.filter(item => item.id === productId)[0];
+    // const product = mainData.filter(item => item.id === productId)[0];
     
-    const {tier, type, name, price, nation, images, tank_type, id}= product;
+    // const {tier, type, name, price, nation, images, tank_type, id} = product;
     
     return `
       <section class="product-page">
