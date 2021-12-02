@@ -1,4 +1,4 @@
-import storage from "../app/components/storage/storage";
+import storage from '../app/components/storage/storage';
 
 class ProductPageComponent {
   constructor() {
@@ -9,17 +9,20 @@ class ProductPageComponent {
 
   init() {}
 
-  convertToRomane(number:number):string {
-    let map = ['','I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
+  convertToRomane(number: number): string {
+    const map = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
     return map[number];
   }
 
   unmount() {}
 
   render() {
-    const productId = window.location.hash.slice(1).toLowerCase().replace(/\/product\//, '');
+    const productId = window.location.hash
+      .slice(1)
+      .toLowerCase()
+      .replace(/\/product\//, '');
     const productList = storage.mainData;
-    const product = productList.filter(item => item.id === productId)[0];
+    const product = productList.filter((item) => item.id === productId)[0];
 
     let TankNameInfo;
     if (product.type === 'machinery') {

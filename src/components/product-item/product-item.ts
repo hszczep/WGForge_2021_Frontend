@@ -1,5 +1,5 @@
 class ProductItemComponent {
-  id : string;
+  id: string;
   tier: number;
   type: string;
   name: string;
@@ -12,27 +12,48 @@ class ProductItemComponent {
   discount: number;
   price_discount: number;
   flag: string;
-  constructor({tier, type, name, price, discount, price_discount, nation, images, tank_type, id}:{tier:number, type:string, name:string, price:number, discount: number, price_discount:number, nation:string, images:Array<string>, tank_type:string, id:string}) {
+  constructor({
+    tier,
+    type,
+    name,
+    price,
+    discount,
+    price_discount,
+    nation,
+    images,
+    tank_type,
+    id,
+  }: {
+    tier: number;
+    type: string;
+    name: string;
+    price: number;
+    discount: number;
+    price_discount: number;
+    nation: string;
+    images: Array<string>;
+    tank_type: string;
+    id: string;
+  }) {
     this.id = id;
     this.tier = tier; // tier tank, for render convert expample "4" -> "IV"
-    this.type = type; //tank, gold or premium
-    this.tankType = tank_type.toLowerCase(); //ligth, medium, haevy
+    this.type = type; // tank, gold or premium
+    this.tankType = tank_type.toLowerCase(); // ligth, medium, haevy
     this.name = name; // shor name tank
-    this.price = price; //default price $
-    this.nation = nation; //country 
+    this.price = price; // default price $
+    this.nation = nation; // country
     this.flag = `flag__${this.nation}`; // for icon flag
     this.images = images; // link image
     this.size = 'single'; // add to JSON
     this.linkToDiscription = `#/product/${this.id}`;
     this.discount = discount; // discont in %  example 10
-    this.discount
     this.price_discount = price_discount;
 
     this.render = this.render.bind(this);
   }
 
-  convertToRomane(number:number):string {
-    let map = ['','I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
+  convertToRomane(number: number): string {
+    const map = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
     return map[number];
   }
 
@@ -55,12 +76,12 @@ class ProductItemComponent {
             <a href="${this.linkToDiscription}" class="card-info">
               <img class="card-img" src="${this.images[0]}" alt="${this.name}" />
               <div class="card-specifications">
-                <p class="discount">${this.discount ? '-'+this.discount+'%' : ''}</p>
+                <p class="discount">${this.discount ? `-${this.discount}%` : ''}</p>
                 <h2 class="item-text">
                   ${TankNameInfo}
                 </h2>
                 <p class="price">$${this.price}</p>
-                <p class="price price-discount">${this.discount ? '$'+this.price_discount : ''}</p>
+                <p class="price price-discount">${this.discount ? `$${this.price_discount}` : ''}</p>
               </div>
             </a>
             <button class="like-btn">

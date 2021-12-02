@@ -10,22 +10,18 @@ class MainPageComponent {
     this.unmount = this.unmount.bind(this);
   }
 
-  init() {
-    console.log('It is MainPage init()');
-  }
+  init() {}
 
-  unmount() {
-    console.log('It is MainPage unmount()');
-  }
+  unmount() {}
 
   render() {
-    let listOfProducts = storage.mainData;
+    const listOfProducts = storage.mainData;
 
-    let fragment = document.createElement('div');
+    const fragment = document.createElement('div');
     fragment.classList.add('cards-field');
-  
-    for (let i = 0; i < listOfProducts.length; i++){
-      let item = new ProductItemComponent(listOfProducts[i]);
+
+    for (let i = 0; i < listOfProducts.length; i++) {
+      const item = new ProductItemComponent(listOfProducts[i]);
       fragment.innerHTML += item.render();
     }
 

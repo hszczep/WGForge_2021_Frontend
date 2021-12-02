@@ -9,7 +9,7 @@ const routes: IRoute[] = [
   { path: '/', page: mainPage },
   { path: '/test', page: testPage },
   { path: '/error', page: errorPage },
-  { path: '/product/', page: productPage},
+  { path: '/product/', page: productPage },
 ];
 
 export default routes;

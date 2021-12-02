@@ -1,5 +1,16 @@
 class Storage {
-  mainData: Array<Object>
+  mainData: {
+    tier: number;
+    type: string;
+    name: string;
+    price: number;
+    discount: number;
+    price_discount: number;
+    nation: string;
+    images: Array<string>;
+    tank_type: string;
+    id: string;
+  };
   constructor() {
     this.beforeUnloadHandler = this.beforeUnloadHandler.bind(this);
   }
@@ -10,7 +21,7 @@ class Storage {
 
   async init() {
     window.addEventListener('beforeunload', this.beforeUnloadHandler);
-    this.mainData = await fetch('https://wg-forge-back.herokuapp.com/api/products').then(res => res.json());
+    this.mainData = await fetch('https://wg-forge-back.herokuapp.com/api/products').then((res) => res.json());
   }
 }
 

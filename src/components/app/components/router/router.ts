@@ -24,9 +24,9 @@ class Router {
     if (this.previousPage && this.previousPage.unmount) this.previousPage.unmount();
     let currentPath = getLocationPath();
 
-    if (/\/product\//.test(currentPath)){
-      currentPath = currentPath.match(/\/product\//)[0];
-    } 
+    if (/\/product\//.test(currentPath)) {
+      currentPath = currentPath.slice(0, 9);
+    }
     const { page } = this.findPageByPath(currentPath);
     this.previousPage = page;
     appController.spinner.show();
@@ -37,7 +37,7 @@ class Router {
     appController.spinner.hide();
 
     this.mainContainer.insertAdjacentHTML('afterbegin', pageMarkup);
-    if (page.init) page.init();    
+    if (page.init) page.init();
   }
 
   init() {
