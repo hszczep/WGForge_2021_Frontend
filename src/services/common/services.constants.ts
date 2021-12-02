@@ -7,3 +7,7 @@ export const MAIN_API_URLS = {
     LOGIN: 'user/auth',
   },
 };
+
+export const LOCAL_STORAGE_KEYS = {
+  USER: 'WG-Forge-UserInfo',
+};
