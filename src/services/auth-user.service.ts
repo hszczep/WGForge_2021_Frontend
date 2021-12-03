@@ -1,10 +1,11 @@
 import mainApiService from './main-api.service';
 import localStorageService from './local-storage.service';
 
-import { IUser, IUserCredentials } from '../models/user.model';
 import storage from '../components/app/components/storage/storage';
-import { USER } from '../common/common.constants';
+
 import { getUserNameFromEmail } from '../common/common.helper';
+import { USER } from '../common/common.constants';
+import { IUser, IUserCredentials } from '../models/user.model';
 
 class AuthUserService {
   async #signUpUser(userCredentials: IUserCredentials) {
@@ -17,21 +18,6 @@ class AuthUserService {
 
   async #singInUser(userCredentials: IUserCredentials): Promise<IUser | false> {
     const { token } = (await mainApiService.loginUser(userCredentials)) || { token: null };
-
-    // if (token) {
-    //   localStorageService.setUserInfo(userCredentials.email, token);
-
-    //   const user = await mainApiService.getUser(token);
-    //   if (!user) return false;
-
-    //   storage.setUserState({
-    //     credentials: userCredentials,
-    //     isLogged: true,
-    //     isAdmin: user.role === USER.ROLES.ADMIN
-    //   });
-
-    //   return user;
-    // }
 
     if (!token) return false;
 
@@ -46,7 +32,7 @@ class AuthUserService {
     localStorageService.setUserInfo(email, token);
 
     storage.setUserState({
-      credentials: userCredentials || {
+      credentials: {
         name: getUserNameFromEmail(email),
         email,
         token,
@@ -55,18 +41,15 @@ class AuthUserService {
       isAdmin: user.role === USER.ROLES.ADMIN,
     });
 
-    console.log(storage.getUserState());
-    // debugger;
-
     return user;
   }
 
-  updateUserState() {
+  async updateUserState() {
     const { token } = localStorageService.getUserInfo() || { token: null };
 
     if (!token) return;
 
-    this.#updateUser(token);
+    await this.#updateUser(token);
   }
 
   logOutUser() {

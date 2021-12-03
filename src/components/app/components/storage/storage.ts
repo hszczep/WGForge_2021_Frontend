@@ -16,11 +16,11 @@ class Storage {
     this.#userState.isLogged = isLogged;
   }
 
-  isUserLogged(): boolean {
+  checkIsUserLogged(): boolean {
     return this.#userState.isLogged;
   }
 
-  isUserAdmin(): boolean {
+  checkIsUserAdmin(): boolean {
     return this.#userState.isAdmin;
   }
 
