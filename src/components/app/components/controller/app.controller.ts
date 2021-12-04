@@ -14,7 +14,7 @@ class Controller {
     this.authBlock = document.querySelector('.authentication');
   }
 
-  #spinnerInit() {
+  #spinnerInit(): void {
     this.spinner = new Spinner(document.body);
     this.spinner.init();
   }
@@ -48,11 +48,17 @@ class Controller {
     );
   }
 
-  async init() {
+  async init(): Promise<void> {
     this.#spinnerInit();
 
+    this.spinner.show();
     await authUserService.updateUserState();
-    if (storage.checkIsUserLogged()) this.rerenderAuthBlock();
+    this.spinner.hide();
+
+    if (storage.checkIsUserLogged()) {
+      this.rerenderAuthBlock();
+      window.location.hash = '#';
+    }
   }
 }
 

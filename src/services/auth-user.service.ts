@@ -8,7 +8,7 @@ import { USER } from '../common/common.constants';
 import { IUser, IUserCredentials } from '../models/user.model';
 
 class AuthUserService {
-  async #signUpUser(userCredentials: IUserCredentials) {
+  async #signUpUser(userCredentials: IUserCredentials): Promise<IUser | false> {
     const created = await mainApiService.registerUser(userCredentials);
     if (created) {
       return this.#singInUser(userCredentials);
@@ -44,7 +44,7 @@ class AuthUserService {
     return user;
   }
 
-  async updateUserState() {
+  async updateUserState(): Promise<void> {
     const { token } = localStorageService.getUserInfo() || { token: null };
 
     if (!token) return;
@@ -52,12 +52,12 @@ class AuthUserService {
     await this.#updateUser(token);
   }
 
-  logOutUser() {
+  logOutUser(): void {
     storage.resetUserState();
     localStorageService.deleteUserInfo();
   }
 
-  async loginUser(isRegistration: boolean, userCredentials: IUserCredentials) {
+  async loginUser(isRegistration: boolean, userCredentials: IUserCredentials): Promise<IUser | false> {
     if (isRegistration) {
       return this.#signUpUser(userCredentials);
     }

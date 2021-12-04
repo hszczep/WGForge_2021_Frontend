@@ -35,17 +35,17 @@ class AuthPageComponent {
     this.#isRegistration = isRegistration;
 
     this.#elements = {
-      emailInput: document.querySelector('#js-inputEmail'),
-      passwordInput: document.querySelector('#js-inputPassword'),
-      authForm: document.querySelector('#js-authForm'),
-      logoutButton: document.querySelector('#js-logOutBtn'),
+      emailInput: document.querySelector('.login__input_email'),
+      passwordInput: document.querySelector('.login__input_password'),
+      authForm: document.querySelector('.login-form'),
+      logoutButton: document.querySelector('.login__button_logout'),
     };
 
     this.#elements.authForm.addEventListener('submit', this.authFormSubmitHandler);
     this.#elements.logoutButton.addEventListener('click', appController.logoutButtonClickHandler);
   }
 
-  unmount() {
+  unmount(): void {
     this.#elements.authForm.removeEventListener('submit', this.authFormSubmitHandler);
   }
 
@@ -54,45 +54,42 @@ class AuthPageComponent {
 
     const userCredetials: IUserCredentials = this.#getUserCredentias();
 
-    authUserService.loginUser(this.#isRegistration, userCredetials).then((response) => {
-      if (response) appController.rerenderAuthBlock();
-    });
+    appController.spinner.show();
+    authUserService
+      .loginUser(this.#isRegistration, userCredetials)
+      .then((response) => {
+        if (response) {
+          appController.rerenderAuthBlock();
+          window.location.hash = '#';
+        }
+      })
+      .finally(() => appController.spinner.hide());
   }
 
   render(isRegistration = true): string {
+    // test@mail.by  12345
     return `
-      <section class="main-page">
-        <header class="main-page__header">
-          <nav class="main-page__navigation navigation">
-            <a class="main-page__navigation-link navigation-link link" href="#/">Main page</a>
-            <a class="main-page__navigation-link navigation-link link" href="#/signin">Signin page</a>
-            <a class="main-page__navigation-link navigation-link link" href="#/signup">Signup page</a>
-            <a class="main-page__navigation-link navigation-link link" href="#/test">Test page</a>
-            <a class="main-page__navigation-link navigation-link link" href="#/error">Error page</a>
-          </nav>
-        </header>
-        <h2 class="main-page-title">It is ${isRegistration ? 'Signup' : 'Signin'} Page!</h2>
-      </section>
+      <section class="auth-page">
+        <h2 class="auth-page-title">It is ${isRegistration ? 'Signup' : 'Signin'} Page!</h2>
 
-      <form name="auth" class="login" id="js-authForm">
-        <div class="login__title">Welcome to ${isRegistration ? 'registration' : 'login'} page</div>
-          
-        <div>
-          <input type="email" id="js-inputEmail" class="login__input form-control" 
-            placeholder="EMAIL" maxlength="30" autocomplete="off">
-        </div>
-        <div>
-          <input type="password" id="js-inputPassword" class="login__input form-control" 
-            placeholder="PASSWORD" maxlength="30" autocomplete="off">
-        </div>
-        <button class="login__send login-mb-3" type="submit" id="js-loginCreateBtn">
-          ${isRegistration ? 'signup' : 'signin'}
-        </button>
-        <button class="login__send login-mb-3" type="button" id="js-logOutBtn">
-          logOut
-        </button>
-        <div id="js-loginCreateInfo" class="login__info login-mb-3"></div>   
-      </form> 
+        <form class="login-form login" name="login-form">
+          <legend class="login__title">Welcome to ${isRegistration ? 'registration' : 'login'} page</legend>
+          <label>
+            <input class="login__input login__input_email form-control" type="email" 
+              placeholder="Enter your email, please" maxlength="30" autocomplete="off">
+          </label>
+          <div>
+            <input type="password" class="login__input login__input_password form-control" 
+              placeholder="Enter your password, please" maxlength="30" autocomplete="off">
+          </div>
+          <button class="login__button login__button_submit" type="submit"">
+            ${isRegistration ? 'signup' : 'signin'}
+          </button>
+          <button class="login__button login__button_logout" type="button">
+            logOut
+          </button>  
+        </form> 
+      </section>
     `;
   }
 }
