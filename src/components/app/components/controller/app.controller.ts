@@ -30,8 +30,10 @@ class Controller {
     if (storage.checkIsUserLogged()) {
       this.authBlock.insertAdjacentHTML(
         'afterbegin',
-        `<span>${storage.getUserState().credentials.name}</span>
-        <button class="authentication-logout-button">logout</button>`
+        `<div class="authentication-wrapper">
+          <span class="authentication-user-name">${storage.getUserState().credentials.name}</span>
+          <button class="authentication-logout-button">logout</button>
+         </div>`
       );
 
       this.authBlock
@@ -43,8 +45,8 @@ class Controller {
 
     this.authBlock.insertAdjacentHTML(
       'afterbegin',
-      `<a href="#/signin">Login</a><span> or</span>
-      <a href="#/signup">Create account</a>`
+      `<a class="authentication-signin" href="#/signin">Login</a><span> or</span>
+       <a class="authentication-signup" href="#/signup">Create account</a>`
     );
   }
 

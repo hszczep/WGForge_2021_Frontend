@@ -82,11 +82,9 @@ class AuthPageComponent {
       validationMessagesEmail: document.querySelector('.incorrect-email'),
       validationMessagesPassword: document.querySelector('.incorrect-password'),
       apiErrorsMessages: document.querySelector('.incorrect-data'),
-      // logoutButton: document.querySelector('.login__button_logout'),
     };
 
     this.#elements.authForm.addEventListener('submit', this.authFormSubmitHandler);
-    // this.#elements.logoutButton.addEventListener('click', appController.logoutButtonClickHandler);
   }
 
   unmount(): void {
