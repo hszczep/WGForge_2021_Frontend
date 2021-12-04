@@ -9,3 +9,23 @@ body {
   height: 100%;
   font-family: $menu-font-family;
 }
+
+.app-field {
+  min-height: 100%;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  background: #1c1b15 url('../assets/images/bg_fire.png') no-repeat 0 47px;
+  background-size: contain;
+
+  .app-background-img {
+    position: fixed;
+    top: 47px;
+    left: 0;
+    z-index: 1;
+  }
+}
+
+.app {
+  flex: 1 1 auto;
+}

@@ -1,3 +1,5 @@
+import './scss/auth.styles.scss';
+
 import appController from '../app/components/controller/app.controller';
 import authUserService from '../../services/auth-user.service';
 import { IUserCredentials } from '../../models/user.model';
@@ -35,14 +37,14 @@ class AuthPageComponent {
     this.#isRegistration = isRegistration;
 
     this.#elements = {
-      emailInput: document.querySelector('.login__input_email'),
-      passwordInput: document.querySelector('.login__input_password'),
-      authForm: document.querySelector('.login-form'),
-      logoutButton: document.querySelector('.login__button_logout'),
+      authForm: document.querySelector('.auth-form'),
+      emailInput: document.querySelector('.auth-form__input-email'),
+      passwordInput: document.querySelector('.auth-form__input-password'),
+      // logoutButton: document.querySelector('.login__button_logout'),
     };
 
     this.#elements.authForm.addEventListener('submit', this.authFormSubmitHandler);
-    this.#elements.logoutButton.addEventListener('click', appController.logoutButtonClickHandler);
+    // this.#elements.logoutButton.addEventListener('click', appController.logoutButtonClickHandler);
   }
 
   unmount(): void {
@@ -69,28 +71,25 @@ class AuthPageComponent {
   render(isRegistration = true): string {
     // test@mail.by  12345
     return `
-      <section class="auth-page">
-        <h2 class="auth-page-title">It is ${isRegistration ? 'Signup' : 'Signin'} Page!</h2>
-
-        <form class="login-form login" name="login-form">
-          <legend class="login__title">Welcome to ${isRegistration ? 'registration' : 'login'} page</legend>
-          <label>
-            <input class="login__input login__input_email form-control" type="email" 
-              placeholder="Enter your email, please" maxlength="30" autocomplete="off">
-          </label>
-          <div>
-            <input type="password" class="login__input login__input_password form-control" 
-              placeholder="Enter your password, please" maxlength="30" autocomplete="off">
-          </div>
-          <button class="login__button login__button_submit" type="submit"">
-            ${isRegistration ? 'signup' : 'signin'}
-          </button>
-          <button class="login__button login__button_logout" type="button">
-            logOut
-          </button>  
-        </form> 
-      </section>
-    `;
+      <div class="auth-field">
+        <form class="auth-form">
+          <fieldset class="auth-form__fieldset">
+            <legend>${isRegistration ? 'Registration' : 'Log in to account'}</legend> 
+            <label class="auth-form__input-name">
+              Email:
+              <input type="text" class="auth-form__input auth-form__input-email correct-input-data" />
+            </label>
+            <p class="validator-text" id="incorrect-email">* Неверный email.</p>
+            <label class="auth-form__input-name">
+              Password:
+              <input type="password" class="auth-form__input auth-form__input-password incorrect-input-data" />
+            </label>
+            <p class="validator-text" id="incorrect-password">* Неверный пароль.</p>
+            <p class="validator-text" id="incorrect-data">* Неверный email или пароль.</p>
+            <button class="auth-form__button">${isRegistration ? 'Sign up' : 'Sign in'}</button>
+          </fieldset>
+        </form>
+      </div>`;
   }
 }
 
