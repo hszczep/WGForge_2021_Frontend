@@ -2,8 +2,9 @@ import './scss/auth.styles.scss';
 
 import appController from '../app/components/controller/app.controller';
 import authUserService from '../../services/auth-user.service';
-import { IUserCredentials } from '../../models/user.model';
+import { capitalizeFirstLetter } from '../../common/common.helper';
 import { VALIDATION_ERRORS_MESSAGES, VALIDATION_REG_EXPS } from './common/constants';
+import { IUserCredentials } from '../../models/user.model';
 
 class AuthPageComponent {
   // in signup page #isRegistration = true (default);
@@ -40,6 +41,14 @@ class AuthPageComponent {
 
   #isValidPassword(password: string) {
     return password.match(VALIDATION_REG_EXPS.PASSWORD);
+  }
+
+  #clearApiErrorMessage() {
+    this.#elements.apiErrorMessage.innerText = '';
+  }
+
+  #showApiErrorMessage(apiErrorMessage: string) {
+    this.#elements.apiErrorMessage.innerText = capitalizeFirstLetter(apiErrorMessage);
   }
 
   #clearValidationMessages() {
@@ -81,7 +90,7 @@ class AuthPageComponent {
       passwordInput: document.querySelector('.auth-form__input-password'),
       validationMessagesEmail: document.querySelector('.incorrect-email'),
       validationMessagesPassword: document.querySelector('.incorrect-password'),
-      apiErrorsMessages: document.querySelector('.incorrect-data'),
+      apiErrorMessage: document.querySelector('.incorrect-data'),
     };
 
     this.#elements.authForm.addEventListener('submit', this.authFormSubmitHandler);
@@ -94,6 +103,7 @@ class AuthPageComponent {
   authFormSubmitHandler(event: Event): void {
     event.preventDefault();
 
+    this.#clearApiErrorMessage();
     if (!this.#validateFormInputs()) return;
 
     const userCredetials: IUserCredentials = this.#getUserCredentias();
@@ -107,11 +117,14 @@ class AuthPageComponent {
           window.location.hash = '#';
         }
       })
+      .catch((error: Error) => {
+        this.#showApiErrorMessage(error.message);
+      })
       .finally(() => appController.spinner.hide());
   }
 
   render(isRegistration = true): string {
-    // test@mail.by  12345
+    // for testing email: test@mail.by  password: 12345 or create your own account
     return `
       <div class="auth-field">
         <form class="auth-field-form">

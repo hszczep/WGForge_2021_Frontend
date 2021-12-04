@@ -1,7 +1,7 @@
+import storage from '../components/app/components/storage/storage';
+
 import mainApiService from './main-api.service';
 import localStorageService from './local-storage.service';
-
-import storage from '../components/app/components/storage/storage';
 
 import { getUserNameFromEmail } from '../common/common.helper';
 import { USER } from '../common/common.constants';
