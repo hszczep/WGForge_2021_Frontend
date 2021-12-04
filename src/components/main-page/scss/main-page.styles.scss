@@ -3,24 +3,7 @@
 @import './main-page.footer';
 @import '../../product-item/scss/product-item.styles';
 
-.app-field {
-  min-height: 100%;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  background: #1c1b15 url('../../../assets/images/bg_fire.png') no-repeat 0 47px;
-  background-size: contain;
-
-  .app-background-img {
-    position: fixed;
-    top: 47px;
-    left: 0;
-    z-index: 1;
-  }
-}
-
 .app {
-  flex: 1 1 auto;
   margin-bottom: 30px;
 
   .content-menu {

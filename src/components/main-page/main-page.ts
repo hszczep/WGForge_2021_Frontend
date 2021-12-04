@@ -19,7 +19,6 @@ class MainPageComponent {
     console.log('It is MainPage render()');
     // delete all articles after parsing
     return `
-      <div class="content-field">
         <div class="content-menu">
           <a href="#" class="WoT_logo"><img src="assets/images/WoT_logo.png" alt="WoT logo" /></a>
           <div class="content-menu__buttons">
@@ -160,7 +159,6 @@ class MainPageComponent {
             <button class="purchase-btn">purchase</button>
           </article>
         </div>
-      </div>
     `;
   }
 }
