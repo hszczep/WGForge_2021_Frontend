@@ -140,7 +140,7 @@ class AuthPageComponent {
               <input type="password" class="auth-form__input auth-form__input-password" />
             </label>
             <p class="validator-text incorrect-password"></p>
-            <p class="validator-text incorrect-data"></p>
+            <p class="api-validator-text validator-text incorrect-data"></p>
             <button class="auth-form__button">${isRegistration ? 'Sign up' : 'Sign in'}</button>
           </fieldset>
         </form>

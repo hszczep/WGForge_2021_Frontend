@@ -7,16 +7,11 @@ class MainPageComponent {
     this.unmount = this.unmount.bind(this);
   }
 
-  init() {
-    console.log('It is MainPage init()');
-  }
+  init() {}
 
-  unmount() {
-    console.log('It is MainPage unmount()');
-  }
+  unmount() {}
 
   render() {
-    console.log('It is MainPage render()');
     // delete all articles after parsing
     return `
         <div class="content-menu">
@@ -139,7 +134,7 @@ class MainPageComponent {
             </button>
             <button class="purchase-btn">purchase</button>
           </article>
-                    <article class="card card__single">
+          <article class="card card__single">
             <a href="#" class="card-info">
               <img class="card-img" src="assets/images/M56.png" alt="gold" />
               <div class="card-specifications">
