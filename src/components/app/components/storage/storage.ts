@@ -1,15 +1,34 @@
+import { USER } from '../../../../common/common.constants';
+import { IUserState } from '../../../../models/user.model';
+
 class Storage {
-  constructor() {
-    this.beforeUnloadHandler = this.beforeUnloadHandler.bind(this);
+  #userState: IUserState = USER.DEFAULT_STATE;
+
+  setUserState(userState: IUserState) {
+    this.#userState = userState;
   }
 
-  beforeUnloadHandler() {
-    window.removeEventListener('beforeunload', this.beforeUnloadHandler);
+  getUserState(): IUserState {
+    return this.#userState;
   }
 
-  init() {
-    window.addEventListener('beforeunload', this.beforeUnloadHandler);
+  setLoggedUserState(isLogged: boolean): void {
+    this.#userState.isLogged = isLogged;
   }
+
+  checkIsUserLogged(): boolean {
+    return this.#userState.isLogged;
+  }
+
+  checkIsUserAdmin(): boolean {
+    return this.#userState.isAdmin;
+  }
+
+  resetUserState() {
+    this.#userState = USER.DEFAULT_STATE;
+  }
+
+  init() {}
 }
 
 export default new Storage();

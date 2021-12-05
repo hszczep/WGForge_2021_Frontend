@@ -82,6 +82,41 @@
         a {
           margin-right: 0;
         }
+
+        .authentication-wrapper {
+          display: flex;
+          justify-content: space-evenly;
+        }
+
+        .authentication-user-name {
+          display: inline-block;
+          max-width: 100px;
+          width: 100px;
+          margin-right: 10px;
+
+          text-align: right;
+          text-transform: capitalize;
+
+          text-overflow: ellipsis;
+          overflow: hidden;
+          white-space: nowrap;
+
+          cursor: default;
+        }
+
+        button {
+          width: 20px;
+          font-size: 0;
+
+          background-image: url('../../../assets/images/logout.png');
+          background-position-y: 4px;
+          background-repeat: no-repeat;
+          background-size: contain;
+
+          &:hover {
+            filter: $icon-brightness;
+          }
+        }
       }
     }
   }
@@ -144,8 +179,10 @@
       }
 
       .nav-menu {
+        justify-content: space-between;
+
         a {
-          margin-right: 25px;
+          margin-right: 15px;
         }
 
         #wish-list::before {
@@ -159,16 +196,41 @@
         }
 
         .authentication {
+          display: flex;
+          justify-content: space-evenly;
+
           height: 35px;
+          font-size: 0;
 
           span {
-            font-size: 0;
+            display: none;
           }
 
-          &::before {
-            font-size: 26px;
-            content: url('../../../assets/images/ico.png');
-            cursor: pointer;
+          .authentication-signin {
+            margin-right: 15px;
+
+            &::before {
+              font-size: 26px;
+              content: url('../../../assets/images/ico.png');
+              cursor: pointer;
+            }
+          }
+
+          .authentication-signup {
+            &::before {
+              font-size: 26px;
+              content: url('../../../assets/images/registration.png');
+              cursor: pointer;
+              filter: $icon-brightness;
+            }
+          }
+
+          .authentication-user-name {
+            display: none;
+          }
+
+          button {
+            filter: $icon-brightness;
           }
         }
       }
