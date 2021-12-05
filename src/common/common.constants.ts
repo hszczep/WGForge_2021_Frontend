@@ -7,7 +7,7 @@ export const USER = {
     isLogged: false,
     isAdmin: false,
     credentials: {
-      name: 'Unknown User',
+      name: '',
       email: '',
       token: '',
     },
