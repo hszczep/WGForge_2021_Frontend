@@ -26,7 +26,6 @@ class AuthPageComponent {
   }
 }
 
-
 const signupPageComponent = new AuthPageComponent();
 
 export { signupPageComponent };
