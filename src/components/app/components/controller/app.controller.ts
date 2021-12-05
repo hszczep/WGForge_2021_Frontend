@@ -27,11 +27,15 @@ class Controller {
   rerenderAuthBlock(): void {
     this.authBlock.innerHTML = '';
 
+    const userName = storage.getUserState().credentials.name;
+
     if (storage.checkIsUserLogged()) {
       this.authBlock.insertAdjacentHTML(
         'afterbegin',
         `<div class="authentication-wrapper">
-          <span class="authentication-user-name">${storage.getUserState().credentials.name}</span>
+          <span class="authentication-user-name" title="${userName}">
+            ${userName}
+          </span>
           <button class="authentication-logout-button">logout</button>
          </div>`
       );
