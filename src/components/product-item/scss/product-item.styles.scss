@@ -141,6 +141,21 @@
             background: url('../../../assets/flags/ussr.png');
             @extend %flag-settings;
           }
+
+          &__italy {
+            background: url('../../../assets/flags/italy.png');
+            @extend %flag-settings;
+          }
+
+          &__japan {
+            background: url('../../../assets/flags/japan.png');
+            @extend %flag-settings;
+          }
+
+          &__marc {
+            background: url('../../../assets/flags/marc.png');
+            @extend %flag-settings;
+          }
         }
 
         .tank-type {
