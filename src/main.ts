@@ -3,7 +3,7 @@ import './scss/main.scss';
 
 import app from './components/app/app';
 
-const appInit = async () => {
+const appInit = () => {
   app.init();
   document.removeEventListener('DOMContentLoaded', appInit);
 };

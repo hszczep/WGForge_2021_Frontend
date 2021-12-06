@@ -1,16 +1,7 @@
+import ProductIteIinterface from './product-item-interface';
+
 class Storage {
-  mainData: {
-    tier: number;
-    type: string;
-    name: string;
-    price: number;
-    discount: number;
-    price_discount: number;
-    nation: string;
-    images: Array<string>;
-    tank_type: string;
-    id: string;
-  };
+  mainData: Array<ProductIteIinterface>;
   constructor() {
     this.beforeUnloadHandler = this.beforeUnloadHandler.bind(this);
   }

@@ -2,6 +2,7 @@ import { errorPage } from './pages/error-page';
 
 import appController from '../controller/app.controller';
 import routes from './routes/routes';
+import storage from '../storage/storage';
 
 import { getLocationPath, isRouteHasPath } from './common/router.helper';
 
@@ -20,13 +21,23 @@ class Router {
     return routes.find((route: IRoute) => isRouteHasPath(route, currentPath)) || { path: '/error', page: errorPage };
   }
 
+  findProductById(id: string): boolean {
+    const productList = storage.mainData;
+    const product = productList.filter((item) => item.id === id)[0];
+    return !!product;
+  }
+
   route() {
     if (this.previousPage && this.previousPage.unmount) this.previousPage.unmount();
     let currentPath = getLocationPath();
+    const productRegExp = /\/product\//;
+    let productId;
 
-    if (/\/product\//.test(currentPath)) {
-      currentPath = currentPath.slice(0, 9);
+    if (productRegExp.test(currentPath)) {
+      productId = currentPath.split('/').pop();
+      currentPath = this.findProductById(productId) ? currentPath.replace(productId, '') : '/error';
     }
+
     const { page } = this.findPageByPath(currentPath);
     this.previousPage = page;
     appController.spinner.show();

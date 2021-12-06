@@ -1,16 +1,20 @@
-class ProductItemComponent {
+import ProductIteIinterface from '../app/components/storage/product-item-interface';
+import ProductItemComponentInterface from './product-item-interface';
+import convertToRomane from '../../common/common.helper';
+
+class ProductItemComponent implements ProductItemComponentInterface {
   id: string;
   tier: number;
   type: string;
   name: string;
-  price: number;
+  price: string;
   nation: string;
   images: Array<string>;
-  tankType: string;
+  tank_type: string;
   size: string;
   linkToDiscription: string;
   discount: number;
-  price_discount: number;
+  price_discount: string;
   flag: string;
   constructor({
     tier,
@@ -23,51 +27,35 @@ class ProductItemComponent {
     images,
     tank_type,
     id,
-  }: {
-    tier: number;
-    type: string;
-    name: string;
-    price: number;
-    discount: number;
-    price_discount: number;
-    nation: string;
-    images: Array<string>;
-    tank_type: string;
-    id: string;
-  }) {
+  }: ProductIteIinterface) {
     this.id = id;
     this.tier = tier; // tier tank, for render convert expample "4" -> "IV"
     this.type = type; // tank, gold or premium
-    this.tankType = tank_type.toLowerCase(); // ligth, medium, haevy
+    this.tank_type = tank_type.toLowerCase(); // ligth, medium, haevy
     this.name = name; // shor name tank
-    this.price = price; // default price $
+    this.price = price.toFixed(2); // default price $
     this.nation = nation; // country
     this.flag = `flag__${this.nation}`; // for icon flag
     this.images = images; // link image
     this.size = 'single'; // add to JSON
     this.linkToDiscription = `#/product/${this.id}`;
     this.discount = discount; // discont in %  example 10
-    this.price_discount = price_discount;
+    this.price_discount = price_discount ? price_discount.toFixed(2) : '';
 
     this.render = this.render.bind(this);
   }
 
-  convertToRomane(number: number): string {
-    const map = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
-    return map[number];
-  }
-
   render() {
-    let TankNameInfo;
+    let productNameInfo;
     if (this.type === 'machinery') {
-      TankNameInfo = `
+      productNameInfo = `
                   <span class="flag ${this.flag}"></span>
-                  <span class="tank-type tank-type__${this.tankType}"></span>
-                  <span class="level">${this.convertToRomane(this.tier)}</span>
+                  <span class="tank-type tank-type__${this.tank_type}"></span>
+                  <span class="level">${convertToRomane(this.tier)}</span>
                   <span class="item-name">${this.name}</span>
       `;
     } else {
-      TankNameInfo = `
+      productNameInfo = `
                   <span class="item-name">${this.name}</span>
       `;
     }
@@ -78,9 +66,9 @@ class ProductItemComponent {
               <div class="card-specifications">
                 <p class="discount">${this.discount ? `-${this.discount}%` : ''}</p>
                 <h2 class="item-text">
-                  ${TankNameInfo}
+                  ${productNameInfo}
                 </h2>
-                <p class="price">$${this.price}</p>
+                <p class="price${this.discount ? ' old-price' : ''}">$${this.price}</p>
                 <p class="price price-discount">${this.discount ? `$${this.price_discount}` : ''}</p>
               </div>
             </a>
