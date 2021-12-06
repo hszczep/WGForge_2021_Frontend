@@ -14,6 +14,13 @@ $discount-background: #a61c00;
 $discount-text-color: #fff;
 $purchase-button-background: #e95104;
 $purchase-text-color: #fff;
+$auth-form-text-color: #fff;
+$auth-form-border-color: rgba(255, 255, 245, 0.8);
+$auth-input-border-focus-color: rgba(255, 93, 0, 0.6);
+$auth-button-border-hover-color: rgba(255, 93, 0, 0.8);
+$auth-text-hover-color: #ff5d00;
+$incorrect-color: #e12600;
+$correct-color: #008000;
 
 // ANIMATION
 $app-standard-transition: all 200ms;
@@ -29,3 +36,10 @@ $app-min-width: 300px;
 $footer-social-networks-max-width: 200px;
 $footer-social-networks-medium-width: 170px;
 $footer-social-networks-min-width: 150px;
+$auth-form-width: 400px;
+$auth-form-height: 420px;
+$auth-form-mobile-width: 300px;
+$auth-form-mobile-height: 390px;
+
+// FILTERS
+$icon-brightness: brightness(6);

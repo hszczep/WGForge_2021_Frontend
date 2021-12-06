@@ -1,0 +1,126 @@
+@import '../../../scss/variables';
+
+.auth-field {
+  display: flex;
+  justify-content: center;
+
+  .auth-form {
+    width: $auth-form-width;
+    height: $auth-form-height;
+    margin-top: 60px;
+    padding: 20px 35px;
+    border: 2px solid $auth-form-border-color;
+    border-radius: 10px;
+
+    legend {
+      padding: 0 10px 10px;
+      font-family: $menu-font-family;
+      font-size: 28px;
+      text-transform: uppercase;
+      color: $auth-form-text-color;
+    }
+
+    &__input-name {
+      margin-left: 5px;
+      color: $auth-form-text-color;
+      font-family: $menu-font-family;
+      font-size: 22px;
+    }
+
+    &__input {
+      width: 323px;
+      height: 50px;
+      margin: 8px 0 12px;
+      padding: 0 15px;
+      border: 1px solid $auth-form-border-color;
+      border-radius: 10px;
+      color: $auth-form-text-color;
+      font-family: $menu-font-family;
+      font-size: 20px;
+
+      &:focus {
+        border: 1px solid $auth-input-border-focus-color;
+      }
+    }
+
+    .incorrect-input-data {
+      border: 1px solid $incorrect-color;
+    }
+
+    .correct-input-data {
+      border: 1px solid $correct-color;
+    }
+
+    .validator-text {
+      box-sizing: border-box;
+      height: 24px;
+      padding: 0 0 0 16px;
+      font-family: $menu-font-family;
+      font-size: 16px;
+      color: $incorrect-color;
+    }
+
+    .api-validator-text {
+      padding: 0;
+      text-align: center;
+    }
+
+    &__button {
+      width: 310px;
+      height: 50px;
+      margin: 10px 8px;
+      border: 2px solid $auth-form-border-color;
+      border-radius: 10px;
+      color: $auth-form-text-color;
+      font-family: $menu-font-family;
+      font-size: 24px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: $app-standard-transition;
+
+      &:hover {
+        border: 2px solid $auth-button-border-hover-color;
+        color: $auth-text-hover-color;
+        transition: $app-standard-transition;
+      }
+    }
+  }
+
+  @media all and (max-width: $app-medium-media-query) {
+    .auth-form {
+      width: $auth-form-mobile-width;
+      height: $auth-form-mobile-height;
+      margin-top: 30px;
+      padding: 20px 35px;
+
+      legend {
+        font-size: 24px;
+      }
+
+      &__input-name {
+        font-size: 20px;
+      }
+
+      &__input {
+        width: 223px;
+        height: 40px;
+        font-size: 18px;
+      }
+
+      .validator-text {
+        padding-left: 6px;
+        font-size: 15px;
+      }
+
+      .api-validator-text {
+        padding: 0;
+      }
+
+      &__button {
+        width: 210px;
+        height: 40px;
+        font-size: 20px;
+      }
+    }
+  }
+}

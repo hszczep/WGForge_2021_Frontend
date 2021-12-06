@@ -26,7 +26,6 @@ class MainPageComponent {
     }
 
     return `
-      <div class="content-field">
         <div class="content-menu">
           <a href="#" class="WoT_logo"><img src="assets/images/WoT_logo.png" alt="WoT logo" /></a>
           <div class="content-menu__buttons">
