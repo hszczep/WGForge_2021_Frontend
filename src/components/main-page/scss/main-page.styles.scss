@@ -29,19 +29,178 @@
         font-weight: 400;
         text-transform: uppercase;
         letter-spacing: 0.05em;
-        color: #ccc;
+        color: $title-text-color;
         transition: all 200ms;
 
         &:hover {
-          color: #fff;
+          color: $hover-text-color;
           border-bottom: 4px solid #fff;
-          transition: all 200ms;
+          transition: $app-standard-transition;
         }
       }
 
       .active-menu__button {
-        color: #fff;
+        color: $hover-text-color;
         border-bottom: 4px solid #fff;
+      }
+    }
+  }
+
+  .filter-field {
+    position: relative;
+    display: flex;
+    flex-flow: row;
+    flex-wrap: wrap;
+    margin-bottom: 5px;
+    background-color: rgba(0, 0, 0, 0.21);
+    padding: 12px 0;
+
+    .tanks-select {
+      margin-right: 5px;
+      position: relative;
+      font-family: $menu-font-family;
+      font-size: 17px;
+      line-height: 1.2;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      text-shadow: 0 1px 0 rgba(0, 0, 0, 0.33);
+      color: $title-text-color;
+
+      .tank-type,
+      .flag {
+        opacity: 0.6;
+        transition: $app-standard-transition;
+      }
+
+      &__header {
+        display: flex;
+        align-items: center;
+        width: fit-content;
+        margin: 0 auto;
+        cursor: pointer;
+        transition: $app-standard-transition;
+
+        &:hover {
+          color: $hover-text-color;
+          transition: $app-standard-transition;
+
+          .tank-type,
+          .flag {
+            opacity: 1;
+            transition: $app-standard-transition;
+          }
+        }
+      }
+
+      &__current {
+        margin-right: 6px;
+
+        .tanks-select__value {
+          border-bottom: 0.15em dashed $title-text-color;
+        }
+      }
+
+      &__icon {
+        width: 9px;
+        height: 9px;
+      }
+
+      &__body {
+        margin-top: 15px;
+        padding: 5px 0;
+        flex-direction: column;
+        background-color: rgba(0, 0, 0, 0.9);
+        border: 1px solid rgba(102, 102, 102, 0.49);
+        box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.25);
+        width: fit-content;
+        display: none;
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 100%;
+        z-index: 10;
+
+        &::before {
+          content: '';
+          position: absolute;
+          top: -18px;
+          border: 10px solid transparent;
+          border-bottom: 10px solid rgba(0, 0, 0, 0.9);
+        }
+      }
+
+      &__item {
+        display: flex;
+        align-items: center;
+        flex-wrap: nowrap;
+        padding: 0 18px;
+        opacity: 0.8;
+        font-family: $menu-font-family;
+        font-size: 17px;
+        line-height: 37px;
+        font-weight: 400;
+        color: #999;
+        cursor: pointer;
+      }
+
+      &__item:hover {
+        background-color: rgba(255, 255, 255, 0.14);
+        color: #ccc;
+      }
+    }
+
+    .select-nation {
+      width: 182px;
+
+      .tanks-select__body::before {
+        left: 77px;
+      }
+    }
+
+    .select-tank-type {
+      width: 178px;
+
+      .tanks-select__body::before {
+        left: 75px;
+      }
+    }
+
+    .select-level {
+      width: 128px;
+
+      .tanks-select__body::before {
+        left: 50px;
+      }
+
+      .tanks-select__item {
+        justify-content: center;
+      }
+
+      .tanks-select__value {
+        margin-left: 5px;
+      }
+    }
+
+    .is-active .tanks-select__body {
+      display: flex;
+    }
+
+    .reset-button {
+      position: absolute;
+      right: 30px;
+      font-family: $menu-font-family;
+      font-size: 17px;
+      line-height: 1.2;
+      font-weight: 400;
+      letter-spacing: 0.05em;
+      text-shadow: 0 1px 0 rgba(0, 0, 0, 0.33);
+      color: $title-text-color;
+      border-bottom: 0.15em dashed $title-text-color;
+      transition: $app-standard-transition;
+
+      &:hover {
+        color: $hover-text-color;
+        transition: $app-standard-transition;
       }
     }
   }
@@ -106,6 +265,19 @@
           margin-left: 20px;
           margin-bottom: 5px;
         }
+      }
+    }
+
+    .filter-field {
+      flex-direction: column;
+      align-items: center;
+
+      .tanks-select {
+        margin-bottom: 12px;
+      }
+
+      .reset-button {
+        position: initial;
       }
     }
 

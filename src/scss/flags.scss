@@ -1,0 +1,73 @@
+@import '../scss/mixins';
+
+.flag {
+  display: inline-block;
+  flex: 0 0 auto;
+
+  &__all {
+    background: url('/src/assets/flags/all.png');
+    width: 13px;
+    height: 14px;
+    margin: 0 11px 0 5px;
+  }
+
+  &__china {
+    background: url('/src/assets/flags/china.png');
+    @extend %flag-settings;
+  }
+
+  &__czech {
+    background: url('/src/assets/flags/czech.png');
+    @extend %flag-settings;
+  }
+
+  &__france {
+    background: url('/src/assets/flags/france.png');
+    @extend %flag-settings;
+  }
+
+  &__germany {
+    background: url('/src/assets/flags/germany.png');
+    @extend %flag-settings;
+  }
+
+  &__poland {
+    background: url('../../../assets/flags/poland.png');
+    @extend %flag-settings;
+  }
+
+  &__sweden {
+    background: url('/src/assets/flags/sweden.png');
+    @extend %flag-settings;
+  }
+
+  &__uk {
+    background: url('/src/assets/flags/uk.png');
+    @extend %flag-settings;
+  }
+
+  &__usa {
+    background: url('/src/assets/flags/usa.png');
+    @extend %flag-settings;
+  }
+
+  &__ussr {
+    background: url('/src/assets/flags/ussr.png');
+    @extend %flag-settings;
+  }
+
+  &__italy {
+    background: url('/src/assets/flags/italy.png');
+    @extend %flag-settings;
+  }
+
+  &__japan {
+    background: url('/src/assets/flags/japan.png');
+    @extend %flag-settings;
+  }
+
+  &__marc {
+    background: url('/src/assets/flags/marc.png');
+    @extend %flag-settings;
+  }
+}
