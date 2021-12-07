@@ -29,7 +29,7 @@ class MainPageComponent {
             <button>Premium account</button>
           </div>
         </div>        
-          ${fragment.outerHTML}        
+          ${fragment.outerHTML}
       </div>
     `;
   }
