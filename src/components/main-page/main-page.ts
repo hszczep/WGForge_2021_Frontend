@@ -6,13 +6,7 @@ import ProductItemComponent from '../product-item/product-item';
 class MainPageComponent {
   constructor() {
     this.render = this.render.bind(this);
-    this.init = this.init.bind(this);
-    this.unmount = this.unmount.bind(this);
   }
-
-  init() {}
-
-  unmount() {}
 
   render() {
     const listOfProducts = storage.mainData;
@@ -35,7 +29,7 @@ class MainPageComponent {
             <button>Premium account</button>
           </div>
         </div>        
-          ${fragment.outerHTML}        
+          ${fragment.outerHTML}
       </div>
     `;
   }

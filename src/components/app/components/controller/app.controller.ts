@@ -1,3 +1,5 @@
+import headerComponent from '../../../header/header';
+import footerComponent from '../../../footer/footer';
 import storage from '../storage/storage';
 import { Spinner } from '../../../spinner/spinner';
 
@@ -6,12 +8,22 @@ import authUserService from '../../../../services/auth-user.service';
 class Controller {
   spinner: Spinner = null;
 
-  authBlock: HTMLElement;
+  appContainer: HTMLElement = null;
+  authBlock: HTMLElement = null;
 
   constructor() {
     this.logoutButtonClickHandler = this.logoutButtonClickHandler.bind(this);
+    this.appContainer = document.querySelector('.app-field');
+  }
 
-    this.authBlock = document.querySelector('.authentication');
+  #renderHeader(): void {
+    const headerMarkup = headerComponent.render();
+    this.appContainer.insertAdjacentHTML('afterbegin', headerMarkup);
+  }
+
+  #renderFooter(): void {
+    const footerMarkup = footerComponent.render();
+    this.appContainer.insertAdjacentHTML('beforeend', footerMarkup);
   }
 
   #spinnerInit(): void {
@@ -55,6 +67,11 @@ class Controller {
   }
 
   async init(): Promise<void> {
+    this.#renderHeader();
+    this.#renderFooter();
+
+    this.authBlock = document.querySelector('.authentication');
+
     this.#spinnerInit();
 
     this.spinner.show();
