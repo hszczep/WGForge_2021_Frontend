@@ -3,4 +3,5 @@ import { IPage } from '../models/page.model';
 
 export const mainPage: IPage = {
   render: mainPageComponent.render,
+  init: mainPageComponent.init,
 };
