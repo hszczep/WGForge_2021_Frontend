@@ -5,6 +5,7 @@ export const MAIN_API_URLS = {
     BASE: 'user',
     REGISTER: 'user/register',
     LOGIN: 'user/auth',
+    FAVORITES: 'user/favourites',
   },
 };
 
@@ -15,6 +16,8 @@ export const LOCAL_STORAGE_KEYS = {
 export const METHODS: { [key: string]: 'GET' | 'POST' | 'PUT' | 'DELETE' } = {
   GET: 'GET',
   POST: 'POST',
+  PUT: 'PUT',
+  DELETE: 'DELETE',
 };
 
 export const DEFAULT_ERROR_MESSAGE = 'Database request error...';

@@ -8,17 +8,26 @@ const generateHeaders = (token: string) => ({
 });
 
 const generateRequestConfig = ({ method, token, params }: IRequestConfig) => {
-  if (method === 'GET')
-    return {
-      method, // GET
-      headers: generateHeaders(token),
-    };
-
-  return {
-    method, // POST
-    headers: generateHeaders(token),
-    body: JSON.stringify(params),
-  };
+  switch (method) {
+    case 'GET':
+      return {
+        method,
+        headers: generateHeaders(token),
+      };
+    case 'POST':
+      return {
+        method,
+        headers: generateHeaders(token),
+        body: JSON.stringify(params),
+      };
+    case 'PUT':
+      return {
+        method,
+        headers: generateHeaders(token),
+      };
+    default:
+      return null;
+  }
 };
 
 const getEndpointUrl = (endpointUrl: string) => `${MAIN_API_URLS.BASE}${endpointUrl}`;
@@ -37,5 +46,10 @@ export const getResource = (endpointUrl: string, { token }: IRequestConfig) => {
 
 export const postResourse = (endpointUrl: string, { token, params }: IRequestConfig) => {
   const resource = fetchMainAPI(endpointUrl, { method: METHODS.POST, token, params });
+  return resource;
+};
+
+export const putResourse = (endpointUrl: string, { token }: IRequestConfig) => {
+  const resource = fetchMainAPI(endpointUrl, { method: METHODS.PUT, token });
   return resource;
 };
