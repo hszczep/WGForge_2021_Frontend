@@ -63,6 +63,8 @@
     &__body {
       margin-top: 15px;
       padding: 5px 0;
+      overflow: auto;
+      max-height: 50vh;
       flex-direction: column;
       background-color: rgba(0, 0, 0, 0.9);
       border: 1px solid rgba(102, 102, 102, 0.49);
@@ -71,7 +73,6 @@
       display: none;
       left: 0;
       position: absolute;
-      right: 0;
       top: 100%;
       z-index: 10;
 
