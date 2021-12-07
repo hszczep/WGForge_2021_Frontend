@@ -1,9 +1,11 @@
 import storage from './components/storage/storage';
+import appController from './components/controller/app.controller';
 import router from './components/router/router';
 
 class App {
   init() {
     storage.init();
+    appController.init();
     router.init();
   }
 }
