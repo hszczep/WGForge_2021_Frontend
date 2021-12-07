@@ -1,4 +1,4 @@
-import { getResource, postResourse, putResourse } from './common/services.helper';
+import { deleteResourse, getResource, postResourse, putResourse } from './common/services.helper';
 import { MAIN_API_URLS } from './common/services.constants';
 import { IUser, IUserCredentials } from '../models/user.model';
 
@@ -21,6 +21,10 @@ class MainApiService {
 
   putToFavorites(token: string, product_id: string): Promise<IUser> {
     return putResourse(`${MAIN_API_URLS.USER.FAVORITES}/${product_id}`, { token });
+  }
+
+  deleteFromFavorites(token: string, product_id: string): Promise<IUser> {
+    return deleteResourse(`${MAIN_API_URLS.USER.FAVORITES}/${product_id}`, { token });
   }
 }
 

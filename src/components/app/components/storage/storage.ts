@@ -1,4 +1,5 @@
 import { USER } from '../../../../common/common.constants';
+import { IProductItem } from '../../../../models/product-item.model';
 import { IUserState } from '../../../../models/user.model';
 
 class Storage {
@@ -10,6 +11,18 @@ class Storage {
 
   getUserState(): IUserState {
     return this.#userState;
+  }
+
+  getFavorites(): IProductItem[] {
+    return this.#userState.favorites;
+  }
+
+  addToFavorites(productItem: IProductItem) {
+    this.getFavorites().push(productItem);
+  }
+
+  removeFromFavorites(product_id: string) {
+    this.#userState.favorites = this.#userState.favorites.filter((favoriteItem) => favoriteItem.id !== product_id);
   }
 
   setLoggedUserState(isLogged: boolean): void {
