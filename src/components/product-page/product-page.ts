@@ -1,5 +1,5 @@
 import storage from '../app/components/storage/storage';
-import convertToRomane from '../../common/common.helper';
+import { convertToRomane } from '../../common/common.helper';
 
 class ProductPageComponent {
   constructor() {
@@ -14,7 +14,7 @@ class ProductPageComponent {
 
   render() {
     const productId = window.location.hash.split('/').pop();
-    const productList = storage.mainData;
+    const productList = storage.products;
     const product = productList.filter((item) => item.id === productId)[0];
     const productTank = 'machinery';
     let productNameInfo;

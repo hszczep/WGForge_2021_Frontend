@@ -1,8 +1,8 @@
-interface ProductIteIinterface {
+interface ProductItemInterface {
   tier?: number;
   type: string;
   name: string;
-  price: number;
+  price: ProductPrice;
   discount: number;
   price_discount: number;
   nation?: string;
@@ -11,4 +11,9 @@ interface ProductIteIinterface {
   id: string;
 }
 
-export default ProductIteIinterface;
+interface ProductPrice {
+  code: string;
+  amount: string;
+}
+
+export default ProductItemInterface;

@@ -1,10 +1,10 @@
 import { USER } from '../../../../common/common.constants';
 import { IUserState } from '../../../../models/user.model';
-import ProductIteIinterface from './product-item-interface';
-
+import ProductItemInterface from './product-item-interface';
+import mainApiService from '../../../../services/main-api.service';
 class Storage {
   #userState: IUserState = USER.DEFAULT_STATE;
-  mainData: Array<ProductIteIinterface>;
+  products: Array<ProductItemInterface>;
   setUserState(userState: IUserState) {
     this.#userState = userState;
   }
@@ -30,7 +30,7 @@ class Storage {
   }
 
   async init() {
-    this.mainData = await fetch('https://wg-forge-back.herokuapp.com/api/products').then((res) => res.json());
+    this.products =  await mainApiService.getProducts();
   }
 }
 
