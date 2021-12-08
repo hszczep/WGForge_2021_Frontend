@@ -22,8 +22,7 @@ class Router {
   }
 
   findProductById(id: string): boolean {
-    const productList = storage.mainData;
-    const product = productList.filter((item) => item.id === id)[0];
+    const product = storage.getProductById(id);
     return !!product;
   }
 

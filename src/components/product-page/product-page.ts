@@ -14,8 +14,7 @@ class ProductPageComponent {
 
   render() {
     const productId = window.location.hash.split('/').pop();
-    const productList = storage.mainData;
-    const product = productList.filter((item) => item.id === productId)[0];
+    const product = storage.getProductById(productId);
     const productTank = 'machinery';
     let productNameInfo;
 
