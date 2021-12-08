@@ -49,7 +49,7 @@ class ProductItemComponent implements ProductItemComponentInterface {
       `;
     }
     return `
-          <article class="card card__${this.size}" id="${this.id}">
+          <article class="card card__${this.size}" data-id="${this.id}">
             <a href="${this.linkToDiscription}" class="card-info">
               <img class="card-img" src="${this.images[0]}" alt="${this.name}" />
               <div class="card-specifications">

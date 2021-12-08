@@ -1,16 +1,26 @@
 import storage from '../app/components/storage/storage';
 import convertToRomane from '../../common/common.helper';
+import favoritesService from '../../services/favorites.service';
 
 class ProductPageComponent {
+  #elements: { [key: string]: HTMLElement } = null;
+
   constructor() {
     this.init = this.init.bind(this);
     this.unmount = this.unmount.bind(this);
     this.render = this.render.bind(this);
   }
 
-  init() {}
+  init() {
+    this.#elements = {
+      favoritesButton: document.querySelector('.like-btn'),
+    };
+    this.#elements.favoritesButton.addEventListener('click', favoritesService.favoritesButtonClickHandler);
+  }
 
-  unmount() {}
+  unmount() {
+    this.#elements.favoritesButton.removeEventListener('click', favoritesService.favoritesButtonClickHandler);
+  }
 
   render() {
     const productId = window.location.hash.split('/').pop();
