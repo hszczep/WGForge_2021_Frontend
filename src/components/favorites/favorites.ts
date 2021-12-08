@@ -45,11 +45,16 @@ class FavoritesPageComponent {
       <h2 class="favorites__page-title">Favorites products:</h2>
       <button class="favorites__add-button">Put to favorites</button>
       <ul style="color: white;" class="favorites__list">
-        ${storage.getFavorites().map(item => `
+        ${storage
+          .getFavorites()
+          .map(
+            (item) => `
         <li class="favorites__item" data-id="${item.id}">
           <p>${JSON.stringify(item)}</p>
           <button class="favorites__remove-button">Remove from favorites</button>
-        </li>`).join('')}
+        </li>`
+          )
+          .join('')}
       </ul>
     `;
   }

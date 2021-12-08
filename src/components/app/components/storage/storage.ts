@@ -1,6 +1,7 @@
 import { USER } from '../../../../common/common.constants';
 import { IProductItem } from '../../../../models/product-item.model';
 import { IUserState } from '../../../../models/user.model';
+import mainApiService from '../../../../services/main-api.service';
 
 class Storage {
   #userState: IUserState = USER.DEFAULT_STATE;
@@ -54,7 +55,9 @@ class Storage {
     this.#userState.favorites = this.#userState.favorites.filter((favoriteItem) => favoriteItem.id !== product_id);
   }
 
-  init() {}
+  async init() {
+    this.#products = await mainApiService.getProducts();
+  }
 }
 
 export default new Storage();

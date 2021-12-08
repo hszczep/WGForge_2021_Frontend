@@ -1,5 +1,6 @@
 @import '../../../scss/variables';
-@import '../../../scss/mixins';
+@import '../../../scss/flags';
+@import '../../../scss/tank-type';
 
 .card {
   display: block;
@@ -93,89 +94,6 @@
         letter-spacing: 0.1em;
         text-shadow: 0 1px 0 rgba(0, 0, 0, 0.33);
         color: $title-text-color;
-
-        .flag {
-          display: inline-block;
-
-          &__china {
-            background: url('../../../assets/flags/china.png');
-            @extend %flag-settings;
-          }
-
-          &__czech {
-            background: url('../../../assets/flags/czech.png');
-            @extend %flag-settings;
-          }
-
-          &__france {
-            background: url('../../../assets/flags/france.png');
-            @extend %flag-settings;
-          }
-
-          &__germany {
-            background: url('../../../assets/flags/germany.png');
-            @extend %flag-settings;
-          }
-
-          &__poland {
-            background: url('../../../assets/flags/poland.png');
-            @extend %flag-settings;
-          }
-
-          &__sweden {
-            background: url('../../../assets/flags/sweden.png');
-            @extend %flag-settings;
-          }
-
-          &__uk {
-            background: url('../../../assets/flags/uk.png');
-            @extend %flag-settings;
-          }
-
-          &__usa {
-            background: url('../../../assets/flags/usa.png');
-            @extend %flag-settings;
-          }
-
-          &__ussr {
-            background: url('../../../assets/flags/ussr.png');
-            @extend %flag-settings;
-          }
-        }
-
-        .tank-type {
-          display: inline-block;
-
-          &__at-spg {
-            background-image: url('../../../assets/types/at-spg.png');
-            @extend %type-settings;
-          }
-
-          &__heavytank {
-            background-image: url('../../../assets/types/heavytank.png');
-            @extend %type-settings;
-          }
-
-          &__lighttank {
-            background-image: url('../../../assets/types/lighttank.png');
-            @extend %type-settings;
-          }
-
-          &__mediumtank {
-            background-image: url('../../../assets/types/mediumtank.png');
-            @extend %type-settings;
-          }
-
-          &__multirole {
-            background-image: url('../../../assets/types/multirole.png');
-            @extend %type-settings;
-          }
-
-          &__spg {
-            background-image: url('../../../assets/types/spg.png');
-            @extend %type-settings;
-          }
-        }
 
         .level {
           margin-right: 8px;
