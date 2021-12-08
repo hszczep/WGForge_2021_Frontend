@@ -227,6 +227,7 @@
         }
 
         .item-text {
+          font-size: 14px;
           align-items: baseline;
           margin-bottom: 4px;
 
@@ -234,6 +235,18 @@
           .tank-type,
           .level {
             margin-right: 3px;
+          }
+
+          .item-name {
+            white-space: nowrap;
+            max-width: 70px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+
+          .flag,
+          .tank-type {
+            transform: scale(0.8);
           }
         }
       }
