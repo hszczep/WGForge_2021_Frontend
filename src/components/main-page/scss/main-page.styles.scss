@@ -27,18 +27,18 @@
         font-weight: 400;
         text-transform: uppercase;
         letter-spacing: 0.05em;
-        color: #ccc;
+        color: $title-text-color;
         transition: all 200ms;
 
         &:hover {
-          color: #fff;
+          color: $hover-text-color;
           border-bottom: 4px solid #fff;
-          transition: all 200ms;
+          transition: $app-standard-transition;
         }
       }
 
       .active-menu__button {
-        color: #fff;
+        color: $hover-text-color;
         border-bottom: 4px solid #fff;
       }
     }

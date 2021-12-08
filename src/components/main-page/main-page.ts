@@ -1,12 +1,23 @@
 import './scss/main-page.styles.scss';
 
+import FilterComponent from './components/filter/filter';
 import storage from '../app/components/storage/storage';
 import ProductItemComponent from '../product-item/product-item';
+
+const filter = new FilterComponent();
 
 class MainPageComponent {
   constructor() {
     this.render = this.render.bind(this);
+    this.init = this.init.bind(this);
+    this.unmount = this.unmount.bind(this);
   }
+
+  init() {
+    filter.init();
+  }
+
+  unmount() {}
 
   render() {
     const listOfProducts = storage.mainData;
@@ -28,7 +39,8 @@ class MainPageComponent {
             <button>Gold</button>
             <button>Premium account</button>
           </div>
-        </div>        
+        </div>  
+          <div class="filter-field">${filter.render()}</div>
           ${fragment.outerHTML}
       </div>
     `;
