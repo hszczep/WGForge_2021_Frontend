@@ -3,8 +3,8 @@ import appController from './components/controller/app.controller';
 import router from './components/router/router';
 
 class App {
-  init() {
-    storage.init();
+  async init() {
+    await storage.init();
     appController.init();
     router.init();
   }

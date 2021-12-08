@@ -1,51 +1,75 @@
-class ProductItemComponent {
-  card_size = 'card__single'; // size on table card__single(1) or card__double(2)
-  card_id = ''; // item id __ "23525"
-  card_href = ''; // link to item page
-  card_src = ''; // item img link
-  card_alt = ''; // item img description (card_name) __ M56
-  card_discount = ''; // item discount (optional) __ -10%
-  card_flag = ''; // item flag (optional)
-  // flag__china, flag__czech, flag__france, flag__germany, flag__poland, flag__sweden, flag__uk, flag__usa, flag__ussr
-  card_tank_type = ''; // item type (optional)
-  // __ (type__at-spg, type__heavytank, type__lighttank, type__mediumtank, type__multirole, type__spg)
-  card_level = ''; // item level (optional) __ (I-X)
-  card_name = ''; // item name __ M56
-  card_price = ''; // item price __ $ 99.99
-  card_price_discount = ''; // item price discount __ $ 99.99
-  card_type = ''; // __ tank, gold, prem
-  constructor() {
-    this.init = this.init.bind(this);
+import ProductIteIinterface from '../app/components/storage/product-item-interface';
+import ProductItemComponentInterface from './product-item-interface';
+import convertToRomane from '../../common/common.helper';
+
+class ProductItemComponent implements ProductItemComponentInterface {
+  id: string;
+  tier: number;
+  type: string;
+  name: string;
+  price: string;
+  nation: string;
+  images: Array<string>;
+  tank_type: string;
+  size: string;
+  linkToDiscription: string;
+  discount: number;
+  price_discount: string;
+  flag: string;
+  constructor({
+    tier,
+    type,
+    name,
+    price,
+    discount,
+    price_discount,
+    nation,
+    images,
+    tank_type,
+    id,
+  }: ProductIteIinterface) {
+    this.id = id;
+    this.tier = tier; // tier tank, for render convert expample "4" -> "IV"
+    this.type = type; // tank, gold or premium
+    this.tank_type = tank_type.toLowerCase(); // ligth, medium, haevy
+    this.name = name; // shor name tank
+    this.price = price.toFixed(2); // default price $
+    this.nation = nation; // country
+    this.flag = `flag__${this.nation}`; // for icon flag
+    this.images = images; // link image
+    this.size = 'single'; // add to JSON
+    this.linkToDiscription = `#/product/${this.id}`;
+    this.discount = discount; // discont in %  example 10
+    this.price_discount = price_discount ? price_discount.toFixed(2) : '';
+
     this.render = this.render.bind(this);
   }
 
-  init() {}
-
   render() {
-    let TankNameInfo;
-    if (this.card_type === 'tank') {
-      TankNameInfo = `
-                  <span class="flag ${this.card_flag}"></span>
-                  <span class="tank-type ${this.card_tank_type}"></span>
-                  <span class="level">${this.card_level}</span>
-                  <span class="item-name">${this.card_name}</span>
+    let productNameInfo;
+    if (this.type === 'machinery') {
+      productNameInfo = `
+                  <span class="flag ${this.flag}"></span>
+                  <span class="tank-type tank-type__${this.tank_type}"></span>
+                  <span class="level">${convertToRomane(this.tier)}</span>
+                  <span class="item-name">${this.name}</span>
       `;
     } else {
-      TankNameInfo = `
-                  <span class="item-name">${this.card_name}</span>
+      productNameInfo = `
+                  <span class="item-name">${this.name}</span>
       `;
     }
     return `
-          <article class="card ${this.card_size}" id="${this.card_id}">
-            <a href="${this.card_href}" class="card-info">
-              <img class="card-img" src="${this.card_src}" alt="${this.card_alt}" />
+          <article class="card card__${this.size}" id="${this.id}">
+            <a href="${this.linkToDiscription}" class="card-info">
+              <img class="card-img" src="${this.images[0]}" alt="${this.name}" />
               <div class="card-specifications">
-                <p class="discount">${this.card_discount}</p>
+                <p class="discount">${this.discount ? `-${this.discount}%` : ''}</p>
                 <h2 class="item-text">
-                  ${TankNameInfo}
+                  ${productNameInfo}
                 </h2>
-                <p class="price">${this.card_price}</p>
-                <p class="price price-discount">${this.card_price_discount}</p>
+                <p class="price${this.discount ? ' old-price' : ''}">$${this.price}</p>
+                <p class="price price-discount">${this.discount ? `$${this.price_discount}` : ''}</p>
               </div>
             </a>
             <button class="like-btn">
@@ -59,4 +83,4 @@ class ProductItemComponent {
   }
 }
 
-export default new ProductItemComponent();
+export default ProductItemComponent;

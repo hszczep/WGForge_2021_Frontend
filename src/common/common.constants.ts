@@ -1,3 +1,4 @@
+export const ROMAN_DIGITS = ['', 'I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII', 'IX', 'X'];
 export const USER = {
   ROLES: {
     ADMIN: 'admin',
