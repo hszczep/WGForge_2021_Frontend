@@ -1,0 +1,334 @@
+@import '../../../scss/variables';
+@import '../../../scss/flags';
+@import '../../../scss/tank-type';
+
+.favorites-field {
+  width: $app-max-width;
+  min-height: 70px;
+  margin-top: 40px;
+  padding: 30px 50px;
+  border: 2px solid $favorites-border-color;
+  border-radius: 10px;
+
+  legend {
+    padding: 0 10px 10px;
+    font-family: $menu-font-family;
+    font-size: 30px;
+    text-transform: uppercase;
+    color: $title-text-color;
+  }
+
+  .favorite-item {
+    position: relative;
+    width: $app-max-width - 102px;
+    height: 160px;
+    background: #ffffff06;
+    border: 2px solid rgba(255, 255, 245, 0.8);
+    border-radius: 10px;
+    margin-bottom: 20px;
+
+    &__info {
+      margin-left: 70px;
+      display: flex;
+      align-items: center;
+    }
+
+    &__img-block {
+      width: 200px;
+      height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    &__img {
+      max-width: 200px;
+    }
+
+    &__text-block {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      width: 420px;
+      height: 150px;
+      margin-left: 70px;
+    }
+
+    &__text {
+      display: flex;
+      align-items: center;
+      font-family: $menu-font-family;
+      font-size: 18px;
+      line-height: 1.2;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-shadow: 0 1px 0 rgba(0, 0, 0, 0.33);
+      color: $title-text-color;
+      cursor: pointer;
+      user-select: none;
+      margin-bottom: 10px;
+
+      .level {
+        margin-right: 8px;
+      }
+    }
+
+    &__description {
+      height: 70px;
+      text-align: left;
+      font-family: $menu-font-family;
+      font-size: 12px;
+      line-height: 1.2;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-shadow: 0 1px 0 rgba(0, 0, 0, 0.33);
+      color: $title-text-color;
+      overflow-y: auto;
+    }
+
+    &__price-block {
+      margin-left: 70px;
+      display: flex;
+      align-items: center;
+      width: 270px;
+      height: 150px;
+
+      .price {
+        display: inline-block;
+        margin-bottom: 50px;
+        font-family: $menu-font-family;
+        font-size: 18px;
+        line-height: 1.2;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 0.1em;
+        text-shadow: 0 1px 0 rgba(0, 0, 0, 0.33);
+        color: $price-now-color;
+        cursor: default;
+        user-select: none;
+      }
+
+      .old-price {
+        color: $old-price-color;
+        text-decoration: line-through;
+        margin-right: 15px;
+      }
+
+      .purchase-btn {
+        width: 150px;
+        height: 45px;
+        position: absolute;
+        bottom: 30px;
+        border-radius: 3px;
+        border: 1px solid $purchase-button-background;
+        background: none;
+        font-family: $menu-font-family;
+        font-size: 14px;
+        line-height: 18px;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 0.01em;
+        color: $purchase-text-color;
+        transition: $app-standard-transition;
+
+        &:hover {
+          background: $purchase-button-background;
+          transition: $app-standard-transition;
+        }
+      }
+    }
+
+    .discount {
+      clip-path: circle(60% at 1% 0);
+      width: 90px;
+      height: 90px;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: $discount-background;
+      border-top-left-radius: 10px;
+      font-size: 15px;
+      color: $discount-text-color;
+      padding: 14px 0 0 9px;
+    }
+
+    .delete-button {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      top: 14px;
+      right: 20px;
+      fill: #999;
+      padding: 6px;
+      cursor: pointer;
+      user-select: none;
+
+      &:hover {
+        fill: $delete-button-color;
+        border: 1px solid $delete-button-color;
+        border-radius: 50%;
+      }
+    }
+  }
+}
+
+@media all and (max-width: $app-max-media-query) {
+  .favorites-field {
+    width: $app-medium-width;
+
+    .favorite-item {
+      position: relative;
+      width: $app-medium-width - 102px;
+      height: 160px;
+
+      &__info {
+        margin-left: 40px;
+      }
+
+      &__img-block {
+        width: 170px;
+        height: 150px;
+      }
+
+      &__img {
+        max-width: 170px;
+      }
+
+      &__text-block {
+        width: 380px;
+        height: 150px;
+        margin-left: 30px;
+      }
+
+      &__text {
+        font-size: 16px;
+      }
+
+      &__description {
+        height: 70px;
+      }
+
+      &__price-block {
+        margin-left: 40px;
+        width: 220px;
+        height: 150px;
+
+        .price {
+          font-size: 16px;
+          margin-bottom: 50px;
+        }
+
+        .purchase-btn {
+          width: 130px;
+          height: 45px;
+          bottom: 35px;
+        }
+      }
+
+      .discount {
+        clip-path: circle(60% at 1% 0);
+        width: 80px;
+        height: 80px;
+        font-size: 14px;
+        padding: 13px 0 0 9px;
+      }
+
+      .delete-button {
+        width: 35px;
+        height: 35px;
+        top: 10px;
+        right: 10px;
+        padding: 4px;
+      }
+    }
+  }
+}
+
+@media all and (max-width: $app-medium-media-query) {
+  .favorites-field {
+    width: $app-min-width;
+    margin-top: 20px;
+    padding: 15px;
+
+    .favorite-item {
+      position: relative;
+      width: $app-min-width - 32px;
+      height: 125px;
+
+      &__info {
+        margin-top: 5px;
+        margin-left: 10px;
+      }
+
+      &__img-block {
+        width: 100px;
+        height: 140px;
+      }
+
+      &__img {
+        max-width: 100px;
+      }
+
+      &__text-block {
+        width: 0;
+        height: 0;
+        margin-left: 0;
+      }
+
+      &__text {
+        position: absolute;
+        top: 15px;
+        left: 35px;
+        font-size: 13px;
+
+        .flag,
+        .tank-type {
+          margin-right: 3px;
+          transform: scale(0.8);
+        }
+
+        .item-name {
+          width: 120px;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+      }
+
+      &__price-block {
+        margin-left: 10px;
+        width: 200px;
+        height: 100px;
+
+        .price {
+          margin-right: 5px;
+          font-size: 14px;
+          margin-bottom: 35px;
+        }
+
+        .purchase-btn {
+          width: 100px;
+          height: 30px;
+          bottom: 15px;
+          font-size: 12px;
+        }
+      }
+
+      .discount {
+        clip-path: circle(60% at 1% 0);
+        width: 50px;
+        height: 50px;
+        font-size: 10px;
+        padding: 7px 0 0 5px;
+      }
+
+      .delete-button {
+        width: 30px;
+        height: 30px;
+        top: 5px;
+        right: 5px;
+      }
+    }
+  }
+}
