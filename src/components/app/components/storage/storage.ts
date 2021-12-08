@@ -4,6 +4,7 @@ import { IUserState } from '../../../../models/user.model';
 
 class Storage {
   #userState: IUserState = USER.DEFAULT_STATE;
+  #products: IProductItem[] = [];
 
   setUserState(userState: IUserState) {
     this.#userState = userState;
@@ -11,18 +12,6 @@ class Storage {
 
   getUserState(): IUserState {
     return this.#userState;
-  }
-
-  getFavorites(): IProductItem[] {
-    return this.#userState.favorites;
-  }
-
-  addToFavorites(productItem: IProductItem) {
-    this.getFavorites().push(productItem);
-  }
-
-  removeFromFavorites(product_id: string) {
-    this.#userState.favorites = this.#userState.favorites.filter((favoriteItem) => favoriteItem.id !== product_id);
   }
 
   setLoggedUserState(isLogged: boolean): void {
@@ -39,6 +28,30 @@ class Storage {
 
   resetUserState() {
     this.#userState = USER.DEFAULT_STATE;
+  }
+
+  setProducts(products: IProductItem[]) {
+    this.#products = products;
+  }
+
+  getProducts(): IProductItem[] {
+    return this.#products;
+  }
+
+  getProductById(productId: string) {
+    return this.#products.find((product) => product.id === productId);
+  }
+
+  getFavorites(): IProductItem[] {
+    return this.#userState.favorites;
+  }
+
+  addToFavorites(productItem: IProductItem) {
+    this.#userState.favorites.push(productItem);
+  }
+
+  removeFromFavorites(product_id: string) {
+    this.#userState.favorites = this.#userState.favorites.filter((favoriteItem) => favoriteItem.id !== product_id);
   }
 
   init() {}
