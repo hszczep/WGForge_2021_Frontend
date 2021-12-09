@@ -16,7 +16,21 @@ class ProductItemComponent implements ProductItemComponentInterface {
   discount: number;
   price_discount: string;
   flag: string;
-  constructor({ tier, type, name, price, discount, price_discount, nation, images, tank_type, id }: IProductItem) {
+  isFavorite: boolean;
+
+  constructor({
+    tier,
+    type,
+    name,
+    price,
+    discount,
+    price_discount,
+    nation,
+    images,
+    tank_type,
+    id,
+    isFavorite,
+  }: IProductItem) {
     this.id = id;
     this.tier = tier; // tier tank, for render convert expample "4" -> "IV"
     this.type = type; // tank, gold or premium
@@ -30,6 +44,7 @@ class ProductItemComponent implements ProductItemComponentInterface {
     this.linkToDiscription = `#/product/${this.id}`;
     this.discount = discount; // discont in %  example 10
     this.price_discount = price_discount ? price_discount.toFixed(2) : '';
+    this.isFavorite = isFavorite;
 
     this.render = this.render.bind(this);
   }
@@ -61,7 +76,7 @@ class ProductItemComponent implements ProductItemComponentInterface {
                 <p class="price price-discount">${this.discount ? `$${this.price_discount}` : ''}</p>
               </div>
             </a>
-            <button class="like-btn">
+            <button class="like-btn ${this.isFavorite ? 'like-btn__active' : ''}">
               <svg class="like-btn__icon">
                 <use xlink:href="assets/images/sprite.svg#like"></use>
               </svg>

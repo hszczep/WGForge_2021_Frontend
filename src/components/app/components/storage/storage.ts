@@ -47,8 +47,17 @@ class Storage {
     return this.#userState.favorites;
   }
 
+  checkProductInFavoritesById(productId: string): boolean {
+    return Boolean(this.#userState.favorites.find((favoriteItem) => favoriteItem.id === productId));
+  }
+
   addToFavorites(productItem: IProductItem) {
     this.#userState.favorites.push(productItem);
+  }
+
+  addToFavoritesById(productId: string) {
+    const currentProduct = this.getProductById(productId);
+    this.addToFavorites(currentProduct);
   }
 
   removeFromFavorites(product_id: string) {

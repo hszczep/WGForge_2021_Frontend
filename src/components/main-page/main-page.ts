@@ -36,6 +36,7 @@ class MainPageComponent {
     fragment.classList.add('cards-field');
 
     for (let i = 0; i < listOfProducts.length; i++) {
+      listOfProducts[i].isFavorite = storage.checkProductInFavoritesById(listOfProducts[i].id);
       const item = new ProductItemComponent(listOfProducts[i]);
       fragment.innerHTML += item.render();
     }

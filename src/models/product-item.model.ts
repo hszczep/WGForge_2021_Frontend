@@ -10,4 +10,5 @@ export interface IProductItem {
   nation?: string;
   tank_type?: string;
   id: string;
+  isFavorite?: boolean;
 }

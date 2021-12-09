@@ -12,6 +12,7 @@ interface ProductItemComponentInterface {
   discount: number;
   price_discount: string;
   flag?: string;
+  isFavorite?: boolean;
 }
 
 export default ProductItemComponentInterface;

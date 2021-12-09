@@ -5,7 +5,7 @@ import router from './components/router/router';
 class App {
   async init() {
     await storage.init();
-    appController.init();
+    await appController.init();
     router.init();
   }
 }

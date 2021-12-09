@@ -11,12 +11,6 @@ class FavoritesPageComponent {
     this.init = this.init.bind(this);
     this.unmount = this.unmount.bind(this);
     this.render = this.render.bind(this);
-    this.removeFromFavorites = this.removeFromFavorites.bind(this);
-  }
-
-  async removeFromFavorites(event: Event) {
-    if (!(event.target as Element).closest('.favorites__remove-button')) return;
-    await favoritesService.removeFromFavorites(event);
   }
 
   init() {
@@ -25,11 +19,11 @@ class FavoritesPageComponent {
       favoritesList: document.querySelector('.favorites__list'),
     };
 
-    this.#elements.favoritesList.addEventListener('click', this.removeFromFavorites);
+    this.#elements.favoritesList.addEventListener('click', favoritesService.removeFromFavoritesButtonClickHandler);
   }
 
   unmount() {
-    this.#elements.favoritesList.removeEventListener('click', this.removeFromFavorites);
+    this.#elements.favoritesList.removeEventListener('click', favoritesService.removeFromFavoritesButtonClickHandler);
   }
 
   render() {

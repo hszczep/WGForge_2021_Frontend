@@ -1,3 +1,5 @@
+import './scss/product-page.styles.scss';
+
 import storage from '../app/components/storage/storage';
 import convertToRomane from '../../common/common.helper';
 import favoritesService from '../../services/favorites.service';
@@ -40,8 +42,9 @@ class ProductPageComponent {
                   <span class="item-name">${product.name}</span>
       `;
     }
+
     return `
-          <div class="card__single" id="${product.id}">
+          <div class="card__single" data-id="${product.id}">
               <img class="card-img" src="${product.images[0]}" alt="${product.name}" />
               <div class="card-specifications">
                 <p class="discount">${product.discount || ''}</p>
@@ -51,7 +54,7 @@ class ProductPageComponent {
                 <p class="price">$ ${product.price}</p>
                 <p class="price price-discount">${product.discount ? product.price : ''}</p>
               </div>
-            <button class="like-btn">
+            <button class="like-btn ${storage.checkProductInFavoritesById(product.id) ? 'like-btn__active' : ''}">
               <svg class="like-btn__icon">
                 <use xlink:href="assets/images/sprite.svg#like"></use>
               </svg>

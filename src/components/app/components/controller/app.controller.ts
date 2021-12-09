@@ -34,6 +34,7 @@ class Controller {
   logoutButtonClickHandler(): void {
     authUserService.logOutUser();
     this.rerenderAuthBlock();
+    window.dispatchEvent(new Event('hashchange'));
   }
 
   rerenderAuthBlock(): void {
