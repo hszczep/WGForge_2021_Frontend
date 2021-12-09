@@ -8,30 +8,33 @@ class MainPageComponent {
     this.render = this.render.bind(this);
   }
 
-  render() {
+  render(): DocumentFragment {
     const listOfProducts = storage.mainData;
 
-    const fragment = document.createElement('div');
-    fragment.classList.add('cards-field');
+    const fragmentContainer = document.createDocumentFragment();
+    const contentMenu = document.createElement('div');
+    contentMenu.classList.add('content-menu');
 
-    for (let i = 0; i < listOfProducts.length; i++) {
-      const item = new ProductItemComponent(listOfProducts[i]);
-      fragment.innerHTML += item.render();
-    }
-
-    return `
-        <div class="content-menu">
-          <a href="#" class="WoT_logo"><img src="assets/images/WoT_logo.png" alt="WoT logo" /></a>
+    contentMenu.innerHTML = `<a href="#" class="WoT_logo"><img src="assets/images/WoT_logo.png" alt="WoT logo" /></a>
           <div class="content-menu__buttons">
             <button class="active-menu__button">All</button>
             <button>Vehicles</button>
             <button>Gold</button>
             <button>Premium account</button>
-          </div>
-        </div>        
-          ${fragment.outerHTML}
-      </div>
-    `;
+          </div>`;
+
+    const cardsField = document.createElement('div');
+    cardsField.classList.add('cards-field');
+
+    for (let i = 0; i < listOfProducts.length; i++) {
+      const item = new ProductItemComponent(listOfProducts[i]);
+      cardsField.append(item.render());
+    }
+
+    fragmentContainer.append(contentMenu);
+    fragmentContainer.append(cardsField);
+
+    return fragmentContainer;
   }
 }
 

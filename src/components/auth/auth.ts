@@ -12,8 +12,8 @@ class AuthPageComponent {
   #isRegistration = true;
   #elements: { [key: string]: HTMLInputElement | HTMLFormElement } = null;
 
-  renderSigninPage: () => string;
-  renderSignupPage: () => string;
+  renderSigninPage: () => HTMLElement;
+  renderSignupPage: () => HTMLElement;
 
   initSigninPage: () => void;
   initSignupPage: () => void;
@@ -123,10 +123,11 @@ class AuthPageComponent {
       .finally(() => appController.spinner.hide());
   }
 
-  render(isRegistration = true): string {
+  render(isRegistration = true): HTMLElement {
     // for testing email: test@mail.by  password: 12345 or create your own account
-    return `
-      <div class="auth-field">
+    const authField: HTMLElement = document.createElement('div');
+    authField.classList.add('auth-field');
+    authField.innerHTML = `
         <form class="auth-field-form">
           <fieldset class="auth-form">
             <legend>${isRegistration ? 'Registration' : 'Log in to account'}</legend> 
@@ -143,8 +144,8 @@ class AuthPageComponent {
             <p class="api-validator-text validator-text incorrect-data"></p>
             <button class="auth-form__button">${isRegistration ? 'Sign up' : 'Sign in'}</button>
           </fieldset>
-        </form>
-      </div>`;
+        </form>`;
+    return authField;
   }
 }
 

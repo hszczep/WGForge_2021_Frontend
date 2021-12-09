@@ -43,11 +43,12 @@ class Router {
     appController.spinner.show();
 
     this.mainContainer.innerHTML = '';
-    const pageMarkup: string = page.render();
+    // const pageMarkup: string = page.render();
+    const pageMarkup = page.render();
 
     appController.spinner.hide();
-
-    this.mainContainer.insertAdjacentHTML('afterbegin', pageMarkup);
+    this.mainContainer.append(pageMarkup);
+    // this.mainContainer.insertAdjacentHTML('afterbegin', pageMarkup);
     if (page.init) page.init();
   }
 

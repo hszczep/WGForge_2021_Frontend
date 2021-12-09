@@ -15,8 +15,13 @@ class ProductPageComponent {
   render() {
     const productId = window.location.hash.split('/').pop();
     const productList = storage.mainData;
-    const product = productList.filter((item) => item.id === productId)[0];
+    const product = productList.filter((item) => item.id === productId).pop();
     const productTank = 'machinery';
+
+    const cardFrame: HTMLElement = document.createElement('div');
+    cardFrame.classList.add(`card`, `card__single`);
+    cardFrame.id = product.id;
+
     let productNameInfo;
 
     if (product.type === productTank) {
@@ -31,25 +36,23 @@ class ProductPageComponent {
                   <span class="item-name">${product.name}</span>
       `;
     }
-    return `
-          <div class="card__single" id="${product.id}">
-              <img class="card-img" src="${product.images[0]}" alt="${product.name}" />
-              <div class="card-specifications">
-                <p class="discount">${product.discount || ''}</p>
-                <h2 class="item-text">
-                  ${productNameInfo}
-                </h2>
-                <p class="price">$ ${product.price}</p>
-                <p class="price price-discount">${product.discount ? product.price : ''}</p>
-              </div>
-            <button class="like-btn">
-              <svg class="like-btn__icon">
-                <use xlink:href="assets/images/sprite.svg#like"></use>
-              </svg>
-            </button>
-            <button class="purchase-btn">purchase</button>
-          </div>
-    `;
+    cardFrame.innerHTML = `<img class="card-img" src="${product.images[0]}" alt="${product.name}" />
+                              <div class="card-specifications">
+                                <p class="discount">${product.discount || ''}</p>
+                                <h2 class="item-text">
+                                  ${productNameInfo}
+                                </h2>
+                                <p class="price">$ ${product.price}</p>
+                                <p class="price price-discount">${product.discount ? product.price : ''}</p>
+                              </div>
+                            <button class="like-btn">
+                              <svg class="like-btn__icon">
+                                <use xlink:href="assets/images/sprite.svg#like"></use>
+                              </svg>
+                            </button>
+                            <button class="purchase-btn">purchase</button>
+                          `;
+    return cardFrame;
   }
 }
 

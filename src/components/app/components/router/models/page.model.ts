@@ -1,5 +1,5 @@
 export interface IPage {
-  render: () => string;
+  render: () => HTMLElement | DocumentFragment;
   init?: () => void;
   unmount?: () => void;
 }

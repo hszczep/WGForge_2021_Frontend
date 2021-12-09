@@ -1,10 +1,10 @@
 import { USER } from '../../../../common/common.constants';
 import { IUserState } from '../../../../models/user.model';
-import ProductIteIinterface from './product-item-interface';
+import ProductItemIinterface from './product-item-interface';
 
 class Storage {
   #userState: IUserState = USER.DEFAULT_STATE;
-  mainData: Array<ProductIteIinterface>;
+  mainData: Array<ProductItemIinterface>;
   setUserState(userState: IUserState) {
     this.#userState = userState;
   }
