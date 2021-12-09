@@ -1,3 +1,11 @@
-export const productPageURLRegExp = /\/product\//;
+export const PAGES_URL_REG_EXPS = {
+  PRODUCT: /\/product\//,
+  AUTH: /\/(signin|signup)/,
+  SUBMENU: /\/(favorites|cart)/,
+};
 
-export const authPagesURLRegExp = /\/(signin|signup)/;
+export const PATHS = {
+  MAIN_PAGE: '/',
+  PRODUCT: '/product/',
+  NOT_FOUND: '/notfound',
+};

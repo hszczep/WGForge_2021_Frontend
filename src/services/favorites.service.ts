@@ -1,3 +1,4 @@
+import appController from '../components/app/components/controller/app.controller';
 import storage from '../components/app/components/storage/storage';
 import mainApiService from './main-api.service';
 
@@ -38,6 +39,7 @@ class FavoritesService {
       this.#removeFromAPIFavorites(productId)
         .then(() => {
           storage.removeFromFavorites(productId);
+          appController.updateFavoritesCount();
         })
         .catch((error) => {
           likeButton.className = previousClassName;
@@ -51,6 +53,7 @@ class FavoritesService {
     this.#addToAPIFavorites(productId)
       .then(() => {
         storage.addToFavoritesById(productId);
+        appController.updateFavoritesCount();
       })
       .catch((error) => {
         likeButton.className = previousClassName;
@@ -69,6 +72,7 @@ class FavoritesService {
     this.#removeFromAPIFavorites(productId)
       .then(() => {
         storage.removeFromFavorites(productId);
+        appController.updateFavoritesCount();
         currentProductListElement.remove();
       })
       .catch(console.log);

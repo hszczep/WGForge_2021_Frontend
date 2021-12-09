@@ -36,19 +36,23 @@ class Controller {
     this.spinner.init();
   }
 
-  #hideSubMenuForUnauthorizedUser() {
+  #hideSubMenuForUnauthorizedUser(): void {
     this.#elements.subMenu.classList.add('hidden');
   }
 
-  showSubMenuForAuthorizedUser() {
+  showSubMenuForAuthorizedUser(): void {
     this.#elements.subMenu.classList.remove('hidden');
+  }
+
+  updateFavoritesCount(): void {
+    this.#elements.favoritesCount.textContent = `(${storage.getFavorites().length})`;
   }
 
   logoutButtonClickHandler(): void {
     authUserService.logOutUser();
     this.#hideSubMenuForUnauthorizedUser();
     this.rerenderAuthBlock();
-    if (window.location.hash === '#') {
+    if (window.location.hash === '') {
       window.dispatchEvent(new Event('hashchange'));
     } else window.location.hash = '#';
   }
@@ -89,6 +93,7 @@ class Controller {
 
     this.#elements.subMenu = this.#elements.appContainer.querySelector('.nav-menu__sub-menu');
     this.#elements.authBlock = this.#elements.appContainer.querySelector('.authentication');
+    this.#elements.favoritesCount = this.#elements.subMenu.querySelector('#wish-list__quantity');
 
     this.#spinnerInit();
 
@@ -97,8 +102,8 @@ class Controller {
     this.spinner.hide();
 
     if (storage.checkIsUserLogged()) {
+      this.updateFavoritesCount();
       this.rerenderAuthBlock();
-      window.location.hash = '#';
     } else this.#hideSubMenuForUnauthorizedUser();
   }
 }

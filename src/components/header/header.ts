@@ -22,7 +22,7 @@ class HeaderComponent {
             <div class="nav-menu__sub-menu">
               <a href="#/favorites" id="wish-list">
                 Wishlist
-                <span id="wish-list__quantity" class="quantity">(2)</span>
+                <span id="wish-list__quantity" class="quantity"></span>
               </a>
               <a href="#" id="cart">
                 Shopping cart
