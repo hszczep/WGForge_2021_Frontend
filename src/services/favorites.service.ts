@@ -31,23 +31,31 @@ class FavoritesService {
     const currentProductListElement = (target as Element).closest('[data-id]') as HTMLElement;
     const productId = currentProductListElement.dataset.id;
 
+    const previousClassName = likeButton.className;
+
     if (storage.checkProductInFavoritesById(productId)) {
+      likeButton.classList.remove('like-btn__active');
       this.#removeFromAPIFavorites(productId)
         .then(() => {
           storage.removeFromFavorites(productId);
-          likeButton.classList.remove('like-btn__active');
         })
-        .catch(console.log);
+        .catch((error) => {
+          likeButton.className = previousClassName;
+          console.log(error);
+        });
 
       return;
     }
 
+    likeButton.classList.add('like-btn__active');
     this.#addToAPIFavorites(productId)
       .then(() => {
         storage.addToFavoritesById(productId);
-        likeButton.classList.add('like-btn__active');
       })
-      .catch(console.log);
+      .catch((error) => {
+        likeButton.className = previousClassName;
+        console.log(error);
+      });
   }
 
   removeFromFavoritesButtonClickHandler({ target }: Event) {

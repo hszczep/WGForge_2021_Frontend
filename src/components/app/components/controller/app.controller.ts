@@ -8,22 +8,27 @@ import authUserService from '../../../../services/auth-user.service';
 class Controller {
   spinner: Spinner = null;
 
+  #elements: { [key: string]: HTMLElement } = null;
+
   appContainer: HTMLElement = null;
   authBlock: HTMLElement = null;
 
   constructor() {
     this.logoutButtonClickHandler = this.logoutButtonClickHandler.bind(this);
-    this.appContainer = document.querySelector('.app-field');
+
+    this.#elements = {
+      appContainer: document.querySelector('.app-field'),
+    };
   }
 
   #renderHeader(): void {
     const headerMarkup = headerComponent.render();
-    this.appContainer.insertAdjacentHTML('afterbegin', headerMarkup);
+    this.#elements.appContainer.insertAdjacentHTML('afterbegin', headerMarkup);
   }
 
   #renderFooter(): void {
     const footerMarkup = footerComponent.render();
-    this.appContainer.insertAdjacentHTML('beforeend', footerMarkup);
+    this.#elements.appContainer.insertAdjacentHTML('beforeend', footerMarkup);
   }
 
   #spinnerInit(): void {
@@ -31,19 +36,30 @@ class Controller {
     this.spinner.init();
   }
 
+  #hideSubMenuForUnauthorizedUser() {
+    this.#elements.subMenu.classList.add('hidden');
+  }
+
+  showSubMenuForAuthorizedUser() {
+    this.#elements.subMenu.classList.remove('hidden');
+  }
+
   logoutButtonClickHandler(): void {
     authUserService.logOutUser();
+    this.#hideSubMenuForUnauthorizedUser();
     this.rerenderAuthBlock();
-    window.dispatchEvent(new Event('hashchange'));
+    if (window.location.hash === '#') {
+      window.dispatchEvent(new Event('hashchange'));
+    } else window.location.hash = '#';
   }
 
   rerenderAuthBlock(): void {
-    this.authBlock.innerHTML = '';
+    this.#elements.authBlock.innerHTML = '';
 
     const userName = storage.getUserState().credentials.name;
 
     if (storage.checkIsUserLogged()) {
-      this.authBlock.insertAdjacentHTML(
+      this.#elements.authBlock.insertAdjacentHTML(
         'afterbegin',
         `<div class="authentication-wrapper">
           <span class="authentication-user-name" title="${userName}">
@@ -53,14 +69,14 @@ class Controller {
          </div>`
       );
 
-      this.authBlock
+      this.#elements.authBlock
         .querySelector('.authentication-logout-button')
         .addEventListener('click', this.logoutButtonClickHandler);
 
       return;
     }
 
-    this.authBlock.insertAdjacentHTML(
+    this.#elements.authBlock.insertAdjacentHTML(
       'afterbegin',
       `<a class="authentication-signin" href="#/signin">Login</a><span> or</span>
        <a class="authentication-signup" href="#/signup">Create account</a>`
@@ -71,7 +87,8 @@ class Controller {
     this.#renderHeader();
     this.#renderFooter();
 
-    this.authBlock = document.querySelector('.authentication');
+    this.#elements.subMenu = this.#elements.appContainer.querySelector('.nav-menu__sub-menu');
+    this.#elements.authBlock = this.#elements.appContainer.querySelector('.authentication');
 
     this.#spinnerInit();
 
@@ -82,7 +99,7 @@ class Controller {
     if (storage.checkIsUserLogged()) {
       this.rerenderAuthBlock();
       window.location.hash = '#';
-    }
+    } else this.#hideSubMenuForUnauthorizedUser();
   }
 }
 

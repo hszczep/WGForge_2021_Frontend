@@ -114,6 +114,7 @@ class AuthPageComponent {
       .then((response) => {
         if (response) {
           appController.rerenderAuthBlock();
+          appController.showSubMenuForAuthorizedUser();
           window.location.hash = '#';
         }
       })

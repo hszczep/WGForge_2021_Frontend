@@ -19,14 +19,16 @@ class HeaderComponent {
             </a>
           </div>
           <div class="nav-menu">
-            <a href="#/favorites" id="wish-list">
-              Wishlist
-              <span id="wish-list__quantity" class="quantity">(2)</span>
-            </a>
-            <a href="#" id="cart">
-              Shopping cart
-              <span id="cart__quantity" class="quantity">(5)</span>
-            </a>
+            <div class="nav-menu__sub-menu">
+              <a href="#/favorites" id="wish-list">
+                Wishlist
+                <span id="wish-list__quantity" class="quantity">(2)</span>
+              </a>
+              <a href="#" id="cart">
+                Shopping cart
+                <span id="cart__quantity" class="quantity">(5)</span>
+              </a>
+            </div>
             <div class="authentication">
               <a class="authentication-signin" href="#/signin">Login</a><span> or</span>
               <a class="authentication-signup" href="#/signup">Create account</a>
