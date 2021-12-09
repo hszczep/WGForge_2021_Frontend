@@ -4,6 +4,8 @@ import favoritesService from '../../services/favorites.service';
 import storage from '../app/components/storage/storage';
 import ProductItemComponent from '../product-item/product-item';
 
+import { EMPTY_MESSAGE } from './common/favorites.constants';
+
 class FavoritesPageComponent {
   #elements: { [key: string]: HTMLElement } = null;
 
@@ -27,7 +29,7 @@ class FavoritesPageComponent {
   }
 
   render() {
-    const favoritesListElements = storage
+    const favoritesElements = storage
       .getFavorites()
       .map(
         (favoritesItem) => `
@@ -40,9 +42,8 @@ class FavoritesPageComponent {
 
     return `
       <h2 class="favorites__page-title">Favorites products:</h2>
-      <button class="favorites__add-button">Put to favorites</button>
       <ul style="color: white;" class="favorites__list">
-        ${favoritesListElements}
+        ${favoritesElements || EMPTY_MESSAGE}
       </ul>
     `;
   }

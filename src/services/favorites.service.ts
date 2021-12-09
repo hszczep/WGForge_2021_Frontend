@@ -1,5 +1,6 @@
 import appController from '../components/app/components/controller/app.controller';
 import storage from '../components/app/components/storage/storage';
+import { EMPTY_MESSAGE } from '../components/favorites/common/favorites.constants';
 import mainApiService from './main-api.service';
 
 class FavoritesService {
@@ -73,6 +74,7 @@ class FavoritesService {
       .then(() => {
         storage.removeFromFavorites(productId);
         appController.updateFavoritesCount();
+        if (!storage.getFavorites().length) currentProductListElement.parentElement.textContent = EMPTY_MESSAGE;
         currentProductListElement.remove();
       })
       .catch(console.log);
