@@ -1,7 +1,10 @@
 import storage from '../components/app/components/storage/storage';
-import { EMPTY_MESSAGE } from '../components/favorites/common/favorites.constants';
 import headerComponent from '../components/header/header';
+import popup from '../components/popup/popup';
+
 import mainApiService from './main-api.service';
+
+import { EMPTY_MESSAGE } from '../components/favorites/common/favorites.constants';
 
 class FavoritesService {
   constructor() {
@@ -44,7 +47,7 @@ class FavoritesService {
         })
         .catch((error) => {
           likeButton.className = previousClassName;
-          console.log(error);
+          popup.open(error.message);
         });
 
       return;
@@ -58,7 +61,7 @@ class FavoritesService {
       })
       .catch((error) => {
         likeButton.className = previousClassName;
-        console.log(error);
+        popup.open(error.message);
       });
   }
 
@@ -77,7 +80,7 @@ class FavoritesService {
         if (!storage.getFavorites().length) currentProductListElement.parentElement.textContent = EMPTY_MESSAGE;
         currentProductListElement.remove();
       })
-      .catch(console.log);
+      .catch((error) => popup.open(error.message));
   }
 }
 
