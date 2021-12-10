@@ -15,7 +15,7 @@ class FavoritesPageComponent {
     return `
 <fieldset class="favorites-field">
   <legend>Wishlist</legend>
-  <div class="favorite-item">
+  <article class="favorite-item">
     <div class="discount">-10%</div>
 
     <svg class="delete-button">
@@ -51,8 +51,8 @@ class FavoritesPageComponent {
         <button class="purchase-btn">purchase</button>
       </div>
     </div>
-  </div>
-  <div class="favorite-item">
+  </article>
+  <article class="favorite-item">
     <svg class="delete-button">
       <use xlink:href="assets/images/sprite.svg#close"></use>
     </svg>
@@ -87,7 +87,7 @@ class FavoritesPageComponent {
         <button class="purchase-btn">purchase</button>
       </div>
     </div>
-  </div>
+  </article>
 </fieldset>
       `;
   }

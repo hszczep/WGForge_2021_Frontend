@@ -173,7 +173,7 @@
       transition: $card-transition;
     }
 
-    &:hover .card-specifications {
+    & .card-specifications {
       bottom: 76px;
       transition: $card-transition;
     }
@@ -187,7 +187,6 @@
 @media all and (max-width: $app-medium-media-query) {
   .card {
     background-color: $card-hover-background;
-    pointer-events: none;
 
     &__single {
       .card-img {
@@ -254,6 +253,14 @@
       .price {
         font-size: 14px;
       }
+    }
+
+    &:hover .card-specifications {
+      bottom: 14px;
+    }
+
+    .purchase-btn {
+      display: none;
     }
   }
 }
