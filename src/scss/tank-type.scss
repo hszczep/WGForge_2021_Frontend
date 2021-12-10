@@ -1,0 +1,43 @@
+@import '../scss/mixins';
+
+.tank-type {
+  display: inline-block;
+  flex: 0 0 auto;
+
+  &__all {
+    background-image: url('/src/assets/types/all.png');
+    width: 17px;
+    height: 11px;
+    margin-right: 5px;
+  }
+
+  &__at-spg {
+    background-image: url('/src/assets/types/at-spg.png');
+    @extend %type-settings;
+  }
+
+  &__heavytank {
+    background-image: url('/src/assets/types/heavytank.png');
+    @extend %type-settings;
+  }
+
+  &__lighttank {
+    background-image: url('/src/assets/types/lighttank.png');
+    @extend %type-settings;
+  }
+
+  &__mediumtank {
+    background-image: url('/src/assets/types/mediumtank.png');
+    @extend %type-settings;
+  }
+
+  &__multirole {
+    background-image: url('/src/assets/types/multirole.png');
+    @extend %type-settings;
+  }
+
+  &__spg {
+    background-image: url('../../../assets/types/spg.png');
+    @extend %type-settings;
+  }
+}

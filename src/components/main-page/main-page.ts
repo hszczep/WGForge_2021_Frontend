@@ -1,12 +1,21 @@
 import './scss/main-page.styles.scss';
 
+import FilterComponent from './components/filter/filter';
 import storage from '../app/components/storage/storage';
 import ProductItemComponent from '../product-item/product-item';
 
 class MainPageComponent {
   constructor() {
     this.render = this.render.bind(this);
+    this.init = this.init.bind(this);
+    this.unmount = this.unmount.bind(this);
   }
+
+  init() {
+    FilterComponent.init();
+  }
+
+  unmount() {}
 
   render(): DocumentFragment {
     const listOfProducts = storage.products;
@@ -22,6 +31,12 @@ class MainPageComponent {
             <button>Gold</button>
             <button>Premium account</button>
           </div>`;
+
+    const cardsFilter = document.createElement('div');
+    cardsFilter.classList.add('filter-field');
+    cardsFilter.innerHTML = FilterComponent.render();
+    // <div class="filter-field">${filter.render()}</div>
+
 
     const cardsField = document.createElement('div');
     cardsField.classList.add('cards-field');
