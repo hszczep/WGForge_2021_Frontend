@@ -13,22 +13,27 @@ class FavoritesPageComponent {
     this.init = this.init.bind(this);
     this.unmount = this.unmount.bind(this);
     this.render = this.render.bind(this);
+    this.removeFromFavoritesButtonClickHandler = this.removeFromFavoritesButtonClickHandler.bind(this);
   }
 
-  init() {
+  removeFromFavoritesButtonClickHandler(event: Event) {
+    favoritesService.removeFromFavoritesButtonClickHandler(event);
+  }
+
+  init(): void {
     this.#elements = {
       addButton: document.querySelector('.favorites__add-button'),
       favoritesList: document.querySelector('.favorites__list'),
     };
 
-    this.#elements.favoritesList.addEventListener('click', favoritesService.removeFromFavoritesButtonClickHandler);
+    this.#elements.favoritesList.addEventListener('click', this.removeFromFavoritesButtonClickHandler);
   }
 
-  unmount() {
-    this.#elements.favoritesList.removeEventListener('click', favoritesService.removeFromFavoritesButtonClickHandler);
+  unmount(): void {
+    this.#elements.favoritesList.removeEventListener('click', this.removeFromFavoritesButtonClickHandler);
   }
 
-  render() {
+  render(): string {
     const favoritesElements = storage
       .getFavorites()
       .map(

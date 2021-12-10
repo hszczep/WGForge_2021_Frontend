@@ -1,6 +1,6 @@
-import appController from '../components/app/components/controller/app.controller';
 import storage from '../components/app/components/storage/storage';
 import { EMPTY_MESSAGE } from '../components/favorites/common/favorites.constants';
+import headerComponent from '../components/header/header';
 import mainApiService from './main-api.service';
 
 class FavoritesService {
@@ -40,7 +40,7 @@ class FavoritesService {
       this.#removeFromAPIFavorites(productId)
         .then(() => {
           storage.removeFromFavorites(productId);
-          appController.updateFavoritesCount();
+          headerComponent.updateFavoritesCount();
         })
         .catch((error) => {
           likeButton.className = previousClassName;
@@ -54,7 +54,7 @@ class FavoritesService {
     this.#addToAPIFavorites(productId)
       .then(() => {
         storage.addToFavoritesById(productId);
-        appController.updateFavoritesCount();
+        headerComponent.updateFavoritesCount();
       })
       .catch((error) => {
         likeButton.className = previousClassName;
@@ -73,7 +73,7 @@ class FavoritesService {
     this.#removeFromAPIFavorites(productId)
       .then(() => {
         storage.removeFromFavorites(productId);
-        appController.updateFavoritesCount();
+        headerComponent.updateFavoritesCount();
         if (!storage.getFavorites().length) currentProductListElement.parentElement.textContent = EMPTY_MESSAGE;
         currentProductListElement.remove();
       })
