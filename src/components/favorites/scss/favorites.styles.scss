@@ -171,6 +171,14 @@
       }
     }
   }
+
+  .empty-message {
+    display: inline-block;
+    margin-bottom: 10px;
+
+    font-size: 18px;
+    color: $title-text-color;
+  }
 }
 
 @media all and (max-width: $app-max-media-query) {

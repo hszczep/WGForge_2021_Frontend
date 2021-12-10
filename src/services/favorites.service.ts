@@ -4,7 +4,7 @@ import popup from '../components/popup/popup';
 
 import mainApiService from './main-api.service';
 
-import { EMPTY_MESSAGE } from '../components/favorites/common/favorites.constants';
+import { EMPTY_MESSAGE_TEMPLATE } from '../components/favorites/common/favorites.constants';
 
 class FavoritesService {
   constructor() {
@@ -77,7 +77,8 @@ class FavoritesService {
       .then(() => {
         storage.removeFromFavorites(productId);
         headerComponent.updateFavoritesCount();
-        if (!storage.getFavorites().length) currentProductListElement.parentElement.textContent = EMPTY_MESSAGE;
+        if (!storage.getFavorites().length)
+          currentProductListElement.parentElement.insertAdjacentHTML('afterbegin', EMPTY_MESSAGE_TEMPLATE);
         currentProductListElement.remove();
       })
       .catch((error) => popup.open(error.message));
