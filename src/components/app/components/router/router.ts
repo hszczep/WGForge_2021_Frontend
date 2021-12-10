@@ -22,7 +22,7 @@ class Router {
   }
 
   findProductById(id: string): boolean {
-    const productList = storage.mainData;
+    const productList = storage.products;
     const product = productList.filter((item) => item.id === id)[0];
     return !!product;
   }

@@ -1,4 +1,4 @@
-import '../product-item/scss/product-item-clone.style.scss';
+import './scss/product-item-clone.style.scss';
 
 function addPurchase(event: Event) {
   const button = event.target as HTMLElement;

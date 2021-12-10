@@ -1,6 +1,6 @@
 import ProductItemIinterface from '../app/components/storage/product-item-interface';
 import convertToRomane from '../../common/common.helper';
-import addPurchase from '../main-page/add-purchase';
+import addPurchase from './add-purchase';
 
 class ProductItemComponent implements ProductItemIinterface {
   id: string;
@@ -13,7 +13,7 @@ class ProductItemComponent implements ProductItemIinterface {
   images: Array<string>;
   tank_type: string;
   size: string;
-  linkToDiscription: string;
+  linkToDescription: string;
   discount: number;
   price_discount: number;
   flag: string;
@@ -30,16 +30,16 @@ class ProductItemComponent implements ProductItemIinterface {
     id,
   }: ProductItemIinterface) {
     this.id = id;
-    this.tier = tier; // tier tank, for render convert expample "4" -> "IV"
+    this.tier = tier; // tier tank, for render convert example "4" -> "IV"
     this.type = type; // tank, gold or premium
-    this.tank_type = tank_type; // ligth, medium, haevy
+    this.tank_type = tank_type; // light, medium, haevy
     this.name = name; // shor name tank
     this.price = price; // default price $
     this.nation = nation; // country
     this.flag = `flag__${this.nation}`; // for icon flag
     this.images = images; // link image
     this.size = Math.random() > 0.3 ? 'single' : 'double'; // add to JSON
-    this.linkToDiscription = `#/product/${this.id}`;
+    this.linkToDescription = `#/product/${this.id}`;
     this.discount = discount; // discont in %  example 10
     this.price_discount = price_discount;
 
@@ -64,7 +64,7 @@ class ProductItemComponent implements ProductItemIinterface {
       `;
     }
     cardFrame.innerHTML = `
-      <a href="${this.linkToDiscription}" class="card-info">
+      <a href="${this.linkToDescription}" class="card-info">
         <img class="card-img" src="${this.images[0]}" alt="${this.name}" />
         <div class="card-specifications">
           <p class="discount">${this.discount ? `-${this.discount}%` : ''}</p>

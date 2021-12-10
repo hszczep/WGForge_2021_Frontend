@@ -9,7 +9,7 @@ class MainPageComponent {
   }
 
   render(): DocumentFragment {
-    const listOfProducts = storage.mainData;
+    const listOfProducts = storage.products;
 
     const fragmentContainer = document.createDocumentFragment();
     const contentMenu = document.createElement('div');

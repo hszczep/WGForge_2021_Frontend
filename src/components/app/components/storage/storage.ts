@@ -4,7 +4,7 @@ import ProductItemIinterface from './product-item-interface';
 
 class Storage {
   #userState: IUserState = USER.DEFAULT_STATE;
-  mainData: Array<ProductItemIinterface>;
+  products: Array<ProductItemIinterface>;
   setUserState(userState: IUserState) {
     this.#userState = userState;
   }
@@ -30,7 +30,7 @@ class Storage {
   }
 
   async init() {
-    this.mainData = await fetch('https://wg-forge-back.herokuapp.com/api/products').then((res) => res.json());
+    this.products = await fetch('https://wg-forge-back.herokuapp.com/api/products').then((res) => res.json());
   }
 }
 
