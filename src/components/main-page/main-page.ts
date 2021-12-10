@@ -35,8 +35,6 @@ class MainPageComponent {
     const cardsFilter = document.createElement('div');
     cardsFilter.classList.add('filter-field');
     cardsFilter.innerHTML = FilterComponent.render();
-    // <div class="filter-field">${filter.render()}</div>
-
 
     const cardsField = document.createElement('div');
     cardsField.classList.add('cards-field');
@@ -47,6 +45,7 @@ class MainPageComponent {
     }
 
     fragmentContainer.append(contentMenu);
+    fragmentContainer.append(cardsFilter);
     fragmentContainer.append(cardsField);
 
     return fragmentContainer;
