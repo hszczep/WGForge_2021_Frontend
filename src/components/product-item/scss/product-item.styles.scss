@@ -173,7 +173,7 @@
       transition: $card-transition;
     }
 
-    &:hover .card-specifications {
+    & .card-specifications {
       bottom: 76px;
       transition: $card-transition;
     }
@@ -187,7 +187,6 @@
 @media all and (max-width: $app-medium-media-query) {
   .card {
     background-color: $card-hover-background;
-    pointer-events: none;
 
     &__single {
       .card-img {
@@ -227,6 +226,7 @@
         }
 
         .item-text {
+          font-size: 14px;
           align-items: baseline;
           margin-bottom: 4px;
 
@@ -235,12 +235,32 @@
           .level {
             margin-right: 3px;
           }
+
+          .item-name {
+            white-space: nowrap;
+            max-width: 70px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+
+          .flag,
+          .tank-type {
+            transform: scale(0.8);
+          }
         }
       }
 
       .price {
         font-size: 14px;
       }
+    }
+
+    &:hover .card-specifications {
+      bottom: 14px;
+    }
+
+    .purchase-btn {
+      display: none;
     }
   }
 }

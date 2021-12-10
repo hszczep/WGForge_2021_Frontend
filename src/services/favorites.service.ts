@@ -66,7 +66,7 @@ class FavoritesService {
   }
 
   removeFromFavoritesButtonClickHandler({ target }: Event) {
-    if (!(target as Element).closest('.favorites__remove-button')) return;
+    if (!(target as Element).closest('.favorite__delete-button')) return;
 
     const currentProductListElement = (target as Element).closest('[data-id]') as HTMLElement;
     const productId = currentProductListElement.dataset.id;
