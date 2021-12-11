@@ -1,7 +1,7 @@
 import './scss/product-page.styles.scss';
 
 import storage from '../app/components/storage/storage';
-import convertToRomane from '../../common/common.helper';
+import { convertToRomane, localizeCurrency } from '../../common/common.helper';
 import favoritesService from '../../services/favorites.service';
 
 class ProductPageComponent {
@@ -43,16 +43,21 @@ class ProductPageComponent {
       `;
     }
 
+    const price = localizeCurrency(Number(product.price.amount), product.price.code);
+    const priceDiscount = product.price_discount
+      ? localizeCurrency(Number(product.price_discount), product.price.code)
+      : '';
+
     return `
           <div class="card__single" data-id="${product.id}">
               <img class="card-img" src="${product.images[0]}" alt="${product.name}" />
               <div class="card-specifications">
-                <p class="discount">${product.discount || ''}</p>
+                <p class="discount">${priceDiscount}</p>
                 <h2 class="item-text">
                   ${productNameInfo}
                 </h2>
-                <p class="price">$ ${product.price}</p>
-                <p class="price price-discount">${product.discount ? product.price : ''}</p>
+                <p class="price">${price}</p>
+                <p class="price price-discount">${product.discount ? product.discount : ''}</p>
               </div>
             <button class="like-btn ${storage.checkProductInFavoritesById(product.id) ? 'like-btn__active' : ''}">
               <svg class="like-btn__icon">

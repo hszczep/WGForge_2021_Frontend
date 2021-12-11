@@ -1,10 +1,13 @@
 import { ROMAN_DIGITS } from './common.constants';
+import { currencyLocaleMap } from '../components/product-item/common/constants';
 
-function convertToRomane(number: number): string {
+export const convertToRomane = (number: number): string => {
   return ROMAN_DIGITS[number];
-}
+};
+export const localizeCurrency = (amount: number, code: string): string => {
+  return amount.toLocaleString(currencyLocaleMap[code], { currency: code, style: 'currency' });
+};
 
-export default convertToRomane;
 export const getUserNameFromEmail = (email: string) => email.substring(0, email.indexOf('@'));
 
 export const capitalizeFirstLetter = (string: string) => string.charAt(0).toUpperCase() + string.slice(1);

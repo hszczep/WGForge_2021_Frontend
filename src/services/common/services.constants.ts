@@ -5,7 +5,7 @@ export const MAIN_API_URLS = {
     BASE: 'user',
     REGISTER: 'user/register',
     LOGIN: 'user/auth',
-    FAVORITES: 'user/favourites',
+    FAVORITES: 'user/favorites',
   },
 };
 

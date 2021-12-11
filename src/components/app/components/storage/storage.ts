@@ -1,11 +1,11 @@
 import { USER } from '../../../../common/common.constants';
-import { IProductItem } from '../../../../models/product-item.model';
+import ProductItemInterface from '../../../../models/product-item.model';
 import { IUserState } from '../../../../models/user.model';
 import mainApiService from '../../../../services/main-api.service';
 
 class Storage {
   #userState: IUserState = USER.DEFAULT_STATE;
-  #products: IProductItem[] = [];
+  products: Array<ProductItemInterface>;
 
   setUserState(userState: IUserState) {
     this.#userState = userState;
@@ -31,19 +31,19 @@ class Storage {
     this.#userState = USER.DEFAULT_STATE;
   }
 
-  setProducts(products: IProductItem[]) {
-    this.#products = products;
+  setProducts(products: Array<ProductItemInterface>) {
+    this.products = products;
   }
 
-  getProducts(): IProductItem[] {
-    return this.#products;
+  getProducts(): Array<ProductItemInterface> {
+    return this.products;
   }
 
   getProductById(productId: string) {
-    return this.#products.find((product) => product.id === productId);
+    return this.products.find((product) => product.id === productId);
   }
 
-  getFavorites(): IProductItem[] {
+  getFavorites(): Array<ProductItemInterface> {
     return this.#userState.favorites;
   }
 
@@ -51,7 +51,7 @@ class Storage {
     return Boolean(this.#userState.favorites.find((favoriteItem) => favoriteItem.id === productId));
   }
 
-  addToFavorites(productItem: IProductItem) {
+  addToFavorites(productItem: ProductItemInterface) {
     this.#userState.favorites.push(productItem);
   }
 
@@ -65,7 +65,7 @@ class Storage {
   }
 
   async init() {
-    this.#products = await mainApiService.getProducts();
+    this.products = await mainApiService.getProducts();
   }
 }
 

@@ -1,4 +1,4 @@
-import { IProductItem } from './product-item.model';
+import ProductItemInterface from './product-item.model';
 
 export interface IUserCredentials {
   name?: string;
@@ -9,7 +9,7 @@ export interface IUserCredentials {
 
 export interface IUserState {
   credentials: IUserCredentials;
-  favorites: IProductItem[];
+  favorites: Array<ProductItemInterface>;
   isLogged: boolean;
   isAdmin: boolean;
 }
@@ -18,6 +18,6 @@ export interface IUser {
   email: string;
   password: string;
   role: string;
-  favourites: IProductItem[];
-  cart: IProductItem[];
+  favourites: Array<ProductItemInterface>;
+  cart: Array<ProductItemInterface>;
 }

@@ -35,7 +35,7 @@ export class Spinner {
             </div>
           </div>
         </div>
-        <span class="spinner__description">загрузка...</span>
+        <span class="spinner__description">loading...</span>
       `
     );
   }

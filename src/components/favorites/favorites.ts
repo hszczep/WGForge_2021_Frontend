@@ -3,7 +3,7 @@ import './scss/favorites.styles.scss';
 import favoritesService from '../../services/favorites.service';
 import storage from '../app/components/storage/storage';
 
-import { renderFavoritesItem } from './common/fevorites.tools';
+import { renderFavoritesItem } from './common/favorites.tools';
 import { EMPTY_MESSAGE_TEMPLATE } from './common/favorites.constants';
 
 class FavoritesPageComponent {

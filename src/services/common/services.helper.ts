@@ -1,11 +1,16 @@
 import { IRequestConfig } from '../models/request-config.model';
 import { DEFAULT_ERROR_MESSAGE, MAIN_API_URLS, METHODS } from './services.constants';
 
-const generateHeaders = (token: string) => ({
-  Authorization: token ? `Bearer ${token}` : null,
-  Accept: 'application/json',
-  'Content-Type': 'application/json',
-});
+const generateHeaders = (token: string) => {
+  const headers: { [key: string]: string } = {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  };
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
+  }
+  return headers;
+};
 
 const generateRequestConfig = ({ method, token, params }: IRequestConfig) => {
   switch (method) {

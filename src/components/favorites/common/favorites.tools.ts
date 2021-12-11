@@ -1,8 +1,8 @@
-import convertToRomane from '../../../common/common.helper';
+import { convertToRomane, localizeCurrency } from '../../../common/common.helper';
 import { PRODUCT_TYPE_MACHINERY } from './favorites.constants';
-import { IProductItem } from '../../../models/product-item.model';
+import ProductItemInterface from '../../../models/product-item.model';
 
-export const renderFavoritesItem = (favoritesItem: IProductItem): string => {
+export const renderFavoritesItem = (favoritesItem: ProductItemInterface): string => {
   const favoritesItemInfo =
     favoritesItem.type === PRODUCT_TYPE_MACHINERY
       ? `
@@ -12,6 +12,10 @@ export const renderFavoritesItem = (favoritesItem: IProductItem): string => {
        <span class="item-name">${favoritesItem.name}</span>
       `
       : `<span class="item-name">${favoritesItem.name}</span>`;
+
+  const priceDiscount = favoritesItem.price_discount
+    ? localizeCurrency(Number(favoritesItem.price_discount), favoritesItem.price.code)
+    : '';
 
   return `
     <article class="favorite-item" data-id="${favoritesItem.id}">
@@ -31,8 +35,12 @@ export const renderFavoritesItem = (favoritesItem: IProductItem): string => {
           <div class="favorite-item__description">${favoritesItem.details}</div>
         </div>
         <div class="favorite-item__price-block">
-          <p class="price${favoritesItem.discount ? ' old-price' : ''}">$${favoritesItem.price}</p>
-          <p class="price price-discount">${favoritesItem.discount ? `$${favoritesItem.price_discount}` : ''}</p>
+          <p class="price${favoritesItem.discount ? ' old-price' : ''}">
+            ${localizeCurrency(Number(favoritesItem.price.amount), favoritesItem.price.code)}
+          </p>
+          <p class="price price-discount">
+            ${priceDiscount}
+          </p>
           <button class="purchase-btn">purchase</button>
         </div>
       </div>

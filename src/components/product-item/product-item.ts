@@ -1,6 +1,6 @@
 import ProductItemComponentInterface from './product-item-interface';
-import convertToRomane from '../../common/common.helper';
-import { IProductItem } from '../../models/product-item.model';
+import { convertToRomane, localizeCurrency } from '../../common/common.helper';
+import ProductItemInterface from '../../models/product-item.model';
 
 class ProductItemComponent implements ProductItemComponentInterface {
   id: string;
@@ -12,7 +12,7 @@ class ProductItemComponent implements ProductItemComponentInterface {
   images: Array<string>;
   tank_type: string;
   size: string;
-  linkToDiscription: string;
+  linkToDescription: string;
   discount: number;
   price_discount: string;
   flag: string;
@@ -30,22 +30,23 @@ class ProductItemComponent implements ProductItemComponentInterface {
     tank_type,
     id,
     isFavorite,
-  }: IProductItem) {
+  }: ProductItemInterface) {
     this.id = id;
-    this.tier = tier; // tier tank, for render convert expample "4" -> "IV"
+    this.tier = tier; // tier tank, for render convert example "4" -> "IV"
     this.type = type; // tank, gold or premium
-    this.tank_type = tank_type.toLowerCase(); // ligth, medium, haevy
+    this.tank_type = tank_type.toLowerCase(); // light, medium, heavy
     this.name = name; // shor name tank
-    this.price = price.toFixed(2); // default price $
+    this.price = localizeCurrency(Number(price.amount), price.code); // default price $
     this.nation = nation; // country
     this.flag = `flag__${this.nation}`; // for icon flag
     this.images = images; // link image
     this.size = 'single'; // add to JSON
-    this.linkToDiscription = `#/product/${this.id}`;
-    this.discount = discount; // discont in %  example 10
-    this.price_discount = price_discount ? price_discount.toFixed(2) : '';
+    this.linkToDescription = `#/product/${this.id}`;
+    if (discount > 0) {
+      this.discount = discount; // discount in %  example 10
+      this.price_discount = price_discount ? localizeCurrency(Number(price_discount), price.code) : '';
+    }
     this.isFavorite = isFavorite;
-
     this.render = this.render.bind(this);
   }
 
@@ -65,15 +66,15 @@ class ProductItemComponent implements ProductItemComponentInterface {
     }
     return `
           <article class="card card__${this.size}" data-id="${this.id}">
-            <a href="${this.linkToDiscription}" class="card-info">
+            <a href="${this.linkToDescription}" class="card-info">
               <img class="card-img" src="${this.images[0]}" alt="${this.name}" />
               <div class="card-specifications">
                 <p class="discount">${this.discount ? `-${this.discount}%` : ''}</p>
                 <h2 class="item-text">
                   ${productNameInfo}
                 </h2>
-                <p class="price${this.discount ? ' old-price' : ''}">$${this.price}</p>
-                <p class="price price-discount">${this.discount ? `$${this.price_discount}` : ''}</p>
+                <p class="price${this.discount ? ' old-price' : ''}">${this.price}</p>
+                <p class="price price-discount">${this.discount ? `${this.price_discount}` : ''}</p>
               </div>
             </a>
             <button class="like-btn ${this.isFavorite ? 'like-btn__active' : ''}">

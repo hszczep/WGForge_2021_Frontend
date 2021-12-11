@@ -25,7 +25,7 @@ class Popup {
 
   closePopupButtonHandler(): void {
     this.#closeButton.removeEventListener('click', this.closePopupButtonHandler);
-    document.body.removeChild(this.#popup);
+    this.#popup.remove();
 
     this.#popup = null;
     this.#closeButton = null;
@@ -34,7 +34,7 @@ class Popup {
   open(message: string, type = 'Error'): void {
     this.#popup = this.#create(message, type);
     this.#closeButton = this.#popup.querySelector('.popup__close-button');
-    document.body.appendChild(this.#popup);
+    document.body.append(this.#popup);
     this.#closeButton.addEventListener('click', this.closePopupButtonHandler);
   }
 }
