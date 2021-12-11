@@ -1,7 +1,10 @@
 import './scss/auth.styles.scss';
 
 import appController from '../app/components/controller/app.controller';
+import headerComponent from '../header/header';
+
 import authUserService from '../../services/auth-user.service';
+
 import { capitalizeFirstLetter } from '../../common/common.helper';
 import { VALIDATION_ERRORS_MESSAGES, VALIDATION_REG_EXPS } from './common/constants';
 import { IUserCredentials } from '../../models/user.model';
@@ -35,28 +38,28 @@ class AuthPageComponent {
     };
   }
 
-  #isValidEmail(email: string) {
-    return email.match(VALIDATION_REG_EXPS.EMAIL);
+  #isValidEmail(email: string): boolean {
+    return Boolean(email.match(VALIDATION_REG_EXPS.EMAIL));
   }
 
-  #isValidPassword(password: string) {
-    return password.match(VALIDATION_REG_EXPS.PASSWORD);
+  #isValidPassword(password: string): boolean {
+    return Boolean(password.match(VALIDATION_REG_EXPS.PASSWORD));
   }
 
-  #clearApiErrorMessage() {
+  #clearApiErrorMessage(): void {
     this.#elements.apiErrorMessage.innerText = '';
   }
 
-  #showApiErrorMessage(apiErrorMessage: string) {
+  #showApiErrorMessage(apiErrorMessage: string): void {
     this.#elements.apiErrorMessage.innerText = capitalizeFirstLetter(apiErrorMessage);
   }
 
-  #clearValidationMessages() {
+  #clearValidationMessages(): void {
     this.#elements.validationMessagesEmail.innerText = '';
     this.#elements.validationMessagesPassword.innerText = '';
   }
 
-  #setDefaultValidationState() {
+  #setDefaultValidationState(): void {
     this.#clearValidationMessages();
     this.#elements.emailInput.classList.remove('incorrect-input-data', 'correct-input-data');
     this.#elements.passwordInput.classList.remove('incorrect-input-data', 'correct-input-data');
@@ -113,7 +116,7 @@ class AuthPageComponent {
       .loginUser(this.#isRegistration, userCredetials)
       .then((response) => {
         if (response) {
-          appController.rerenderAuthBlock();
+          headerComponent.updateHeaderForCurrentUserState();
           window.location.hash = '#';
         }
       })

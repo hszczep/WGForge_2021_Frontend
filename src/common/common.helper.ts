@@ -5,8 +5,8 @@ export const convertToRomane = (number: number): string => {
   return ROMAN_DIGITS[number];
 };
 export const localizeCurrency = (amount: number, code: string): string => {
-  return amount.toLocaleString(currencyLocaleMap[code], {currency: code, style: 'currency'})
-}
+  return amount.toLocaleString(currencyLocaleMap[code], { currency: code, style: 'currency' });
+};
 
 export const getUserNameFromEmail = (email: string) => email.substring(0, email.indexOf('@'));
 

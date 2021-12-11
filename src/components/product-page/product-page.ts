@@ -1,21 +1,32 @@
+import './scss/product-page.styles.scss';
+
 import storage from '../app/components/storage/storage';
-import { convertToRomane } from '../../common/common.helper';
+import { convertToRomane, localizeCurrency } from '../../common/common.helper';
+import favoritesService from '../../services/favorites.service';
 
 class ProductPageComponent {
+  #elements: { [key: string]: HTMLElement } = null;
+
   constructor() {
     this.init = this.init.bind(this);
     this.unmount = this.unmount.bind(this);
     this.render = this.render.bind(this);
   }
 
-  init() {}
+  init() {
+    this.#elements = {
+      favoritesButton: document.querySelector('.like-btn'),
+    };
+    this.#elements.favoritesButton.addEventListener('click', favoritesService.favoritesButtonClickHandler);
+  }
 
-  unmount() {}
+  unmount() {
+    this.#elements.favoritesButton.removeEventListener('click', favoritesService.favoritesButtonClickHandler);
+  }
 
   render() {
     const productId = window.location.hash.split('/').pop();
-    const productList = storage.products;
-    const product = productList.filter((item) => item.id === productId)[0];
+    const product = storage.getProductById(productId);
     const productTank = 'machinery';
     let productNameInfo;
 
@@ -31,18 +42,24 @@ class ProductPageComponent {
                   <span class="item-name">${product.name}</span>
       `;
     }
+
+    const price = localizeCurrency(Number(product.price.amount), product.price.code);
+    const priceDiscount = product.price_discount
+      ? localizeCurrency(Number(product.price_discount), product.price.code)
+      : '';
+
     return `
-          <div class="card__single" id="${product.id}">
+          <div class="card__single" data-id="${product.id}">
               <img class="card-img" src="${product.images[0]}" alt="${product.name}" />
               <div class="card-specifications">
-                <p class="discount">${product.discount || ''}</p>
+                <p class="discount">${priceDiscount}</p>
                 <h2 class="item-text">
                   ${productNameInfo}
                 </h2>
-                <p class="price">$ ${product.price}</p>
-                <p class="price price-discount">${product.discount ? product.price : ''}</p>
+                <p class="price">${price}</p>
+                <p class="price price-discount">${product.discount ? product.discount : ''}</p>
               </div>
-            <button class="like-btn">
+            <button class="like-btn ${storage.checkProductInFavoritesById(product.id) ? 'like-btn__active' : ''}">
               <svg class="like-btn__icon">
                 <use xlink:href="assets/images/sprite.svg#like"></use>
               </svg>
