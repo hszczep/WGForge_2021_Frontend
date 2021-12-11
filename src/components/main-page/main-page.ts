@@ -4,6 +4,7 @@ import FilterComponent from './components/filter/filter';
 import storage from '../app/components/storage/storage';
 import ProductItemComponent from '../product-item/product-item';
 import ProductItemInterface from '../../models/product-item.model';
+import { PRODUCT_LIMIT, PRODUCT_OFFSET } from './common/constants';
 import favoritesService from '../../services/favorites.service';
 
 const filter = new FilterComponent();
@@ -20,8 +21,8 @@ class MainPageComponent {
     this.render = this.render.bind(this);
     this.init = this.init.bind(this);
     this.unmount = this.unmount.bind(this);
-    this.offset = 0;
-    this.limit = 12;
+    this.offset = PRODUCT_OFFSET;
+    this.limit = PRODUCT_LIMIT;
   }
 
   init() {
@@ -57,6 +58,7 @@ class MainPageComponent {
   unmount() {
     this.observer.disconnect();
     this.#elements.productsList.removeEventListener('click', favoritesService.favoritesButtonClickHandler);
+    this.offset = 0
   }
 
   render() {
@@ -72,8 +74,7 @@ class MainPageComponent {
         </div>  
           <div class='filter-field'>${filter.render()}</div>
           <div class='cards-field' id='cards-container'></div>
-          <div id='list-end'><div/>
-      </div>
+          <div id='list-end'></div>
     `;
   }
 }
