@@ -1,13 +1,11 @@
 import './scss/main-page.styles.scss';
 
-import FilterComponent from './components/filter/filter';
 import storage from '../app/components/storage/storage';
 import ProductItemComponent from '../product-item/product-item';
 import ProductItemInterface from '../../models/product-item.model';
 import { PRODUCT_LIMIT, PRODUCT_OFFSET } from './common/constants';
 import favoritesService from '../../services/favorites.service';
-
-const filter = new FilterComponent();
+import filter from './components/filter/filter';
 
 class MainPageComponent {
   listOfProducts: ProductItemInterface[];
@@ -16,6 +14,7 @@ class MainPageComponent {
   listSize: number;
   observer: IntersectionObserver;
   #elements: { [key: string]: HTMLElement } = null;
+  filterForProducts :{nation:string,type:string,tier:string};
 
   constructor() {
     this.render = this.render.bind(this);
@@ -27,6 +26,7 @@ class MainPageComponent {
 
   init() {
     this.listOfProducts = storage.products;
+    this.filterForProducts = storage.productsFilter;
     this.listSize = this.listOfProducts.length;
     this.#elements = {
       productsList: document.querySelector('.cards-field'),
@@ -42,13 +42,21 @@ class MainPageComponent {
 
   addProductsToList() {
     const container = document.getElementById('cards-container');
-    const productsToRender = this.listOfProducts
+
+    const filteredProducts = this.listOfProducts.filter(item => 
+      (item.nation === this.filterForProducts.nation || !this.filterForProducts.nation) &&
+     (item.tank_type.toLowerCase() === this.filterForProducts.type || !this.filterForProducts.type) &&
+     (item.tier.toString() === this.filterForProducts.tier || !this.filterForProducts.tier)
+    );
+
+    const productsToRender = filteredProducts
       .slice(this.offset, Math.min(this.offset + this.limit, this.listSize))
       .map(product => {
-        product.isFavorite = storage.checkProductInFavoritesById(product.id);
+        const item = product
+        item.isFavorite = storage.checkProductInFavoritesById(product.id);
         return new ProductItemComponent(product).render();
       }).join('');
-    this.offset= Math.min(this.offset + this.limit, this.listSize);
+    this.offset = Math.min(this.offset + this.limit, this.listSize);
     if (this.offset === this.listSize){
       this.observer.disconnect();
     }
