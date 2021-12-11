@@ -1,7 +1,10 @@
 import './scss/favorites.styles.scss';
 
-import favoritesService from '../../services/favorites.service';
+import headerComponent from '../header/header';
 import storage from '../app/components/storage/storage';
+import popup from '../popup/popup';
+
+import favoritesService from '../../services/favorites.service';
 
 import { renderFavoritesItem } from './common/favorites.tools';
 import { EMPTY_MESSAGE_TEMPLATE } from './common/favorites.constants';
@@ -16,8 +19,24 @@ class FavoritesPageComponent {
     this.removeFromFavoritesButtonClickHandler = this.removeFromFavoritesButtonClickHandler.bind(this);
   }
 
-  removeFromFavoritesButtonClickHandler(event: Event) {
-    favoritesService.removeFromFavoritesButtonClickHandler(event);
+  removeFromFavoritesButtonClickHandler({ target }: Event) {
+    if (!(target as Element).closest('.favorite__delete-button')) return;
+
+    const currentFavoritesElement = (target as Element).closest('[data-id]') as HTMLElement;
+    const productId = currentFavoritesElement.dataset.id;
+
+    if (!storage.checkProductInFavoritesById(productId)) return;
+
+    favoritesService
+      .removeFromAPIFavorites(productId)
+      .then(() => {
+        storage.removeFromFavorites(productId);
+        headerComponent.updateFavoritesCount();
+        if (!storage.getFavorites().length)
+          currentFavoritesElement.parentElement.insertAdjacentHTML('afterbegin', EMPTY_MESSAGE_TEMPLATE);
+        currentFavoritesElement.remove();
+      })
+      .catch((error) => popup.open(error.message));
   }
 
   init(): void {
