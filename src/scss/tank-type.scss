@@ -37,7 +37,7 @@
   }
 
   &__spg {
-    background-image: url('../../../assets/types/spg.png');
+    background-image: url('/src/assets/types/spg.png');
     @extend %type-settings;
   }
 }
