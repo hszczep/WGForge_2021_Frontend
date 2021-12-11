@@ -20,7 +20,7 @@ class MainPageComponent {
   unmount() {}
 
   render() {
-    const listOfProducts = storage.mainData;
+    const listOfProducts = storage.products;
 
     const fragment = document.createElement('div');
     fragment.classList.add('cards-field');

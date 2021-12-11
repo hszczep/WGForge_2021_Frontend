@@ -1,9 +1,10 @@
 import { getResource, postResourse } from './common/services.helper';
 import { MAIN_API_URLS } from './common/services.constants';
 import { IUser, IUserCredentials } from '../models/user.model';
+import ProductItemInterface from '../components/app/components/storage/product-item-interface';
 
 class MainApiService {
-  getProducts(): Promise<unknown> {
+  getProducts(): Promise<Array<ProductItemInterface>> {
     return getResource(MAIN_API_URLS.PRODUCTS, { token: null });
   }
 
