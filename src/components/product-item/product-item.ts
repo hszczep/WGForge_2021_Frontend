@@ -1,8 +1,9 @@
-import ProductItemComponentInterface from './product-item-interface';
+import IProductItemComponent from './models/product-item-interface';
 import convertToRomane from '../../common/common.helper';
 import { IProductItem } from '../../models/product-item.model';
+import { PRODUCT_TYPE_MACHINERY } from './common/product-item.constants';
 
-class ProductItemComponent implements ProductItemComponentInterface {
+class ProductItemComponent implements IProductItemComponent {
   id: string;
   tier: number;
   type: string;
@@ -36,7 +37,8 @@ class ProductItemComponent implements ProductItemComponentInterface {
     this.type = type; // tank, gold or premium
     this.tank_type = tank_type.toLowerCase(); // ligth, medium, haevy
     this.name = name; // shor name tank
-    this.price = price.toFixed(2); // default price $
+    // this.price = price.toFixed(2); // default price $
+    this.price = price; // default price $
     this.nation = nation; // country
     this.flag = `flag__${this.nation}`; // for icon flag
     this.images = images; // link image
@@ -51,7 +53,7 @@ class ProductItemComponent implements ProductItemComponentInterface {
 
   render() {
     let productNameInfo;
-    if (this.type === 'machinery') {
+    if (this.type === PRODUCT_TYPE_MACHINERY) {
       productNameInfo = `
                   <span class="flag ${this.flag}"></span>
                   <span class="tank-type tank-type__${this.tank_type}"></span>

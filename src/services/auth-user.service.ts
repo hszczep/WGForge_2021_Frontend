@@ -38,6 +38,7 @@ class AuthUserService {
         token,
       },
       favorites: user.favourites,
+      cart: user.favourites, // CHANGE TO user.cart !!!
       isLogged: true,
       isAdmin: user.role === USER.ROLES.ADMIN,
     });

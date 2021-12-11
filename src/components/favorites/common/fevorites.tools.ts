@@ -1,5 +1,5 @@
 import convertToRomane from '../../../common/common.helper';
-import { PRODUCT_TYPE_MACHINERY } from './favorites.constants';
+import { PRODUCT_TYPE_MACHINERY } from '../../product-item/common/product-item.constants';
 import { IProductItem } from '../../../models/product-item.model';
 
 export const renderFavoritesItem = (favoritesItem: IProductItem): string => {
@@ -31,8 +31,12 @@ export const renderFavoritesItem = (favoritesItem: IProductItem): string => {
           <div class="favorite-item__description">${favoritesItem.details}</div>
         </div>
         <div class="favorite-item__price-block">
-          <p class="price${favoritesItem.discount ? ' old-price' : ''}">$${favoritesItem.price}</p>
-          <p class="price price-discount">${favoritesItem.discount ? `$${favoritesItem.price_discount}` : ''}</p>
+          <p class="price${favoritesItem.discount ? ' old-price' : ''}">
+            $${favoritesItem.price}
+          </p>
+          <p class="price price-discount">
+            ${favoritesItem.discount ? `$${favoritesItem.price_discount.toFixed(2)}` : ''}
+          </p>
           <button class="purchase-btn">purchase</button>
         </div>
       </div>

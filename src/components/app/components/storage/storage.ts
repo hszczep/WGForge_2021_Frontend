@@ -64,6 +64,27 @@ class Storage {
     this.#userState.favorites = this.#userState.favorites.filter((favoriteItem) => favoriteItem.id !== product_id);
   }
 
+  getCart(): IProductItem[] {
+    return this.#userState.cart;
+  }
+
+  checkProductInCartById(productId: string): boolean {
+    return Boolean(this.#userState.cart.find((cartItem) => cartItem.id === productId));
+  }
+
+  addToCart(productItem: IProductItem) {
+    this.#userState.cart.push(productItem);
+  }
+
+  addToCartById(productId: string) {
+    const currentProduct = this.getProductById(productId);
+    this.addToCart(currentProduct);
+  }
+
+  removeFromCart(product_id: string) {
+    this.#userState.cart = this.#userState.cart.filter((cartItem) => cartItem.id !== product_id);
+  }
+
   async init() {
     this.#products = await mainApiService.getProducts();
   }

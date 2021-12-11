@@ -16,11 +16,11 @@ class FavoritesService {
     return storage.getUserState().credentials.token;
   }
 
-  #removeFromAPIFavorites(productId: string) {
+  #removeFromApiFavorites(productId: string) {
     return mainApiService.deleteFromFavorites(this.#getUserToken(), productId);
   }
 
-  #addToAPIFavorites(productId: string) {
+  #addToApiFavorites(productId: string) {
     return mainApiService.putToFavorites(this.#getUserToken(), productId);
   }
 
@@ -40,7 +40,7 @@ class FavoritesService {
 
     if (storage.checkProductInFavoritesById(productId)) {
       likeButton.classList.remove('like-btn__active');
-      this.#removeFromAPIFavorites(productId)
+      this.#removeFromApiFavorites(productId)
         .then(() => {
           storage.removeFromFavorites(productId);
           headerComponent.updateFavoritesCount();
@@ -54,7 +54,7 @@ class FavoritesService {
     }
 
     likeButton.classList.add('like-btn__active');
-    this.#addToAPIFavorites(productId)
+    this.#addToApiFavorites(productId)
       .then(() => {
         storage.addToFavoritesById(productId);
         headerComponent.updateFavoritesCount();
@@ -73,7 +73,7 @@ class FavoritesService {
 
     if (!storage.checkProductInFavoritesById(productId)) return;
 
-    this.#removeFromAPIFavorites(productId)
+    this.#removeFromApiFavorites(productId)
       .then(() => {
         storage.removeFromFavorites(productId);
         headerComponent.updateFavoritesCount();

@@ -10,6 +10,7 @@ export interface IUserCredentials {
 export interface IUserState {
   credentials: IUserCredentials;
   favorites: IProductItem[];
+  cart: IProductItem[];
   isLogged: boolean;
   isAdmin: boolean;
 }
