@@ -1,4 +1,7 @@
 import './scss/filter.styles.scss';
+import storage from '../../../app/components/storage/storage';
+import ProductItemComponent from '../../../product-item/product-item';
+import ProductItemInterface from '../../../app/components/storage/product-item-interface';
 
 class FilterComponent {
   init() {
@@ -16,6 +19,7 @@ class FilterComponent {
     selectItem.forEach((item) => {
       item.addEventListener('click', () => {
         const selectValue = item.innerHTML;
+        this.apllyFilter(item.firstElementChild.classList.item(1).split('__'));
         const select = item.closest('.tanks-select');
         const currentText = select.querySelector('.tanks-select__current');
         currentText.innerHTML = selectValue;
@@ -27,11 +31,58 @@ class FilterComponent {
       defaultValue.forEach((value, index) => {
         selectHeader[index].parentElement.classList.remove('is-active');
         selectHeader[index].firstElementChild.innerHTML = value.innerHTML;
+        const defaultValue = '';
+        storage.products_filter.nation = defaultValue;
+        storage.products_filter.tier = defaultValue;
+        storage.products_filter.type = defaultValue;
+        const card_field = document.querySelector('.cards-field');
+        card_field.innerHTML = this.#render_content(storage.products);
       });
     });
   }
 
+  apllyFilter([type_filter,value_filter]:Array<string>){  
+    const {products,products_filter} = storage;
+    const nation = 'flag';
+    const type = 'tank-type';
+    const tier = 'tank-tier';
+    const default_filter = 'all';
+    switch (type_filter){
+       case nation:
+        products_filter.nation = value_filter == default_filter ? '' : value_filter;
+        break
+      case type:
+        products_filter.type = value_filter == default_filter ? '' : value_filter;
+        break
+      case tier:
+        products_filter.tier = value_filter == default_filter ? '' : value_filter;
+        break
+    }
+    const card_field = document.querySelector('.cards-field');
+    const filtered_products = products.filter(item => {
+      if( (item.nation == products_filter.nation || !products_filter.nation) &&
+     (item.tank_type.toLowerCase() == products_filter.type || !products_filter.type) &&
+     (item.tier.toString() == products_filter.tier || !products_filter.tier)
+     )
+     return item
+    });
+    card_field.innerHTML = this.#render_content(filtered_products);
+  }
+
+  #render_content(products:Array<ProductItemInterface>):string{
+    let string_HTML = '';
+    
+    for (let i = 0; i < products.length; i++) {
+      const item = new ProductItemComponent(products[i]);
+      string_HTML += item.render();
+    }
+    return string_HTML;
+  }
+
   render() {
+    const filter_nation = document.createElement('div');
+    filter_nation.setAttribute('class','tanks-select select-nation');
+
     return `  
           <div class="tanks-select select-nation">
             <div class="tanks-select__header">
@@ -139,17 +190,17 @@ class FilterComponent {
               </svg>
             </div>
             <div class="tanks-select__body">
-              <div class="tanks-select__item default-value">I-X<span class="tanks-select__value">All Tiers</span></div>
-              <div class="tanks-select__item">I<span class="tanks-select__value">Levels</span></div>
-              <div class="tanks-select__item">II<span class="tanks-select__value">Levels</span></div>
-              <div class="tanks-select__item">III<span class="tanks-select__value">Levels</span></div>
-              <div class="tanks-select__item">IV<span class="tanks-select__value">Levels</span></div>
-              <div class="tanks-select__item">V<span class="tanks-select__value">Levels</span></div>
-              <div class="tanks-select__item">VI<span class="tanks-select__value">Levels</span></div>
-              <div class="tanks-select__item">VII<span class="tanks-select__value">Levels</span></div>
-              <div class="tanks-select__item">VII<span class="tanks-select__value">Levels</span></div>
-              <div class="tanks-select__item">IX<span class="tanks-select__value">Levels</span></div>
-              <div class="tanks-select__item">X<span class="tanks-select__value">Levels</span></div>    
+              <div class="tanks-select__item default-value">I-X<span class="tanks-select__value tank-tier__all">All Tiers</span></div>
+              <div class="tanks-select__item">I<span class="tanks-select__value tank-tier__1">Levels</span></div>
+              <div class="tanks-select__item">II<span class="tanks-select__value tank-tier__2">Levels</span></div>
+              <div class="tanks-select__item">III<span class="tanks-select__value tank-tier__3">Levels</span></div>
+              <div class="tanks-select__item">IV<span class="tanks-select__value tank-tier__4">Levels</span></div>
+              <div class="tanks-select__item">V<span class="tanks-select__value tank-tier__5">Levels</span></div>
+              <div class="tanks-select__item">VI<span class="tanks-select__value tank-tier__6">Levels</span></div>
+              <div class="tanks-select__item">VII<span class="tanks-select__value tank-tier__7">Levels</span></div>
+              <div class="tanks-select__item">VII<span class="tanks-select__value tank-tier__8">Levels</span></div>
+              <div class="tanks-select__item">IX<span class="tanks-select__value tank-tier__9">Levels</span></div>
+              <div class="tanks-select__item">X<span class="tanks-select__value tank-tier__10">Levels</span></div>    
             </div>
           </div>
           <button class="reset-button">Show all vehicles</button>
