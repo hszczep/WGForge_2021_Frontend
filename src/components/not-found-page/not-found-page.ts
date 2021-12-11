@@ -4,10 +4,7 @@ class NotFoundPageComponent {
   init() {}
 
   render() {
-    let errorText = '';
-    for (let i = 0; i < 300; i++) {
-      errorText += '404 page, not found. Error! ';
-    }
+    const errorText = '404 page, not found. Error!'.repeat(300);
 
     return `
     <div class="error-block">
