@@ -153,7 +153,7 @@
       padding: 14px 0 0 9px;
     }
 
-    .delete-button {
+    .favorite__delete-button {
       position: absolute;
       width: 40px;
       height: 40px;
@@ -170,6 +170,14 @@
         border-radius: 50%;
       }
     }
+  }
+
+  .empty-message {
+    display: inline-block;
+    margin-bottom: 10px;
+
+    font-size: 18px;
+    color: $title-text-color;
   }
 }
 

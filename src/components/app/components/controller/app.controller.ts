@@ -1,29 +1,26 @@
 import headerComponent from '../../../header/header';
 import footerComponent from '../../../footer/footer';
-import storage from '../storage/storage';
 import { Spinner } from '../../../spinner/spinner';
 
 import authUserService from '../../../../services/auth-user.service';
 
 class Controller {
+  #elements: { [key: string]: HTMLElement } = null;
   spinner: Spinner = null;
-
   appContainer: HTMLElement = null;
-  authBlock: HTMLElement = null;
 
   constructor() {
-    this.logoutButtonClickHandler = this.logoutButtonClickHandler.bind(this);
-    this.appContainer = document.querySelector('.app-field');
+    this.#elements = {
+      appContainer: document.querySelector('.app-field'),
+    };
   }
 
   #renderHeader(): void {
-    const headerMarkup = headerComponent.render();
-    this.appContainer.insertAdjacentHTML('afterbegin', headerMarkup);
+    this.#elements.appContainer.insertAdjacentHTML('afterbegin', headerComponent.render());
   }
 
   #renderFooter(): void {
-    const footerMarkup = footerComponent.render();
-    this.appContainer.insertAdjacentHTML('beforeend', footerMarkup);
+    this.#elements.appContainer.insertAdjacentHTML('beforeend', footerComponent.render());
   }
 
   #spinnerInit(): void {
@@ -31,46 +28,11 @@ class Controller {
     this.spinner.init();
   }
 
-  logoutButtonClickHandler(): void {
-    authUserService.logOutUser();
-    this.rerenderAuthBlock();
-  }
-
-  rerenderAuthBlock(): void {
-    this.authBlock.innerHTML = '';
-
-    const userName = storage.getUserState().credentials.name;
-
-    if (storage.checkIsUserLogged()) {
-      this.authBlock.insertAdjacentHTML(
-        'afterbegin',
-        `<div class="authentication-wrapper">
-          <span class="authentication-user-name" title="${userName}">
-            ${userName}
-          </span>
-          <button class="authentication-logout-button">logout</button>
-         </div>`
-      );
-
-      this.authBlock
-        .querySelector('.authentication-logout-button')
-        .addEventListener('click', this.logoutButtonClickHandler);
-
-      return;
-    }
-
-    this.authBlock.insertAdjacentHTML(
-      'afterbegin',
-      `<a class="authentication-signin" href="#/signin">Login</a><span> or</span>
-       <a class="authentication-signup" href="#/signup">Create account</a>`
-    );
-  }
-
   async init(): Promise<void> {
     this.#renderHeader();
-    this.#renderFooter();
+    headerComponent.init();
 
-    this.authBlock = document.querySelector('.authentication');
+    this.#renderFooter();
 
     this.#spinnerInit();
 
@@ -78,10 +40,7 @@ class Controller {
     await authUserService.updateUserState();
     this.spinner.hide();
 
-    if (storage.checkIsUserLogged()) {
-      this.rerenderAuthBlock();
-      window.location.hash = '#';
-    }
+    headerComponent.updateHeaderForCurrentUserState();
   }
 }
 

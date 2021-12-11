@@ -66,6 +66,14 @@
       justify-content: flex-end;
       align-items: center;
 
+      .nav-menu__sub-menu {
+        display: flex;
+      }
+
+      .hidden {
+        display: none;
+      }
+
       a {
         margin-right: 66px;
       }

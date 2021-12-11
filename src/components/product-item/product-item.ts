@@ -1,6 +1,6 @@
-import ProductItemInterface from '../app/components/storage/product-item-interface';
 import ProductItemComponentInterface from './product-item-interface';
 import { convertToRomane, localizeCurrency } from '../../common/common.helper';
+import ProductItemInterface from '../../models/product-item.model';
 
 class ProductItemComponent implements ProductItemComponentInterface {
   id: string;
@@ -16,6 +16,8 @@ class ProductItemComponent implements ProductItemComponentInterface {
   discount: number;
   price_discount: string;
   flag: string;
+  isFavorite: boolean;
+
   constructor({
     tier,
     type,
@@ -27,6 +29,7 @@ class ProductItemComponent implements ProductItemComponentInterface {
     images,
     tank_type,
     id,
+    isFavorite,
   }: ProductItemInterface) {
     this.id = id;
     this.tier = tier; // tier tank, for render convert example "4" -> "IV"
@@ -43,6 +46,7 @@ class ProductItemComponent implements ProductItemComponentInterface {
       this.discount = discount; // discount in %  example 10
       this.price_discount = price_discount ? localizeCurrency(Number(price_discount), price.code) : '';
     }
+    this.isFavorite = isFavorite;
     this.render = this.render.bind(this);
   }
 
@@ -61,7 +65,7 @@ class ProductItemComponent implements ProductItemComponentInterface {
       `;
     }
     return `
-          <article class="card card__${this.size}" id="${this.id}">
+          <article class="card card__${this.size}" data-id="${this.id}">
             <a href="${this.linkToDescription}" class="card-info">
               <img class="card-img" src="${this.images[0]}" alt="${this.name}" />
               <div class="card-specifications">
@@ -73,7 +77,7 @@ class ProductItemComponent implements ProductItemComponentInterface {
                 <p class="price price-discount">${this.discount ? `${this.price_discount}` : ''}</p>
               </div>
             </a>
-            <button class="like-btn">
+            <button class="like-btn ${this.isFavorite ? 'like-btn__active' : ''}">
               <svg class="like-btn__icon">
                 <use xlink:href="assets/images/sprite.svg#like"></use>
               </svg>

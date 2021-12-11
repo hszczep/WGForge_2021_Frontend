@@ -2,28 +2,34 @@ import { IRequestConfig } from '../models/request-config.model';
 import { DEFAULT_ERROR_MESSAGE, MAIN_API_URLS, METHODS } from './services.constants';
 
 const generateHeaders = (token: string) => {
-  let headers: {[key: string]: string} = {
+  const headers: { [key: string]: string } = {
     Accept: 'application/json',
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   };
-  if (token){
-    headers['Authorization'] = `Bearer ${token}`;
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
   }
   return headers;
 };
 
 const generateRequestConfig = ({ method, token, params }: IRequestConfig) => {
-  if (method === 'GET')
-    return {
-      method, // GET
-      headers: generateHeaders(token)
-    };
-
-  return {
-    method, // POST
-    headers: generateHeaders(token),
-    body: JSON.stringify(params)
-  };
+  switch (method) {
+    case 'GET':
+    case 'PUT':
+    case 'DELETE':
+      return {
+        method,
+        headers: generateHeaders(token),
+      };
+    case 'POST':
+      return {
+        method,
+        headers: generateHeaders(token),
+        body: JSON.stringify(params),
+      };
+    default:
+      return null;
+  }
 };
 
 const getEndpointUrl = (endpointUrl: string) => `${MAIN_API_URLS.BASE}${endpointUrl}`;
@@ -35,12 +41,14 @@ const fetchMainAPI = async (endpointUrl: string, requestConfig: IRequestConfig) 
   return json;
 };
 
-export const getResource = (endpointUrl: string, { token }: IRequestConfig) => {
-  const resource = fetchMainAPI(endpointUrl, { method: METHODS.GET, token });
-  return resource;
-};
+export const getResource = (endpointUrl: string, { token }: IRequestConfig) =>
+  fetchMainAPI(endpointUrl, { method: METHODS.GET, token });
 
-export const postResourse = (endpointUrl: string, { token, params }: IRequestConfig) => {
-  const resource = fetchMainAPI(endpointUrl, { method: METHODS.POST, token, params });
-  return resource;
-};
+export const postResourse = (endpointUrl: string, { token, params }: IRequestConfig) =>
+  fetchMainAPI(endpointUrl, { method: METHODS.POST, token, params });
+
+export const putResourse = (endpointUrl: string, { token }: IRequestConfig) =>
+  fetchMainAPI(endpointUrl, { method: METHODS.PUT, token });
+
+export const deleteResourse = (endpointUrl: string, { token }: IRequestConfig) =>
+  fetchMainAPI(endpointUrl, { method: METHODS.DELETE, token });
