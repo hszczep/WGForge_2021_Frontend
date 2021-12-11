@@ -2,6 +2,7 @@ import { USER } from '../../../../common/common.constants';
 import { IUserState } from '../../../../models/user.model';
 import ProductItemInterface from './product-item-interface';
 import mainApiService from '../../../../services/main-api.service';
+
 class Storage {
   #userState: IUserState = USER.DEFAULT_STATE;
   products: Array<ProductItemInterface>;
@@ -30,7 +31,7 @@ class Storage {
   }
 
   async init() {
-    this.products =  await mainApiService.getProducts();
+    this.products = await mainApiService.getProducts();
   }
 }
 

@@ -1,0 +1,40 @@
+@import '../../../scss/variables';
+
+.error-block {
+  width: 60vw;
+  height: 70vh;
+  overflow: hidden;
+}
+
+.error-img__text {
+  position: relative;
+  font-size: 1.5em;
+  letter-spacing: -0.05em;
+  line-height: 0.7em;
+  background: url('../../../assets/public/404.png');
+  background-position: center 150px;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  background-clip: text;
+  color: transparent;
+}
+
+@media all and (max-width: $app-max-media-query) {
+  .error-block {
+    width: $app-medium-width;
+  }
+
+  .error-img__text {
+    background-size: $app-medium-width - 100px;
+  }
+}
+
+@media all and (max-width: $app-medium-media-query) {
+  .error-block {
+    width: $app-min-width;
+  }
+
+  .error-img__text {
+    background-size: $app-min-width - 20px;
+  }
+}

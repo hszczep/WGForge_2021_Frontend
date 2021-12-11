@@ -2,12 +2,12 @@ import { IRequestConfig } from '../models/request-config.model';
 import { DEFAULT_ERROR_MESSAGE, MAIN_API_URLS, METHODS } from './services.constants';
 
 const generateHeaders = (token: string) => {
-  let headers: {[key: string]: string} = {
+  const headers: { [key: string]: string } = {
     Accept: 'application/json',
-    'Content-Type': 'application/json'
+    'Content-Type': 'application/json',
   };
-  if (token){
-    headers['Authorization'] = `Bearer ${token}`;
+  if (token) {
+    headers.Authorization = `Bearer ${token}`;
   }
   return headers;
 };
@@ -16,13 +16,13 @@ const generateRequestConfig = ({ method, token, params }: IRequestConfig) => {
   if (method === 'GET')
     return {
       method, // GET
-      headers: generateHeaders(token)
+      headers: generateHeaders(token),
     };
 
   return {
     method, // POST
     headers: generateHeaders(token),
-    body: JSON.stringify(params)
+    body: JSON.stringify(params),
   };
 };
 

@@ -1,4 +1,4 @@
-import { errorPage } from './pages/error-page';
+import { notFoundPage } from './pages/not-found-page';
 
 import appController from '../controller/app.controller';
 import routes from './routes/routes';
@@ -18,7 +18,7 @@ class Router {
   }
 
   findPageByPath(currentPath: string) {
-    return routes.find((route: IRoute) => isRouteHasPath(route, currentPath)) || { path: '/error', page: errorPage };
+    return routes.find((route: IRoute) => isRouteHasPath(route, currentPath)) || { path: '/error', page: notFoundPage };
   }
 
   findProductById(id: string): boolean {
