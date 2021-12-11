@@ -1,11 +1,11 @@
 import { USER } from '../../../../common/common.constants';
-import { IProductItem } from '../../../../models/product-item.model';
+import ProductItemInterface from '../../../../models/product-item.model';
 import { IUserState } from '../../../../models/user.model';
 import mainApiService from '../../../../services/main-api.service';
 
 class Storage {
   #userState: IUserState = USER.DEFAULT_STATE;
-  #products: IProductItem[] = [];
+  products: Array<ProductItemInterface>;
 
   setUserState(userState: IUserState) {
     this.#userState = userState;
@@ -31,19 +31,19 @@ class Storage {
     this.#userState = USER.DEFAULT_STATE;
   }
 
-  setProducts(products: IProductItem[]) {
-    this.#products = products;
+  setProducts(products: Array<ProductItemInterface>) {
+    this.products = products;
   }
 
-  getProducts(): IProductItem[] {
-    return this.#products;
+  getProducts(): Array<ProductItemInterface> {
+    return this.products;
   }
 
   getProductById(productId: string) {
-    return this.#products.find((product) => product.id === productId);
+    return this.products.find((product) => product.id === productId);
   }
 
-  getFavorites(): IProductItem[] {
+  getFavorites(): Array<ProductItemInterface> {
     return this.#userState.favorites;
   }
 
@@ -51,7 +51,7 @@ class Storage {
     return Boolean(this.#userState.favorites.find((favoriteItem) => favoriteItem.id === productId));
   }
 
-  addToFavorites(productItem: IProductItem) {
+  addToFavorites(productItem: ProductItemInterface) {
     this.#userState.favorites.push(productItem);
   }
 
@@ -60,11 +60,11 @@ class Storage {
     this.addToFavorites(currentProduct);
   }
 
-  removeFromFavorites(product_id: string) {
-    this.#userState.favorites = this.#userState.favorites.filter((favoriteItem) => favoriteItem.id !== product_id);
+  removeFromFavorites(productId: string) {
+    this.#userState.favorites = this.#userState.favorites.filter((favoriteItem) => favoriteItem.id !== productId);
   }
 
-  getCart(): IProductItem[] {
+  getCart(): Array<ProductItemInterface> {
     return this.#userState.cart;
   }
 
@@ -72,7 +72,7 @@ class Storage {
     return Boolean(this.#userState.cart.find((cartItem) => cartItem.id === productId));
   }
 
-  addToCart(productItem: IProductItem) {
+  addToCart(productItem: ProductItemInterface) {
     this.#userState.cart.push(productItem);
   }
 
@@ -81,12 +81,12 @@ class Storage {
     this.addToCart(currentProduct);
   }
 
-  removeFromCart(product_id: string) {
-    this.#userState.cart = this.#userState.cart.filter((cartItem) => cartItem.id !== product_id);
+  removeFromCart(productId: string) {
+    this.#userState.cart = this.#userState.cart.filter((cartItem) => cartItem.id !== productId);
   }
 
   async init() {
-    this.#products = await mainApiService.getProducts();
+    this.products = await mainApiService.getProducts();
   }
 }
 

@@ -3,5 +3,6 @@ import { IPage } from '../models/page.model';
 
 export const mainPage: IPage = {
   render: mainPageComponent.render,
+  unmount: mainPageComponent.unmount,
   init: mainPageComponent.init,
 };

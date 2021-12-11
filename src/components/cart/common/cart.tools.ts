@@ -1,9 +1,9 @@
 import storage from '../../app/components/storage/storage';
-import convertToRomane from '../../../common/common.helper';
+import { convertToRomane, localizeCurrency } from '../../../common/common.helper';
 import { PRODUCT_TYPE_MACHINERY } from '../../product-item/common/product-item.constants';
-import { IProductItem } from '../../../models/product-item.model';
+import ProductItemInterface from '../../../models/product-item.model';
 
-export const renderCartItem = (cartItem: IProductItem): string => {
+export const renderCartItem = (cartItem: ProductItemInterface): string => {
   const cartItemInfo =
     cartItem.type === PRODUCT_TYPE_MACHINERY
       ? `
@@ -13,6 +13,10 @@ export const renderCartItem = (cartItem: IProductItem): string => {
        <span class="item-name">${cartItem.name}</span>
       `
       : `<span class="item-name">${cartItem.name}</span>`;
+
+  const priceDiscount = cartItem.price_discount
+    ? localizeCurrency(Number(cartItem.price_discount), cartItem.price.code)
+    : '';
 
   return `
     <article class="cart-item" data-id="${cartItem.id}">
@@ -34,10 +38,10 @@ export const renderCartItem = (cartItem: IProductItem): string => {
         <div class="cart-item__wrapper">
           <div class="cart-item__price-block">
             <p class="price${cartItem.discount ? ' old-price' : ''}">
-              $${cartItem.price}
+              ${localizeCurrency(Number(cartItem.price.amount), cartItem.price.code)}
             </p>
             <p class="price price-discount">
-              ${cartItem.discount ? `$${cartItem.price_discount.toFixed(2)}` : ''}
+              ${priceDiscount}
             </p>
           </div>
           <button class="like-btn ${storage.checkProductInFavoritesById(cartItem.id) ? 'like-btn__active' : ''}">

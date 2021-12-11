@@ -6,7 +6,7 @@ export const MAIN_API_URLS = {
     REGISTER: 'user/register',
     LOGIN: 'user/auth',
     FAVORITES: 'user/favorites',
-    CART: 'user/favorites', // CHANGE TO user/cart !!!
+    CART: 'user/cart',
   },
 };
 

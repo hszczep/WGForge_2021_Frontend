@@ -4,24 +4,47 @@ import popup from '../components/popup/popup';
 
 import mainApiService from './main-api.service';
 
-import { EMPTY_MESSAGE_TEMPLATE } from '../components/favorites/common/favorites.constants';
-
 class FavoritesService {
   constructor() {
     this.favoritesButtonClickHandler = this.favoritesButtonClickHandler.bind(this);
-    this.removeFromFavoritesButtonClickHandler = this.removeFromFavoritesButtonClickHandler.bind(this);
   }
 
   #getUserToken(): string {
     return storage.getUserState().credentials.token;
   }
 
-  #removeFromApiFavorites(productId: string) {
+  addToAPIFavorites(productId: string) {
+    return mainApiService.putToFavorites(this.#getUserToken(), productId);
+  }
+
+  removeFromAPIFavorites(productId: string) {
     return mainApiService.deleteFromFavorites(this.#getUserToken(), productId);
   }
 
-  #addToApiFavorites(productId: string) {
-    return mainApiService.putToFavorites(this.#getUserToken(), productId);
+  addToFavorites(productId: string, likeButton: Element) {
+    likeButton.classList.remove('like-btn__active');
+    this.removeFromAPIFavorites(productId)
+      .then(() => {
+        storage.removeFromFavorites(productId);
+        headerComponent.updateFavoritesCount();
+      })
+      .catch((error) => {
+        likeButton.classList.add('like-btn__active');
+        popup.open(error.message);
+      });
+  }
+
+  removeFromFavorites(productId: string, likeButton: Element) {
+    likeButton.classList.add('like-btn__active');
+    this.addToAPIFavorites(productId)
+      .then(() => {
+        storage.addToFavoritesById(productId);
+        headerComponent.updateFavoritesCount();
+      })
+      .catch((error) => {
+        likeButton.classList.remove('like-btn__active');
+        popup.open(error.message);
+      });
   }
 
   favoritesButtonClickHandler({ target }: Event) {
@@ -36,52 +59,9 @@ class FavoritesService {
     const currentProductListElement = (target as Element).closest('[data-id]') as HTMLElement;
     const productId = currentProductListElement.dataset.id;
 
-    const previousClassName = likeButton.className;
-
     if (storage.checkProductInFavoritesById(productId)) {
-      likeButton.classList.remove('like-btn__active');
-      this.#removeFromApiFavorites(productId)
-        .then(() => {
-          storage.removeFromFavorites(productId);
-          headerComponent.updateFavoritesCount();
-        })
-        .catch((error) => {
-          likeButton.className = previousClassName;
-          popup.open(error.message);
-        });
-
-      return;
-    }
-
-    likeButton.classList.add('like-btn__active');
-    this.#addToApiFavorites(productId)
-      .then(() => {
-        storage.addToFavoritesById(productId);
-        headerComponent.updateFavoritesCount();
-      })
-      .catch((error) => {
-        likeButton.className = previousClassName;
-        popup.open(error.message);
-      });
-  }
-
-  removeFromFavoritesButtonClickHandler({ target }: Event) {
-    if (!(target as Element).closest('.favorite__delete-button')) return;
-
-    const currentProductListElement = (target as Element).closest('[data-id]') as HTMLElement;
-    const productId = currentProductListElement.dataset.id;
-
-    if (!storage.checkProductInFavoritesById(productId)) return;
-
-    this.#removeFromApiFavorites(productId)
-      .then(() => {
-        storage.removeFromFavorites(productId);
-        headerComponent.updateFavoritesCount();
-        if (!storage.getFavorites().length)
-          currentProductListElement.parentElement.insertAdjacentHTML('afterbegin', EMPTY_MESSAGE_TEMPLATE);
-        currentProductListElement.remove();
-      })
-      .catch((error) => popup.open(error.message));
+      this.addToFavorites(productId, likeButton);
+    } else this.removeFromFavorites(productId, likeButton);
   }
 }
 

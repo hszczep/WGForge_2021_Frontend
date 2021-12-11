@@ -8,7 +8,7 @@ interface IProductItemComponent {
   images: Array<string>;
   tank_type?: string;
   size: string;
-  linkToDiscription: string;
+  linkToDescription: string;
   discount: number;
   price_discount: string;
   flag?: string;
