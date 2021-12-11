@@ -1,11 +1,12 @@
 import { USER } from '../../../../common/common.constants';
+import ProductItemInterface from '../../../../models/product-item.model';
 import { IUserState } from '../../../../models/user.model';
-import ProductItemInterface from './product-item-interface';
 import mainApiService from '../../../../services/main-api.service';
 
 class Storage {
   #userState: IUserState = USER.DEFAULT_STATE;
   products: Array<ProductItemInterface>;
+
   setUserState(userState: IUserState) {
     this.#userState = userState;
   }
@@ -28,6 +29,39 @@ class Storage {
 
   resetUserState() {
     this.#userState = USER.DEFAULT_STATE;
+  }
+
+  setProducts(products: Array<ProductItemInterface>) {
+    this.products = products;
+  }
+
+  getProducts(): Array<ProductItemInterface> {
+    return this.products;
+  }
+
+  getProductById(productId: string) {
+    return this.products.find((product) => product.id === productId);
+  }
+
+  getFavorites(): Array<ProductItemInterface> {
+    return this.#userState.favorites;
+  }
+
+  checkProductInFavoritesById(productId: string): boolean {
+    return Boolean(this.#userState.favorites.find((favoriteItem) => favoriteItem.id === productId));
+  }
+
+  addToFavorites(productItem: ProductItemInterface) {
+    this.#userState.favorites.push(productItem);
+  }
+
+  addToFavoritesById(productId: string) {
+    const currentProduct = this.getProductById(productId);
+    this.addToFavorites(currentProduct);
+  }
+
+  removeFromFavorites(product_id: string) {
+    this.#userState.favorites = this.#userState.favorites.filter((favoriteItem) => favoriteItem.id !== product_id);
   }
 
   async init() {

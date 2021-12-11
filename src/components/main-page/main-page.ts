@@ -3,10 +3,13 @@ import './scss/main-page.styles.scss';
 import FilterComponent from './components/filter/filter';
 import storage from '../app/components/storage/storage';
 import ProductItemComponent from '../product-item/product-item';
+import favoritesService from '../../services/favorites.service';
 
 const filter = new FilterComponent();
 
 class MainPageComponent {
+  #elements: { [key: string]: HTMLElement } = null;
+
   constructor() {
     this.render = this.render.bind(this);
     this.init = this.init.bind(this);
@@ -15,9 +18,16 @@ class MainPageComponent {
 
   init() {
     filter.init();
+
+    this.#elements = {
+      productsList: document.querySelector('.cards-field'),
+    };
+    this.#elements.productsList.addEventListener('click', favoritesService.favoritesButtonClickHandler);
   }
 
-  unmount() {}
+  unmount() {
+    this.#elements.productsList.removeEventListener('click', favoritesService.favoritesButtonClickHandler);
+  }
 
   render() {
     const listOfProducts = storage.products;
@@ -26,6 +36,7 @@ class MainPageComponent {
     fragment.classList.add('cards-field');
 
     for (let i = 0; i < listOfProducts.length; i++) {
+      listOfProducts[i].isFavorite = storage.checkProductInFavoritesById(listOfProducts[i].id);
       const item = new ProductItemComponent(listOfProducts[i]);
       fragment.innerHTML += item.render();
     }

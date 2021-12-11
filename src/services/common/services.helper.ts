@@ -13,17 +13,23 @@ const generateHeaders = (token: string) => {
 };
 
 const generateRequestConfig = ({ method, token, params }: IRequestConfig) => {
-  if (method === 'GET')
-    return {
-      method, // GET
-      headers: generateHeaders(token),
-    };
-
-  return {
-    method, // POST
-    headers: generateHeaders(token),
-    body: JSON.stringify(params),
-  };
+  switch (method) {
+    case 'GET':
+    case 'PUT':
+    case 'DELETE':
+      return {
+        method,
+        headers: generateHeaders(token),
+      };
+    case 'POST':
+      return {
+        method,
+        headers: generateHeaders(token),
+        body: JSON.stringify(params),
+      };
+    default:
+      return null;
+  }
 };
 
 const getEndpointUrl = (endpointUrl: string) => `${MAIN_API_URLS.BASE}${endpointUrl}`;
@@ -35,12 +41,14 @@ const fetchMainAPI = async (endpointUrl: string, requestConfig: IRequestConfig) 
   return json;
 };
 
-export const getResource = (endpointUrl: string, { token }: IRequestConfig) => {
-  const resource = fetchMainAPI(endpointUrl, { method: METHODS.GET, token });
-  return resource;
-};
+export const getResource = (endpointUrl: string, { token }: IRequestConfig) =>
+  fetchMainAPI(endpointUrl, { method: METHODS.GET, token });
 
-export const postResourse = (endpointUrl: string, { token, params }: IRequestConfig) => {
-  const resource = fetchMainAPI(endpointUrl, { method: METHODS.POST, token, params });
-  return resource;
-};
+export const postResourse = (endpointUrl: string, { token, params }: IRequestConfig) =>
+  fetchMainAPI(endpointUrl, { method: METHODS.POST, token, params });
+
+export const putResourse = (endpointUrl: string, { token }: IRequestConfig) =>
+  fetchMainAPI(endpointUrl, { method: METHODS.PUT, token });
+
+export const deleteResourse = (endpointUrl: string, { token }: IRequestConfig) =>
+  fetchMainAPI(endpointUrl, { method: METHODS.DELETE, token });

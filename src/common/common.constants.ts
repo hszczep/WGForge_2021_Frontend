@@ -12,5 +12,6 @@ export const USER = {
       email: '',
       token: '',
     },
+    favorites: new Array(0),
   },
 };

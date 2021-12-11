@@ -2,12 +2,14 @@ import { notFoundPage } from './pages/not-found-page';
 
 import appController from '../controller/app.controller';
 import routes from './routes/routes';
-import storage from '../storage/storage';
 
-import { getLocationPath, isRouteHasPath } from './common/router.helper';
+import { checkIsProductById, getLocationPath, isRouteHasPath } from './common/router.helper';
+
+import { PAGES_URL_REG_EXPS, PATHS } from './common/router.constants';
 
 import { IPage } from './models/page.model';
 import { IRoute } from './models/route.model';
+import storage from '../storage/storage';
 
 class Router {
   mainContainer: HTMLElement = null;
@@ -17,25 +19,32 @@ class Router {
     this.route = this.route.bind(this);
   }
 
-  findPageByPath(currentPath: string) {
-    return routes.find((route: IRoute) => isRouteHasPath(route, currentPath)) || { path: '/error', page: notFoundPage };
+  findPageByPath(currentPath: string): IRoute {
+    return (
+      routes.find((route: IRoute) => isRouteHasPath(route, currentPath)) || {
+        path: PATHS.NOT_FOUND,
+        page: notFoundPage,
+      }
+    );
   }
 
-  findProductById(id: string): boolean {
-    const productList = storage.products;
-    const product = productList.filter((item) => item.id === id)[0];
-    return !!product;
-  }
-
-  route() {
+  route(): void {
     if (this.previousPage && this.previousPage.unmount) this.previousPage.unmount();
     let currentPath = getLocationPath();
-    const productRegExp = /\/product\//;
-    let productId;
 
-    if (productRegExp.test(currentPath)) {
-      productId = currentPath.split('/').pop();
-      currentPath = this.findProductById(productId) ? currentPath.replace(productId, '') : '/error';
+    // ROUTER GUARDS
+    if (PAGES_URL_REG_EXPS.PRODUCT.test(currentPath)) {
+      const productId = currentPath.split('/').pop();
+      // FOR 'PRODUCT' PAGE
+      currentPath = checkIsProductById(productId) ? PATHS.PRODUCT : PATHS.NOT_FOUND;
+    } else if (
+      // FOR 'SIGIN' AND 'SIGNOUT' PAGES
+      (PAGES_URL_REG_EXPS.AUTH.test(currentPath) && storage.checkIsUserLogged()) ||
+      // FOR 'FAVORITES' AND 'CART' PAGES
+      (PAGES_URL_REG_EXPS.SUBMENU.test(currentPath) && !storage.checkIsUserLogged())
+    ) {
+      window.location.hash = '#';
+      return;
     }
 
     const { page } = this.findPageByPath(currentPath);
@@ -51,7 +60,7 @@ class Router {
     if (page.init) page.init();
   }
 
-  init() {
+  init(): void {
     this.mainContainer = document.querySelector('.app');
     window.addEventListener('hashchange', this.route);
     this.route();

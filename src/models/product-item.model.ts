@@ -1,14 +1,16 @@
 interface ProductItemInterface {
-  tier?: number;
   type: string;
   name: string;
   price: ProductPrice;
   discount: number;
   price_discount: number;
+  tier?: number;
   nation?: string;
-  images: Array<string>;
   tank_type?: string;
   id: string;
+  images: Array<string>;
+  details: string;
+  isFavorite?: boolean;
 }
 
 interface ProductPrice {

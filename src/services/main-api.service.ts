@@ -1,7 +1,7 @@
-import { getResource, postResourse } from './common/services.helper';
+import { deleteResourse, getResource, postResourse, putResourse } from './common/services.helper';
 import { MAIN_API_URLS } from './common/services.constants';
 import { IUser, IUserCredentials } from '../models/user.model';
-import ProductItemInterface from '../components/app/components/storage/product-item-interface';
+import ProductItemInterface from '../models/product-item.model';
 
 class MainApiService {
   getProducts(): Promise<Array<ProductItemInterface>> {
@@ -18,6 +18,14 @@ class MainApiService {
 
   getUser(token: string): Promise<IUser> {
     return getResource(MAIN_API_URLS.USER.BASE, { token });
+  }
+
+  putToFavorites(token: string, product_id: string): Promise<IUser> {
+    return putResourse(`${MAIN_API_URLS.USER.FAVORITES}/${product_id}`, { token });
+  }
+
+  deleteFromFavorites(token: string, product_id: string): Promise<IUser> {
+    return deleteResourse(`${MAIN_API_URLS.USER.FAVORITES}/${product_id}`, { token });
   }
 }
 
