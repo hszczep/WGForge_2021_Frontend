@@ -1,6 +1,8 @@
 import './scss/cart.styles.scss';
 
 import storage from '../app/components/storage/storage';
+import headerComponent from '../header/header';
+import popup from '../popup/popup';
 
 import cartService from '../../services/cart.service';
 import favoritesService from '../../services/favorites.service';
@@ -18,8 +20,24 @@ class CartPageComponent {
     this.removeFromCartButtonClickHandler = this.removeFromCartButtonClickHandler.bind(this);
   }
 
-  removeFromCartButtonClickHandler(event: Event) {
-    cartService.removeFromCartButtonClickHandler(event);
+  removeFromCartButtonClickHandler({ target }: Event): void {
+    if (!(target as Element).closest('.cart__delete-button')) return;
+
+    const currentProductListElement = (target as Element).closest('[data-id]') as HTMLElement;
+    const productId = currentProductListElement.dataset.id;
+
+    if (!storage.checkProductInCartById(productId)) return;
+
+    cartService
+      .removeFromApiCart(productId)
+      .then(() => {
+        storage.removeFromCart(productId);
+        headerComponent.updateCartCount();
+        if (!storage.getCart().length)
+          currentProductListElement.parentElement.insertAdjacentHTML('afterbegin', EMPTY_MESSAGE_TEMPLATE);
+        currentProductListElement.remove();
+      })
+      .catch((error) => popup.open(error.message));
   }
 
   init(): void {

@@ -1,3 +1,4 @@
+import storage from '../../app/components/storage/storage';
 import { convertToRomane, localizeCurrency } from '../../../common/common.helper';
 import { PRODUCT_TYPE_MACHINERY } from '../../../common/common.constants';
 import ProductItemInterface from '../../../models/product-item.model';
@@ -16,6 +17,8 @@ export const renderFavoritesItem = (favoritesItem: ProductItemInterface): string
   const priceDiscount = favoritesItem.price_discount
     ? localizeCurrency(Number(favoritesItem.price_discount), favoritesItem.price.code)
     : '';
+
+  const isInCart = storage.checkProductInCartById(favoritesItem.id);
 
   return `
     <article class="favorite-item" data-id="${favoritesItem.id}">
@@ -41,7 +44,9 @@ export const renderFavoritesItem = (favoritesItem: ProductItemInterface): string
           <p class="price price-discount">
             ${priceDiscount}
           </p>
-          <button class="purchase-btn">purchase</button>
+          <button class="purchase-btn ${isInCart ? 'purchase-btn__active' : ''}">
+            purchase
+          </button>
         </div>
       </div>
     </article>`;

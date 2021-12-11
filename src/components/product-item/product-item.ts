@@ -2,6 +2,7 @@ import { PRODUCT_TYPE_MACHINERY } from './common/product-item.constants';
 import IProductItemComponent from './models/product-item-interface';
 import { convertToRomane, localizeCurrency } from '../../common/common.helper';
 import ProductItemInterface from '../../models/product-item.model';
+import storage from '../app/components/storage/storage';
 
 class ProductItemComponent implements IProductItemComponent {
   id: string;
@@ -65,6 +66,9 @@ class ProductItemComponent implements IProductItemComponent {
                   <span class="item-name">${this.name}</span>
       `;
     }
+
+    const isInCart = storage.checkProductInCartById(this.id);
+
     return `
           <article class="card card__${this.size}" data-id="${this.id}">
             <a href="${this.linkToDescription}" class="card-info">
@@ -83,7 +87,7 @@ class ProductItemComponent implements IProductItemComponent {
                 <use xlink:href="assets/images/sprite.svg#like"></use>
               </svg>
             </button>
-            <button class="purchase-btn">purchase</button>
+            <button class="purchase-btn ${isInCart ? 'purchase-btn__active' : ''}">purchase</button>
           </article>
     `;
   }

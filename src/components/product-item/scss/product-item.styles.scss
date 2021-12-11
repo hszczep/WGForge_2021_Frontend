@@ -138,14 +138,15 @@
     transition: $app-standard-transition;
 
     &:hover {
-      background: $purchase-button-background;
+      background-color: $purchase-button-background;
     }
 
-    &_active {
-      background: $purchase-button-background;
+    &__active {
+      background-color: $purchase-button-background;
 
       &:hover {
-        background: none;
+        color: $purchase-button-background;
+        background-color: $purchase-text-color;
       }
     }
   }
