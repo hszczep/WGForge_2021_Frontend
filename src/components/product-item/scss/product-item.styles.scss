@@ -126,7 +126,8 @@
     position: absolute;
     bottom: 22px;
     border-radius: 3px;
-    background: $purchase-button-background;
+    border: 1px solid $purchase-button-background;
+    background: none;
     font-family: $menu-font-family;
     font-size: 12px;
     line-height: 18px;
@@ -135,6 +136,19 @@
     letter-spacing: 0.01em;
     color: $purchase-text-color;
     transition: $app-standard-transition;
+
+    &:hover {
+      background-color: $purchase-button-background;
+    }
+
+    &__active {
+      background-color: $purchase-button-background;
+
+      &:hover {
+        color: $purchase-button-background;
+        background-color: $purchase-text-color;
+      }
+    }
   }
 
   .like-btn {

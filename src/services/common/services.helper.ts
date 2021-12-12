@@ -1,5 +1,5 @@
-import { IRequestConfig } from '../models/request-config.model';
 import { DEFAULT_ERROR_MESSAGE, MAIN_API_URLS, METHODS } from './services.constants';
+import { IRequestConfig } from '../models/request-config.model';
 
 const generateHeaders = (token: string) => {
   const headers: { [key: string]: string } = {

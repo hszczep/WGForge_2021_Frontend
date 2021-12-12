@@ -32,6 +32,8 @@ class Popup {
   }
 
   open(message: string, type = 'Error'): void {
+    if (this.#popup) this.closePopupButtonHandler();
+
     this.#popup = this.#create(message, type);
     this.#closeButton = this.#popup.querySelector('.popup__close-button');
     document.body.append(this.#popup);
