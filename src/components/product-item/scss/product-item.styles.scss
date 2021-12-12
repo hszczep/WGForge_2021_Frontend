@@ -86,7 +86,7 @@
         align-items: center;
         text-align: left;
         margin-bottom: 10px;
-        font-family: $menu-font-family;
+        font-family: $app-font-family;
         font-size: 15px;
         line-height: 1.2;
         font-weight: 400;
@@ -102,7 +102,7 @@
 
       .price {
         display: inline-block;
-        font-family: $menu-font-family;
+        font-family: $app-font-family;
         font-size: 15px;
         line-height: 1.2;
         font-weight: 400;
@@ -127,7 +127,7 @@
     bottom: 22px;
     border-radius: 3px;
     background: $purchase-button-background;
-    font-family: $menu-font-family;
+    font-family: $app-font-family;
     font-size: 12px;
     line-height: 18px;
     font-weight: 400;

@@ -1,5 +1,5 @@
 // FONTS
-$menu-font-family: 'Roboto Condensed', sans-serif;
+$app-font-family: 'Roboto Condensed', sans-serif;
 
 // COLORS
 $header-background: #000;
@@ -13,6 +13,7 @@ $old-price-color: #999;
 $discount-background: #a61c00;
 $discount-text-color: #fff;
 $purchase-button-background: #e95104;
+$purchase-button-hover-background: #e92c00;
 $purchase-text-color: #fff;
 $auth-form-text-color: #fff;
 $auth-form-border-color: rgba(255, 255, 245, 0.8);
@@ -23,6 +24,8 @@ $incorrect-color: #e12600;
 $correct-color: #008000;
 $favorites-border-color: rgba(255, 255, 245, 0.8);
 $delete-button-color: #ff0048;
+$item-page-text-color: #ffffff;
+$item-page-border-color: rgba(255, 255, 255, 0.3);
 
 // ANIMATION
 $app-standard-transition: all 200ms;
