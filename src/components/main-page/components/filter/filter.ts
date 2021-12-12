@@ -1,6 +1,6 @@
 import './scss/filter.styles.scss';
 import storage from '../../../app/components/storage/storage';
-import mainPage from '../../main-page';
+import lazyLoad from '../lazy-load/lazy-load';
 
 class FilterComponent {
   init() {
@@ -15,11 +15,11 @@ class FilterComponent {
       });
     });
 
-    selectItem.forEach((item:HTMLElement) => {
+    selectItem.forEach((item: HTMLElement) => {
       item.addEventListener('click', () => {
         const selectValue = item.innerHTML;
         const firstChild = item.firstElementChild as HTMLElement;
-        this.applyFilter(Object.entries(firstChild.dataset ).pop());
+        this.applyFilter(Object.entries(firstChild.dataset).pop());
         const select = item.closest('.tanks-select');
         const currentText = select.querySelector('.tanks-select__current');
         currentText.innerHTML = selectValue;
@@ -37,39 +37,39 @@ class FilterComponent {
         storage.productsFilter.type = defaultFilterValue;
         const cardField = document.querySelector('.cards-field');
         cardField.innerHTML = '';
-        mainPage.offset = 0;
-        mainPage.addProductsToList();
-        mainPage.addProductsToList();
+        lazyLoad.offset = 0;
+        lazyLoad.addProductsToList();
+        lazyLoad.addProductsToList();
       });
     });
   }
 
-  applyFilter([typeFilter,valueFilter]:Array<string>){
-    const {productsFilter} = storage;
+  applyFilter([typeFilter, valueFilter]: Array<string>) {
+    const { productsFilter } = storage;
     const nation = 'nation';
     const type = 'type';
     const tier = 'tier';
-    
+
     const defaultFilter = 'all';
-    switch (typeFilter){
+    switch (typeFilter) {
       case nation:
         productsFilter.nation = valueFilter === defaultFilter ? '' : valueFilter;
-        break
+        break;
       case type:
         productsFilter.type = valueFilter === defaultFilter ? '' : valueFilter;
-        break
+        break;
       case tier:
         productsFilter.tier = valueFilter === defaultFilter ? '' : valueFilter;
-        break
+        break;
       default:
-        break
+        break;
     }
 
     const cardField = document.querySelector('.cards-field');
     cardField.innerHTML = '';
-    mainPage.offset = 0;
-    mainPage.addProductsToList();
-    mainPage.addProductsToList();
+    lazyLoad.offset = 0;
+    lazyLoad.addProductsToList();
+    lazyLoad.addProductsToList();
   }
 
   render() {
@@ -200,4 +200,4 @@ class FilterComponent {
   }
 }
 
-export default new FilterComponent;
+export default new FilterComponent();
