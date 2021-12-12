@@ -39,6 +39,7 @@
         transition: $app-standard-transition;
 
         &:hover {
+          transform: scale(1.2);
           fill: $hover-text-color;
           transition: $app-standard-transition;
         }
