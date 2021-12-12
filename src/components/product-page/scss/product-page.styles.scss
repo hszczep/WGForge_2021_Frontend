@@ -1,58 +1,362 @@
 @import '../../../scss/variables';
 
-.card__single {
-  .like-btn {
-    height: 30px;
-    top: 21px;
+.item-block {
+  width: $app-max-width;
 
-    &__icon {
+  &__main-info {
+    display: flex;
+    position: relative;
+
+    .discount {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      width: 100px;
+      background: $discount-background;
+      color: $discount-text-color;
+      font-size: 22px;
+      line-height: 40px;
+      text-align: center;
+    }
+
+    .item-specifications {
+      width: 50%;
+
+      .item-title {
+        width: fit-content;
+        font-family: $app-font-family;
+        font-size: 60px;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: -0.025em;
+        color: $item-page-text-color;
+        padding: 50px 5px 25px;
+        border-bottom: 1px solid $item-page-border-color;
+      }
+
+      .item-text {
+        margin: 20px 0 0 5px;
+        font-family: $app-font-family;
+        font-size: 20px;
+        text-transform: uppercase;
+        color: $item-page-text-color;
+
+        .flag,
+        .tank-type {
+          transform: scale(1.2);
+          margin-right: 5px;
+        }
+
+        .level {
+          margin-right: 5px;
+        }
+      }
+
+      .price-block {
+        display: flex;
+        margin: 15px 0 0 5px;
+
+        .price {
+          display: inline-block;
+          font-family: $app-font-family;
+          font-size: 24px;
+          line-height: 1.2;
+          font-weight: 400;
+          letter-spacing: 0.05em;
+          text-shadow: 0 1px 0 rgba(0, 0, 0, 0.33);
+          color: $price-now-color;
+        }
+
+        .old-price {
+          color: $old-price-color;
+          text-decoration: line-through;
+          margin-right: 15px;
+        }
+      }
+
+      .item__controls {
+        margin-top: 25px;
+        display: flex;
+        align-items: center;
+      }
+
+      .purchase-btn {
+        width: 150px;
+        height: 60px;
+        border-radius: 3px;
+        background: $purchase-button-background;
+        font-family: $app-font-family;
+        font-size: 20px;
+        line-height: 18px;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 0.01em;
+        color: $purchase-text-color;
+        transition: $app-standard-transition;
+
+        &:hover {
+          background: $purchase-button-hover-background;
+        }
+      }
+
+      .like-btn {
+        margin-left: 20px;
+        width: 150px;
+        height: 60px;
+        border: 1px solid $item-page-border-color;
+        border-radius: 3px;
+        font-family: $app-font-family;
+        font-size: 16px;
+        line-height: 18px;
+        font-weight: 400;
+        text-transform: uppercase;
+        letter-spacing: 0.01em;
+        color: $item-page-text-color;
+        transition: $app-standard-transition;
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.1);
+        }
+      }
+    }
+
+    .item-img {
+      width: 50%;
+    }
+  }
+
+  .item-description {
+    &__title {
       width: 100%;
-      height: 100%;
-      opacity: 0.7;
-      fill: none;
+      font-family: $app-font-family;
+      font-size: 30px;
+      line-height: 30px;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      color: $item-page-text-color;
+      padding: 50px 5px 10px;
+      border-bottom: 1px solid $item-page-border-color;
+    }
+
+    &__text {
+      width: 80%;
+      margin-top: 45px;
+      font-family: $app-font-family;
+      font-size: 17px;
+      line-height: 30px;
+      font-weight: 400;
+      letter-spacing: 0.025em;
+      color: #999;
+    }
+  }
+}
+
+@media all and (max-width: $app-max-media-query) {
+  .item-block {
+    width: $app-medium-width;
+
+    &__main-info {
+      .discount {
+        top: 15px;
+        right: 15px;
+        width: 70px;
+        font-size: 18px;
+        line-height: 30px;
+      }
+
+      .item-specifications {
+        .item-title {
+          font-size: 50px;
+          padding: 50px 5px 10px;
+        }
+
+        .item-text {
+          margin: 15px 0 0 5px;
+          font-size: 18px;
+
+          .flag,
+          .tank-type {
+            transform: scale(1.1);
+            margin-right: 3px;
+          }
+
+          .level {
+            margin-right: 3px;
+          }
+        }
+
+        .price-block {
+          margin: 10px 0 0 5px;
+
+          .price {
+            font-size: 20px;
+          }
+
+          .old-price {
+            margin-right: 10px;
+          }
+        }
+
+        .item__controls {
+          margin-top: 20px;
+        }
+
+        .purchase-btn {
+          width: 120px;
+          height: 50px;
+          font-size: 18px;
+        }
+
+        .like-btn {
+          margin-left: 20px;
+          width: 120px;
+          height: 50px;
+          font-size: 13px;
+        }
+      }
+    }
+
+    .item-description {
+      &__title {
+        font-size: 26px;
+      }
+
+      &__text {
+        margin-top: 25px;
+        font-size: 16px;
+      }
+    }
+  }
+}
+
+@media all and (max-width: $app-medium-media-query) {
+  .item-block {
+    width: $app-min-width;
+
+    .purchase-btn {
+      width: 150px;
+      height: 45px;
+      bottom: 30px;
+      border-radius: 3px;
+      border: 1px solid $purchase-button-background;
+      background: none;
+      font-family: $app-font-family;
+      font-size: 14px;
+      line-height: 18px;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.01em;
+      color: $purchase-text-color;
       transition: $app-standard-transition;
 
       &:hover {
-        fill: #fff;
-        transition: $app-standard-transition;
+        background-color: $purchase-button-background;
+      }
+
+      &__active {
+        background-color: $purchase-button-background;
+
+        &:hover {
+          color: $purchase-button-background;
+          background-color: $purchase-text-color;
+        }
+      }
+    }
+
+    &__main-info {
+      display: block;
+
+      .discount {
+        display: none;
+      }
+
+      .item-specifications {
+        .item-title {
+          width: 300px;
+          font-size: 26px;
+          padding: 5px 5px 10px;
+        }
+
+        .item-text {
+          font-size: 16px;
+
+          .flag,
+          .tank-type {
+            transform: scale(1);
+          }
+        }
+
+        .price-block {
+          margin: 0;
+          width: 0;
+          height: 0;
+
+          .price {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            font-size: 22px;
+            width: 50vw;
+            height: 60px;
+            background-color: #232323;
+            z-index: 10;
+          }
+
+          .price-discount {
+            z-index: 1;
+          }
+
+          .old-price {
+            display: none;
+          }
+        }
+
+        .item__controls {
+          margin-top: 20px;
+        }
+
+        .purchase-btn {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          position: fixed;
+          bottom: 0;
+          right: 0;
+          width: 50vw;
+          height: 60px;
+          border-radius: 0;
+          font-size: 18px;
+        }
+
+        .like-btn {
+          display: none;
+        }
+      }
+    }
+
+    .item-img {
+      width: 100%;
+    }
+
+    .item-description {
+      &__title {
+        padding: 20px 5px 5px;
+        font-size: 16px;
+      }
+
+      &__text {
+        width: 90%;
+        margin-top: 10px;
+        font-size: 13px;
       }
     }
   }
 
-  .like-btn__active {
-    .like-btn__icon {
-      fill: #fff;
-      opacity: 0.6;
-    }
-  }
-
-  .purchase-btn {
-    width: 150px;
-    height: 45px;
-    bottom: 30px;
-    border-radius: 3px;
-    border: 1px solid $purchase-button-background;
-    background: none;
-    font-family: $menu-font-family;
-    font-size: 14px;
-    line-height: 18px;
-    font-weight: 400;
-    text-transform: uppercase;
-    letter-spacing: 0.01em;
-    color: $purchase-text-color;
-    transition: $app-standard-transition;
-
-    &:hover {
-      background-color: $purchase-button-background;
-    }
-
-    &__active {
-      background-color: $purchase-button-background;
-
-      &:hover {
-        color: $purchase-button-background;
-        background-color: $purchase-text-color;
-      }
-    }
+  .footer {
+    margin-bottom: 60px;
   }
 }
