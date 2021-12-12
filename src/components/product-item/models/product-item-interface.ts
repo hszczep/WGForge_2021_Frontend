@@ -1,4 +1,4 @@
-interface ProductItemComponentInterface {
+interface IProductItemComponent {
   id: string;
   tier?: number;
   type: string;
@@ -15,4 +15,4 @@ interface ProductItemComponentInterface {
   isFavorite?: boolean;
 }
 
-export default ProductItemComponentInterface;
+export default IProductItemComponent;

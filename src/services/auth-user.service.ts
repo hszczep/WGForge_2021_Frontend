@@ -37,7 +37,8 @@ class AuthUserService {
         email,
         token,
       },
-      favorites: user.favourites,
+      favorites: user.favorites,
+      cart: user.cart,
       isLogged: true,
       isAdmin: user.role === USER.ROLES.ADMIN,
     });

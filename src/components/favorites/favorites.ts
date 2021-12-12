@@ -5,6 +5,7 @@ import storage from '../app/components/storage/storage';
 import popup from '../popup/popup';
 
 import favoritesService from '../../services/favorites.service';
+import cartService from '../../services/cart.service';
 
 import { renderFavoritesItem } from './common/favorites.tools';
 import { EMPTY_MESSAGE_TEMPLATE } from './common/favorites.constants';
@@ -19,7 +20,7 @@ class FavoritesPageComponent {
     this.removeFromFavoritesButtonClickHandler = this.removeFromFavoritesButtonClickHandler.bind(this);
   }
 
-  removeFromFavoritesButtonClickHandler({ target }: Event) {
+  removeFromFavoritesButtonClickHandler({ target }: Event): void {
     if (!(target as Element).closest('.favorite__delete-button')) return;
 
     const currentFavoritesElement = (target as Element).closest('[data-id]') as HTMLElement;
@@ -42,10 +43,12 @@ class FavoritesPageComponent {
   init(): void {
     this.#favoritesField = document.querySelector('.favorites-field');
     this.#favoritesField.addEventListener('click', this.removeFromFavoritesButtonClickHandler);
+    this.#favoritesField.addEventListener('click', cartService.purchaseButtonClickHandler);
   }
 
   unmount(): void {
     this.#favoritesField.removeEventListener('click', this.removeFromFavoritesButtonClickHandler);
+    this.#favoritesField.removeEventListener('click', cartService.purchaseButtonClickHandler);
   }
 
   render(): string {

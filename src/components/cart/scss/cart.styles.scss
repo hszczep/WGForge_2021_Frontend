@@ -1,8 +1,9 @@
 @import '../../../scss/variables';
 @import '../../../scss/flags';
 @import '../../../scss/tank-type';
+@import './cart-order.styles.scss';
 
-.favorites-field {
+.cart-field {
   width: $app-max-width;
   min-height: 70px;
   margin-top: 40px;
@@ -12,13 +13,13 @@
 
   legend {
     padding: 0 10px 10px;
-    font-family: $app-font-family;
+    font-family: $menu-font-family;
     font-size: 30px;
     text-transform: uppercase;
     color: $title-text-color;
   }
 
-  .favorite-item {
+  .cart-item {
     position: relative;
     width: $app-max-width - 102px;
     height: 160px;
@@ -57,7 +58,7 @@
     &__text {
       display: flex;
       align-items: center;
-      font-family: $app-font-family;
+      font-family: $menu-font-family;
       font-size: 18px;
       line-height: 1.2;
       font-weight: 400;
@@ -76,9 +77,9 @@
 
     &__description {
       height: 70px;
-      font-family: $app-font-family;
       padding-right: 10px;
       text-align: justify;
+      font-family: $menu-font-family;
       font-size: 12px;
       line-height: 1.2;
       font-weight: 400;
@@ -88,16 +89,22 @@
       overflow-y: auto;
     }
 
-    &__price-block {
-      margin-left: 70px;
+    &__wrapper {
       display: flex;
-      align-items: center;
+      flex-direction: column;
+      justify-content: center;
       height: 150px;
+      margin-left: 70px;
+    }
+
+    &__price-block {
+      display: flex;
+      width: 120px;
+      align-items: center;
 
       .price {
         display: inline-block;
-        margin-bottom: 50px;
-        font-family: $app-font-family;
+        font-family: $menu-font-family;
         font-size: 18px;
         line-height: 1.2;
         font-weight: 400;
@@ -114,36 +121,31 @@
         text-decoration: line-through;
         margin-right: 15px;
       }
+    }
 
-      .purchase-btn {
-        width: 150px;
-        height: 45px;
-        position: absolute;
-        bottom: 30px;
-        border-radius: 3px;
-        border: 1px solid $purchase-button-background;
-        background: none;
-        font-family: $app-font-family;
-        font-size: 14px;
-        line-height: 18px;
-        font-weight: 400;
-        text-transform: uppercase;
-        letter-spacing: 0.01em;
-        color: $purchase-text-color;
+    .like-btn {
+      align-self: center;
+      height: 30px;
+      margin-top: 20px;
+
+      &__icon {
+        width: 100%;
+        height: 100%;
+        opacity: 0.7;
+        fill: none;
         transition: $app-standard-transition;
 
         &:hover {
-          background-color: $purchase-button-background;
+          fill: #fff;
+          transition: $app-standard-transition;
         }
+      }
+    }
 
-        &__active {
-          background-color: $purchase-button-background;
-
-          &:hover {
-            color: $purchase-button-background;
-            background-color: $purchase-text-color;
-          }
-        }
+    .like-btn__active {
+      .like-btn__icon {
+        fill: #fff;
+        opacity: 0.6;
       }
     }
 
@@ -161,7 +163,7 @@
       padding: 14px 0 0 9px;
     }
 
-    .favorite__delete-button {
+    .cart__delete-button {
       position: absolute;
       width: 40px;
       height: 40px;
@@ -180,6 +182,29 @@
     }
   }
 
+  .cart-order-button {
+    align-self: center;
+    width: 150px;
+    height: 45px;
+    margin-bottom: 15px;
+    bottom: 30px;
+    border-radius: 3px;
+    border: 1px solid $purchase-button-background;
+    background: none;
+    font-family: $menu-font-family;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    color: $purchase-text-color;
+    transition: $app-standard-transition;
+
+    &:hover {
+      background-color: $purchase-button-background;
+    }
+  }
+
   .empty-message {
     display: inline-block;
     margin-bottom: 10px;
@@ -190,10 +215,10 @@
 }
 
 @media all and (max-width: $app-max-media-query) {
-  .favorites-field {
+  .cart-field {
     width: $app-medium-width;
 
-    .favorite-item {
+    .cart-item {
       position: relative;
       width: $app-medium-width - 102px;
       height: 160px;
@@ -225,21 +250,29 @@
         height: 70px;
       }
 
-      &__price-block {
-        margin-left: 40px;
+      &__wrapper {
         width: 220px;
-        height: 150px;
+        height: 100px;
+        margin-left: 40px;
+      }
+
+      &__price-block {
+        margin-top: 10px;
 
         .price {
+          margin-right: 5px;
           font-size: 16px;
-          margin-bottom: 50px;
+          margin-bottom: 10px;
         }
 
-        .purchase-btn {
-          width: 130px;
-          height: 45px;
-          bottom: 35px;
+        .old-price {
+          margin-right: 15px;
         }
+      }
+
+      .like-btn {
+        align-self: flex-start;
+        margin-left: 35px;
       }
 
       .discount {
@@ -250,7 +283,7 @@
         padding: 13px 0 0 9px;
       }
 
-      .favorite__delete-button {
+      .cart__delete-button {
         width: 35px;
         height: 35px;
         top: 10px;
@@ -262,12 +295,12 @@
 }
 
 @media all and (max-width: $app-medium-media-query) {
-  .favorites-field {
+  .cart-field {
     width: $app-min-width;
     margin-top: 20px;
     padding: 15px;
 
-    .favorite-item {
+    .cart-item {
       position: relative;
       width: $app-min-width - 32px;
       height: 125px;
@@ -312,23 +345,28 @@
         }
       }
 
-      &__price-block {
-        margin-left: 10px;
-        width: 200px;
+      &__wrapper {
+        width: 100px;
         height: 100px;
+        margin-left: 0;
+      }
+
+      &__price-block {
+        margin-top: 0;
+        margin-left: 10px;
 
         .price {
           margin-right: 5px;
           font-size: 14px;
-          margin-bottom: 35px;
+          margin-bottom: 10px;
         }
+      }
 
-        .purchase-btn {
-          width: 100px;
-          height: 30px;
-          bottom: 15px;
-          font-size: 12px;
-        }
+      .like-btn {
+        align-self: center;
+        width: 25px;
+        height: 25px;
+        margin: 0;
       }
 
       .discount {
@@ -339,7 +377,7 @@
         padding: 7px 0 0 5px;
       }
 
-      .favorite__delete-button {
+      .cart__delete-button {
         width: 30px;
         height: 30px;
         top: 5px;

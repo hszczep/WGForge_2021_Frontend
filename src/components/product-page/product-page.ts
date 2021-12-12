@@ -3,6 +3,7 @@ import './scss/product-page.styles.scss';
 import storage from '../app/components/storage/storage';
 import { convertToRomane } from '../../common/common.helper';
 import favoritesService from '../../services/favorites.service';
+import cartService from '../../services/cart.service';
 
 class ProductPageComponent {
   #elements: { [key: string]: HTMLElement } = null;
@@ -16,12 +17,15 @@ class ProductPageComponent {
   init() {
     this.#elements = {
       favoritesButton: document.querySelector('.like-btn'),
+      purchaseButton: document.querySelector('.purchase-btn'),
     };
     this.#elements.favoritesButton.addEventListener('click', favoritesService.favoritesButtonClickHandler);
+    this.#elements.purchaseButton.addEventListener('click', cartService.purchaseButtonClickHandler);
   }
 
   unmount() {
     this.#elements.favoritesButton.removeEventListener('click', favoritesService.favoritesButtonClickHandler);
+    this.#elements.purchaseButton.removeEventListener('click', cartService.purchaseButtonClickHandler);
   }
 
   render() {

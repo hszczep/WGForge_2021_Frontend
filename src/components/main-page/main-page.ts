@@ -6,6 +6,7 @@ import ProductItemComponent from '../product-item/product-item';
 import ProductItemInterface from '../../models/product-item.model';
 import { PRODUCT_LIMIT, PRODUCT_OFFSET } from './common/constants';
 import favoritesService from '../../services/favorites.service';
+import cartService from '../../services/cart.service';
 
 const filter = new FilterComponent();
 
@@ -32,6 +33,7 @@ class MainPageComponent {
       productsList: document.querySelector('.cards-field'),
     };
     this.#elements.productsList.addEventListener('click', favoritesService.favoritesButtonClickHandler);
+    this.#elements.productsList.addEventListener('click', cartService.purchaseButtonClickHandler);
     filter.init();
     this.addProductsToList();
     this.observer = new IntersectionObserver((entries) => {
@@ -60,6 +62,7 @@ class MainPageComponent {
   unmount() {
     this.observer.disconnect();
     this.#elements.productsList.removeEventListener('click', favoritesService.favoritesButtonClickHandler);
+    this.#elements.productsList.removeEventListener('click', cartService.purchaseButtonClickHandler);
     this.offset = 0;
   }
 

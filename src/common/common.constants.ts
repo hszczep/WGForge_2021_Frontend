@@ -13,5 +13,7 @@ export const USER = {
       token: '',
     },
     favorites: new Array(0),
+    cart: new Array(0),
   },
 };
+export const PRODUCT_TYPE_MACHINERY = 'machinery';

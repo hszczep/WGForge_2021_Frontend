@@ -68,7 +68,7 @@
 
     .card-specifications {
       position: absolute;
-      bottom: 30px;
+      bottom: 85px;
       transition: $card-transition;
 
       .discount {
@@ -126,15 +126,29 @@
     position: absolute;
     bottom: 22px;
     border-radius: 3px;
-    background: $purchase-button-background;
+    border: 1px solid $purchase-button-background;
+    background: none;
     font-family: $app-font-family;
-    font-size: 12px;
+    font-size: 16px;
     line-height: 18px;
     font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 0.01em;
     color: $purchase-text-color;
     transition: $app-standard-transition;
+
+    &:hover {
+      background-color: $purchase-button-background;
+    }
+
+    &__active {
+      background-color: $purchase-button-background;
+
+      &:hover {
+        color: $purchase-button-background;
+        background-color: $purchase-text-color;
+      }
+    }
   }
 
   .like-btn {

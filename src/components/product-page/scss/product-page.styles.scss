@@ -156,6 +156,36 @@
       color: #999;
     }
   }
+
+  .purchase-btn {
+    width: 150px;
+    height: 45px;
+    bottom: 30px;
+    border-radius: 3px;
+    border: 1px solid $purchase-button-background;
+    background: none;
+    font-family: $menu-font-family;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    color: $purchase-text-color;
+    transition: $app-standard-transition;
+
+    &:hover {
+      background-color: $purchase-button-background;
+    }
+
+    &__active {
+      background-color: $purchase-button-background;
+
+      &:hover {
+        color: $purchase-button-background;
+        background-color: $purchase-text-color;
+      }
+    }
+  }
 }
 
 @media all and (max-width: $app-max-media-query) {

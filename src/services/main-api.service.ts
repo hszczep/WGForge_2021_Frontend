@@ -27,6 +27,14 @@ class MainApiService {
   deleteFromFavorites(token: string, product_id: string): Promise<IUser> {
     return deleteResourse(`${MAIN_API_URLS.USER.FAVORITES}/${product_id}`, { token });
   }
+
+  putToCart(token: string, product_id: string): Promise<IUser> {
+    return putResourse(`${MAIN_API_URLS.USER.CART}/${product_id}`, { token });
+  }
+
+  deleteFromCart(token: string, product_id: string): Promise<IUser> {
+    return deleteResourse(`${MAIN_API_URLS.USER.CART}/${product_id}`, { token });
+  }
 }
 
 export default new MainApiService();
