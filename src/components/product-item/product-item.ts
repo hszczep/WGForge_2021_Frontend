@@ -1,8 +1,10 @@
-import ProductItemComponentInterface from './product-item-interface';
+import { PRODUCT_TYPE_MACHINERY } from './common/product-item.constants';
+import IProductItemComponent from './models/product-item-interface';
 import { convertToRomane, localizeCurrency } from '../../common/common.helper';
 import ProductItemInterface from '../../models/product-item.model';
+import storage from '../app/components/storage/storage';
 
-class ProductItemComponent implements ProductItemComponentInterface {
+class ProductItemComponent implements IProductItemComponent {
   id: string;
   tier: number;
   type: string;
@@ -52,7 +54,7 @@ class ProductItemComponent implements ProductItemComponentInterface {
 
   render() {
     let productNameInfo;
-    if (this.type === 'machinery') {
+    if (this.type === PRODUCT_TYPE_MACHINERY) {
       productNameInfo = `
                   <span class="flag ${this.flag}"></span>
                   <span class="tank-type tank-type__${this.tank_type}"></span>
@@ -64,6 +66,9 @@ class ProductItemComponent implements ProductItemComponentInterface {
                   <span class="item-name">${this.name}</span>
       `;
     }
+
+    const isInCart = storage.checkProductInCartById(this.id);
+
     return `
           <article class="card card__${this.size}" data-id="${this.id}">
             <a href="${this.linkToDescription}" class="card-info">
@@ -82,7 +87,7 @@ class ProductItemComponent implements ProductItemComponentInterface {
                 <use xlink:href="assets/images/sprite.svg#like"></use>
               </svg>
             </button>
-            <button class="purchase-btn">purchase</button>
+            <button class="purchase-btn ${isInCart ? 'purchase-btn__active' : ''}">purchase</button>
           </article>
     `;
   }

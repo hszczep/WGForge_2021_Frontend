@@ -33,6 +33,18 @@
   animation-duration: 0.4s;
 }
 
+@media all and (max-width: $app-max-media-query) {
+  .popup {
+    width: 60%;
+  }
+}
+
+@media all and (max-width: $app-medium-media-query) {
+  .popup {
+    width: 70%;
+  }
+}
+
 .popup__header {
   display: flex;
   justify-content: space-between;

@@ -7,7 +7,7 @@ import storage from '../app/components/storage/storage';
 import authUserService from '../../services/auth-user.service';
 
 import { capitalizeFirstLetter } from '../../common/common.helper';
-import { VALIDATION_ERRORS_MESSAGES, VALIDATION_REG_EXPS } from './common/constants';
+import { VALIDATION_ERRORS_MESSAGES, VALIDATION_REG_EXPS } from './common/auth.constants';
 import { IUserCredentials } from '../../models/user.model';
 
 class AuthPageComponent {
