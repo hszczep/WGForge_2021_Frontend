@@ -1,7 +1,7 @@
 import './scss/product-page.styles.scss';
 
 import storage from '../app/components/storage/storage';
-import { convertToRomane, localizeCurrency } from '../../common/common.helper';
+import { convertToRomane } from '../../common/common.helper';
 import favoritesService from '../../services/favorites.service';
 
 class ProductPageComponent {
@@ -52,13 +52,13 @@ class ProductPageComponent {
 
       <article class="item-block" data-id="${product.id}">
         <div class="item-block__main-info">
-          <p class="discount">${product.discount ? "- "+product.discount+"%" : ''}</p>
+          <p class="discount">${product.discount ? `- ${product.discount}%` : ''}</p>
           <div class="item-specifications">
             <h2 class="item-title">${product.name}</h2>
             <h2 class="item-text">${productTextInfo}</h2>           
             <div class="price-block">
-                <p class="price${product.discount ? ' old-price' : ''}">${"$ "+product.price.amount}</p>
-                <p class="price price-discount">${product.discount ? `${"$ "+product.price_discount}` : ''}</p>
+                <p class="price${product.discount ? ' old-price' : ''}">${`$ ${product.price.amount}`}</p>
+                <p class="price price-discount">${product.discount ? `${`$ ${product.price_discount}`}` : ''}</p>
             </div>
             <div class="item__controls">
               <button class="purchase-btn">purchase</button>
