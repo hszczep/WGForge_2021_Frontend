@@ -1,6 +1,7 @@
 @import '../../../scss/variables';
 @import '../../../scss/flags';
 @import '../../../scss/tank-type';
+@import './cart-order.styles.scss';
 
 .cart-field {
   width: $app-max-width;
@@ -178,6 +179,29 @@
         border: 1px solid $delete-button-color;
         border-radius: 50%;
       }
+    }
+  }
+
+  .cart-order-button {
+    align-self: center;
+    width: 150px;
+    height: 45px;
+    margin-bottom: 15px;
+    bottom: 30px;
+    border-radius: 3px;
+    border: 1px solid $purchase-button-background;
+    background: none;
+    font-family: $menu-font-family;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    color: $purchase-text-color;
+    transition: $app-standard-transition;
+
+    &:hover {
+      background-color: $purchase-button-background;
     }
   }
 
