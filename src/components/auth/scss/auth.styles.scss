@@ -14,7 +14,7 @@
 
     legend {
       padding: 0 10px 10px;
-      font-family: $menu-font-family;
+      font-family: $app-font-family;
       font-size: 28px;
       text-transform: uppercase;
       color: $auth-form-text-color;
@@ -23,7 +23,7 @@
     &__input-name {
       margin-left: 5px;
       color: $auth-form-text-color;
-      font-family: $menu-font-family;
+      font-family: $app-font-family;
       font-size: 22px;
     }
 
@@ -35,7 +35,7 @@
       border: 1px solid $auth-form-border-color;
       border-radius: 10px;
       color: $auth-form-text-color;
-      font-family: $menu-font-family;
+      font-family: $app-font-family;
       font-size: 20px;
 
       &:focus {
@@ -55,7 +55,7 @@
       box-sizing: border-box;
       height: 24px;
       padding: 0 0 0 16px;
-      font-family: $menu-font-family;
+      font-family: $app-font-family;
       font-size: 16px;
       color: $incorrect-color;
     }
@@ -72,7 +72,7 @@
       border: 2px solid $auth-form-border-color;
       border-radius: 10px;
       color: $auth-form-text-color;
-      font-family: $menu-font-family;
+      font-family: $app-font-family;
       font-size: 24px;
       text-transform: uppercase;
       cursor: pointer;
