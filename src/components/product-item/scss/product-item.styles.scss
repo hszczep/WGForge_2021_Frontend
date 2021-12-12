@@ -68,7 +68,7 @@
 
     .card-specifications {
       position: absolute;
-      bottom: 85px;
+      bottom: 30px;
       transition: $card-transition;
 
       .discount {
@@ -121,17 +121,15 @@
 
   .purchase-btn {
     opacity: 0;
-    width: 100px;
-    height: 40px;
+    width: 150px;
+    height: 45px;
+    bottom: 30px;
     position: absolute;
-    bottom: 22px;
     border-radius: 3px;
     border: 1px solid $purchase-button-background;
     background: none;
     font-family: $app-font-family;
     font-size: 16px;
-    line-height: 18px;
-    font-weight: 400;
     text-transform: uppercase;
     letter-spacing: 0.01em;
     color: $purchase-text-color;
@@ -187,7 +185,7 @@
     }
 
     & .card-specifications {
-      bottom: 76px;
+      bottom: 85px;
       transition: $card-transition;
     }
 
