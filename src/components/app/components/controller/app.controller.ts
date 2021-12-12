@@ -3,6 +3,7 @@ import footerComponent from '../../../footer/footer';
 import { Spinner } from '../../../spinner/spinner';
 
 import authUserService from '../../../../services/auth-user.service';
+import storage from '../storage/storage';
 
 class Controller {
   #elements: { [key: string]: HTMLElement } = null;
@@ -38,6 +39,7 @@ class Controller {
 
     this.spinner.show();
     await authUserService.updateUserState();
+    if (storage.checkIsUserAdmin()) window.location.hash = '#/admin';
     this.spinner.hide();
 
     headerComponent.updateHeaderForCurrentUserState();

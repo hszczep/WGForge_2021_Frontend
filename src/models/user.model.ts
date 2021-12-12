@@ -18,6 +18,6 @@ export interface IUser {
   email: string;
   password: string;
   role: string;
-  favourites: Array<ProductItemInterface>;
+  favorites: Array<ProductItemInterface>;
   cart: Array<ProductItemInterface>;
 }

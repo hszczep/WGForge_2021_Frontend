@@ -4,6 +4,7 @@ import { signupPage } from '../pages/signup-page';
 import { favoritesPage } from '../pages/favorites-page';
 import { notFoundPage } from '../pages/not-found-page';
 import { productPage } from '../pages/product-page';
+import { adminPage } from '../pages/admin-page';
 
 import { IRoute } from '../models/route.model';
 
@@ -14,6 +15,7 @@ const routes: IRoute[] = [
   { path: '/favorites', page: favoritesPage },
   { path: '/notfound', page: notFoundPage },
   { path: '/product/', page: productPage },
+  { path: '/admin', page: adminPage },
 ];
 
 export default routes;

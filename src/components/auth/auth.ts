@@ -2,6 +2,7 @@ import './scss/auth.styles.scss';
 
 import appController from '../app/components/controller/app.controller';
 import headerComponent from '../header/header';
+import storage from '../app/components/storage/storage';
 
 import authUserService from '../../services/auth-user.service';
 
@@ -117,7 +118,7 @@ class AuthPageComponent {
       .then((response) => {
         if (response) {
           headerComponent.updateHeaderForCurrentUserState();
-          window.location.hash = '#';
+          window.location.hash = storage.checkIsUserAdmin() ? '#/admin' : '#';
         }
       })
       .catch((error: Error) => {
