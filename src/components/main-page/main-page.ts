@@ -1,8 +1,10 @@
 import './scss/main-page.styles.scss';
 import filter from './components/filter/filter';
 import lazyLoad from './components/lazy-load/lazy-load';
+import favoritesService from '../../services/favorites.service';
 
 class MainPageComponent {
+  #elements: { [key: string]: HTMLElement } = null;
   constructor() {
     this.render = this.render.bind(this);
     this.init = this.init.bind(this);
@@ -12,9 +14,16 @@ class MainPageComponent {
   init() {
     filter.init();
     lazyLoad.init();
+    this.#elements = {
+      productsList: document.querySelector('.cards-field'),
+    };
+    this.#elements.productsList.addEventListener('click', favoritesService.favoritesButtonClickHandler);
   }
 
-  unmount() {}
+  unmount() {
+    this.#elements.productsList.removeEventListener('click', favoritesService.favoritesButtonClickHandler);
+    lazyLoad.unmount();
+  }
 
   render() {
     return `

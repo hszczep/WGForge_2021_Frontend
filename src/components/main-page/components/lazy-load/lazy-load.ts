@@ -1,7 +1,6 @@
 import storage from '../../../app/components/storage/storage';
 import ProductItemComponent from '../../../product-item/product-item';
 import { PRODUCT_LIMIT, PRODUCT_OFFSET } from '../../common/constants';
-import favoritesService from '../../../../services/favorites.service';
 import ProductItemInterface from '../../../../models/product-item.model';
 
 class LazyLoad {
@@ -11,7 +10,6 @@ class LazyLoad {
   listSize: number;
   observer: IntersectionObserver;
   filterForProducts: { nation: string; type: string; tier: string };
-  #elements: { [key: string]: HTMLElement } = null;
   constructor() {
     this.init = this.init.bind(this);
     this.unmount = this.unmount.bind(this);
@@ -22,11 +20,6 @@ class LazyLoad {
     this.listOfProducts = storage.products;
     this.filterForProducts = storage.productsFilter;
     this.listSize = this.listOfProducts.length;
-    this.#elements = {
-      productsList: document.querySelector('.cards-field'),
-    };
-    this.#elements.productsList.addEventListener('click', favoritesService.favoritesButtonClickHandler);
-
     this.addProductsToList();
     this.observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => entry.isIntersecting && this.addProductsToList());
@@ -61,7 +54,6 @@ class LazyLoad {
 
   unmount() {
     this.observer.disconnect();
-    this.#elements.productsList.removeEventListener('click', favoritesService.favoritesButtonClickHandler);
     this.offset = 0;
   }
 }
