@@ -36,7 +36,7 @@ class CartService {
   }
 
   addToCart(productId: string, purchaseButton: Element) {
-    if (window.location.hash === '') addToCartAnimation(purchaseButton.parentElement);
+    if (window.location.hash === '#' || window.location.hash === '') addToCartAnimation(purchaseButton.parentElement);
     purchaseButton.classList.add('purchase-btn__active');
     this.addToApiCart(productId)
       .then(() => {
