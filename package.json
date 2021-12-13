@@ -8,6 +8,7 @@
     "build": "webpack --config webpack.config.prod.js",
     "build:dev": "webpack",
     "start": "npm run serve",
+    "heroku-prebuild": "",
     "lint": "eslint src/**/*.{js,ts}",
     "lint:fix": "eslint src/**/*.{js,ts} --fix",
     "prettier": "prettier --write ./src/**/*.{js,ts} ./src/**/*.{scss,css}",
@@ -56,5 +57,8 @@
     "webpack-cli": "^4.9.1",
     "webpack-dev-server": "^4.5.0",
     "webpack-merge": "^5.8.0"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
   }
 }

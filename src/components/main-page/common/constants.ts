@@ -26,7 +26,7 @@ export const FILTER_MAP: {
                 <span class="tanks-select__value">U.S.S.R</span>`,
     china: `<span class="flag flag__china" data-nation="china"></span>
                 <span class="tanks-select__value">China</span>`,
-    marc: `<span class="flag flag__marc" data-nation="marc"></span>
+    merc: `<span class="flag flag__merc" data-nation="merc"></span>
                 <span class="tanks-select__value">Mercenary</span>`,
   },
   tier: {

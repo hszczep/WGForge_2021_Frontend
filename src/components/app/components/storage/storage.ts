@@ -60,8 +60,29 @@ class Storage {
     this.addToFavorites(currentProduct);
   }
 
-  removeFromFavorites(product_id: string) {
-    this.#userState.favorites = this.#userState.favorites.filter((favoriteItem) => favoriteItem.id !== product_id);
+  removeFromFavorites(productId: string) {
+    this.#userState.favorites = this.#userState.favorites.filter((favoriteItem) => favoriteItem.id !== productId);
+  }
+
+  getCart(): Array<ProductItemInterface> {
+    return this.#userState.cart;
+  }
+
+  checkProductInCartById(productId: string): boolean {
+    return Boolean(this.#userState.cart.find((cartItem) => cartItem.id === productId));
+  }
+
+  addToCart(productItem: ProductItemInterface) {
+    this.#userState.cart.push(productItem);
+  }
+
+  addToCartById(productId: string) {
+    const currentProduct = this.getProductById(productId);
+    this.addToCart(currentProduct);
+  }
+
+  removeFromCart(productId: string) {
+    this.#userState.cart = this.#userState.cart.filter((cartItem) => cartItem.id !== productId);
   }
 
   async init() {

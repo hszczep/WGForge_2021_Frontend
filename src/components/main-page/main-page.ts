@@ -2,6 +2,7 @@ import './scss/main-page.styles.scss';
 import filter from './components/filter/filter';
 import lazyLoad from './components/lazy-load/lazy-load';
 import favoritesService from '../../services/favorites.service';
+import cartService from '../../services/cart.service';
 
 class MainPageComponent {
   #elements: { [key: string]: HTMLElement } = null;
@@ -18,10 +19,12 @@ class MainPageComponent {
       productsList: document.querySelector('.cards-field'),
     };
     this.#elements.productsList.addEventListener('click', favoritesService.favoritesButtonClickHandler);
+    this.#elements.productsList.addEventListener('click', cartService.purchaseButtonClickHandler);
   }
 
   unmount() {
     this.#elements.productsList.removeEventListener('click', favoritesService.favoritesButtonClickHandler);
+    this.#elements.productsList.removeEventListener('click', cartService.purchaseButtonClickHandler);
     lazyLoad.unmount();
   }
 

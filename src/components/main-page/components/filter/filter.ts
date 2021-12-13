@@ -38,7 +38,6 @@ class FilterComponent {
         storage.productsFilter.type = defaultFilterValue;
         const cardField = document.querySelector('.cards-field');
         cardField.innerHTML = '';
-        lazyLoad.offset = 0;
         lazyLoad.unmount();
         lazyLoad.init();
       });
@@ -67,7 +66,6 @@ class FilterComponent {
     }
     const cardField = document.querySelector('.cards-field');
     cardField.innerHTML = '';
-    lazyLoad.offset = 0;
     lazyLoad.unmount();
     lazyLoad.init();
   }
@@ -119,7 +117,7 @@ class FilterComponent {
               ${FILTER_MAP.nation.china}
               </div>    
               <div class="tanks-select__item">
-              ${FILTER_MAP.nation.marc}
+              ${FILTER_MAP.nation.merc}
               </div>
             </div>
           </div>
@@ -146,7 +144,7 @@ class FilterComponent {
               ${FILTER_MAP.type.heavytank}
               </div>
               <div class="tanks-select__item">
-              ${FILTER_MAP.type[specialTypeTank] /* All style use "-" */} 
+              ${FILTER_MAP.type[specialTypeTank] /* All style for this tank type use "-" */} 
               </div>
               <div class="tanks-select__item">
               ${FILTER_MAP.type.spg}

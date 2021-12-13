@@ -24,6 +24,10 @@ class HeaderComponent {
     this.#elements.favoritesCount.textContent = `(${storage.getFavorites().length})`;
   }
 
+  updateCartCount(): void {
+    this.#elements.cartCount.textContent = `(${storage.getCart().length})`;
+  }
+
   logoutButtonClickHandler(): void {
     authUserService.logOutUser();
     this.#hideSubMenuForUnauthorizedUser();
@@ -67,6 +71,7 @@ class HeaderComponent {
     if (storage.checkIsUserLogged()) {
       this.rerenderAuthBlock();
       this.updateFavoritesCount();
+      this.updateCartCount();
       this.showSubMenuForAuthorizedUser();
     } else this.#hideSubMenuForUnauthorizedUser();
   }
@@ -78,6 +83,7 @@ class HeaderComponent {
       subMenu: headerElement.querySelector('.nav-menu__sub-menu'),
       authBlock: headerElement.querySelector('.authentication'),
       favoritesCount: headerElement.querySelector('#wish-list__quantity'),
+      cartCount: headerElement.querySelector('#cart__quantity'),
     };
   }
 
@@ -100,9 +106,9 @@ class HeaderComponent {
                 Wishlist
                 <span id="wish-list__quantity" class="quantity"></span>
               </a>
-              <a href="#" id="cart">
+              <a href="#/cart" id="cart">
                 Shopping cart
-                <span id="cart__quantity" class="quantity">(5)</span>
+                <span id="cart__quantity" class="quantity"></span>
               </a>
             </div>
             <div class="authentication">
