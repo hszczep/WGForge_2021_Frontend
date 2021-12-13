@@ -12,7 +12,7 @@
 
   legend {
     padding: 0 10px 10px;
-    font-family: $menu-font-family;
+    font-family: $app-font-family;
     font-size: 30px;
     text-transform: uppercase;
     color: $title-text-color;
@@ -57,7 +57,7 @@
     &__text {
       display: flex;
       align-items: center;
-      font-family: $menu-font-family;
+      font-family: $app-font-family;
       font-size: 18px;
       line-height: 1.2;
       font-weight: 400;
@@ -76,9 +76,9 @@
 
     &__description {
       height: 70px;
+      font-family: $app-font-family;
       padding-right: 10px;
       text-align: justify;
-      font-family: $menu-font-family;
       font-size: 12px;
       line-height: 1.2;
       font-weight: 400;
@@ -97,7 +97,7 @@
       .price {
         display: inline-block;
         margin-bottom: 50px;
-        font-family: $menu-font-family;
+        font-family: $app-font-family;
         font-size: 18px;
         line-height: 1.2;
         font-weight: 400;
@@ -123,7 +123,7 @@
         border-radius: 3px;
         border: 1px solid $purchase-button-background;
         background: none;
-        font-family: $menu-font-family;
+        font-family: $app-font-family;
         font-size: 14px;
         line-height: 18px;
         font-weight: 400;

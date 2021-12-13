@@ -13,7 +13,7 @@
   .tanks-select {
     margin-right: 5px;
     position: relative;
-    font-family: $menu-font-family;
+    font-family: $app-font-family;
     font-size: 17px;
     line-height: 1.2;
     font-weight: 400;
@@ -91,7 +91,7 @@
       flex-wrap: nowrap;
       padding: 0 18px;
       opacity: 0.8;
-      font-family: $menu-font-family;
+      font-family: $app-font-family;
       font-size: 17px;
       line-height: 37px;
       font-weight: 400;
@@ -144,7 +144,7 @@
   .reset-button {
     position: absolute;
     right: 30px;
-    font-family: $menu-font-family;
+    font-family: $app-font-family;
     font-size: 17px;
     line-height: 1.2;
     font-weight: 400;

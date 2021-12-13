@@ -1,9 +1,12 @@
 import './scss/product-page.styles.scss';
 
 import storage from '../app/components/storage/storage';
-import { convertToRomane, localizeCurrency } from '../../common/common.helper';
+
 import favoritesService from '../../services/favorites.service';
 import cartService from '../../services/cart.service';
+
+import { convertToRomane, localizeCurrency } from '../../common/common.helper';
+import { PRODUCT_TYPE_MACHINERY } from '../../common/common.constants';
 
 class ProductPageComponent {
   #elements: { [key: string]: HTMLElement } = null;
@@ -31,18 +34,13 @@ class ProductPageComponent {
   render() {
     const productId = window.location.hash.split('/').pop();
     const product = storage.getProductById(productId);
-    const productTank = 'machinery';
-    let productNameInfo;
+    let productTextInfo;
 
-    if (product.type === productTank) {
-      productNameInfo = `
+    if (product.type === PRODUCT_TYPE_MACHINERY) {
+      productTextInfo = `
                   <span class="flag flag__${product.nation}"></span>
-                  <span class="tank-type tank-type__${product.tank_type}"></span>
+                  <span class="tank-type tank-type__${product.tank_type.toLowerCase()}"></span>
                   <span class="level">${convertToRomane(product.tier)}</span>
-                  <span class="item-name">${product.name}</span>
-      `;
-    } else {
-      productNameInfo = `
                   <span class="item-name">${product.name}</span>
       `;
     }
@@ -51,26 +49,43 @@ class ProductPageComponent {
     const priceDiscount = product.price_discount
       ? localizeCurrency(Number(product.price_discount), product.price.code)
       : '';
-    const isInCart = storage.checkProductInCartById(product.id);
+    const isFavorite = storage.checkProductInFavoritesById(product.id);
+    // const isInCart = storage.checkProductInCartById(product.id);
 
     return `
-          <div class="card__single" data-id="${product.id}">
-              <img class="card-img" src="${product.images[0]}" alt="${product.name}" />
-              <div class="card-specifications">
-                <p class="discount">${priceDiscount}</p>
-                <h2 class="item-text">
-                  ${productNameInfo}
-                </h2>
-                <p class="price">${price}</p>
-                <p class="price price-discount">${product.discount ? product.discount : ''}</p>
-              </div>
-            <button class="like-btn ${storage.checkProductInFavoritesById(product.id) ? 'like-btn__active' : ''}">
-              <svg class="like-btn__icon">
-                <use xlink:href="assets/images/sprite.svg#like"></use>
-              </svg>
-            </button>
-            <button class="purchase-btn ${isInCart ? 'purchase-btn__active' : ''}">purchase</button>
+      <div class='content-menu'>
+        <a href='#' class='WoT_logo'><img src='assets/images/WoT_logo.png' alt='WoT logo' /></a>
+        <div class='content-menu__buttons'>
+          <button>All</button>
+          <button>Vehicles</button>
+          <button>Gold</button>
+          <button>Premium account</button>
+        </div>
+      </div>
+      <article class="item-block" data-id="${product.id}">
+        <div class="item-block__main-info">
+          <p class="discount">${product.discount ? `-${product.discount}%` : ''}</p>
+          <div class="item-specifications">
+            <h2 class="item-title">${product.name}</h2>
+            <h2 class="item-text">${productTextInfo}</h2>           
+            <div class="price-block">
+                <p class="price${product.discount ? ' old-price' : ''}">${price}</p>
+                <p class="price price-discount">${priceDiscount}</p>
+            </div>
+            <div class="item__controls">
+              <button class="purchase-btn">purchase</button>
+              <button class="like-btn">
+                ${isFavorite ? 'Already in favorites' : 'Add to favorites'}
+              </button>
+            </div>
           </div>
+          <img class="item-img" src="${product.images[0]}" alt="${product.name}" />
+        </div>
+        <div class="item-description">
+          <h3 class="item-description__title">Details</h3>
+          <p class="item-description__text">${product.details}</p>
+        </div>
+      </article>
     `;
   }
 }

@@ -86,7 +86,7 @@
         align-items: center;
         text-align: left;
         margin-bottom: 10px;
-        font-family: $menu-font-family;
+        font-family: $app-font-family;
         font-size: 15px;
         line-height: 1.2;
         font-weight: 400;
@@ -102,7 +102,7 @@
 
       .price {
         display: inline-block;
-        font-family: $menu-font-family;
+        font-family: $app-font-family;
         font-size: 15px;
         line-height: 1.2;
         font-weight: 400;
@@ -121,17 +121,15 @@
 
   .purchase-btn {
     opacity: 0;
-    width: 100px;
-    height: 40px;
+    width: 150px;
+    height: 45px;
+    bottom: 30px;
     position: absolute;
-    bottom: 22px;
     border-radius: 3px;
     border: 1px solid $purchase-button-background;
     background: none;
-    font-family: $menu-font-family;
-    font-size: 12px;
-    line-height: 18px;
-    font-weight: 400;
+    font-family: $app-font-family;
+    font-size: 16px;
     text-transform: uppercase;
     letter-spacing: 0.01em;
     color: $purchase-text-color;
@@ -187,7 +185,7 @@
     }
 
     & .card-specifications {
-      bottom: 76px;
+      bottom: 85px;
       transition: $card-transition;
     }
 
