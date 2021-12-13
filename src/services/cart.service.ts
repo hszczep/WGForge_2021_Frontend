@@ -1,6 +1,7 @@
 import storage from '../components/app/components/storage/storage';
 import headerComponent from '../components/header/header';
 import popup from '../components/popup/popup';
+import addToCartAnimation from './common/cart-animation';
 
 import mainApiService from './main-api.service';
 
@@ -22,6 +23,7 @@ class CartService {
   }
 
   addToCart(productId: string, purchaseButton: Element) {
+    addToCartAnimation(purchaseButton.parentElement);
     purchaseButton.classList.remove('purchase-btn__active');
     this.removeFromApiCart(productId)
       .then(() => {
