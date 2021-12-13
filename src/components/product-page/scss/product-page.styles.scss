@@ -3,6 +3,36 @@
 .item-block {
   width: $app-max-width;
 
+  .purchase-btn {
+    width: 150px;
+    height: 45px;
+    bottom: 30px;
+    border-radius: 3px;
+    border: 1px solid $purchase-button-background;
+    background: none;
+    font-family: $app-font-family;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    color: $purchase-text-color;
+    transition: $app-standard-transition;
+
+    &:hover {
+      background-color: $purchase-button-background;
+    }
+
+    &__active {
+      background-color: $purchase-button-background;
+
+      &:hover {
+        color: $purchase-button-background;
+        background-color: $purchase-text-color;
+      }
+    }
+  }
+
   &__main-info {
     display: flex;
     position: relative;
@@ -95,7 +125,18 @@
         transition: $app-standard-transition;
 
         &:hover {
-          background: $purchase-button-hover-background;
+          color: $purchase-button-background;
+          background-color: $purchase-text-color;
+        }
+
+        &__active {
+          color: $purchase-button-background;
+          background-color: $purchase-text-color;
+
+          &:hover {
+            color: $purchase-text-color;
+            background-color: $purchase-button-background;
+          }
         }
       }
 
@@ -154,36 +195,6 @@
       font-weight: 400;
       letter-spacing: 0.025em;
       color: #999;
-    }
-  }
-
-  .purchase-btn {
-    width: 150px;
-    height: 45px;
-    bottom: 30px;
-    border-radius: 3px;
-    border: 1px solid $purchase-button-background;
-    background: none;
-    font-family: $app-font-family;
-    font-size: 14px;
-    line-height: 18px;
-    font-weight: 400;
-    text-transform: uppercase;
-    letter-spacing: 0.01em;
-    color: $purchase-text-color;
-    transition: $app-standard-transition;
-
-    &:hover {
-      background-color: $purchase-button-background;
-    }
-
-    &__active {
-      background-color: $purchase-button-background;
-
-      &:hover {
-        color: $purchase-button-background;
-        background-color: $purchase-text-color;
-      }
     }
   }
 }
