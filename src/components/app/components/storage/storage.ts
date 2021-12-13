@@ -6,7 +6,7 @@ import mainApiService from '../../../../services/main-api.service';
 class Storage {
   #userState: IUserState = USER.DEFAULT_STATE;
   products: Array<ProductItemInterface>;
-
+  productsFilter: { nation: string; type: string; tier: string };
   setUserState(userState: IUserState) {
     this.#userState = userState;
   }
@@ -87,6 +87,11 @@ class Storage {
 
   async init() {
     this.products = await mainApiService.getProducts();
+    this.productsFilter = {
+      nation: '',
+      type: '',
+      tier: '',
+    };
   }
 }
 

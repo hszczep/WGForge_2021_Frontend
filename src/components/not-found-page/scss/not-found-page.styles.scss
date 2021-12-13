@@ -2,18 +2,18 @@
 
 .error-block {
   width: 60vw;
-  height: 70vh;
+  height: 500px;
   overflow: hidden;
 }
 
 .error-img__text {
+  max-height: 500px;
   position: relative;
-  font-size: 1.5em;
+  font-size: 1.4em;
   letter-spacing: -0.05em;
   line-height: 0.7em;
-  background: url('../../../assets/public/404.png');
-  background-position: center 150px;
-  background-attachment: fixed;
+  background-image: url('../../../assets/images/not-found.png');
+  background-position: center 10vh;
   background-repeat: no-repeat;
   background-clip: text;
   color: transparent;
@@ -32,9 +32,11 @@
 @media all and (max-width: $app-medium-media-query) {
   .error-block {
     width: $app-min-width;
+    height: 200px;
   }
 
   .error-img__text {
+    font-size: 1.1em;
     background-size: $app-min-width - 20px;
   }
 }

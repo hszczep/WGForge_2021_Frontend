@@ -1,4 +1,7 @@
 import './scss/filter.styles.scss';
+import storage from '../../../app/components/storage/storage';
+import lazyLoad from '../lazy-load/lazy-load';
+import { FILTER_MAP } from '../../common/constants';
 
 class FilterComponent {
   init() {
@@ -13,9 +16,11 @@ class FilterComponent {
       });
     });
 
-    selectItem.forEach((item) => {
+    selectItem.forEach((item: HTMLElement) => {
       item.addEventListener('click', () => {
         const selectValue = item.innerHTML;
+        const firstChild = item.firstElementChild as HTMLElement;
+        this.applyFilter(Object.entries(firstChild.dataset).pop());
         const select = item.closest('.tanks-select');
         const currentText = select.querySelector('.tanks-select__current');
         currentText.innerHTML = selectValue;
@@ -27,17 +32,54 @@ class FilterComponent {
       defaultValue.forEach((value, index) => {
         selectHeader[index].parentElement.classList.remove('is-active');
         selectHeader[index].firstElementChild.innerHTML = value.innerHTML;
+        const defaultFilterValue = '';
+        storage.productsFilter.nation = defaultFilterValue;
+        storage.productsFilter.tier = defaultFilterValue;
+        storage.productsFilter.type = defaultFilterValue;
+        const cardField = document.querySelector('.cards-field');
+        cardField.innerHTML = '';
+        lazyLoad.unmount();
+        lazyLoad.init();
       });
     });
   }
 
+  applyFilter([typeFilter, valueFilter]: Array<string>) {
+    const { productsFilter } = storage;
+    const nation = 'nation';
+    const type = 'type';
+    const tier = 'tier';
+
+    const defaultFilter = 'all';
+    switch (typeFilter) {
+      case nation:
+        productsFilter.nation = valueFilter === defaultFilter ? '' : valueFilter;
+        break;
+      case type:
+        productsFilter.type = valueFilter === defaultFilter ? '' : valueFilter;
+        break;
+      case tier:
+        productsFilter.tier = valueFilter === defaultFilter ? '' : valueFilter;
+        break;
+      default:
+        break;
+    }
+    const cardField = document.querySelector('.cards-field');
+    cardField.innerHTML = '';
+    lazyLoad.unmount();
+    lazyLoad.init();
+  }
+
   render() {
+    const { nation, type, tier } = storage.productsFilter;
+    const defaultFilter = 'all';
+    const specialTypeTank = 'at-spg';
+    let tierCounte = 0;
     return `  
           <div class="tanks-select select-nation">
             <div class="tanks-select__header">
               <p class="tanks-select__current">
-                <span class="flag flag__all"></span>
-                <span class="tanks-select__value">All Nations</span>
+                ${FILTER_MAP.nation[nation || defaultFilter]}
               </p>
               <svg class="tanks-select__icon">
                 <use xlink:href="assets/images/sprite.svg#arrow"></use>
@@ -45,56 +87,44 @@ class FilterComponent {
             </div>
             <div class="tanks-select__body">
               <div class="tanks-select__item default-value">
-                <span class="flag flag__all"></span>
-                <span class="tanks-select__value">All Nations</span>
+              ${FILTER_MAP.nation.all}
               </div>
               <div class="tanks-select__item">
-                <span class="flag flag__france"></span>
-                <span class="tanks-select__value">France</span>
+              ${FILTER_MAP.nation.france}
               </div>
               <div class="tanks-select__item">
-                <span class="flag flag__germany"></span>
-                <span class="tanks-select__value">Germany</span>
+              ${FILTER_MAP.nation.germany}
               </div>
               <div class="tanks-select__item">
-                <span class="flag flag__italy"></span>
-                <span class="tanks-select__value">Italy</span>
+              ${FILTER_MAP.nation.italy}
               </div>
               <div class="tanks-select__item">
-                <span class="flag flag__japan"></span>
-                <span class="tanks-select__value">Japan</span>
+              ${FILTER_MAP.nation.japan}
               </div>
               <div class="tanks-select__item">
-                <span class="flag flag__czech"></span>
-                <span class="tanks-select__value">Czechoslovakia</span>
+              ${FILTER_MAP.nation.czech}
               </div>
               <div class="tanks-select__item">
-                <span class="flag flag__uk"></span>
-                <span class="tanks-select__value">U.K.</span>
+              ${FILTER_MAP.nation.uk}
               </div>
               <div class="tanks-select__item">
-                <span class="flag flag__usa"></span>
-                <span class="tanks-select__value">U.S.A.</span>
+              ${FILTER_MAP.nation.usa}
               </div>
               <div class="tanks-select__item">
-                <span class="flag flag__ussr"></span>
-                <span class="tanks-select__value">U.S.S.R</span>
+              ${FILTER_MAP.nation.ussr}
               </div>
               <div class="tanks-select__item">
-                <span class="flag flag__china"></span>
-                <span class="tanks-select__value">China</span>
+              ${FILTER_MAP.nation.china}
               </div>    
               <div class="tanks-select__item">
-                <span class="flag flag__marc"></span>
-                <span class="tanks-select__value">Mercenary</span>
+              ${FILTER_MAP.nation.merc}
               </div>
             </div>
           </div>
           <div class="tanks-select select-tank-type">
             <div class="tanks-select__header">
               <p class="tanks-select__current">
-                <span class="tank-type tank-type__all"></span>
-                <span class="tanks-select__value">All Types</span>
+              ${FILTER_MAP.type[type || defaultFilter]}
               </p>
               <svg class="tanks-select__icon">
                 <use xlink:href="assets/images/sprite.svg#arrow"></use>
@@ -102,54 +132,49 @@ class FilterComponent {
             </div>
             <div class="tanks-select__body">
               <div class="tanks-select__item default-value">
-                <span class="tank-type tank-type__all"></span>
-                <span class="tanks-select__value">All Types</span>
+              ${FILTER_MAP.type.all}
               </div>
               <div class="tanks-select__item">
-                <span class="tank-type tank-type__lighttank"></span>
-                <span class="tanks-select__value">Light Tanks</span>
+              ${FILTER_MAP.type.lighttank}
               </div>
               <div class="tanks-select__item">
-                <span class="tank-type tank-type__mediumtank"></span>
-                <span class="tanks-select__value">Medium tanks</span>
+              ${FILTER_MAP.type.mediumtank}
               </div>
               <div class="tanks-select__item">
-                <span class="tank-type tank-type__heavytank"></span>
-                <span class="tanks-select__value">Heavy Tanks</span>
+              ${FILTER_MAP.type.heavytank}
               </div>
               <div class="tanks-select__item">
-                <span class="tank-type tank-type__at-spg"></span>
-                <span class="tanks-select__value">Tank DEstroyers</span>
+              ${FILTER_MAP.type[specialTypeTank] /* All style for this tank type use "-" */} 
               </div>
               <div class="tanks-select__item">
-                <span class="tank-type tank-type__spg"></span>
-                <span class="tanks-select__value">SPGs</span>
+              ${FILTER_MAP.type.spg}
               </div>
               <div class="tanks-select__item">
-                <span class="tank-type tank-type__multirole"></span>
-                <span class="tanks-select__value">Multirole fighter</span>
+              ${FILTER_MAP.type.multirole}
               </div>
             </div>
           </div>
           <div class="tanks-select select-level">
             <div class="tanks-select__header">
-              <p class="tanks-select__current">I-X<span class="tanks-select__value">All Tiers</span></p>
+              <p class="tanks-select__current">${FILTER_MAP.tier[tier || defaultFilter]}</span></p>
               <svg class="tanks-select__icon">
                 <use xlink:href="assets/images/sprite.svg#arrow"></use>
               </svg>
             </div>
             <div class="tanks-select__body">
-              <div class="tanks-select__item default-value">I-X<span class="tanks-select__value">All Tiers</span></div>
-              <div class="tanks-select__item">I<span class="tanks-select__value">Levels</span></div>
-              <div class="tanks-select__item">II<span class="tanks-select__value">Levels</span></div>
-              <div class="tanks-select__item">III<span class="tanks-select__value">Levels</span></div>
-              <div class="tanks-select__item">IV<span class="tanks-select__value">Levels</span></div>
-              <div class="tanks-select__item">V<span class="tanks-select__value">Levels</span></div>
-              <div class="tanks-select__item">VI<span class="tanks-select__value">Levels</span></div>
-              <div class="tanks-select__item">VII<span class="tanks-select__value">Levels</span></div>
-              <div class="tanks-select__item">VII<span class="tanks-select__value">Levels</span></div>
-              <div class="tanks-select__item">IX<span class="tanks-select__value">Levels</span></div>
-              <div class="tanks-select__item">X<span class="tanks-select__value">Levels</span></div>    
+              <div class="tanks-select__item default-value">I-X
+                <span class="tanks-select__value" data-tier="all">All Tiers</span>
+              </div>
+              <div class="tanks-select__item">${FILTER_MAP.tier[++tierCounte]}</div>
+              <div class="tanks-select__item">${FILTER_MAP.tier[++tierCounte]}</div>
+              <div class="tanks-select__item">${FILTER_MAP.tier[++tierCounte]}</div>
+              <div class="tanks-select__item">${FILTER_MAP.tier[++tierCounte]}</div>
+              <div class="tanks-select__item">${FILTER_MAP.tier[++tierCounte]}</div>
+              <div class="tanks-select__item">${FILTER_MAP.tier[++tierCounte]}</div>
+              <div class="tanks-select__item">${FILTER_MAP.tier[++tierCounte]}</div>
+              <div class="tanks-select__item">${FILTER_MAP.tier[++tierCounte]}</div>
+              <div class="tanks-select__item">${FILTER_MAP.tier[++tierCounte]}</div>
+              <div class="tanks-select__item">${FILTER_MAP.tier[++tierCounte]}</div>
             </div>
           </div>
           <button class="reset-button">Show all vehicles</button>
@@ -157,4 +182,4 @@ class FilterComponent {
   }
 }
 
-export default FilterComponent;
+export default new FilterComponent();
