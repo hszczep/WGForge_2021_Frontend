@@ -1,69 +1,31 @@
 import './scss/main-page.styles.scss';
-
-import FilterComponent from './components/filter/filter';
-import storage from '../app/components/storage/storage';
-import ProductItemComponent from '../product-item/product-item';
-import ProductItemInterface from '../../models/product-item.model';
-import { PRODUCT_LIMIT, PRODUCT_OFFSET } from './common/constants';
+import filter from './components/filter/filter';
+import lazyLoad from './components/lazy-load/lazy-load';
 import favoritesService from '../../services/favorites.service';
 import cartService from '../../services/cart.service';
 
-const filter = new FilterComponent();
-
 class MainPageComponent {
-  listOfProducts: ProductItemInterface[];
-  offset: number;
-  limit: number;
-  listSize: number;
-  observer: IntersectionObserver;
   #elements: { [key: string]: HTMLElement } = null;
-
   constructor() {
     this.render = this.render.bind(this);
     this.init = this.init.bind(this);
     this.unmount = this.unmount.bind(this);
-    this.offset = PRODUCT_OFFSET;
-    this.limit = PRODUCT_LIMIT;
   }
 
   init() {
-    this.listOfProducts = storage.products;
-    this.listSize = this.listOfProducts.length;
+    filter.init();
+    lazyLoad.init();
     this.#elements = {
       productsList: document.querySelector('.cards-field'),
     };
     this.#elements.productsList.addEventListener('click', favoritesService.favoritesButtonClickHandler);
     this.#elements.productsList.addEventListener('click', cartService.purchaseButtonClickHandler);
-    filter.init();
-    this.addProductsToList();
-    this.observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => entry.isIntersecting && this.addProductsToList());
-    });
-    this.observer.observe(document.getElementById('list-end'));
-  }
-
-  addProductsToList() {
-    const container = document.getElementById('cards-container');
-    const productsToRender = this.listOfProducts
-      .slice(this.offset, Math.min(this.offset + this.limit, this.listSize))
-      .map((product) => {
-        const productWithFavorite = product;
-        productWithFavorite.isFavorite = storage.checkProductInFavoritesById(product.id);
-        return new ProductItemComponent(productWithFavorite).render();
-      })
-      .join('');
-    this.offset = Math.min(this.offset + this.limit, this.listSize);
-    if (this.offset === this.listSize) {
-      this.observer.disconnect();
-    }
-    container.insertAdjacentHTML('beforeend', productsToRender);
   }
 
   unmount() {
-    this.observer.disconnect();
     this.#elements.productsList.removeEventListener('click', favoritesService.favoritesButtonClickHandler);
     this.#elements.productsList.removeEventListener('click', cartService.purchaseButtonClickHandler);
-    this.offset = 0;
+    lazyLoad.unmount();
   }
 
   render() {

@@ -10,7 +10,7 @@ interface ProductItemInterface {
   id: string;
   images: Array<string>;
   details: string;
-  isFavorite?: boolean;
+  isFavorite: boolean;
 }
 
 interface ProductPrice {

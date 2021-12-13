@@ -3,6 +3,36 @@
 .item-block {
   width: $app-max-width;
 
+  .purchase-btn {
+    width: 150px;
+    height: 45px;
+    bottom: 30px;
+    border-radius: 3px;
+    border: 1px solid $purchase-button-background;
+    background: none;
+    font-family: $app-font-family;
+    font-size: 14px;
+    line-height: 18px;
+    font-weight: 400;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    color: $purchase-text-color;
+    transition: $app-standard-transition;
+
+    &:hover {
+      background-color: $purchase-button-background;
+    }
+
+    &__active {
+      background-color: $purchase-button-background;
+
+      &:hover {
+        color: $purchase-button-background;
+        background-color: $purchase-text-color;
+      }
+    }
+  }
+
   &__main-info {
     display: flex;
     position: relative;
@@ -95,27 +125,44 @@
         transition: $app-standard-transition;
 
         &:hover {
-          background: $purchase-button-hover-background;
+          color: $purchase-button-background;
+          background-color: $purchase-text-color;
+        }
+
+        &__active {
+          color: $purchase-button-background;
+          background-color: $purchase-text-color;
+
+          &:hover {
+            color: $purchase-text-color;
+            background-color: $purchase-button-background;
+          }
         }
       }
 
       .like-btn {
-        margin-left: 20px;
-        width: 150px;
+        width: 60px;
         height: 60px;
-        border: 1px solid $item-page-border-color;
-        border-radius: 3px;
-        font-family: $app-font-family;
-        font-size: 16px;
-        line-height: 18px;
-        font-weight: 400;
-        text-transform: uppercase;
-        letter-spacing: 0.01em;
-        color: $item-page-text-color;
-        transition: $app-standard-transition;
+        margin-left: 30px;
 
-        &:hover {
-          background: rgba(255, 255, 255, 0.1);
+        &__icon {
+          width: 100%;
+          height: 100%;
+          opacity: 0.7;
+          fill: none;
+          transition: $app-standard-transition;
+
+          &:hover {
+            fill: #fff;
+            transition: $app-standard-transition;
+          }
+        }
+      }
+
+      .like-btn__active {
+        .like-btn__icon {
+          fill: #fff;
+          opacity: 0.6;
         }
       }
     }
@@ -166,6 +213,8 @@
       }
 
       .item-specifications {
+        width: 85%;
+
         .item-title {
           font-size: 50px;
           padding: 50px 5px 10px;
@@ -209,10 +258,9 @@
         }
 
         .like-btn {
+          width: 40px;
+          height: 40px;
           margin-left: 20px;
-          width: 120px;
-          height: 50px;
-          font-size: 13px;
         }
       }
     }
@@ -233,36 +281,6 @@
 @media all and (max-width: $app-medium-media-query) {
   .item-block {
     width: $app-min-width;
-
-    .purchase-btn {
-      width: 150px;
-      height: 45px;
-      bottom: 30px;
-      border-radius: 3px;
-      border: 1px solid $purchase-button-background;
-      background: none;
-      font-family: $app-font-family;
-      font-size: 14px;
-      line-height: 18px;
-      font-weight: 400;
-      text-transform: uppercase;
-      letter-spacing: 0.01em;
-      color: $purchase-text-color;
-      transition: $app-standard-transition;
-
-      &:hover {
-        background-color: $purchase-button-background;
-      }
-
-      &__active {
-        background-color: $purchase-button-background;
-
-        &:hover {
-          color: $purchase-button-background;
-          background-color: $purchase-text-color;
-        }
-      }
-    }
 
     &__main-info {
       display: block;
@@ -333,7 +351,11 @@
         }
 
         .like-btn {
-          display: none;
+          position: absolute;
+          top: 50px;
+          left: 230px;
+          width: 35px;
+          height: 35px;
         }
       }
     }
@@ -354,9 +376,5 @@
         font-size: 13px;
       }
     }
-  }
-
-  .footer {
-    margin-bottom: 60px;
   }
 }

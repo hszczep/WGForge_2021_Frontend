@@ -41,7 +41,9 @@ class Router {
       // FOR 'SIGIN' AND 'SIGNOUT' PAGES
       (PAGES_URL_REG_EXPS.AUTH.test(currentPath) && storage.checkIsUserLogged()) ||
       // FOR 'FAVORITES' AND 'CART' PAGES
-      (PAGES_URL_REG_EXPS.SUBMENU.test(currentPath) && !storage.checkIsUserLogged())
+      (PAGES_URL_REG_EXPS.SUBMENU.test(currentPath) && !storage.checkIsUserLogged()) ||
+      // FOR 'ADMIN' PAGE
+      (PAGES_URL_REG_EXPS.ADMIN.test(currentPath) && !storage.checkIsUserAdmin())
     ) {
       window.location.hash = '#';
       return;
