@@ -50,7 +50,7 @@ class ProductPageComponent {
       ? localizeCurrency(Number(product.price_discount), product.price.code)
       : '';
     const isFavorite = storage.checkProductInFavoritesById(product.id);
-    // const isInCart = storage.checkProductInCartById(product.id);
+    const isInCart = storage.checkProductInCartById(product.id);
 
     return `
       <div class='content-menu'>
@@ -73,9 +73,11 @@ class ProductPageComponent {
                 <p class="price price-discount">${priceDiscount}</p>
             </div>
             <div class="item__controls">
-              <button class="purchase-btn">purchase</button>
-              <button class="like-btn">
-                ${isFavorite ? 'Already in favorites' : 'Add to favorites'}
+              <button class="purchase-btn ${isInCart ? 'purchase-btn__active' : ''}">purchase</button>
+              <button class="like-btn ${isFavorite ? 'like-btn__active' : ''}">
+                <svg class="like-btn__icon">
+                  <use xlink:href="assets/images/sprite.svg#like"></use>
+                </svg>
               </button>
             </div>
           </div>

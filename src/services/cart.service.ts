@@ -21,7 +21,7 @@ class CartService {
     return mainApiService.putToCart(this.#getUserToken(), productId);
   }
 
-  addToCart(productId: string, purchaseButton: Element) {
+  removeFromCart(productId: string, purchaseButton: Element) {
     purchaseButton.classList.remove('purchase-btn__active');
     this.removeFromApiCart(productId)
       .then(() => {
@@ -34,7 +34,7 @@ class CartService {
       });
   }
 
-  removeFromCart(productId: string, purchaseButton: Element) {
+  addToCart(productId: string, purchaseButton: Element) {
     purchaseButton.classList.add('purchase-btn__active');
     this.addToApiCart(productId)
       .then(() => {
@@ -60,8 +60,8 @@ class CartService {
     const productId = currentProductListElement.dataset.id;
 
     if (storage.checkProductInCartById(productId)) {
-      this.addToCart(productId, purchaseButton);
-    } else this.removeFromCart(productId, purchaseButton);
+      this.removeFromCart(productId, purchaseButton);
+    } else this.addToCart(productId, purchaseButton);
   }
 }
 
