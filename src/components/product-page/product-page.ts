@@ -1,9 +1,12 @@
 import './scss/product-page.styles.scss';
 
 import storage from '../app/components/storage/storage';
-import { convertToRomane } from '../../common/common.helper';
+
 import favoritesService from '../../services/favorites.service';
 import cartService from '../../services/cart.service';
+
+import { convertToRomane, localizeCurrency } from '../../common/common.helper';
+import { PRODUCT_TYPE_MACHINERY } from '../../common/common.constants';
 
 class ProductPageComponent {
   #elements: { [key: string]: HTMLElement } = null;
@@ -31,17 +34,23 @@ class ProductPageComponent {
   render() {
     const productId = window.location.hash.split('/').pop();
     const product = storage.getProductById(productId);
-    const productTank = 'machinery';
     let productTextInfo;
 
-    if (product.type === productTank) {
+    if (product.type === PRODUCT_TYPE_MACHINERY) {
       productTextInfo = `
                   <span class="flag flag__${product.nation}"></span>
-                  <span class="tank-type tank-type__${product.tank_type}"></span>
+                  <span class="tank-type tank-type__${product.tank_type.toLowerCase()}"></span>
                   <span class="level">${convertToRomane(product.tier)}</span>
                   <span class="item-name">${product.name}</span>
       `;
     }
+
+    const price = localizeCurrency(Number(product.price.amount), product.price.code);
+    const priceDiscount = product.price_discount
+      ? localizeCurrency(Number(product.price_discount), product.price.code)
+      : '';
+    const isFavorite = storage.checkProductInFavoritesById(product.id);
+    // const isInCart = storage.checkProductInCartById(product.id);
 
     return `
       <div class='content-menu'>
@@ -53,23 +62,20 @@ class ProductPageComponent {
           <button>Premium account</button>
         </div>
       </div>
-
       <article class="item-block" data-id="${product.id}">
         <div class="item-block__main-info">
-          <p class="discount">${product.discount ? `- ${product.discount}%` : ''}</p>
+          <p class="discount">${product.discount ? `-${product.discount}%` : ''}</p>
           <div class="item-specifications">
             <h2 class="item-title">${product.name}</h2>
             <h2 class="item-text">${productTextInfo}</h2>           
             <div class="price-block">
-                <p class="price${product.discount ? ' old-price' : ''}">${`$ ${product.price.amount}`}</p>
-                <p class="price price-discount">${product.discount ? `${`$ ${product.price_discount}`}` : ''}</p>
+                <p class="price${product.discount ? ' old-price' : ''}">${price}</p>
+                <p class="price price-discount">${priceDiscount}</p>
             </div>
             <div class="item__controls">
               <button class="purchase-btn">purchase</button>
-              <button class="like-btn ${product.isFavorite ? 'like-btn__active' : ''}">
-                <svg class="like-btn__icon">
-                  <use xlink:href="assets/images/sprite.svg#like"></use>
-                </svg>
+              <button class="like-btn">
+                ${isFavorite ? 'Already in favorites' : 'Add to favorites'}
               </button>
             </div>
           </div>
