@@ -1,0 +1,127 @@
+@import '../../../scss/variables';
+
+.carousel {
+  position: relative;
+
+  display: flex;
+  width: 50%;
+}
+
+.carousel-image {
+  width: 100%;
+}
+
+.items-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.carousel-item {
+  position: relative;
+  display: none;
+
+  animation: 0.5s ease-in-out;
+}
+
+.active,
+.next {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.next {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+.control-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 5%;
+
+  &-left {
+    order: -1;
+  }
+
+  &-right {
+    right: 0;
+  }
+}
+
+.control {
+  font-size: 84px;
+}
+
+.to-left {
+  animation-name: left;
+}
+
+.from-right {
+  animation-name: right;
+}
+
+.to-right {
+  animation-name: right;
+  animation-direction: reverse;
+}
+
+.from-left {
+  animation-name: left;
+  animation-direction: reverse;
+}
+
+@keyframes left {
+  from {
+    left: 0;
+  }
+
+  to {
+    left: -100%;
+  }
+}
+
+@keyframes right {
+  from {
+    left: 100%;
+  }
+
+  to {
+    left: 0;
+  }
+}
+
+@media all and (max-width: $app-medium-media-query) {
+  .carousel {
+    width: 100%;
+  }
+
+  .control-wrapper {
+    display: none;
+  }
+}
+
+// @media (max-width: 960px) {
+//   .description {
+//     flex-direction: column;
+//     align-items: center;
+//   }
+// }
+
+// @media (max-width: 640px) {
+//   .control > .arrow {
+//     display: none;
+//   }
+
+//   .project-name {
+//     display: none;
+//   }
+
+//   .description {
+//     border: 0;
+//   }
+// }

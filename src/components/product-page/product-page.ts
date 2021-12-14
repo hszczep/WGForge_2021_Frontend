@@ -1,4 +1,5 @@
 import './scss/product-page.styles.scss';
+import './components/swiper.scss';
 
 import storage from '../app/components/storage/storage';
 
@@ -7,6 +8,8 @@ import cartService from '../../services/cart.service';
 
 import { convertToRomane, localizeCurrency } from '../../common/common.helper';
 import { PRODUCT_TYPE_MACHINERY } from '../../common/common.constants';
+
+import { swiperInit } from './components/swiper';
 
 class ProductPageComponent {
   #elements: { [key: string]: HTMLElement } = null;
@@ -24,6 +27,8 @@ class ProductPageComponent {
     };
     this.#elements.favoritesButton.addEventListener('click', favoritesService.favoritesButtonClickHandler);
     this.#elements.purchaseButton.addEventListener('click', cartService.purchaseButtonClickHandler);
+
+    swiperInit();
   }
 
   unmount() {
@@ -51,7 +56,7 @@ class ProductPageComponent {
       : '';
     const isFavorite = storage.checkProductInFavoritesById(product.id);
     const isInCart = storage.checkProductInCartById(product.id);
-
+    // <img class="item-img" src="${product.images[0]}" alt="${product.name}" />
     return `
       <div class='content-menu'>
         <a href='#' class='WoT_logo'><img src='assets/images/WoT_logo.png' alt='WoT logo' /></a>
@@ -81,7 +86,27 @@ class ProductPageComponent {
               </button>
             </div>
           </div>
-          <img class="item-img" src="${product.images[0]}" alt="${product.name}" />
+
+          <div class="carousel">
+            <div class="items-container">
+              <div class="carousel-item active">
+                <img class="carousel-image" src="${product.images[0]}" alt="project">
+              </div>
+              <div class="carousel-item" style="filter: sepia(1)">
+                <img class="carousel-image" src="${product.images[0]}" alt="project">
+              </div>
+              <div class="carousel-item" style="filter: grayscale(1)">
+                <img class="carousel-image" src="${product.images[0]}" alt="project">
+              </div>
+            </div>
+            <div class="control-wrapper control-wrapper-left">
+              <button class="control control-left">&lt;</button>
+            </div>
+            <div class="control-wrapper control-wrapper-right">
+              <button class="control control-right">&gt;</button>
+            </div>
+          </div>
+
         </div>
         <div class="item-description">
           <h3 class="item-description__title">Details</h3>
