@@ -275,3 +275,13 @@
     }
   }
 }
+
+.card-clone {
+  margin: 0;
+  padding: 0;
+  position: absolute;
+  pointer-events: none;
+  filter: blur(5px);
+  z-index: 5;
+  transition: 500ms ease-in-out;
+}

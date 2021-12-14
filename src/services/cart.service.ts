@@ -1,6 +1,7 @@
 import storage from '../components/app/components/storage/storage';
 import headerComponent from '../components/header/header';
 import popup from '../components/popup/popup';
+import addToCartAnimation from './common/cart-animation';
 
 import mainApiService from './main-api.service';
 
@@ -35,6 +36,7 @@ class CartService {
   }
 
   addToCart(productId: string, purchaseButton: Element) {
+    if (window.location.hash === '#' || window.location.hash === '') addToCartAnimation(purchaseButton.parentElement);
     purchaseButton.classList.add('purchase-btn__active');
     this.addToApiCart(productId)
       .then(() => {
