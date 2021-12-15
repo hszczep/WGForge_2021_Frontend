@@ -79,7 +79,7 @@ class ProductItemComponent implements IProductItemComponent {
                   ${productNameInfo}
                 </h2>
                 <p class="price${this.discount ? ' old-price' : ''}">${this.price}</p>
-                <p class="price price-discount">${this.discount ? `${this.price_discount}` : ''}</p>
+                <p class="price price-discount">${this.discount ? this.price_discount : ''}</p>
               </div>
             </a>
             <button class="like-btn ${this.isFavorite ? 'like-btn__active' : ''}">
