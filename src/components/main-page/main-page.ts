@@ -13,7 +13,6 @@ class MainPageComponent {
   }
 
   init() {
-    console.log('init main page');
     menu.init();
     this.#elements = {
       productsList: document.querySelector('.cards-field'),

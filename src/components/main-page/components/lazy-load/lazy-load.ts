@@ -17,14 +17,13 @@ class LazyLoad {
     this.limit = PRODUCT_LIMIT;
   }
   init(listOfProducts: Array<ProductItemInterface>) {
-    console.log('init lazy load');
     this.listOfProducts = listOfProducts;
     this.listSize = this.listOfProducts.length;
-    this.addProductsToList();
     this.observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => entry.isIntersecting && this.addProductsToList());
     });
     this.observer.observe(document.getElementById('list-end'));
+    this.addProductsToList();
   }
 
   addProductsToList() {

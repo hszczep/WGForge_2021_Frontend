@@ -7,7 +7,7 @@ import storage from '../app/components/storage/storage';
 class ProductItemComponent implements IProductItemComponent {
   id: string;
   tier: number;
-  type: string;
+  type: string | Array<string>;
   name: string;
   price: string;
   nation: string;
@@ -54,7 +54,7 @@ class ProductItemComponent implements IProductItemComponent {
 
   render() {
     let productNameInfo;
-    if (this.type === PRODUCT_TYPE_MACHINERY) {
+    if (this.type.includes(PRODUCT_TYPE_MACHINERY)) {
       productNameInfo = `
                   <span class="flag ${this.flag}"></span>
                   <span class="tank-type tank-type__${this.tank_type}"></span>

@@ -7,16 +7,15 @@ import ProductItemInterface from '../../../../models/product-item.model';
 class FilterComponent {
   listOfProducts: Array<ProductItemInterface>;
   init(listOfProducts: Array<ProductItemInterface>) {
-    console.log('init filter');
     this.listOfProducts = listOfProducts;
-    lazyLoad.init(this.listOfProducts);
+    lazyLoad.init(this.#filtratedListOfProducts(listOfProducts));
 
     const selectHeader = document.querySelectorAll('.tanks-select__header');
     const selectItem = document.querySelectorAll('.tanks-select__item');
     const defaultValue = document.querySelectorAll('.default-value');
     const resetButton = document.querySelector('.reset-button');
     const tanksFilter = document.querySelector('.filter-field') as HTMLElement;
-    const tankCategory = 'vehicles';
+    const tankCategory = 'machinery';
 
     if (storage.category !== tankCategory) tanksFilter.style.display = 'none';
 

@@ -5,56 +5,73 @@ import ProductItemInterface from '../../../../models/product-item.model';
 
 class MenuCategories {
   menu: HTMLElement;
+  vehiclesFilter: HTMLElement;
+  vehiclesCategory: string;
   constructor() {
     this.init = this.init.bind(this);
     this.render = this.render.bind(this);
+    this.changeCategory = this.changeCategory.bind(this);
   }
   init() {
-    console.log('init categories');
     this.menu = document.querySelector('.content-menu__buttons');
     const setActiveButton = this.menu.querySelector(`[data-category='${storage.category}']`);
     setActiveButton.classList.add('active-menu__button');
 
-    const vehiclesCategory = 'machinery';
+    if (window.location.hash === '#' || window.location.hash === '') {
+      this.vehiclesCategory = 'machinery';
+      this.vehiclesFilter = document.querySelector('.filter-field') as HTMLElement;
 
-    if (storage.category === vehiclesCategory) filter.init(this.#changeCategory(storage.products));
-    else lazyLoad.init(this.#changeCategory(storage.products));
-
-    this.menu.addEventListener('click', (event: Event) => {
-      const target = event.target as HTMLElement;
-      const tagElement = 'BUTTON';
-
-      if (target.tagName === tagElement && !target.classList.contains('active-menu__button')) {
-        window.location.hash = '#';
-        lazyLoad.unmount();
-        const activeButton = this.menu.querySelector('.active-menu__button');
-
-        activeButton.classList.remove('active-menu__button');
-        target.classList.add('active-menu__button');
-        storage.category = target.dataset.category;
-        const cardField = document.querySelector('.cards-field');
-        cardField.innerHTML = '';
-
-        const vehiclesFilter = document.querySelector('.filter-field') as HTMLElement;
-        if (storage.category === vehiclesCategory) {
-          filter.init(this.#changeCategory(storage.products));
-          vehiclesFilter.style.display = 'flex';
-        } else {
-          vehiclesFilter.style.display = 'none';
-          lazyLoad.init(this.#changeCategory(storage.products));
-        }
+      if (storage.category === this.vehiclesCategory) {
+        this.vehiclesFilter.style.display = 'flex';
+        filter.init(this.#filterCategory(storage.products));
+      } else {
+        this.vehiclesFilter.style.display = 'none';
+        lazyLoad.init(this.#filterCategory(storage.products));
       }
-    });
+      this.menu.addEventListener('click', this.changeCategory);
+    } else this.menu.addEventListener('click', this.simpleWork);
   }
   unmount() {
     lazyLoad.unmount();
   }
-  #changeCategory(listOfProducts: Array<ProductItemInterface>): Array<ProductItemInterface> {
+  changeCategory(event: Event) {
+    const target = event.target as HTMLElement;
+    const tagButton = 'BUTTON';
+
+    if (target.tagName === tagButton) {
+      lazyLoad.unmount();
+      const activeButton = this.menu.querySelector('.active-menu__button');
+      activeButton.classList.remove('active-menu__button');
+      target.classList.add('active-menu__button');
+      storage.category = target.dataset.category;
+
+      const cardField = document.querySelector('.cards-field');
+      cardField.innerHTML = '';
+
+      if (storage.category === this.vehiclesCategory) {
+        filter.init(this.#filterCategory(storage.products));
+        this.vehiclesFilter.style.display = 'flex';
+      } else {
+        this.vehiclesFilter.style.display = 'none';
+        lazyLoad.init(this.#filterCategory(storage.products));
+      }
+    }
+  }
+  simpleWork(event: Event) {
+    const target = event.target as HTMLElement;
+    const tagButton = 'BUTTON';
+
+    if (target.tagName === tagButton) {
+      storage.category = target.dataset.category;
+      window.location.hash = '';
+    }
+  }
+  #filterCategory(listOfProducts: Array<ProductItemInterface>): Array<ProductItemInterface> {
     const { category } = storage;
     const allCategoris = 'all';
     if (category === allCategoris) return listOfProducts;
 
-    const filteredProducts = listOfProducts.filter((item) => item.type === category);
+    const filteredProducts = listOfProducts.filter((item) => item.type.includes(category));
     return filteredProducts;
   }
   render() {
