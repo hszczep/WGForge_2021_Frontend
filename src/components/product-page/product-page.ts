@@ -1,7 +1,7 @@
 import './scss/product-page.styles.scss';
-import './components/swiper.scss';
 
 import storage from '../app/components/storage/storage';
+import Swiper from './components/swiper/swiper';
 
 import favoritesService from '../../services/favorites.service';
 import cartService from '../../services/cart.service';
@@ -9,10 +9,9 @@ import cartService from '../../services/cart.service';
 import { convertToRomane, localizeCurrency } from '../../common/common.helper';
 import { PRODUCT_TYPE_MACHINERY } from '../../common/common.constants';
 
-import { swiperInit } from './components/swiper';
-
 class ProductPageComponent {
   #elements: { [key: string]: HTMLElement } = null;
+  #swiper: Swiper;
 
   constructor() {
     this.init = this.init.bind(this);
@@ -28,15 +27,19 @@ class ProductPageComponent {
     this.#elements.favoritesButton.addEventListener('click', favoritesService.favoritesButtonClickHandler);
     this.#elements.purchaseButton.addEventListener('click', cartService.purchaseButtonClickHandler);
 
-    swiperInit();
+    this.#swiper.init();
   }
 
   unmount() {
     this.#elements.favoritesButton.removeEventListener('click', favoritesService.favoritesButtonClickHandler);
     this.#elements.purchaseButton.removeEventListener('click', cartService.purchaseButtonClickHandler);
+
+    this.#swiper.unmount();
   }
 
   render() {
+    this.#swiper = new Swiper();
+
     const productId = window.location.hash.split('/').pop();
     const product = storage.getProductById(productId);
     let productTextInfo;
@@ -56,7 +59,6 @@ class ProductPageComponent {
       : '';
     const isFavorite = storage.checkProductInFavoritesById(product.id);
     const isInCart = storage.checkProductInCartById(product.id);
-    // <img class="item-img" src="${product.images[0]}" alt="${product.name}" />
     return `
       <div class='content-menu'>
         <a href='#' class='WoT_logo'><img src='assets/images/WoT_logo.png' alt='WoT logo' /></a>
@@ -86,27 +88,7 @@ class ProductPageComponent {
               </button>
             </div>
           </div>
-
-          <div class="carousel">
-            <div class="items-container">
-              <div class="carousel-item active">
-                <img class="carousel-image" src="${product.images[0]}" alt="project">
-              </div>
-              <div class="carousel-item" style="filter: sepia(1)">
-                <img class="carousel-image" src="${product.images[0]}" alt="project">
-              </div>
-              <div class="carousel-item" style="filter: grayscale(1)">
-                <img class="carousel-image" src="${product.images[0]}" alt="project">
-              </div>
-            </div>
-            <div class="control-wrapper control-wrapper-left">
-              <button class="control control-left">&lt;</button>
-            </div>
-            <div class="control-wrapper control-wrapper-right">
-              <button class="control control-right">&gt;</button>
-            </div>
-          </div>
-
+          ${this.#swiper.render(product)}
         </div>
         <div class="item-description">
           <h3 class="item-description__title">Details</h3>
