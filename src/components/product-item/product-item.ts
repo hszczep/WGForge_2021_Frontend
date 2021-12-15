@@ -1,8 +1,8 @@
-import { PRODUCT_TYPE_MACHINERY } from './common/product-item.constants';
 import IProductItemComponent from './models/product-item-interface';
 import { convertToRomane, localizeCurrency } from '../../common/common.helper';
 import ProductItemInterface from '../../models/product-item.model';
 import storage from '../app/components/storage/storage';
+import { PRODUCT_TYPE_VEHICLE } from '../../common/common.constants';
 
 class ProductItemComponent implements IProductItemComponent {
   id: string;
@@ -54,7 +54,7 @@ class ProductItemComponent implements IProductItemComponent {
 
   render() {
     let productNameInfo;
-    if (this.type.includes(PRODUCT_TYPE_MACHINERY)) {
+    if (this.type.includes(PRODUCT_TYPE_VEHICLE)) {
       productNameInfo = `
                   <span class="flag ${this.flag}"></span>
                   <span class="tank-type tank-type__${this.tank_type}"></span>

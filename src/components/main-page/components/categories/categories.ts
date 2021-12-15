@@ -18,7 +18,7 @@ class MenuCategories {
     setActiveButton.classList.add('active-menu__button');
 
     if (window.location.hash === '#' || window.location.hash === '') {
-      this.vehiclesCategory = 'machinery';
+      this.vehiclesCategory = 'vehicle';
       this.vehiclesFilter = document.querySelector('.filter-field') as HTMLElement;
 
       if (storage.category === this.vehiclesCategory) {
@@ -29,7 +29,7 @@ class MenuCategories {
         lazyLoad.init(this.#filterCategory(storage.products));
       }
       this.menu.addEventListener('click', this.changeCategory);
-    } else this.menu.addEventListener('click', this.simpleWork);
+    } else this.menu.addEventListener('click', this.ChangeCategoryFromItemPage);
   }
   unmount() {
     lazyLoad.unmount();
@@ -57,7 +57,7 @@ class MenuCategories {
       }
     }
   }
-  simpleWork(event: Event) {
+  ChangeCategoryFromItemPage(event: Event) {
     const target = event.target as HTMLElement;
     const tagButton = 'BUTTON';
 
@@ -68,16 +68,15 @@ class MenuCategories {
   }
   #filterCategory(listOfProducts: Array<ProductItemInterface>): Array<ProductItemInterface> {
     const { category } = storage;
-    const allCategoris = 'all';
-    if (category === allCategoris) return listOfProducts;
+    const allCategories = 'all';
+    if (category === allCategories) return listOfProducts;
 
-    const filteredProducts = listOfProducts.filter((item) => item.type.includes(category));
-    return filteredProducts;
+    return listOfProducts.filter((item) => item.type.includes(category));
   }
   render() {
     return `
         <button data-category='all'>All</button>
-        <button data-category='machinery'>Vehicles</button>
+        <button data-category='vehicle'>Vehicles</button>
         <button data-category='gold'>Gold</button>
         <button data-category='premium'>Premium account</button>
         `;

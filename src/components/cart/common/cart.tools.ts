@@ -1,11 +1,11 @@
 import storage from '../../app/components/storage/storage';
 import { convertToRomane, localizeCurrency } from '../../../common/common.helper';
-import { PRODUCT_TYPE_MACHINERY } from '../../product-item/common/product-item.constants';
 import ProductItemInterface from '../../../models/product-item.model';
+import { PRODUCT_TYPE_VEHICLE } from '../../../common/common.constants';
 
 export const renderCartItem = (cartItem: ProductItemInterface): string => {
   const cartItemInfo =
-    cartItem.type === PRODUCT_TYPE_MACHINERY
+    cartItem.type.includes(PRODUCT_TYPE_VEHICLE)
       ? `
        <span class="flag flag__${cartItem.nation}"></span>
        <span class="tank-type tank-type__${cartItem.tank_type.toLowerCase()}"></span>

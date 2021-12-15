@@ -15,7 +15,7 @@ class FilterComponent {
     const defaultValue = document.querySelectorAll('.default-value');
     const resetButton = document.querySelector('.reset-button');
     const tanksFilter = document.querySelector('.filter-field') as HTMLElement;
-    const tankCategory = 'machinery';
+    const tankCategory = 'vehicle';
 
     if (storage.category !== tankCategory) tanksFilter.style.display = 'none';
 

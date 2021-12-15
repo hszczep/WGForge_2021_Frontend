@@ -8,7 +8,7 @@ import cartService from '../../services/cart.service';
 import menu from '../main-page/components/categories/categories';
 
 import { convertToRomane, localizeCurrency } from '../../common/common.helper';
-import { PRODUCT_TYPE_MACHINERY } from '../../common/common.constants';
+import { PRODUCT_TYPE_VEHICLE } from '../../common/common.constants';
 
 class ProductPageComponent {
   #elements: { [key: string]: HTMLElement } = null;
@@ -45,7 +45,7 @@ class ProductPageComponent {
     const product = storage.getProductById(productId);
     let productTextInfo;
 
-    if (product.type === PRODUCT_TYPE_MACHINERY) {
+    if (product.type.includes(PRODUCT_TYPE_VEHICLE)) {
       productTextInfo = `
                   <span class="flag flag__${product.nation}"></span>
                   <span class="tank-type tank-type__${product.tank_type.toLowerCase()}"></span>
