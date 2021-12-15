@@ -1,6 +1,7 @@
 import './scss/product-page.styles.scss';
 
 import storage from '../app/components/storage/storage';
+import Swiper from './components/swiper/swiper';
 
 import favoritesService from '../../services/favorites.service';
 import cartService from '../../services/cart.service';
@@ -10,6 +11,7 @@ import { PRODUCT_TYPE_MACHINERY } from '../../common/common.constants';
 
 class ProductPageComponent {
   #elements: { [key: string]: HTMLElement } = null;
+  #swiper: Swiper;
 
   constructor() {
     this.init = this.init.bind(this);
@@ -24,14 +26,20 @@ class ProductPageComponent {
     };
     this.#elements.favoritesButton.addEventListener('click', favoritesService.favoritesButtonClickHandler);
     this.#elements.purchaseButton.addEventListener('click', cartService.purchaseButtonClickHandler);
+
+    this.#swiper.init();
   }
 
   unmount() {
     this.#elements.favoritesButton.removeEventListener('click', favoritesService.favoritesButtonClickHandler);
     this.#elements.purchaseButton.removeEventListener('click', cartService.purchaseButtonClickHandler);
+
+    this.#swiper.unmount();
   }
 
   render() {
+    this.#swiper = new Swiper();
+
     const productId = window.location.hash.split('/').pop();
     const product = storage.getProductById(productId);
     let productTextInfo;
@@ -51,7 +59,6 @@ class ProductPageComponent {
       : '';
     const isFavorite = storage.checkProductInFavoritesById(product.id);
     const isInCart = storage.checkProductInCartById(product.id);
-
     return `
       <div class='content-menu'>
         <a href='#' class='WoT_logo'><img src='assets/images/WoT_logo.png' alt='WoT logo' /></a>
@@ -81,7 +88,7 @@ class ProductPageComponent {
               </button>
             </div>
           </div>
-          <img class="item-img" src="${product.images[0]}" alt="${product.name}" />
+          ${this.#swiper.render(product)}
         </div>
         <div class="item-description">
           <h3 class="item-description__title">Details</h3>
