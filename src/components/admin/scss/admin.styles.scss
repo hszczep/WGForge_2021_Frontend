@@ -1,3 +1,248 @@
-.some-class {
-  color: red;
+@import '../../../scss/variables';
+
+.admin-field {
+  background: rgba(0, 0, 0, 0.3);
+  width: $app-max-width;
+  margin-top: 30px;
+  padding: 20px 30px;
+  border-radius: 20px;
+  font-family: $app-font-family;
+  color: #e4e4e4;
+
+  h2 {
+    font-size: 36px;
+  }
+
+  .admin-select {
+    margin-left: 15px;
+    color: #e4e4e4;
+    padding: 5px;
+    background: none;
+    border: 1px solid #e4e4e4;
+    border-radius: 5px;
+    font-size: 16px;
+  }
+
+  .admin-option {
+    color: black;
+  }
+
+  .currency-menu {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 15px;
+
+    p {
+      font-size: 26px;
+    }
+  }
+
+  .items-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #e4e4e4;
+    border-radius: 5px;
+
+    &__header {
+      width: $app-max-width - 100px;
+      height: 30px;
+      margin-top: 10px;
+      background: rgba(0, 0, 0, 0.45);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 20px;
+
+      .header-info {
+        width: 100px;
+        text-align: center;
+      }
+
+      .header-name {
+        width: 350px;
+      }
+
+      .header-img {
+        width: 200px;
+      }
+    }
+
+    &__items-field {
+      width: $app-max-width - 100px;
+      margin: 10px 0;
+
+      .item-card {
+        width: 100%;
+        margin-top: 10px;
+        border: 1px solid #e4e4e4;
+        border-radius: 5px;
+
+        .basic-information {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 50px;
+          font-size: 18px;
+
+          .item-info {
+            display: flex;
+            justify-content: center;
+            width: 100px;
+          }
+
+          .item-name {
+            width: 350px;
+          }
+
+          .item-img {
+            width: 100px;
+            height: 50px;
+            margin: 0 50px;
+            transition: all 500ms;
+
+            img {
+              max-width: 200px;
+            }
+
+            &:hover {
+              transform: scale(4);
+              transition: all 500ms;
+            }
+          }
+
+          .delete-button {
+            width: 35px;
+            height: 35px;
+            fill: $title-text-color;
+
+            &:hover {
+              fill: $delete-button-color;
+            }
+          }
+        }
+
+        .full-information {
+          display: none;
+          font-size: 20px;
+          padding: 25px 50px;
+
+          input,
+          textarea {
+            margin-left: 10px;
+            padding: 5px;
+            border: 1px solid #e4e4e4;
+            border-radius: 5px;
+            font-size: 18px;
+            color: #fff;
+          }
+
+          .price-block {
+            width: 840px;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+
+            input {
+              width: 80px;
+            }
+          }
+
+          .title-block {
+            width: 600px;
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+          }
+
+          .category-block {
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 20px;
+
+            input {
+              margin: 0 5px 0 30px;
+            }
+          }
+
+          .tank-info {
+            width: 630px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+          }
+
+          .textarea-block {
+            .textarea {
+              vertical-align: top;
+              width: 800px;
+              height: 80px;
+              margin-bottom: 15px;
+            }
+
+            .images-input {
+              margin-left: 68px;
+            }
+          }
+
+          .buttons-block {
+            width: 100%;
+            display: flex;
+            justify-content: flex-end;
+            margin-top: 20px;
+
+            .button {
+              width: 100px;
+              height: 40px;
+              font-size: 20px;
+              color: #fff;
+              border-radius: 5px;
+            }
+
+            .cancel-btn {
+              background: #a61c00;
+            }
+
+            .save-btn {
+              margin-left: 20px;
+              background: #f80;
+            }
+          }
+        }
+      }
+
+      .active-card {
+        .basic-information {
+          background: rgba(255, 255, 255, 0.2);
+        }
+
+        .full-information {
+          display: block;
+        }
+      }
+    }
+
+    &__add-item {
+      width: 100%;
+      height: 50px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid #e4e4e4;
+      border-radius: 5px;
+      cursor: pointer;
+
+      .add-button {
+        width: 40px;
+        height: 40px;
+        fill: $title-text-color;
+        transform: rotate(45deg);
+      }
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.1);
+      }
+    }
+  }
 }

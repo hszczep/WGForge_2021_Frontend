@@ -48,7 +48,7 @@ export const FILTER_MAP: {
     lighttank: `<span class="tank-type tank-type__lighttank" data-type="lighttank"></span>
     <span class="tanks-select__value">Light Tanks</span>`,
     mediumtank: `<span class="tank-type tank-type__mediumtank" data-type="mediumtank"></span>
-    <span class="tanks-select__value">Medium tanks</span>`,
+    <span class="tanks-select__value">Medium Tanks</span>`,
     heavytank: `<span class="tank-type tank-type__heavytank" data-type="heavytank"></span>
     <span class="tanks-select__value">Heavy Tanks</span>`,
     'at-spg': `<span class="tank-type tank-type__at-spg" data-type="at-spg"></span>
