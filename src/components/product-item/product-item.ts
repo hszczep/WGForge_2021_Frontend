@@ -36,7 +36,7 @@ class ProductItemComponent implements IProductItemComponent {
     this.id = id;
     this.tier = tier; // tier tank, for render convert example "4" -> "IV"
     this.type = type; // tank, gold or premium
-    this.tank_type = tank_type.toLowerCase(); // light, medium, heavy
+    this.tank_type = tank_type ? tank_type.toLowerCase() : ''; // light, medium, heavy
     this.name = name; // shor name tank
     this.price = localizeCurrency(Number(price.amount), price.code); // default price $
     this.nation = nation; // country

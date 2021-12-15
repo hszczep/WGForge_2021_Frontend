@@ -2,11 +2,13 @@ import { USER } from '../../../../common/common.constants';
 import ProductItemInterface from '../../../../models/product-item.model';
 import { IUserState } from '../../../../models/user.model';
 import mainApiService from '../../../../services/main-api.service';
+import { gold, premium } from '../../common/app.constants';
 
 class Storage {
   #userState: IUserState = USER.DEFAULT_STATE;
   products: Array<ProductItemInterface>;
   productsFilter: { nation: string; type: string; tier: string };
+  category: string;
   setUserState(userState: IUserState) {
     this.#userState = userState;
   }
@@ -92,6 +94,8 @@ class Storage {
       type: '',
       tier: '',
     };
+    this.category = 'all';
+    this.products = [].concat(gold, premium, this.products);
   }
 }
 
