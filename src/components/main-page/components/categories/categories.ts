@@ -2,11 +2,12 @@ import storage from '../../../app/components/storage/storage';
 import filter from '../filter/filter';
 import lazyLoad from '../lazy-load/lazy-load';
 import ProductItemInterface from '../../../../models/product-item.model';
+import { PRODUCT_TYPE_VEHICLE } from '../../../../common/common.constants';
+
 
 class MenuCategories {
   menu: HTMLElement;
   vehiclesFilter: HTMLElement;
-  vehiclesCategory: string;
   constructor() {
     this.init = this.init.bind(this);
     this.render = this.render.bind(this);
@@ -18,27 +19,27 @@ class MenuCategories {
     setActiveButton.classList.add('active-menu__button');
 
     if (window.location.hash === '#' || window.location.hash === '') {
-      this.vehiclesCategory = 'vehicle';
       this.vehiclesFilter = document.querySelector('.filter-field') as HTMLElement;
-
-      if (storage.category === this.vehiclesCategory) {
-        this.vehiclesFilter.style.display = 'flex';
-        filter.init(this.#filterCategory(storage.products));
-      } else {
-        this.vehiclesFilter.style.display = 'none';
-        lazyLoad.init(this.#filterCategory(storage.products));
-      }
+      this.toggleFilterDisplay(storage.category === PRODUCT_TYPE_VEHICLE)
       this.menu.addEventListener('click', this.changeCategory);
-    } else this.menu.addEventListener('click', this.ChangeCategoryFromItemPage);
+    } else this.menu.addEventListener('click', this.changeCategoryFromItemPage);
+  }
+  toggleFilterDisplay(visible: boolean){
+    if (visible){
+      this.vehiclesFilter.classList.remove('filter-field_hidden');
+      filter.init(this.#filterCategory(storage.products));
+
+    } else {
+      this.vehiclesFilter.classList.add('filter-field_hidden')
+      lazyLoad.init(this.#filterCategory(storage.products));
+    }
   }
   unmount() {
     lazyLoad.unmount();
   }
   changeCategory(event: Event) {
     const target = event.target as HTMLElement;
-    const tagButton = 'BUTTON';
-
-    if (target.tagName === tagButton) {
+    if (target.tagName === 'BUTTON') {
       lazyLoad.unmount();
       const activeButton = this.menu.querySelector('.active-menu__button');
       activeButton.classList.remove('active-menu__button');
@@ -47,29 +48,22 @@ class MenuCategories {
 
       const cardField = document.querySelector('.cards-field');
       cardField.innerHTML = '';
-
-      if (storage.category === this.vehiclesCategory) {
-        filter.init(this.#filterCategory(storage.products));
-        this.vehiclesFilter.style.display = 'flex';
-      } else {
-        this.vehiclesFilter.style.display = 'none';
-        lazyLoad.init(this.#filterCategory(storage.products));
-      }
+      this.toggleFilterDisplay(storage.category === PRODUCT_TYPE_VEHICLE)
     }
   }
-  ChangeCategoryFromItemPage(event: Event) {
-    const target = event.target as HTMLElement;
-    const tagButton = 'BUTTON';
 
-    if (target.tagName === tagButton) {
+
+  changeCategoryFromItemPage(event: Event) {
+    const target = event.target as HTMLElement;
+
+    if (target.tagName === 'BUTTON') {
       storage.category = target.dataset.category;
-      window.location.hash = '';
+      window.location.hash = '#';
     }
   }
   #filterCategory(listOfProducts: Array<ProductItemInterface>): Array<ProductItemInterface> {
     const { category } = storage;
-    const allCategories = 'all';
-    if (category === allCategories) return listOfProducts;
+    if (category === 'all') return listOfProducts;
 
     return listOfProducts.filter((item) => item.type.includes(category));
   }
