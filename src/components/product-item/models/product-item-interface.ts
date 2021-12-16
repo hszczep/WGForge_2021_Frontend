@@ -1,7 +1,7 @@
 interface IProductItemComponent {
   id: string;
   tier?: number;
-  type: string;
+  type: string | Array<string>;
   name: string;
   price: string;
   nation?: string;

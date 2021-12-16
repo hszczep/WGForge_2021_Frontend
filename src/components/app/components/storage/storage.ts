@@ -7,6 +7,7 @@ class Storage {
   #userState: IUserState = USER.DEFAULT_STATE;
   products: Array<ProductItemInterface>;
   productsFilter: { nation: string; type: string; tier: string };
+  category: string;
   setUserState(userState: IUserState) {
     this.#userState = userState;
   }
@@ -92,6 +93,7 @@ class Storage {
       type: '',
       tier: '',
     };
+    this.category = 'all';
   }
 }
 

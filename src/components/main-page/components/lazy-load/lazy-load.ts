@@ -16,28 +16,19 @@ class LazyLoad {
     this.offset = PRODUCT_OFFSET;
     this.limit = PRODUCT_LIMIT;
   }
-  init() {
-    this.listOfProducts = storage.products;
-    this.filterForProducts = storage.productsFilter;
+  init(listOfProducts: Array<ProductItemInterface>) {
+    this.listOfProducts = listOfProducts;
     this.listSize = this.listOfProducts.length;
-    this.addProductsToList();
     this.observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => entry.isIntersecting && this.addProductsToList());
     });
     this.observer.observe(document.getElementById('list-end'));
+    this.addProductsToList();
   }
 
   addProductsToList() {
     const container = document.getElementById('cards-container');
-
-    const filteredProducts = this.listOfProducts.filter(
-      (item) =>
-        (item.nation === this.filterForProducts.nation || !this.filterForProducts.nation) &&
-        (item.tank_type.toLowerCase() === this.filterForProducts.type || !this.filterForProducts.type) &&
-        (item.tier.toString() === this.filterForProducts.tier || !this.filterForProducts.tier)
-    );
-
-    const productsToRender = filteredProducts
+    const productsToRender = this.listOfProducts
       .slice(this.offset, Math.min(this.offset + this.limit, this.listSize))
       .map((product) => {
         const item = product;

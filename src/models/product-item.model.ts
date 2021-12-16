@@ -1,5 +1,5 @@
 interface ProductItemInterface {
-  type: string;
+  type: Array<string>;
   name: string;
   price: ProductPrice;
   discount: number;

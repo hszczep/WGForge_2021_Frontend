@@ -2,13 +2,22 @@ import './scss/filter.styles.scss';
 import storage from '../../../app/components/storage/storage';
 import lazyLoad from '../lazy-load/lazy-load';
 import { FILTER_MAP } from '../../common/constants';
+import ProductItemInterface from '../../../../models/product-item.model';
 
 class FilterComponent {
-  init() {
+  listOfProducts: Array<ProductItemInterface>;
+  init(listOfProducts: Array<ProductItemInterface>) {
+    this.listOfProducts = listOfProducts;
+    lazyLoad.init(this.#filtratedListOfProducts(listOfProducts));
+
     const selectHeader = document.querySelectorAll('.tanks-select__header');
     const selectItem = document.querySelectorAll('.tanks-select__item');
     const defaultValue = document.querySelectorAll('.default-value');
     const resetButton = document.querySelector('.reset-button');
+    const tanksFilter = document.querySelector('.filter-field') as HTMLElement;
+    const tankCategory = 'vehicle';
+
+    if (storage.category !== tankCategory) tanksFilter.style.display = 'none';
 
     selectHeader.forEach((item) => {
       item.addEventListener('click', () => {
@@ -39,7 +48,7 @@ class FilterComponent {
         const cardField = document.querySelector('.cards-field');
         cardField.innerHTML = '';
         lazyLoad.unmount();
-        lazyLoad.init();
+        lazyLoad.init(this.listOfProducts);
       });
     });
   }
@@ -67,7 +76,18 @@ class FilterComponent {
     const cardField = document.querySelector('.cards-field');
     cardField.innerHTML = '';
     lazyLoad.unmount();
-    lazyLoad.init();
+    lazyLoad.init(this.#filtratedListOfProducts(this.listOfProducts));
+  }
+
+  #filtratedListOfProducts(incomeListOfProducts: Array<ProductItemInterface>): Array<ProductItemInterface> {
+    const filter = storage.productsFilter;
+    const filteredProducts = incomeListOfProducts.filter(
+      (item) =>
+        (item.nation === filter.nation || !filter.nation) &&
+        (item.tank_type.toLowerCase() === filter.type || !filter.type) &&
+        (item.tier.toString() === filter.tier || !filter.tier)
+    );
+    return filteredProducts;
   }
 
   render() {

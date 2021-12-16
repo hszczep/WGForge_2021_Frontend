@@ -1,8 +1,8 @@
 import './scss/main-page.styles.scss';
 import filter from './components/filter/filter';
-import lazyLoad from './components/lazy-load/lazy-load';
 import favoritesService from '../../services/favorites.service';
 import cartService from '../../services/cart.service';
+import menu from './components/categories/categories';
 
 class MainPageComponent {
   #elements: { [key: string]: HTMLElement } = null;
@@ -13,8 +13,7 @@ class MainPageComponent {
   }
 
   init() {
-    filter.init();
-    lazyLoad.init();
+    menu.init();
     this.#elements = {
       productsList: document.querySelector('.cards-field'),
     };
@@ -25,7 +24,7 @@ class MainPageComponent {
   unmount() {
     this.#elements.productsList.removeEventListener('click', favoritesService.favoritesButtonClickHandler);
     this.#elements.productsList.removeEventListener('click', cartService.purchaseButtonClickHandler);
-    lazyLoad.unmount();
+    menu.unmount();
   }
 
   render() {
@@ -33,10 +32,7 @@ class MainPageComponent {
         <div class='content-menu'>
           <a href='#' class='WoT_logo'><img src='assets/images/WoT_logo.png' alt='WoT logo' /></a>
           <div class='content-menu__buttons'>
-            <button class='active-menu__button'>All</button>
-            <button>Vehicles</button>
-            <button>Gold</button>
-            <button>Premium account</button>
+            ${menu.render()}
           </div>
         </div>  
           <div class='filter-field'>${filter.render()}</div>

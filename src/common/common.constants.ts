@@ -36,4 +36,4 @@ export const USER = {
     cart: new Array(0),
   },
 };
-export const PRODUCT_TYPE_MACHINERY = 'machinery';
+export const PRODUCT_TYPE_VEHICLE = 'vehicle';

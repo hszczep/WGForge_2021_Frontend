@@ -5,9 +5,10 @@ import Swiper from './components/swiper/swiper';
 
 import favoritesService from '../../services/favorites.service';
 import cartService from '../../services/cart.service';
+import menu from '../main-page/components/categories/categories';
 
 import { convertToRomane, localizeCurrency } from '../../common/common.helper';
-import { PRODUCT_TYPE_MACHINERY } from '../../common/common.constants';
+import { PRODUCT_TYPE_VEHICLE } from '../../common/common.constants';
 
 class ProductPageComponent {
   #elements: { [key: string]: HTMLElement } = null;
@@ -26,7 +27,7 @@ class ProductPageComponent {
     };
     this.#elements.favoritesButton.addEventListener('click', favoritesService.favoritesButtonClickHandler);
     this.#elements.purchaseButton.addEventListener('click', cartService.purchaseButtonClickHandler);
-
+    menu.init();
     this.#swiper.init();
   }
 
@@ -44,7 +45,7 @@ class ProductPageComponent {
     const product = storage.getProductById(productId);
     let productTextInfo;
 
-    if (product.type === PRODUCT_TYPE_MACHINERY) {
+    if (product.type.includes(PRODUCT_TYPE_VEHICLE)) {
       productTextInfo = `
                   <span class="flag flag__${product.nation}"></span>
                   <span class="tank-type tank-type__${product.tank_type.toLowerCase()}"></span>
@@ -63,10 +64,7 @@ class ProductPageComponent {
       <div class='content-menu'>
         <a href='#' class='WoT_logo'><img src='assets/images/WoT_logo.png' alt='WoT logo' /></a>
         <div class='content-menu__buttons'>
-          <button>All</button>
-          <button>Vehicles</button>
-          <button>Gold</button>
-          <button>Premium account</button>
+          ${menu.render()}
         </div>
       </div>
       <article class="item-block" data-id="${product.id}">

@@ -1,11 +1,11 @@
 import storage from '../../app/components/storage/storage';
 import { convertToRomane, localizeCurrency } from '../../../common/common.helper';
-import { PRODUCT_TYPE_MACHINERY } from '../../../common/common.constants';
+import { PRODUCT_TYPE_VEHICLE } from '../../../common/common.constants';
 import ProductItemInterface from '../../../models/product-item.model';
 
 export const renderFavoritesItem = (favoritesItem: ProductItemInterface): string => {
   const favoritesItemInfo =
-    favoritesItem.type === PRODUCT_TYPE_MACHINERY
+    favoritesItem.type.includes(PRODUCT_TYPE_VEHICLE)
       ? `
        <span class="flag flag__${favoritesItem.nation}"></span>
        <span class="tank-type tank-type__${favoritesItem.tank_type.toLowerCase()}"></span>
