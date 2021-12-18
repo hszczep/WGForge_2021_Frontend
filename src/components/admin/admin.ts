@@ -1,7 +1,8 @@
 import './scss/admin.styles.scss';
 
-import { renderAdminItem } from './common/admin.tools';
-import {currencyLocaleMap} from "../../common/common.constants";
+import { currencyLocaleMap } from '../../common/common.constants';
+import storage from '../app/components/storage/storage';
+import AdminProductItem from './common/admin.product';
 
 class AdminPageComponent {
   #currencySelect: HTMLElement = null;
@@ -15,6 +16,10 @@ class AdminPageComponent {
     this.#currencySelect = document.querySelector('.currency-select');
     Object.keys(currencyLocaleMap).forEach((el) => {
       this.#currencySelect.innerHTML += `<option class="admin-option">${el}</option>`;
+    });
+    const listOfProducts = document.querySelector('.items-menu__items-field');
+    storage.products.forEach((item) => {
+      listOfProducts.append(new AdminProductItem(item).render());
     });
   }
 
@@ -31,7 +36,7 @@ class AdminPageComponent {
       <div class="items-menu">
         <div class="items-menu__header">
           <div class="header-info header-name">Name</div>
-          <div class="header-info">Priority</div>
+          <div class="header-info">Order</div>
           <div class="header-info">Price</div>
           <div class="header-info">Discount</div>
           <div class="header-info">Size</div>
@@ -44,7 +49,6 @@ class AdminPageComponent {
               <use xlink:href="assets/images/sprite.svg#close"></use>
             </svg>
           </div>
-          ${renderAdminItem()}
         </div>
       </div>
     </div>

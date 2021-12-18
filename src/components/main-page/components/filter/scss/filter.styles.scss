@@ -9,9 +9,11 @@
   margin-bottom: 5px;
   background-color: rgba(0, 0, 0, 0.21);
   padding: 12px 0;
-  &_hidden{
+
+  &_hidden {
     display: none;
   }
+
   .tanks-select {
     margin-right: 5px;
     position: relative;

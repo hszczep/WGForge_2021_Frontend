@@ -4,7 +4,6 @@ import lazyLoad from '../lazy-load/lazy-load';
 import ProductItemInterface from '../../../../models/product-item.model';
 import { PRODUCT_TYPE_VEHICLE } from '../../../../common/common.constants';
 
-
 class MenuCategories {
   menu: HTMLElement;
   vehiclesFilter: HTMLElement;
@@ -20,17 +19,16 @@ class MenuCategories {
 
     if (window.location.hash === '#' || window.location.hash === '') {
       this.vehiclesFilter = document.querySelector('.filter-field') as HTMLElement;
-      this.toggleFilterDisplay(storage.category === PRODUCT_TYPE_VEHICLE)
+      this.toggleFilterDisplay(storage.category === PRODUCT_TYPE_VEHICLE);
       this.menu.addEventListener('click', this.changeCategory);
     } else this.menu.addEventListener('click', this.changeCategoryFromItemPage);
   }
-  toggleFilterDisplay(visible: boolean){
-    if (visible){
+  toggleFilterDisplay(visible: boolean) {
+    if (visible) {
       this.vehiclesFilter.classList.remove('filter-field_hidden');
       filter.init(this.#filterCategory(storage.products));
-
     } else {
-      this.vehiclesFilter.classList.add('filter-field_hidden')
+      this.vehiclesFilter.classList.add('filter-field_hidden');
       lazyLoad.init(this.#filterCategory(storage.products));
     }
   }
@@ -48,10 +46,9 @@ class MenuCategories {
 
       const cardField = document.querySelector('.cards-field');
       cardField.innerHTML = '';
-      this.toggleFilterDisplay(storage.category === PRODUCT_TYPE_VEHICLE)
+      this.toggleFilterDisplay(storage.category === PRODUCT_TYPE_VEHICLE);
     }
   }
-
 
   changeCategoryFromItemPage(event: Event) {
     const target = event.target as HTMLElement;

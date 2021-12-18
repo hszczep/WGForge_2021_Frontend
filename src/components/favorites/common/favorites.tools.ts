@@ -4,15 +4,14 @@ import { PRODUCT_TYPE_VEHICLE } from '../../../common/common.constants';
 import ProductItemInterface from '../../../models/product-item.model';
 
 export const renderFavoritesItem = (favoritesItem: ProductItemInterface): string => {
-  const favoritesItemInfo =
-    favoritesItem.type.includes(PRODUCT_TYPE_VEHICLE)
-      ? `
+  const favoritesItemInfo = favoritesItem.type.includes(PRODUCT_TYPE_VEHICLE)
+    ? `
        <span class="flag flag__${favoritesItem.nation}"></span>
        <span class="tank-type tank-type__${favoritesItem.tank_type.toLowerCase()}"></span>
        <span class="level">${convertToRomane(favoritesItem.tier)}</span>
        <span class="item-name">${favoritesItem.name}</span>
       `
-      : `<span class="item-name">${favoritesItem.name}</span>`;
+    : `<span class="item-name">${favoritesItem.name}</span>`;
 
   const priceDiscount = favoritesItem.price_discount
     ? localizeCurrency(Number(favoritesItem.price_discount), favoritesItem.price.code)
