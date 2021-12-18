@@ -1,7 +1,7 @@
 import storage from '../../app/components/storage/storage';
-import { convertToRomane, localizeCurrency } from '../../../common/common.helper';
+import { convertToRomane, formatDiscount, localizeCurrency } from '../../../common/common.helper';
 import { PRODUCT_TYPE_VEHICLE } from '../../../common/common.constants';
-import ProductItemInterface from '../../../models/product-item.model';
+import { ProductItemInterface } from '../../../models/product-item.model';
 
 export const renderFavoritesItem = (favoritesItem: ProductItemInterface): string => {
   const favoritesItemInfo =
@@ -13,6 +13,8 @@ export const renderFavoritesItem = (favoritesItem: ProductItemInterface): string
        <span class="item-name">${favoritesItem.name}</span>
       `
       : `<span class="item-name">${favoritesItem.name}</span>`;
+  const {discount,price_discount,discount_show_type,price} = favoritesItem;
+  const discountFormatted = formatDiscount(discount,price_discount,discount_show_type,price);
 
   const priceDiscount = favoritesItem.price_discount
     ? localizeCurrency(Number(favoritesItem.price_discount), favoritesItem.price.code)
@@ -22,7 +24,7 @@ export const renderFavoritesItem = (favoritesItem: ProductItemInterface): string
 
   return `
     <article class="favorite-item" data-id="${favoritesItem.id}">
-      ${favoritesItem.discount ? `<div class="discount">-${favoritesItem.discount}%</div>` : ''}
+      ${favoritesItem.discount ? `<div class="discount">${discountFormatted}</div>` : ''}
 
       <svg class="favorite__delete-button">
         <use xlink:href="assets/images/sprite.svg#close"></use>

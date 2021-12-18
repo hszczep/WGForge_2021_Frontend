@@ -9,7 +9,7 @@ import {
   IMG_FILTERS,
 } from './common/swiper.constants';
 
-import ProductItemInterface from '../../../../models/product-item.model';
+import { ProductItemInterface } from '../../../../models/product-item.model';
 
 class Swiper {
   #elements: { [key: string]: HTMLElement } = null;
