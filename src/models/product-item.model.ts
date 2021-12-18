@@ -1,4 +1,4 @@
-interface ProductItemInterface {
+export interface ProductItemInterface {
   type: Array<string>;
   name: string;
   price: ProductPrice;
@@ -11,11 +11,13 @@ interface ProductItemInterface {
   images: Array<string>;
   details: string;
   isFavorite: boolean;
+  order?: number;
+  discount_show_type: string;
 }
 
-interface ProductPrice {
+export interface ProductPrice {
   code: string;
-  amount: string;
+  amount: number;
 }
 
-export default ProductItemInterface;
+

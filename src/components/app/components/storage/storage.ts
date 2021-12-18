@@ -1,5 +1,5 @@
 import { USER } from '../../../../common/common.constants';
-import ProductItemInterface from '../../../../models/product-item.model';
+import { ProductItemInterface } from '../../../../models/product-item.model';
 import { IUserState } from '../../../../models/user.model';
 import mainApiService from '../../../../services/main-api.service';
 

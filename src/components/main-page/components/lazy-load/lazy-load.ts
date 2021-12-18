@@ -1,7 +1,7 @@
 import storage from '../../../app/components/storage/storage';
 import ProductItemComponent from '../../../product-item/product-item';
 import { PRODUCT_LIMIT, PRODUCT_OFFSET } from '../../common/constants';
-import ProductItemInterface from '../../../../models/product-item.model';
+import { ProductItemInterface } from '../../../../models/product-item.model';
 
 class LazyLoad {
   listOfProducts: ProductItemInterface[];

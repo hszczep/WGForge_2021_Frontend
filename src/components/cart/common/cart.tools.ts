@@ -1,6 +1,6 @@
 import storage from '../../app/components/storage/storage';
-import { convertToRomane, localizeCurrency } from '../../../common/common.helper';
-import ProductItemInterface from '../../../models/product-item.model';
+import { convertToRomane, formatDiscount, localizeCurrency } from '../../../common/common.helper';
+import { ProductItemInterface } from '../../../models/product-item.model';
 import { PRODUCT_TYPE_VEHICLE } from '../../../common/common.constants';
 
 export const renderCartItem = (cartItem: ProductItemInterface): string => {
@@ -11,15 +11,16 @@ export const renderCartItem = (cartItem: ProductItemInterface): string => {
        <span class="level">${convertToRomane(cartItem.tier)}</span>
        <span class="item-name">${cartItem.name}</span>
       `
-    : `<span class="item-name">${cartItem.name}</span>`;
-
+      : `<span class="item-name">${cartItem.name}</span>`;
+  const {discount,price_discount,discount_show_type,price} = cartItem;
+  const discountFormatted = formatDiscount(discount,price_discount,discount_show_type,price);
   const priceDiscount = cartItem.price_discount
     ? localizeCurrency(Number(cartItem.price_discount), cartItem.price.code)
     : '';
 
   return `
     <article class="cart-item" data-id="${cartItem.id}">
-      ${cartItem.discount ? `<div class="discount">-${cartItem.discount}%</div>` : ''}
+      ${cartItem.discount ? `<div class="discount">${discountFormatted}</div>` : ''}
 
       <svg class="cart__delete-button">
         <use xlink:href="assets/images/sprite.svg#close"></use>

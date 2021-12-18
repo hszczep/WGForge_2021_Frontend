@@ -1,7 +1,7 @@
 import { deleteResourse, getResource, postResourse, putResourse } from './common/services.helper';
 import { MAIN_API_URLS } from './common/services.constants';
 import { IUser, IUserCredentials } from '../models/user.model';
-import ProductItemInterface from '../models/product-item.model';
+import { ProductItemInterface } from '../models/product-item.model';
 
 class MainApiService {
   getProducts(): Promise<Array<ProductItemInterface>> {
