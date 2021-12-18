@@ -41,7 +41,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  filter: invert(1);
+  filter: invert(100%);
   opacity: 0.4;
 
   &-left {
@@ -51,6 +51,7 @@
   &-right {
     right: 0;
   }
+
   &:hover {
     opacity: 0.9;
   }
@@ -58,6 +59,7 @@
 
 .control {
   height: 80px;
+
   &-left {
     transform: rotate(180deg);
   }

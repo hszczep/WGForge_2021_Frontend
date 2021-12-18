@@ -43,7 +43,7 @@ class ProductPageComponent {
 
     const productId = window.location.hash.split('/').pop();
     const product = storage.getProductById(productId);
-    let productTextInfo;
+    let productTextInfo = '';
 
     if (product.type.includes(PRODUCT_TYPE_VEHICLE)) {
       productTextInfo = `

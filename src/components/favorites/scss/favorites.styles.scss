@@ -132,17 +132,8 @@
         color: $purchase-text-color;
         transition: $app-standard-transition;
 
-        &:hover {
-          background-color: $purchase-button-background;
-        }
-
         &__active {
           background-color: $purchase-button-background;
-
-          &:hover {
-            color: $purchase-button-background;
-            background-color: $purchase-text-color;
-          }
         }
       }
     }
@@ -346,5 +337,15 @@
         right: 5px;
       }
     }
+  }
+}
+@media (hover: hover) {
+  .purchase-btn:hover {
+    background-color: $purchase-button-background;
+  }
+
+  .purchase-btn__active:hover {
+    color: $purchase-button-background;
+    background-color: $purchase-text-color;
   }
 }

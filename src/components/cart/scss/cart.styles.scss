@@ -134,11 +134,6 @@
         opacity: 0.7;
         fill: none;
         transition: $app-standard-transition;
-
-        &:hover {
-          fill: #fff;
-          transition: $app-standard-transition;
-        }
       }
     }
 
@@ -384,5 +379,12 @@
         right: 5px;
       }
     }
+  }
+}
+
+@media (hover: hover) {
+  .like-btn__icon:hover {
+    fill: #fff;
+    transition: $app-standard-transition;
   }
 }

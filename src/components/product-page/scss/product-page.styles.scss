@@ -8,8 +8,7 @@
     height: 45px;
     bottom: 30px;
     border-radius: 3px;
-    border: 1px solid $purchase-button-background;
-    background: none;
+    background-color: $purchase-button-background;
     font-family: $app-font-family;
     font-size: 14px;
     line-height: 18px;
@@ -21,17 +20,8 @@
 
     z-index: 10;
 
-    &:hover {
-      background-color: $purchase-button-background;
-    }
-
     &__active {
-      background-color: $purchase-button-background;
-
-      &:hover {
-        color: $purchase-button-background;
-        background-color: $purchase-text-color;
-      }
+      background-color: #ff9d00;
     }
   }
 
@@ -112,36 +102,6 @@
         align-items: center;
       }
 
-      .purchase-btn {
-        width: 150px;
-        height: 60px;
-        border-radius: 3px;
-        background: $purchase-button-background;
-        font-family: $app-font-family;
-        font-size: 20px;
-        line-height: 18px;
-        font-weight: 400;
-        text-transform: uppercase;
-        letter-spacing: 0.01em;
-        color: $purchase-text-color;
-        transition: $app-standard-transition;
-
-        &:hover {
-          color: $purchase-button-background;
-          background-color: $purchase-text-color;
-        }
-
-        &__active {
-          color: $purchase-button-background;
-          background-color: $purchase-text-color;
-
-          &:hover {
-            color: $purchase-text-color;
-            background-color: $purchase-button-background;
-          }
-        }
-      }
-
       .like-btn {
         width: 60px;
         height: 60px;
@@ -153,11 +113,6 @@
           opacity: 0.7;
           fill: none;
           transition: $app-standard-transition;
-
-          &:hover {
-            fill: #fff;
-            transition: $app-standard-transition;
-          }
         }
       }
 
@@ -288,6 +243,7 @@
       }
 
       .item-specifications {
+        position: relative;
         .item-title {
           width: 300px;
           font-size: 26px;
@@ -295,6 +251,7 @@
         }
 
         .item-text {
+          height: 16px;
           font-size: 16px;
 
           .flag,
@@ -350,7 +307,7 @@
 
         .like-btn {
           position: absolute;
-          top: 50px;
+          bottom: 10px;
           left: 230px;
           width: 35px;
           height: 35px;
@@ -370,5 +327,20 @@
         font-size: 13px;
       }
     }
+  }
+}
+@media (hover: hover) {
+  .like-btn__icon:hover {
+    fill: #fff;
+    transition: $app-standard-transition;
+  }
+
+  .purchase-btn:hover {
+    background-color: $purchase-button-background;
+  }
+
+  .purchase-btn__active:hover {
+    color: $purchase-button-background;
+    background-color: $purchase-text-color;
   }
 }
