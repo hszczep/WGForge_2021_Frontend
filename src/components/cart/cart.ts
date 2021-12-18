@@ -33,9 +33,9 @@ class CartPageComponent {
     cartProducts.forEach((cartItem) => {
       if (cartItem.discount > 0) {
         this.#cartOrder.totalCost += cartItem.price_discount;
-        this.#cartOrder.totalDiscount += Number.parseFloat(cartItem.price.amount) - cartItem.price_discount;
+        this.#cartOrder.totalDiscount += cartItem.price.amount - cartItem.price_discount;
       } else {
-        this.#cartOrder.totalCost += Number.parseFloat(cartItem.price.amount);
+        this.#cartOrder.totalCost += cartItem.price.amount;
       }
     });
 

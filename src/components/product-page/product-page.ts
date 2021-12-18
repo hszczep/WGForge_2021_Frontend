@@ -7,7 +7,7 @@ import favoritesService from '../../services/favorites.service';
 import cartService from '../../services/cart.service';
 import menu from '../main-page/components/categories/categories';
 
-import { convertToRomane, localizeCurrency } from '../../common/common.helper';
+import { convertToRomane, formatDiscount, localizeCurrency } from '../../common/common.helper';
 import { PRODUCT_TYPE_VEHICLE } from '../../common/common.constants';
 
 class ProductPageComponent {
@@ -44,7 +44,6 @@ class ProductPageComponent {
     const productId = window.location.hash.split('/').pop();
     const product = storage.getProductById(productId);
     let productTextInfo;
-
     if (product.type.includes(PRODUCT_TYPE_VEHICLE)) {
       productTextInfo = `
                   <span class="flag flag__${product.nation}"></span>
@@ -53,10 +52,11 @@ class ProductPageComponent {
                   <span class="item-name">${product.name}</span>
       `;
     }
-
-    const price = localizeCurrency(Number(product.price.amount), product.price.code);
-    const priceDiscount = product.price_discount
-      ? localizeCurrency(Number(product.price_discount), product.price.code)
+    const {price, price_discount,discount_show_type, discount } = product
+    const discountFormatted = formatDiscount(discount, price_discount, discount_show_type, price);
+    const priceLocalized = localizeCurrency(Number(price.amount), price.code);
+    const priceDiscountLocalized = price_discount
+      ? localizeCurrency(Number(price_discount), price.code)
       : '';
     const isFavorite = storage.checkProductInFavoritesById(product.id);
     const isInCart = storage.checkProductInCartById(product.id);
@@ -69,13 +69,13 @@ class ProductPageComponent {
       </div>
       <article class="item-block" data-id="${product.id}">
         <div class="item-block__main-info">
-          <p class="discount">${product.discount ? `-${product.discount}%` : ''}</p>
+          <p class="discount">${discountFormatted}</p>
           <div class="item-specifications">
             <h2 class="item-title">${product.name}</h2>
             <h2 class="item-text">${productTextInfo}</h2>           
             <div class="price-block">
-                <p class="price${product.discount ? ' old-price' : ''}">${price}</p>
-                <p class="price price-discount">${priceDiscount}</p>
+                <p class="price${discount ? ' old-price' : ''}">${priceLocalized}</p>
+                <p class="price price-discount">${priceDiscountLocalized}</p>
             </div>
             <div class="item__controls">
               <button class="purchase-btn ${isInCart ? 'purchase-btn__active' : ''}">purchase</button>
