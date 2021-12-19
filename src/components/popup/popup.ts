@@ -15,7 +15,9 @@ class Popup {
       <div class="popup">
         <header class="popup__header">
           <h4>${type}</h4>
-          <button class="popup__close-button">×</button>
+          <svg class="popup__close-button">
+            <use xlink:href="assets/images/sprite.svg#close"></use>
+          </svg>
         </header>
         <p class="popup-body__text">${message}</p>
       </div>`;

@@ -4,9 +4,8 @@ import { ProductItemInterface } from '../../../models/product-item.model';
 import { PRODUCT_TYPE_VEHICLE } from '../../../common/common.constants';
 
 export const renderCartItem = (cartItem: ProductItemInterface): string => {
-  const cartItemInfo =
-    cartItem.type.includes(PRODUCT_TYPE_VEHICLE)
-      ? `
+  const cartItemInfo = cartItem.type.includes(PRODUCT_TYPE_VEHICLE)
+    ? `
        <span class="flag flag__${cartItem.nation}"></span>
        <span class="tank-type tank-type__${cartItem.tank_type.toLowerCase()}"></span>
        <span class="level">${convertToRomane(cartItem.tier)}</span>

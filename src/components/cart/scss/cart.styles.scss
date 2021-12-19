@@ -44,6 +44,7 @@
 
     &__img {
       max-width: 200px;
+      max-height: 160px;
     }
 
     &__text-block {
@@ -124,7 +125,11 @@
     }
 
     .like-btn {
+      position: absolute;
+      left: 280px;
+      top: 2px;
       align-self: center;
+      width: 30px;
       height: 30px;
       margin-top: 20px;
 
@@ -134,11 +139,6 @@
         opacity: 0.7;
         fill: none;
         transition: $app-standard-transition;
-
-        &:hover {
-          fill: #fff;
-          transition: $app-standard-transition;
-        }
       }
     }
 
@@ -271,6 +271,7 @@
       }
 
       .like-btn {
+        left: 160px;
         align-self: flex-start;
         margin-left: 35px;
       }
@@ -363,6 +364,7 @@
       }
 
       .like-btn {
+        position: initial;
         align-self: center;
         width: 25px;
         height: 25px;
@@ -384,5 +386,12 @@
         right: 5px;
       }
     }
+  }
+}
+
+@media (hover: hover) {
+  .like-btn__icon:hover {
+    fill: #fff;
+    transition: $app-standard-transition;
   }
 }

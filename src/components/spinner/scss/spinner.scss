@@ -7,7 +7,7 @@
   align-items: center;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(214, 234, 248, 0.9);
+  background-color: rgba(0, 0, 0, 0.7);
   z-index: 9999;
 }
 
@@ -15,89 +15,44 @@
   display: none;
 }
 
-.spinner__description {
-  font-size: 25px;
-  line-height: 40px;
-  color: #335e97;
-  text-transform: uppercase;
-  animation: blink 0.35s linear infinite;
+.machine {
+  width: 25vw;
+  fill: #ff8900;
 }
 
-@keyframes blink {
-  100% {
-    color: rgba(34, 34, 34, 0);
+.small {
+  animation: counter-rotation 2.5s infinite linear;
+  transform-origin: 100.136px 225.345px;
+}
+
+.medium {
+  animation: rotation 3.75s infinite linear;
+  transform-origin: 254.675px 379.447px;
+}
+
+.large {
+  animation: counter-rotation 5s infinite linear;
+  transform-origin: 461.37px 173.694px;
+}
+
+@keyframes rotation {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(359deg);
   }
 }
 
-@keyframes blink {
-  100% {
-    color: rgba(34, 34, 34, 0);
+@keyframes counter-rotation {
+  from {
+    transform: rotate(359deg);
   }
-}
 
-@keyframes spinner__inner {
-  100% {
-    transform: rotate(60deg);
+  to {
+    transform: rotate(0deg);
   }
-}
-
-.spinner__inner div {
-  box-sizing: content-box;
-}
-
-.spinner__inner > div {
-  transform-origin: 132px 132px;
-  animation: spinner__inner 0.35s infinite linear;
-}
-
-.spinner__inner > div div {
-  position: absolute;
-  width: 30px;
-  height: 195px;
-  background: #5e6fa3;
-  left: 132px;
-  top: 132px;
-  transform: translate(-50%, -50%);
-}
-
-.spinner__inner > div div:nth-child(1) {
-  width: 132px;
-  height: 132px;
-  border-radius: 50%;
-}
-
-.spinner__inner > div div:nth-child(5) {
-  width: 85px;
-  height: 85px;
-  background: #f1f2f3;
-  border-radius: 50%;
-}
-
-.spinner__inner > div div:nth-child(3) {
-  transform: translate(-50%, -50%) rotate(60deg);
-}
-
-.spinner__inner > div div:nth-child(4) {
-  transform: translate(-50%, -50%) rotate(120deg);
-}
-
-.spinner__gear {
-  width: 264px;
-  height: 264px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  overflow: hidden;
-  background: transparent;
-}
-
-.spinner__inner {
-  width: 100%;
-  height: 100%;
-  position: relative;
-  transform: translateZ(0) scale(1);
-  backface-visibility: hidden;
-  transform-origin: 0 0;
 }
 
 .display-none {

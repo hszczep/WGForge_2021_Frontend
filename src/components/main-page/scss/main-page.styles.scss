@@ -29,6 +29,7 @@
         letter-spacing: 0.05em;
         color: $title-text-color;
         transition: all 200ms;
+        border-bottom: 4px solid rgba(255, 255, 255, 0);
 
         &:hover {
           color: $hover-text-color;

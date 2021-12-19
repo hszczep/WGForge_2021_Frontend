@@ -1,7 +1,7 @@
 import './scss/admin.styles.scss';
 
 import { renderAdminItem } from './common/admin.tools';
-import {currencyLocaleMap} from "../../common/common.constants";
+import { currencyLocaleMap } from '../../common/common.constants';
 
 class AdminPageComponent {
   #currencySelect: HTMLElement = null;
