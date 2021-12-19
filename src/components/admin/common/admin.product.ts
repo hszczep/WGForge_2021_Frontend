@@ -1,4 +1,4 @@
-import ProductItemInterface from '../../../models/product-item.model';
+import {ProductItemInterface} from '../../../models/product-item.model';
 import detailsRender from './product.details';
 
 class AdminProductItem {
