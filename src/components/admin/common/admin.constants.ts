@@ -1,14 +1,25 @@
-export const CATEGORIES = ['Tank', 'Gold', 'Premium account'];
-export const NATIONS = [
-  'France',
-  'Germany',
-  'Italy',
-  'Japan',
-  'Czechoslovakia',
-  'U.K.',
-  'U.S.A.',
-  'U.S.S.R',
-  'China',
-  'Mercenary',
-];
-export const TANK_TYPES = ['Light', 'Medium', 'Heavy', 'Tank destroyer', 'SPGs', 'Multirole'];
+export const CATEGORIES = {
+  vehicle: 'Vehicle',
+  gold: 'Gold',
+  premium: 'Premium account',
+};
+export const NATIONS = {
+  france: 'France',
+  germany: 'Germany',
+  italy: 'Italy',
+  japan: 'Japan',
+  czech: 'Czechoslovakia',
+  uk: 'U.K.',
+  usa: 'U.S.A.',
+  ussr: 'U.S.S.R',
+  china: 'China',
+  merc: 'Mercenary',
+};
+export const TANK_TYPES = {
+  lighttank: 'Light',
+  mediumtank: 'Medium',
+  heavytank: 'Heavy',
+  'at-spg': 'Tank destroyer',
+  spg: 'SPGs',
+  multirole: 'Multirole',
+};

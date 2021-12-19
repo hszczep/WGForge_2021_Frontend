@@ -11,7 +11,7 @@ export const renderFavoritesItem = (favoritesItem: ProductItemInterface): string
        <span class="level">${convertToRomane(favoritesItem.tier)}</span>
        <span class="item-name">${favoritesItem.name}</span>
       `
-      : `<span class="item-name">${favoritesItem.name}</span>`;
+    : `<span class="item-name">${favoritesItem.name}</span>`;
   const {discount,price_discount,discount_show_type,price} = favoritesItem;
   const discountFormatted = formatDiscount(discount,price_discount,discount_show_type,price);
 

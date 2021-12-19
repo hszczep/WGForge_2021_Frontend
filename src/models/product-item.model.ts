@@ -2,8 +2,11 @@ export interface ProductItemInterface {
   type: Array<string>;
   name: string;
   price: ProductPrice;
+  base_price: number;
   discount: number;
   price_discount: number;
+  base_price_discount: number;
+  discount_show_type: string;
   tier?: number;
   nation?: string;
   tank_type?: string;
@@ -11,8 +14,8 @@ export interface ProductItemInterface {
   images: Array<string>;
   details: string;
   isFavorite: boolean;
-  order?: number;
-  discount_show_type: string;
+  has_order: number;
+  double_size?: boolean;
 }
 
 export interface ProductPrice {

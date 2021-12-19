@@ -16,13 +16,13 @@ class FilterComponent {
     const resetButton = document.querySelector('.reset-button');
     const tanksFilter = document.querySelector('.filter-field') as HTMLElement;
     const tankCategory = 'vehicle';
-
     if (storage.category !== tankCategory) tanksFilter.style.display = 'none';
 
-    selectHeader.forEach((item) => {
-      item.addEventListener('click', () => {
+    selectHeader.forEach((item: HTMLElement) => {
+      const element = item;
+      element.onclick = () => {
         item.parentElement.classList.toggle('is-active');
-      });
+      };
     });
 
     selectItem.forEach((item: HTMLElement) => {
