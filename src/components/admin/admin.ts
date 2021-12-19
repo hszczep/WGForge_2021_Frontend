@@ -3,13 +3,16 @@ import './scss/admin.styles.scss';
 import { currencyLocaleMap } from '../../common/common.constants';
 import storage from '../app/components/storage/storage';
 import AdminProductItem from './common/admin.product';
+import detailsRender from './common/product.details';
 
 class AdminPageComponent {
   #currencySelect: HTMLElement = null;
+  addItemButton: HTMLElement;
   constructor() {
     this.init = this.init.bind(this);
     this.unmount = this.unmount.bind(this);
     this.render = this.render.bind(this);
+    this.addItem = this.addItem.bind(this);
   }
 
   init(): void {
@@ -21,6 +24,28 @@ class AdminPageComponent {
     storage.products.forEach((item) => {
       listOfProducts.append(new AdminProductItem(item).render());
     });
+    this.addItemButton = document.querySelector('.items-menu__add-item');
+    this.addItemButton.addEventListener('click', this.addItem);
+  }
+
+  addItem() {
+    const card = document.createElement('article');
+    card.classList.add('item-card', 'active-card');
+    card.append(detailsRender());
+    this.addItemButton.after(card);
+    const cancelButton = card.querySelector('.cancel-btn') as HTMLElement;
+
+    const vehicle = 'vehicle';
+    const vehicleCheckbox = card.querySelector(`[data-type=${vehicle}]`) as HTMLInputElement;
+    const tankInfo = card.querySelector('.tank-info') as HTMLElement;
+    tankInfo.style.display = 'none';
+    vehicleCheckbox.onchange = () => {
+      tankInfo.style.display = vehicleCheckbox.checked ? 'flex' : 'none';
+    };
+
+    cancelButton.onclick = () => {
+      card.remove();
+    };
   }
 
   unmount(): void {}

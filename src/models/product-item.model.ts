@@ -15,6 +15,7 @@ interface ProductItemInterface {
   details: string;
   isFavorite: boolean;
   has_order: number;
+  double_size?: boolean;
 }
 
 interface ProductPrice {

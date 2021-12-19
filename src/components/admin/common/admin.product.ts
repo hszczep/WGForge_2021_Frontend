@@ -35,9 +35,80 @@ class AdminProductItem {
 
   showDetails() {
     this.card.classList.add('active-card');
-    this.card.append(detailsRender(this.item));
+    this.card.append(detailsRender());
     this.title.removeEventListener('click', this.showDetails);
-    this.title.addEventListener('click', this.hideDetails);
+    const cross = this.card.querySelector('.cancel-btn');
+    cross.addEventListener('click', this.hideDetails);
+    this.initDetails();
+  }
+
+  initDetails() {
+    const priceInput = this.card.querySelector('.input-price') as HTMLInputElement;
+    const dicountPriceInput = this.card.querySelector('.input-discount_price') as HTMLInputElement;
+    const dicountInput = this.card.querySelector('.input-discout') as HTMLInputElement;
+    const showDiscount = this.card.querySelector('.show-discount') as HTMLInputElement;
+    const nameInput = this.card.querySelector('.input-name') as HTMLInputElement;
+    const cardSize = this.card.querySelector('.card-size');
+    const orderInput = this.card.querySelector('.input-order') as HTMLInputElement;
+    const typeInputs = this.card.querySelector('.category-block').querySelectorAll('input');
+    const descriptionInput = this.card.querySelector('.description-input') as HTMLInputElement;
+    const imagesInput = this.card.querySelector('.images-input') as HTMLInputElement;
+
+    const tankInfo = this.card.querySelector('.tank-info') as HTMLElement;
+    const [tankNation, tankType, tankTier] = tankInfo.children;
+    const vehicle = 'vehicle';
+
+    priceInput.value = this.item.base_price.toString();
+    dicountPriceInput.value = this.item.base_price_discount.toString();
+    dicountInput.value = this.item.discount.toString();
+    nameInput.value = this.item.name;
+    descriptionInput.value = this.item.details;
+    imagesInput.value = this.item.images[0] as string;
+    orderInput.value = this.item.has_order ? this.item.has_order.toString() : '0';
+
+    cardSize.querySelectorAll('option').forEach((element: HTMLOptionElement) => {
+      if (this.item.double_size) {
+        const elem = element;
+        elem.selected = true;
+      }
+    });
+    showDiscount.querySelectorAll('option').forEach((element: HTMLOptionElement) => {
+      if (element.innerHTML.toLocaleLowerCase() === this.item.discount_show_type) {
+        const elem = element;
+        elem.selected = true;
+      }
+    });
+    typeInputs.forEach((element: HTMLInputElement) => {
+      if (this.item.type.includes(element.dataset.type)) {
+        const elem = element;
+        elem.checked = true;
+      }
+    });
+    if (this.item.nation && this.item.tank_type && this.item.tier) {
+      tankNation.querySelectorAll('option').forEach((element: HTMLOptionElement) => {
+        if (element.dataset.nation === this.item.nation) {
+          const elem = element;
+          elem.selected = true;
+        }
+      });
+      tankType.querySelectorAll('option').forEach((element: HTMLOptionElement) => {
+        if (element.dataset.type === this.item.tank_type.toLowerCase()) {
+          const elem = element;
+          elem.selected = true;
+        }
+      });
+      tankTier.querySelectorAll('option').forEach((element: HTMLOptionElement) => {
+        if (element.innerHTML === this.item.tier.toString()) {
+          const elem = element;
+          elem.selected = true;
+        }
+      });
+    } else tankInfo.style.display = 'none';
+
+    const vehicleCheckbox = this.card.querySelector(`[data-type=${vehicle}]`) as HTMLInputElement;
+    vehicleCheckbox.onchange = () => {
+      tankInfo.style.display = vehicleCheckbox.checked ? 'flex' : 'none';
+    };
   }
 
   hideDetails() {
