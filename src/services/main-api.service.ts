@@ -2,6 +2,8 @@ import { deleteResourse, getResource, postResourse, putResourse } from './common
 import { MAIN_API_URLS } from './common/services.constants';
 import { IUser, IUserCredentials } from '../models/user.model';
 import { ProductItemInterface } from '../models/product-item.model';
+import { ICurrencyParams } from './models/currency-params.model';
+import { IOrderParams } from './models/order-params.model';
 
 class MainApiService {
   getProducts(): Promise<Array<ProductItemInterface>> {
@@ -34,6 +36,21 @@ class MainApiService {
 
   deleteFromCart(token: string, product_id: string): Promise<IUser> {
     return deleteResourse(`${MAIN_API_URLS.USER.CART}/${product_id}`, { token });
+  }
+
+  changeCurrency(token: string, params: ICurrencyParams) {
+    return putResourse(MAIN_API_URLS.ADMIN.CURRENCY, { token, params });
+  }
+
+  changeProductOrder(token: string, product_id: string, params: IOrderParams) {
+    return putResourse(`${MAIN_API_URLS.ADMIN.PRODUCT.BASE}/${product_id}/${MAIN_API_URLS.ADMIN.PRODUCT.ORDER}`, {
+      token,
+      params,
+    });
+  }
+
+  addNewProduct(token: string, params: unknown) {
+    return postResourse(MAIN_API_URLS.ADMIN.PRODUCT.BASE, { token, params });
   }
 }
 

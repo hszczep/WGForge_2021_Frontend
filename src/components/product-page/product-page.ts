@@ -52,12 +52,10 @@ class ProductPageComponent {
                   <span class="item-name">${product.name}</span>
       `;
     }
-    const {price, price_discount,discount_show_type, discount } = product
+    const { price, price_discount, discount_show_type, discount } = product;
     const discountFormatted = formatDiscount(discount, price_discount, discount_show_type, price);
     const priceLocalized = localizeCurrency(Number(price.amount), price.code);
-    const priceDiscountLocalized = price_discount
-      ? localizeCurrency(Number(price_discount), price.code)
-      : '';
+    const priceDiscountLocalized = price_discount ? localizeCurrency(Number(price_discount), price.code) : '';
     const isFavorite = storage.checkProductInFavoritesById(product.id);
     const isInCart = storage.checkProductInCartById(product.id);
     return `

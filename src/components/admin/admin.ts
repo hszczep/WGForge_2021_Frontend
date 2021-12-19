@@ -4,6 +4,8 @@ import { currencyLocaleMap } from '../../common/common.constants';
 import storage from '../app/components/storage/storage';
 import AdminProductItem from './common/admin.product';
 import detailsRender from './common/product.details';
+import adminService from '../../services/admin.service';
+import popup from '../popup/popup';
 
 class AdminPageComponent {
   #currencySelect: HTMLElement = null;
@@ -20,6 +22,13 @@ class AdminPageComponent {
     Object.keys(currencyLocaleMap).forEach((el) => {
       this.#currencySelect.innerHTML += `<option class="admin-option">${el}</option>`;
     });
+
+    this.#currencySelect.addEventListener('change', (event: Event) => {
+      adminService
+        .changeCurrency((event.target as HTMLSelectElement).value)
+        .catch((error) => popup.open(error.message));
+    });
+
     const listOfProducts = document.querySelector('.items-menu__items-field');
     storage.products.forEach((item) => {
       listOfProducts.append(new AdminProductItem(item).render());
@@ -44,6 +53,24 @@ class AdminPageComponent {
     };
 
     cancelButton.onclick = () => {
+      // *********** !!!ONLY FOR TESTING!!! ***********
+      adminService
+        .addNewProduct({
+          name: 't-43',
+          type: 'vehicle',
+          details: 'cool tank',
+          base_price: 123,
+          tier: 1,
+          nation: 'uk',
+          tank_type: 'heavyTank',
+          price_discount: 10,
+          base_price_discount: 10,
+          price_amount: 20,
+        })
+        .then((response) => console.log(response))
+        .catch((error) => popup.open(error.message));
+      // ********************************************
+
       card.remove();
     };
   }

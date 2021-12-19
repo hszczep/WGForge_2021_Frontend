@@ -1,4 +1,6 @@
-import {ProductItemInterface} from '../../../models/product-item.model';
+import { ProductItemInterface } from '../../../models/product-item.model';
+import adminService from '../../../services/admin.service';
+import popup from '../../popup/popup';
 import detailsRender from './product.details';
 
 class AdminProductItem {
@@ -109,6 +111,12 @@ class AdminProductItem {
     vehicleCheckbox.onchange = () => {
       tankInfo.style.display = vehicleCheckbox.checked ? 'flex' : 'none';
     };
+
+    orderInput.addEventListener('change', (event: Event) => {
+      adminService
+        .changeProductOrder(Number((event.target as HTMLSelectElement).value), this.id)
+        .catch((error) => popup.open(error.message));
+    });
   }
 
   hideDetails() {
