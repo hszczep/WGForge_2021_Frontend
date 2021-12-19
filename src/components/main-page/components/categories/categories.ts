@@ -1,7 +1,7 @@
 import storage from '../../../app/components/storage/storage';
 import filter from '../filter/filter';
 import lazyLoad from '../lazy-load/lazy-load';
-import ProductItemInterface from '../../../../models/product-item.model';
+import { ProductItemInterface } from '../../../../models/product-item.model';
 import { PRODUCT_TYPE_VEHICLE } from '../../../../common/common.constants';
 
 class MenuCategories {

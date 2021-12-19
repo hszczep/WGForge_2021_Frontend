@@ -2,7 +2,7 @@ import './scss/filter.styles.scss';
 import storage from '../../../app/components/storage/storage';
 import lazyLoad from '../lazy-load/lazy-load';
 import { FILTER_MAP } from '../../common/constants';
-import ProductItemInterface from '../../../../models/product-item.model';
+import { ProductItemInterface } from '../../../../models/product-item.model';
 
 class FilterComponent {
   listOfProducts: Array<ProductItemInterface>;

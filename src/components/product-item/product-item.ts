@@ -1,6 +1,6 @@
 import IProductItemComponent from './models/product-item-interface';
-import { convertToRomane, localizeCurrency } from '../../common/common.helper';
-import ProductItemInterface from '../../models/product-item.model';
+import { convertToRomane, formatDiscount, localizeCurrency } from '../../common/common.helper';
+import { ProductItemInterface, ProductPrice } from '../../models/product-item.model';
 import storage from '../app/components/storage/storage';
 import { PRODUCT_TYPE_VEHICLE } from '../../common/common.constants';
 
@@ -9,14 +9,14 @@ class ProductItemComponent implements IProductItemComponent {
   tier: number;
   type: string | Array<string>;
   name: string;
-  price: string;
+  price: ProductPrice;
   nation: string;
   images: Array<string>;
   tank_type: string;
-  size: string;
+  discount_show_type: string;
   linkToDescription: string;
   discount: number;
-  price_discount: string;
+  price_discount:  number;
   flag: string;
   isFavorite: boolean;
 
@@ -31,6 +31,7 @@ class ProductItemComponent implements IProductItemComponent {
     images,
     tank_type,
     id,
+    discount_show_type,
     isFavorite,
   }: ProductItemInterface) {
     this.id = id;
@@ -38,16 +39,14 @@ class ProductItemComponent implements IProductItemComponent {
     this.type = type; // tank, gold or premium
     this.tank_type = tank_type ? tank_type.toLowerCase() : ''; // light, medium, heavy
     this.name = name; // shor name tank
-    this.price = localizeCurrency(Number(price.amount), price.code); // default price $
+    this.price = price; // default price $
     this.nation = nation; // country
     this.flag = `flag__${this.nation}`; // for icon flag
     this.images = images; // link image
-    this.size = 'single'; // add to JSON
     this.linkToDescription = `#/product/${this.id}`;
-    if (discount > 0) {
-      this.discount = discount; // discount in %  example 10
-      this.price_discount = price_discount ? localizeCurrency(Number(price_discount), price.code) : '';
-    }
+    this.discount = discount; // discount in %  example 10
+    this.price_discount = price_discount
+    this.discount_show_type = discount_show_type;
     this.isFavorite = isFavorite;
     this.render = this.render.bind(this);
   }
@@ -66,20 +65,24 @@ class ProductItemComponent implements IProductItemComponent {
                   <span class="item-name">${this.name}</span>
       `;
     }
+    const {discount,price_discount,discount_show_type,price} = this;
+    const discountFormatted = formatDiscount(discount,price_discount,discount_show_type,price);
+    const discountPriceLocalized = localizeCurrency(price_discount, price.code);
+    const priceLocalized = localizeCurrency(price.amount, price.code);
 
     const isInCart = storage.checkProductInCartById(this.id);
 
     return `
-          <article class="card card__${this.size}" data-id="${this.id}">
+          <article class="card card__single" data-id="${this.id}">
             <a href="${this.linkToDescription}" class="card-info">
               <img class="card-img" src="${this.images[0]}" alt="${this.name}" />
               <div class="card-specifications">
-                <p class="discount">${this.discount ? `-${this.discount}%` : ''}</p>
+                <p class="discount">${discountFormatted}</p>
                 <h2 class="item-text">
                   ${productNameInfo}
                 </h2>
-                <p class="price${this.discount ? ' old-price' : ''}">${this.price}</p>
-                <p class="price price-discount">${this.discount ? this.price_discount : ''}</p>
+                <p class="price${this.discount ? ' old-price' : ''}">${priceLocalized}</p>
+                <p class="price price-discount">${this.discount ? discountPriceLocalized : ''}</p>
               </div>
             </a>
             <button class="like-btn ${this.isFavorite ? 'like-btn__active' : ''}">

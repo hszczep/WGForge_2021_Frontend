@@ -19,18 +19,19 @@
   .order-items,
   .order-price,
   .order-discount {
-    color: $price-now-color;
+    color: #ff5d00;
   }
 
   .summary-text {
     display: block;
+    margin: 0 10px;
     line-height: 1.5em;
   }
 }
 
 .popup-body__text {
   .cart-summary-wrapper {
-    color: #085364;
+    color: #00080e;
   }
 }
 

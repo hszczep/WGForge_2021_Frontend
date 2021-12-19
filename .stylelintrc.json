@@ -6,6 +6,7 @@
     "declaration-empty-line-before": null,
     "color-function-notation": "legacy",
     "alpha-value-notation": null,
-    "scss/at-import-partial-extension": null
+    "scss/at-import-partial-extension": null,
+    "scss/no-global-function-names": null
   }
 }

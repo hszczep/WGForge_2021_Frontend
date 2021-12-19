@@ -1,4 +1,4 @@
-interface ProductItemInterface {
+export interface ProductItemInterface {
   type: Array<string>;
   name: string;
   price: ProductPrice;
@@ -18,9 +18,9 @@ interface ProductItemInterface {
   double_size?: boolean;
 }
 
-interface ProductPrice {
+export interface ProductPrice {
   code: string;
-  amount: string;
+  amount: number;
 }
 
-export default ProductItemInterface;
+

@@ -1,4 +1,4 @@
-import ProductItemInterface from './product-item.model';
+import { ProductItemInterface } from './product-item.model';
 
 export interface IUserCredentials {
   name?: string;

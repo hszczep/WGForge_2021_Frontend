@@ -135,17 +135,8 @@
     color: $purchase-text-color;
     transition: $app-standard-transition;
 
-    &:hover {
-      background-color: $purchase-button-background;
-    }
-
     &__active {
       background-color: $purchase-button-background;
-
-      &:hover {
-        color: $purchase-button-background;
-        background-color: $purchase-text-color;
-      }
     }
   }
 
@@ -160,11 +151,6 @@
       opacity: 0.7;
       fill: none;
       transition: $app-standard-transition;
-
-      &:hover {
-        fill: #fff;
-        transition: $app-standard-transition;
-      }
     }
   }
 
@@ -172,26 +158,6 @@
     .like-btn__icon {
       fill: #fff;
       opacity: 0.6;
-    }
-  }
-
-  &:hover {
-    background-color: $card-hover-background;
-    transition: $card-transition;
-
-    .card-img {
-      opacity: 0.65;
-      transition: $card-transition;
-    }
-
-    & .card-specifications {
-      bottom: 85px;
-      transition: $card-transition;
-    }
-
-    .purchase-btn {
-      opacity: 1;
-      transition: all 600ms;
     }
   }
 }
@@ -284,4 +250,39 @@
   filter: blur(5px);
   z-index: 5;
   transition: 500ms ease-in-out;
+}
+@media (hover: hover) {
+  .like-btn__icon:hover {
+    fill: #fff;
+    transition: $app-standard-transition;
+  }
+
+  .purchase-btn:hover {
+    background-color: $purchase-button-background;
+  }
+
+  .purchase-btn__active:hover {
+    color: $purchase-button-background;
+    background-color: $purchase-text-color;
+  }
+
+  .card:hover {
+    background-color: $card-hover-background;
+    transition: $card-transition;
+
+    .card-img {
+      opacity: 0.65;
+      transition: $card-transition;
+    }
+
+    & .card-specifications {
+      bottom: 85px;
+      transition: $card-transition;
+    }
+
+    .purchase-btn {
+      opacity: 1;
+      transition: all 600ms;
+    }
+  }
 }
