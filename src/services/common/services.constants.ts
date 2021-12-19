@@ -8,6 +8,10 @@ export const MAIN_API_URLS = {
     FAVORITES: 'user/favorites',
     CART: 'user/cart',
   },
+  ADMIN:{
+    CURRENCY: 'admin/settings/currency',
+    PRODUCT: 'admin/product'
+  }
 };
 
 export const LOCAL_STORAGE_KEYS = {

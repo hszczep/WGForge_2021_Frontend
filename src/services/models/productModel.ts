@@ -1,10 +1,8 @@
-export interface ProductItemInterface {
+export interface ProductModel {
   type: Array<string>;
   name: string;
-  price: ProductPrice;
   base_price: number;
   discount: number;
-  price_discount: number;
   base_price_discount: number;
   discount_show_type: string;
   tier?: number;
@@ -13,14 +11,5 @@ export interface ProductItemInterface {
   id: string;
   images: Array<string>;
   details: string;
-  isFavorite: boolean;
-  has_order: number;
   order?: number;
 }
-
-export interface ProductPrice {
-  code: string;
-  amount: number;
-}
-
-
