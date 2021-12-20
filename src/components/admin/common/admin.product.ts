@@ -26,7 +26,6 @@ class AdminProductItem {
     this.id = item.id;
     this.name = item.name;
     this.price = localizeCurrency(item.price.amount,item.price.code) ;
-    // this.price = item.price.amount;
     this.images = item.images;
     this.discount = item.discount;
     this.order = item.order;

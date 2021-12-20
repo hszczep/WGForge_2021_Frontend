@@ -9,7 +9,7 @@ import popup from '../popup/popup';
 import { ProductModel } from '../../services/models/productModel';
 
 class AdminPageComponent {
-  #currencySelect: HTMLElement = null;
+  #currencySelect: HTMLElement;
   addItemButton: HTMLElement;
 
   form: HTMLFormElement;
@@ -54,14 +54,19 @@ class AdminPageComponent {
   init(): void {
     this.#currencySelect = document.querySelector('.currency-select');
     Object.keys(currencyLocaleMap).forEach((el) => {
-      this.#currencySelect.innerHTML += `<option class='admin-option hi'
+      this.#currencySelect.innerHTML += `<option class='admin-option'
       ${el === storage.products[0].price.code ? ' selected' : ''}>${el}</option>`;
     });
     this.#currencySelect.addEventListener('change', async (event: Event) => {
       await adminService
         .changeCurrency((event.target as HTMLSelectElement).value)
         .catch((error) => popup.open(error.message));
-      window.location.reload();
+
+      this.unmount();
+      const app = document.querySelector('.app');
+      await storage.init();
+      app.innerHTML = this.render();
+      this.init();
     });
     const listOfProducts = document.querySelector('.items-menu__items-field');
     listOfProducts.replaceChildren(listOfProducts.firstElementChild);
@@ -103,7 +108,10 @@ class AdminPageComponent {
     };
   }
 
-  unmount(): void {}
+  unmount(): void {
+    const adminPage = document.querySelector('.admin-field');
+    adminPage.remove();
+  }
 
   render(): string {
     return `
