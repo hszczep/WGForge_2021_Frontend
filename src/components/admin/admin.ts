@@ -4,7 +4,6 @@ import { currencyLocaleMap } from '../../common/common.constants';
 import storage from '../app/components/storage/storage';
 import AdminProductItem from './common/admin.product';
 import detailsRender from './common/product.details';
-import { ProductItemInterface } from '../../models/product-item.model';
 import adminService from '../../services/admin.service';
 import popup from '../popup/popup';
 import { ProductModel } from '../../services/models/productModel';
@@ -55,12 +54,14 @@ class AdminPageComponent {
   init(): void {
     this.#currencySelect = document.querySelector('.currency-select');
     Object.keys(currencyLocaleMap).forEach((el) => {
-      this.#currencySelect.innerHTML += `<option class='admin-option'>${el}</option>`;
+      this.#currencySelect.innerHTML += `<option class='admin-option hi'
+      ${el === storage.products[0].price.code ? ' selected' : ''}>${el}</option>`;
     });
-    this.#currencySelect.addEventListener('change', (event: Event) => {
-      adminService
+    this.#currencySelect.addEventListener('change', async (event: Event) => {
+      await adminService
         .changeCurrency((event.target as HTMLSelectElement).value)
         .catch((error) => popup.open(error.message));
+      window.location.reload();
     });
     const listOfProducts = document.querySelector('.items-menu__items-field');
     listOfProducts.replaceChildren(listOfProducts.firstElementChild);

@@ -3,13 +3,13 @@ import detailsRender from './product.details';
 import AdminService from '../../../services/admin.service';
 import popup from '../../popup/popup';
 import storage from '../../app/components/storage/storage';
-import AdminPageComponent from '../admin'
 import { ProductModel } from '../../../services/models/productModel';
+import { localizeCurrency } from '../../../common/common.helper';
 
 class AdminProductItem {
   id: string;
   name: string;
-  base_price: number;
+  price: string;
   images: Array<string>;
   discount: number;
   price_discount: string;
@@ -25,7 +25,8 @@ class AdminProductItem {
     this.item = item;
     this.id = item.id;
     this.name = item.name;
-    this.base_price = item.base_price;
+    this.price = localizeCurrency(item.price.amount,item.price.code) ;
+    // this.price = item.price.amount;
     this.images = item.images;
     this.discount = item.discount;
     this.order = item.order;
@@ -51,7 +52,7 @@ class AdminProductItem {
     AdminService.updateProduct(product.id, product)
       .then(()=>{
         storage.init().then(()=>{
-          AdminPageComponent.init();
+          window.location.reload();
         })
       }).catch(err=>{
         popup.open(err.message);
@@ -158,7 +159,7 @@ class AdminProductItem {
                 <div class="basic-information">
                 <div class="item-info item-name">${this.name}</div>
                 <div class="item-info">${this.order ? this.order : null}</div>
-                <div class="item-info">${this.base_price}</div>
+                <div class="item-info">${this.price}</div>
                 <div class="item-info">${this.discount}</div>
                 <div class="item-info item-img">
 <!--                 <img src="${this.images[0]}" alt="${this.name}" />-->
