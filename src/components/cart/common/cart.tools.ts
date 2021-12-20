@@ -12,8 +12,8 @@ export const renderCartItem = (cartItem: ProductItemInterface): string => {
        <span class="item-name">${cartItem.name}</span>
       `
     : `<span class="item-name">${cartItem.name}</span>`;
-  const {discount,price_discount,discount_show_type,price} = cartItem;
-  const discountFormatted = formatDiscount(discount,price_discount,discount_show_type,price);
+  const { discount, price_discount, discount_show_type, price } = cartItem;
+  const discountFormatted = formatDiscount(discount, price_discount, discount_show_type, price);
   const priceDiscount = cartItem.price_discount
     ? localizeCurrency(Number(cartItem.price_discount), cartItem.price.code)
     : '';

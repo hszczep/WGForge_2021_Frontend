@@ -4,10 +4,12 @@ import { currencyLocaleMap } from '../../common/common.constants';
 import storage from '../app/components/storage/storage';
 import AdminProductItem from './common/admin.product';
 import detailsRender from './common/product.details';
-import { ProductItemInterface } from '../../models/product-item.model';
 import adminService from '../../services/admin.service';
 import popup from '../popup/popup';
 import { ProductModel } from '../../services/models/productModel';
+import mainApiService from '../../services/main-api.service';
+import authUserService from '../../services/auth-user.service';
+import appController from '../app/components/controller/app.controller';
 
 class AdminPageComponent {
   #currencySelect: HTMLElement = null;
@@ -39,17 +41,19 @@ class AdminPageComponent {
     const product = {
       ...Object.fromEntries(formData),
       type: formData.getAll('type'),
-      images: formData.get('images').toString().split(/\n/)
+      images: formData.get('images').toString().split(/\n/),
     } as ProductModel;
-    console.log(product);
-    adminService.createProduct(product)
-      .then(res => {
-        storage.init().then(() => {
-          this.init();
-        });
-      }).catch(err => {
-        popup.open(err.message);
-      });
+
+    appController.spinner.show();
+    adminService
+      .createProduct(product)
+      .then(() => mainApiService.getProducts())
+      .then((products) => {
+        storage.setProducts(products);
+        this.init();
+      })
+      .catch((err) => popup.open(err.message))
+      .finally(() => appController.spinner.hide());
   }
 
   init(): void {
@@ -58,9 +62,14 @@ class AdminPageComponent {
       this.#currencySelect.innerHTML += `<option class='admin-option'>${el}</option>`;
     });
     this.#currencySelect.addEventListener('change', (event: Event) => {
+      appController.spinner.show();
       adminService
         .changeCurrency((event.target as HTMLSelectElement).value)
-        .catch((error) => popup.open(error.message));
+        .then(() => mainApiService.getProducts())
+        .then((products) => storage.setProducts(products))
+        .then(() => authUserService.updateUserState())
+        .catch((error) => popup.open(error.message))
+        .finally(() => appController.spinner.hide());
     });
     const listOfProducts = document.querySelector('.items-menu__items-field');
     listOfProducts.replaceChildren(listOfProducts.firstElementChild);
@@ -83,7 +92,7 @@ class AdminPageComponent {
     this.form = card.querySelector('#product-form') as HTMLFormElement;
     const tankInputs = card.querySelectorAll('.tank-select');
     const idInput = card.querySelector('.input-id') as HTMLInputElement;
-    idInput.disabled = true
+    idInput.disabled = true;
     const vehicle = 'vehicle';
     const vehicleCheckbox = card.querySelector(`[data-type=${vehicle}]`) as HTMLInputElement;
     const tankInfo = card.querySelector('.tank-info') as HTMLElement;
@@ -96,7 +105,7 @@ class AdminPageComponent {
     };
     this.priceInput.addEventListener('change', this.calculateDiscount);
     this.discountPriceInput.addEventListener('change', this.calculateDiscount);
-    this.form.addEventListener('submit', this.submitProduct)
+    this.form.addEventListener('submit', this.submitProduct);
     cancelButton.onclick = () => {
       card.remove();
     };
