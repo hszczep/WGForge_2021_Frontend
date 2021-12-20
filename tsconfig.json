@@ -9,7 +9,7 @@
     "target": "es6",
     "allowJs": true,
     "typeRoots": ["custom_typings"],
-    "lib": ["DOM", "es2017", "DOM.Iterable", "ScriptHost", "es2018.promise"]
+    "lib": ["DOM", "es2017", "DOM.Iterable", "ScriptHost", "es2018.promise", "ES2019"]
   },
   "include": ["src/**/*", "global.d.ts"],
   "exclude": ["dist", "node_modules", "/.husky"]
