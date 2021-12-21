@@ -28,7 +28,7 @@ export default function detailsRender() {
   detailInfo.innerHTML = `
               <form id='product-form'>
                 <div class='price-block'>
-                  <label>Price:
+                  <label>Base Price:
                     <input required name='base_price' type='number' min='1' step='any' class='input-price'/>
                   </label>
                   <label>Discounted price:
@@ -45,7 +45,7 @@ export default function detailsRender() {
                   </div>
                 </div>
                 <div class='title-block'>
-                <label>id: <input type='text' class='input-id' name='id' readonly/></label>
+                  <label>id: <input type='text' class='input-id' name='id' readonly/></label>
                   <label>Name:<input type='text' class='input-name' name='name' required/></label>
                   <div class='card-priority'>
                     <label>Order:

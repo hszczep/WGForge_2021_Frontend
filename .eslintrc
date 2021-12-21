@@ -26,6 +26,7 @@
     "no-plusplus": "off",
     "lines-between-class-members": "off",
     "@typescript-eslint/lines-between-class-members": "off",
+    "@typescript-eslint/naming-convention": "off",
     "@typescript-eslint/indent": ["error", 2],
     "@typescript-eslint/no-unused-vars": "error",
     "@typescript-eslint/no-explicit-any": "error",

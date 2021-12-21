@@ -59,14 +59,23 @@ class AdminPageComponent {
   init(): void {
     this.#currencySelect = document.querySelector('.currency-select');
     Object.keys(currencyLocaleMap).forEach((el) => {
-      this.#currencySelect.innerHTML += `<option class='admin-option'>${el}</option>`;
+      this.#currencySelect.innerHTML += `
+        <option class='admin-option' ${el === storage.products[0].price.code ? ' selected' : ''}>${el}</option>
+      `;
     });
     this.#currencySelect.addEventListener('change', (event: Event) => {
       appController.spinner.show();
       adminService
         .changeCurrency((event.target as HTMLSelectElement).value)
         .then(() => mainApiService.getProducts())
-        .then((products) => storage.setProducts(products))
+        .then((products) => {
+          storage.setProducts(products);
+          const listOfProducts = document.querySelector('.items-menu__items-field');
+          listOfProducts.replaceChildren(listOfProducts.firstElementChild);
+          storage.products.forEach((item) => {
+            listOfProducts.append(new AdminProductItem(item).render());
+          });
+        })
         .then(() => authUserService.updateUserState())
         .catch((error) => popup.open(error.message))
         .finally(() => appController.spinner.hide());
