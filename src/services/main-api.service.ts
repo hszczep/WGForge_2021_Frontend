@@ -40,8 +40,8 @@ class MainApiService {
   updateProduct(token: string, product_id: string, params: ProductModel) {
     return putResourse(`${MAIN_API_URLS.ADMIN.PRODUCT}/${product_id}`, { token, params });
   }
-  createProduct(token: string, params: ProductModel){
-    return postResourse(`${MAIN_API_URLS.ADMIN.PRODUCT}`, {token, params})
+  createProduct(token: string, params: ProductModel) {
+    return postResourse(`${MAIN_API_URLS.ADMIN.PRODUCT}`, { token, params });
   }
   changeCurrency(token: string, params: ICurrencyParams) {
     return putResourse(MAIN_API_URLS.ADMIN.CURRENCY, { token, params });

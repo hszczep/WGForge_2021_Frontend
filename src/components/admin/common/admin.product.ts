@@ -1,19 +1,19 @@
 import { ProductItemInterface } from '../../../models/product-item.model';
 import detailsRender from './product.details';
-import AdminService from '../../../services/admin.service';
+import adminService from '../../../services/admin.service';
 import popup from '../../popup/popup';
 import storage from '../../app/components/storage/storage';
-import AdminPageComponent from '../admin';
 import { ProductModel } from '../../../services/models/productModel';
 import appController from '../../app/components/controller/app.controller';
 import mainApiService from '../../../services/main-api.service';
 import authUserService from '../../../services/auth-user.service';
 import headerComponent from '../../header/header';
+import { localizeCurrency } from '../../../common/common.helper';
 
 class AdminProductItem {
   id: string;
   name: string;
-  base_price: number;
+  price: string;
   images: Array<string>;
   discount: number;
   price_discount: string;
@@ -24,12 +24,12 @@ class AdminProductItem {
   form: HTMLFormElement;
   priceInput: HTMLInputElement;
   discountPriceInput: HTMLInputElement;
-  discountInput: HTMLInputElement
+  discountInput: HTMLInputElement;
   constructor(item: ProductItemInterface) {
     this.item = item;
     this.id = item.id;
     this.name = item.name;
-    this.base_price = item.base_price;
+    this.price = localizeCurrency(item.price.amount, item.price.code);
     this.images = item.images;
     this.discount = item.discount;
     this.order = item.order;
@@ -46,26 +46,34 @@ class AdminProductItem {
     this.title.addEventListener('click', this.showDetails);
   }
 
-  submitForm(e: SubmitEvent){
+  submitForm(e: SubmitEvent) {
     e.preventDefault();
     const formData = new FormData(this.form);
-    const product =  {...Object.fromEntries(formData),
+    const product = {
+      ...Object.fromEntries(formData),
       type: formData.getAll('type'),
-      images: formData.get('images').toString().split(/\r\n/)
+      images: formData.get('images').toString().split(/\r\n/),
     } as ProductModel;
-    AdminService.updateProduct(product.id, product)
-      .then(()=>{
-        storage.init().then(()=>{
-          AdminPageComponent.init();
-        })
-      }).catch(err=>{
-        popup.open(err.message);
+
+    appController.spinner.show();
+    adminService
+      .updateProduct(product.id, product)
+      .then(() => mainApiService.getProducts())
+      .then((products) => {
+        storage.setProducts(products);
+        const listOfProducts = document.querySelector('.items-menu__items-field');
+        listOfProducts.replaceChildren(listOfProducts.firstElementChild);
+        storage.products.forEach((item) => {
+          listOfProducts.append(new AdminProductItem(item).render());
+        });
       })
+      .catch((err) => popup.open(err.message))
+      .finally(() => appController.spinner.hide());
   }
-  calculateDiscount(){
+  calculateDiscount() {
     const price = Number(this.priceInput.value);
     const discountPrice = Number(this.discountPriceInput.value);
-    this.discountInput.value = Math.floor(100 - (discountPrice/price) *100).toString();
+    this.discountInput.value = Math.floor(100 - (discountPrice / price) * 100).toString();
   }
   showDetails(event: Event) {
     if (!(event.target as HTMLElement).classList.contains('delete-button')) {
@@ -89,7 +97,11 @@ class AdminProductItem {
     const typeInputs = this.card.querySelector('.category-block').querySelectorAll('input');
     const descriptionInput = this.card.querySelector('.description-input') as HTMLInputElement;
     const imagesInput = this.card.querySelector('.images-input') as HTMLInputElement;
-    const tankInputs = this.card.querySelectorAll('.tank-select')
+    const tankInputs = this.card.querySelectorAll('.tank-select');
+
+    this.card
+      .querySelector('.title-block')
+      .insertAdjacentHTML('beforeend', `<img class="item-img" src="${this.images[0]}" alt="${this.name}"/>`);
 
     const tankInfo = this.card.querySelector('.tank-info') as HTMLElement;
     const [tankNation, tankType, tankTier] = tankInfo.children;
@@ -114,9 +126,9 @@ class AdminProductItem {
       }
     });
     if (this.item.nation && this.item.tank_type && this.item.tier) {
-      tankInputs.forEach((el:HTMLInputElement)=>{
+      tankInputs.forEach((el: HTMLInputElement) => {
         el.disabled = false;
-      })
+      });
       tankNation.querySelectorAll('option').forEach((element: HTMLOptionElement) => {
         if (element.dataset.nation === this.item.nation) {
           element.selected = true;
@@ -133,9 +145,9 @@ class AdminProductItem {
         }
       });
     } else {
-      tankInputs.forEach((el:HTMLInputElement)=>{
+      tankInputs.forEach((el: HTMLInputElement) => {
         el.disabled = true;
-      })
+      });
       tankInfo.style.display = 'none';
     }
 
@@ -144,10 +156,9 @@ class AdminProductItem {
       tankInfo.style.display = vehicleCheckbox.checked ? 'flex' : 'none';
     };
     this.form = document.querySelector('#product-form');
-    this.form.addEventListener('submit', this.submitForm)
-    this.priceInput.addEventListener('change', this.calculateDiscount)
-    this.discountPriceInput.addEventListener('change', this.calculateDiscount)
-
+    this.form.addEventListener('submit', this.submitForm);
+    this.priceInput.addEventListener('change', this.calculateDiscount);
+    this.discountPriceInput.addEventListener('change', this.calculateDiscount);
   }
 
   hideDetails() {
@@ -159,7 +170,7 @@ class AdminProductItem {
 
   deleteProduct(){
     appController.spinner.show();
-    AdminService.deleteProduct(this.id)
+    adminService.deleteProduct(this.id)
       .then(() => mainApiService.getProducts())
       .then((products) => {
         storage.setProducts(products);
@@ -186,11 +197,8 @@ class AdminProductItem {
                 <div class="basic-information">
                 <div class="item-info item-name">${this.name}</div>
                 <div class="item-info">${this.order ? this.order : null}</div>
-                <div class="item-info">${this.base_price}</div>
+                <div class="item-info">${this.price}</div>
                 <div class="item-info">${this.discount}</div>
-                <div class="item-info item-img">
-<!--                 <img src="${this.images[0]}" alt="${this.name}" />-->
-                </div>
                 <div class="item-info">
                 <svg class="delete-button">
                   <use xlink:href="assets/images/sprite.svg#close"></use>

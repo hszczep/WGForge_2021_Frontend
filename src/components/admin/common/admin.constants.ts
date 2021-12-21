@@ -16,10 +16,10 @@ export const NATIONS = {
   merc: 'Mercenary',
 };
 export const TANK_TYPES = {
-  lighttank: 'Light',
-  mediumtank: 'Medium',
-  heavytank: 'Heavy',
-  'at-spg': 'Tank destroyer',
-  spg: 'SPGs',
+  lightTank: 'Light',
+  mediumTank: 'Medium',
+  heavyTank: 'Heavy',
+  'AT-SPG': 'Tank destroyer',
+  SPG: 'SPGs',
   multirole: 'Multirole',
 };

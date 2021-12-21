@@ -59,7 +59,7 @@ class AuthUserService {
     localStorageService.deleteUserInfo();
   }
 
-  async loginUser(isRegistration: boolean, userCredentials: IUserCredentials): Promise<IUser | false> {
+  loginUser(isRegistration: boolean, userCredentials: IUserCredentials): Promise<IUser | false> {
     if (isRegistration) {
       return this.#signUpUser(userCredentials);
     }

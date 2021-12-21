@@ -16,7 +16,7 @@ class ProductItemComponent implements IProductItemComponent {
   discount_show_type: string;
   linkToDescription: string;
   discount: number;
-  price_discount:  number;
+  price_discount: number;
   flag: string;
   isFavorite: boolean;
 
@@ -45,7 +45,7 @@ class ProductItemComponent implements IProductItemComponent {
     this.images = images; // link image
     this.linkToDescription = `#/product/${this.id}`;
     this.discount = discount; // discount in %  example 10
-    this.price_discount = price_discount
+    this.price_discount = price_discount;
     this.discount_show_type = discount_show_type;
     this.isFavorite = isFavorite;
     this.render = this.render.bind(this);
@@ -65,8 +65,8 @@ class ProductItemComponent implements IProductItemComponent {
                   <span class="item-name">${this.name}</span>
       `;
     }
-    const {discount,price_discount,discount_show_type,price} = this;
-    const discountFormatted = formatDiscount(discount,price_discount,discount_show_type,price);
+    const { discount, price_discount, discount_show_type, price } = this;
+    const discountFormatted = formatDiscount(discount, price_discount, discount_show_type, price);
     const discountPriceLocalized = localizeCurrency(price_discount, price.code);
     const priceLocalized = localizeCurrency(price.amount, price.code);
 
