@@ -7,13 +7,13 @@ class AdminService {
     return storage.getUserState().credentials.token;
   }
 
-  async updateProduct(id: string, product:ProductModel) {
+  updateProduct(id: string, product: ProductModel) {
     return mainApiService.updateProduct(AdminService.#getAdminToken(), id, product);
   }
-  async createProduct(product: ProductModel){
-    return mainApiService.createProduct(AdminService.#getAdminToken(), product)
+  createProduct(product: ProductModel) {
+    return mainApiService.createProduct(AdminService.#getAdminToken(), product);
   }
-  async changeCurrency(currencyCode: string) {
+  changeCurrency(currencyCode: string) {
     return mainApiService.changeCurrency(AdminService.#getAdminToken(), { currencyCode });
   }
 }

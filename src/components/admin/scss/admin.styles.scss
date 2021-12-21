@@ -12,9 +12,11 @@
   h2 {
     font-size: 36px;
   }
-  .input-id{
+
+  .input-id {
     color: #00080e;
   }
+
   .admin-select {
     margin-left: 15px;
     color: #e4e4e4;
@@ -38,6 +40,14 @@
     p {
       font-size: 26px;
     }
+  }
+
+  .item-img {
+    position: absolute;
+    top: -65px;
+    right: -40px;
+    max-width: 200px;
+    width: 200px;
   }
 
   .items-menu {
@@ -97,17 +107,6 @@
             width: 350px;
           }
 
-          .item-img {
-            width: 100px;
-            height: 50px;
-            margin: 0 50px;
-            transition: all 500ms;
-
-            img {
-              max-width: 200px;
-            }
-          }
-
           .delete-button {
             width: 35px;
             height: 35px;
@@ -146,10 +145,14 @@
           }
 
           .title-block {
-            width: 750px;
+            position: relative;
             display: flex;
             justify-content: space-between;
             margin-bottom: 20px;
+          }
+
+          .card-priority {
+            margin-right: 250px;
           }
 
           .category-block {

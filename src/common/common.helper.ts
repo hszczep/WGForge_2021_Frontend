@@ -15,8 +15,6 @@ export const formatDiscount = (discount: number, price_discount: number, show_ty
     return `- ${discount}%`;
   }
   return '';
-
-
 };
 
 export const getUserNameFromEmail = (email: string) => email.substring(0, email.indexOf('@'));
