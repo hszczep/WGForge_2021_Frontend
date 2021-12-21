@@ -1,13 +1,7 @@
 import './scss/swiper.scss';
 
 import { hideItemAnimationEndHandler } from './common/swiper.helpers';
-import {
-  ALLOWED_MAX_DIST_Y,
-  ALLOWED_MIN_DIST_X,
-  ALLOWED_TIME,
-  DIRECTIONS,
-  IMG_FILTERS,
-} from './common/swiper.constants';
+import { ALLOWED_MAX_DIST_Y, ALLOWED_MIN_DIST_X, ALLOWED_TIME, DIRECTIONS } from './common/swiper.constants';
 
 import { ProductItemInterface } from '../../../../models/product-item.model';
 
@@ -195,15 +189,10 @@ class Swiper {
   }
 
   renderSlides(product: ProductItemInterface): string {
-    // just for testing without enough product images
-    const images = product.images.length > 1 ? product.images : new Array(3).fill(product.images[0]);
-
-    return images
+    return product.images
       .map(
         (imageSrc, index) => `
-      <div class="swiper-slide ${index === 0 ? 'active' : ''}" 
-           style="${product.images.length > 1 ? '' : IMG_FILTERS[index]}"
-      >
+      <div class="swiper-slide ${index === 0 ? 'active' : ''}">
         <img class="slide-image" src="${imageSrc}" alt="${product.name}">
       </div>`
       )

@@ -28,21 +28,22 @@ class ProductPageComponent {
     this.#elements.favoritesButton.addEventListener('click', favoritesService.favoritesButtonClickHandler);
     this.#elements.purchaseButton.addEventListener('click', cartService.purchaseButtonClickHandler);
     menu.init();
-    this.#swiper.init();
+    if (this.#swiper) this.#swiper.init();
   }
 
   unmount() {
     this.#elements.favoritesButton.removeEventListener('click', favoritesService.favoritesButtonClickHandler);
     this.#elements.purchaseButton.removeEventListener('click', cartService.purchaseButtonClickHandler);
 
-    this.#swiper.unmount();
+    if (this.#swiper) this.#swiper.unmount();
   }
 
   render() {
-    this.#swiper = new Swiper();
-
     const productId = window.location.hash.split('/').pop();
     const product = storage.getProductById(productId);
+
+    this.#swiper = product.images.length > 1 ? new Swiper() : null;
+
     let productTextInfo = '';
     if (product.type.includes(PRODUCT_TYPE_VEHICLE)) {
       productTextInfo = `
@@ -58,6 +59,11 @@ class ProductPageComponent {
     const priceDiscountLocalized = price_discount ? localizeCurrency(Number(price_discount), price.code) : '';
     const isFavorite = storage.checkProductInFavoritesById(product.id);
     const isInCart = storage.checkProductInCartById(product.id);
+
+    const productImages = this.#swiper
+      ? this.#swiper.render(product)
+      : `<img class="slide-image" src="${product.images[0]}" alt="${product.name}">`;
+
     return `
       <div class='content-menu'>
         <a href='#' class='WoT_logo'><img src='assets/images/WoT_logo.png' alt='WoT logo' /></a>
@@ -84,7 +90,7 @@ class ProductPageComponent {
               </button>
             </div>
           </div>
-          ${this.#swiper.render(product)}
+          ${productImages}
         </div>
         <div class="item-description">
           <h3 class="item-description__title">Details</h3>

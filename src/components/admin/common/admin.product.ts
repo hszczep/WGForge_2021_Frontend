@@ -107,7 +107,7 @@ class AdminProductItem {
     this.discountInput.value = this.item.discount.toString();
     nameInput.value = this.item.name;
     descriptionInput.value = this.item.details;
-    imagesInput.value = this.item.images[0] as string;
+    imagesInput.value = this.item.images.join('\r\n');
     orderInput.value = this.item.order ? this.item.order.toString() : '';
 
     showDiscount.querySelectorAll('option').forEach((element: HTMLOptionElement) => {
