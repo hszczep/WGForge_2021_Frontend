@@ -72,7 +72,9 @@
       transition: $card-transition;
 
       .discount {
-        width: 55px;
+        z-index: 10;
+        width: fit-content;
+        padding: 0 10px;
         margin-bottom: 8px;
         background: $discount-background;
         color: $discount-text-color;
@@ -197,8 +199,9 @@
         bottom: 14px;
 
         .discount {
-          width: 40px;
-          font-size: 12px;
+          padding: 0 6px;
+          font-size: 10px;
+          line-height: 16px;
           margin-bottom: 6px;
         }
 

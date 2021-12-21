@@ -12,18 +12,23 @@ export const renderFavoritesItem = (favoritesItem: ProductItemInterface): string
        <span class="item-name">${favoritesItem.name}</span>
       `
     : `<span class="item-name">${favoritesItem.name}</span>`;
-  const {discount,price_discount,discount_show_type,price} = favoritesItem;
-  const discountFormatted = formatDiscount(discount,price_discount,discount_show_type,price);
+  const { discount, price_discount, discount_show_type, price } = favoritesItem;
+  const discountFormatted = formatDiscount(discount, price_discount, discount_show_type, price);
 
   const priceDiscount = favoritesItem.price_discount
     ? localizeCurrency(Number(favoritesItem.price_discount), favoritesItem.price.code)
     : '';
+  const discountClass = favoritesItem.discount_show_type === 'percent' ? 'discount-percent' : 'discount-price';
 
   const isInCart = storage.checkProductInCartById(favoritesItem.id);
 
   return `
     <article class="favorite-item" data-id="${favoritesItem.id}">
-      ${favoritesItem.discount ? `<div class="discount">${discountFormatted}</div>` : ''}
+      ${
+  favoritesItem.discount
+    ? `<div class="discount ${discountClass}">${discountFormatted}</div>`
+    : ''
+}
 
       <svg class="favorite__delete-button">
         <use xlink:href="assets/images/sprite.svg#close"></use>

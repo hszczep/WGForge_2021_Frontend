@@ -4,7 +4,6 @@ import { currencyLocaleMap } from '../../common/common.constants';
 import storage from '../app/components/storage/storage';
 import AdminProductItem from './common/admin.product';
 import detailsRender from './common/product.details';
-import { ProductItemInterface } from '../../models/product-item.model';
 import adminService from '../../services/admin.service';
 import popup from '../popup/popup';
 import { ProductModel } from '../../services/models/productModel';

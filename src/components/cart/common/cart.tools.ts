@@ -12,15 +12,20 @@ export const renderCartItem = (cartItem: ProductItemInterface): string => {
        <span class="item-name">${cartItem.name}</span>
       `
     : `<span class="item-name">${cartItem.name}</span>`;
-  const {discount,price_discount,discount_show_type,price} = cartItem;
-  const discountFormatted = formatDiscount(discount,price_discount,discount_show_type,price);
+  const { discount, price_discount, discount_show_type, price } = cartItem;
+  const discountFormatted = formatDiscount(discount, price_discount, discount_show_type, price);
   const priceDiscount = cartItem.price_discount
     ? localizeCurrency(Number(cartItem.price_discount), cartItem.price.code)
     : '';
+  const discountClass = cartItem.discount_show_type === 'percent' ? 'discount-percent' : 'discount-price';
 
   return `
     <article class="cart-item" data-id="${cartItem.id}">
-      ${cartItem.discount ? `<div class="discount">${discountFormatted}</div>` : ''}
+      ${
+  cartItem.discount
+    ? `<div class="discount ${discountClass}">${discountFormatted}</div>`
+    : ''
+}
 
       <svg class="cart__delete-button">
         <use xlink:href="assets/images/sprite.svg#close"></use>
