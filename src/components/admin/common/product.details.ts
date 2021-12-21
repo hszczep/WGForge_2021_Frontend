@@ -87,7 +87,7 @@ export default function detailsRender() {
                   <label>IMG:<textarea name='images' class='textarea images-input'></textarea></label>
                 </div>
                 <div class='buttons-block'>
-                  <button class='button cancel-btn'>Cancel</button>
+                  <button class='button cancel-btn' type='button'>Cancel</button>
                   <button class='button save-btn'>Save</button>
                 </div>
               </form>
