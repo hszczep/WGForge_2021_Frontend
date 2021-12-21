@@ -96,7 +96,7 @@ class AdminProductItem {
     this.discountInput.value = this.item.discount.toString();
     nameInput.value = this.item.name;
     descriptionInput.value = this.item.details;
-    imagesInput.value = this.item.images[0] as string;
+    imagesInput.value = this.item.images.join('\r\n');
     orderInput.value = this.item.order ? this.item.order.toString() : '';
 
     showDiscount.querySelectorAll('option').forEach((element: HTMLOptionElement) => {
@@ -154,10 +154,13 @@ class AdminProductItem {
   }
 
   deleteProduct(){
+    const spiner = document.querySelector('.spinner') as HTMLElement;
+    spiner.style.display = 'flex';
     AdminService.deleteProduct(this.id)
       .then(res => {
         storage.init().then(() => {
           AdminPageComponent.init();
+          spiner.style.display = 'none';
         });
       }).catch(err => {
         popup.open(err.message);
