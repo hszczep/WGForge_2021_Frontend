@@ -20,19 +20,18 @@ const generateRequestConfig = ({ method, token, params }: IRequestConfig) => {
         method,
         headers: generateHeaders(token),
       };
-    case 'PUT':{
-      if (params){
+    case 'PUT': {
+      if (params) {
         return {
           method,
           headers: generateHeaders(token),
           body: JSON.stringify(params),
         };
-      } 
+      }
       return {
         method,
         headers: generateHeaders(token),
       };
-      
     }
     case 'POST':
       return {

@@ -14,6 +14,8 @@ class Controller {
     this.#elements = {
       appContainer: document.querySelector('.app-field'),
     };
+
+    this.#spinnerInit();
   }
 
   #renderHeader(): void {
@@ -35,12 +37,8 @@ class Controller {
 
     this.#renderFooter();
 
-    this.#spinnerInit();
-
-    this.spinner.show();
     await authUserService.updateUserState();
     if (storage.checkIsUserAdmin()) window.location.hash = '#/admin';
-    this.spinner.hide();
 
     headerComponent.updateHeaderForCurrentUserState();
   }

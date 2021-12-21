@@ -22,5 +22,3 @@ export interface ProductPrice {
   code: string;
   amount: number;
 }
-
-
