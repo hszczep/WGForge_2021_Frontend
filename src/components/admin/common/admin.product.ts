@@ -3,8 +3,12 @@ import detailsRender from './product.details';
 import AdminService from '../../../services/admin.service';
 import popup from '../../popup/popup';
 import storage from '../../app/components/storage/storage';
-import AdminPageComponent from '../admin'
+import AdminPageComponent from '../admin';
 import { ProductModel } from '../../../services/models/productModel';
+import appController from '../../app/components/controller/app.controller';
+import mainApiService from '../../../services/main-api.service';
+import authUserService from '../../../services/auth-user.service';
+import headerComponent from '../../header/header';
 
 class AdminProductItem {
   id: string;
@@ -154,17 +158,24 @@ class AdminProductItem {
   }
 
   deleteProduct(){
-    const spiner = document.querySelector('.spinner') as HTMLElement;
-    spiner.style.display = 'flex';
+    appController.spinner.show();
     AdminService.deleteProduct(this.id)
-      .then(res => {
-        storage.init().then(() => {
-          AdminPageComponent.init();
-          spiner.style.display = 'none';
+      .then(() => mainApiService.getProducts())
+      .then((products) => {
+        storage.setProducts(products);
+        const listOfProducts = document.querySelector('.items-menu__items-field');
+        listOfProducts.replaceChildren(listOfProducts.firstElementChild);
+        storage.products.forEach((item) => {
+          listOfProducts.append(new AdminProductItem(item).render());
         });
-      }).catch(err => {
-        popup.open(err.message);
-      });
+      })
+      .then(() => authUserService.updateUserState())
+      .then(() => {
+        headerComponent.updateCartCount();
+        headerComponent.updateFavoritesCount();
+      })
+      .catch((error) => popup.open(error.message))
+      .finally(() => appController.spinner.hide());
   }
 
   createCard() {
