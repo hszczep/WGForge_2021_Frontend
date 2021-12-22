@@ -28,15 +28,25 @@
     background-size: $app-medium-width - 100px;
   }
 }
-
 @media all and (max-width: $app-medium-media-query) {
   .error-block {
-    width: $app-min-width;
-    height: 200px;
+    width: $app-tablet-width;
+    height: 400px;
   }
 
   .error-img__text {
     font-size: 1.1em;
+    background-size: $app-tablet-width - 20px;
+  }
+}
+
+@media all and (max-width: $app-tablet-media-query) {
+  .error-block {
+    width: $app-min-width;
+    height: 230px;
+  }
+
+  .error-img__text {
     background-size: $app-min-width - 20px;
   }
 }

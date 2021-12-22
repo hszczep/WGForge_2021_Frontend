@@ -80,6 +80,12 @@
 
 @media all and (max-width: $app-medium-media-query) {
   .popup {
+    width: 500px;
+  }
+}
+
+@media all and (max-width: $app-tablet-media-query) {
+  .popup {
     width: 290px;
   }
 }

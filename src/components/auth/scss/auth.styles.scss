@@ -86,7 +86,7 @@
     }
   }
 
-  @media all and (max-width: $app-medium-media-query) {
+  @media all and (max-width: $app-tablet-media-query) {
     .auth-form {
       width: $auth-form-mobile-width;
       height: $auth-form-mobile-height;

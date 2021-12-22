@@ -67,7 +67,6 @@
       letter-spacing: 0.1em;
       text-shadow: 0 1px 0 rgba(0, 0, 0, 0.33);
       color: $title-text-color;
-      cursor: pointer;
       user-select: none;
       margin-bottom: 10px;
 
@@ -320,8 +319,74 @@
     }
   }
 }
-
 @media all and (max-width: $app-medium-media-query) {
+  .cart-field {
+    width: $app-tablet-width;
+    padding: 30px;
+
+    .cart-item {
+      position: relative;
+      width: $app-tablet-width - 62px;
+      height: 160px;
+
+      &__info {
+        margin-left: 40px;
+      }
+
+      &__img-block {
+        width: 120px;
+        height: 100px;
+      }
+
+      &__img {
+        max-width: 120px;
+      }
+
+      &__text-block {
+        width: 420px;
+        height: 150px;
+        margin-left: 20px;
+      }
+
+      &__text {
+        font-size: 14px;
+      }
+
+      &__description {
+        height: 70px;
+        font-size: 11px;
+      }
+
+      &__wrapper {
+        width: 220px;
+        height: 100px;
+        margin-left: 20px;
+      }
+
+      &__price-block {
+        margin-top: 10px;
+        flex-wrap: wrap;
+
+        .price {
+          margin-right: 5px;
+          font-size: 14px;
+          margin-bottom: 10px;
+        }
+      }
+
+      .like-btn {
+        left: 110px;
+        align-self: flex-start;
+      }
+    }
+
+    .cart-order-button {
+      width: 250px;
+    }
+  }
+}
+
+@media all and (max-width: $app-tablet-media-query) {
   .cart-field {
     width: $app-min-width;
     margin-top: 20px;
