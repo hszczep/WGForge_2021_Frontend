@@ -96,13 +96,13 @@ class AdminPageComponent {
   addItem() {
     const card = document.createElement('article');
     card.classList.add('item-card', 'active-card');
-    card.append(detailsRender());
+    card.append(detailsRender('new'));
     this.addItemButton.after(card);
     const cancelButton = card.querySelector('.cancel-btn') as HTMLElement;
     this.discountPriceInput = card.querySelector('.input-discount_price') as HTMLInputElement;
     this.discountInput = card.querySelector('.input-discount') as HTMLInputElement;
     this.priceInput = card.querySelector('.input-price') as HTMLInputElement;
-    this.form = card.querySelector('#product-form') as HTMLFormElement;
+    this.form = card.querySelector('#product-form-new') as HTMLFormElement;
     const tankInputs = card.querySelectorAll('.tank-select');
     const idInput = card.querySelector('.input-id') as HTMLInputElement;
     idInput.disabled = true;

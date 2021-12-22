@@ -78,7 +78,7 @@ class AdminProductItem {
   showDetails(event: Event) {
     if (!(event.target as HTMLElement).classList.contains('delete-button')) {
       this.card.classList.add('active-card');
-      this.card.append(detailsRender());
+      this.card.append(detailsRender(this.item.id));
       this.title.removeEventListener('click', this.showDetails);
       const cross = this.card.querySelector('.cancel-btn');
       cross.addEventListener('click', this.hideDetails);
@@ -155,7 +155,7 @@ class AdminProductItem {
     vehicleCheckbox.onchange = () => {
       tankInfo.style.display = vehicleCheckbox.checked ? 'flex' : 'none';
     };
-    this.form = document.querySelector('#product-form');
+    this.form = document.querySelector(`#product-form-${this.id}`);
     this.form.addEventListener('submit', this.submitForm);
     this.priceInput.addEventListener('change', this.calculateDiscount);
     this.discountPriceInput.addEventListener('change', this.calculateDiscount);
@@ -168,9 +168,10 @@ class AdminProductItem {
     this.title.addEventListener('click', this.showDetails);
   }
 
-  deleteProduct(){
+  deleteProduct() {
     appController.spinner.show();
-    adminService.deleteProduct(this.id)
+    adminService
+      .deleteProduct(this.id)
       .then(() => mainApiService.getProducts())
       .then((products) => {
         storage.setProducts(products);

@@ -9,7 +9,7 @@ export const localizeCurrency = (amount: number, code: string): string => {
 };
 export const formatDiscount = (discount: number, price_discount: number, show_type: string, price: ProductPrice) => {
   if (discount && show_type === 'absolute') {
-    return `- ${localizeCurrency((price.amount - price_discount), price.code)}`;
+    return `- ${localizeCurrency(price.amount - price_discount, price.code)}`;
   }
   if (discount && show_type === 'percent') {
     return `- ${discount}%`;

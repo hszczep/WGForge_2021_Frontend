@@ -152,6 +152,10 @@
       color: #999;
     }
   }
+
+  .item-image {
+    width: 50%;
+  }
 }
 
 @media all and (max-width: $app-max-media-query) {
@@ -237,6 +241,7 @@
   .item-block {
     width: $app-min-width;
     margin: auto;
+
     &__main-info {
       display: block;
 
@@ -329,6 +334,10 @@
         margin-top: 10px;
         font-size: 13px;
       }
+    }
+
+    .item-image {
+      width: 100%;
     }
   }
 }

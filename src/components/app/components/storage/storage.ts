@@ -2,6 +2,7 @@ import { USER } from '../../../../common/common.constants';
 import { ProductItemInterface } from '../../../../models/product-item.model';
 import { IUserState } from '../../../../models/user.model';
 import mainApiService from '../../../../services/main-api.service';
+import { PRODUCTS_FILTER_DEFAULT_STATE } from '../../common/app.constants';
 
 class Storage {
   #userState: IUserState = USER.DEFAULT_STATE;
@@ -29,7 +30,8 @@ class Storage {
   }
 
   resetUserState() {
-    this.#userState = USER.DEFAULT_STATE;
+    this.#userState = { ...USER.DEFAULT_STATE };
+    this.productsFilter = { ...PRODUCTS_FILTER_DEFAULT_STATE };
   }
 
   setProducts(products: Array<ProductItemInterface>) {
@@ -88,11 +90,7 @@ class Storage {
 
   async init() {
     this.products = await mainApiService.getProducts();
-    this.productsFilter = {
-      nation: '',
-      type: '',
-      tier: '',
-    };
+    this.productsFilter = { ...PRODUCTS_FILTER_DEFAULT_STATE };
     this.category = 'all';
   }
 }

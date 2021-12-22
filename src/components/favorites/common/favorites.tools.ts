@@ -24,11 +24,7 @@ export const renderFavoritesItem = (favoritesItem: ProductItemInterface): string
 
   return `
     <article class="favorite-item" data-id="${favoritesItem.id}">
-      ${
-  favoritesItem.discount
-    ? `<div class="discount ${discountClass}">${discountFormatted}</div>`
-    : ''
-}
+      ${favoritesItem.discount ? `<div class="discount ${discountClass}">${discountFormatted}</div>` : ''}
 
       <svg class="favorite__delete-button">
         <use xlink:href="assets/images/sprite.svg#close"></use>
