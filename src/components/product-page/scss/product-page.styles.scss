@@ -152,6 +152,10 @@
       color: #999;
     }
   }
+
+  .item-image {
+    width: 50%;
+  }
 }
 
 @media all and (max-width: $app-max-media-query) {
@@ -329,6 +333,10 @@
         margin-top: 10px;
         font-size: 13px;
       }
+    }
+
+    .item-image {
+      width: 100%;
     }
   }
 }

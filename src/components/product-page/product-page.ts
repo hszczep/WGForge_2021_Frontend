@@ -62,7 +62,7 @@ class ProductPageComponent {
 
     const productImages = this.#swiper
       ? this.#swiper.render(product)
-      : `<img class="slide-image" src="${product.images[0]}" alt="${product.name}">`;
+      : `<img class="item-image" src="${product.images[0]}" alt="${product.name}">`;
 
     return `
       <div class='content-menu'>
