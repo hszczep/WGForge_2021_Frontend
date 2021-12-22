@@ -50,7 +50,11 @@ class AdminPageComponent {
       .then(() => mainApiService.getProducts())
       .then((products) => {
         storage.setProducts(products);
-        this.init();
+        const listOfProducts = document.querySelector('.items-menu__items-field');
+        listOfProducts.replaceChildren(listOfProducts.firstElementChild);
+        storage.products.forEach((item) => {
+          listOfProducts.append(new AdminProductItem(item).render());
+        });
       })
       .catch((err) => popup.open(err.message))
       .finally(() => appController.spinner.hide());
