@@ -4,8 +4,10 @@ import adminService from '../../../services/admin.service';
 import popup from '../../popup/popup';
 import storage from '../../app/components/storage/storage';
 import { ProductModel } from '../../../services/models/productModel';
-import mainApiService from '../../../services/main-api.service';
 import appController from '../../app/components/controller/app.controller';
+import mainApiService from '../../../services/main-api.service';
+import authUserService from '../../../services/auth-user.service';
+import headerComponent from '../../header/header';
 import { localizeCurrency } from '../../../common/common.helper';
 
 class AdminProductItem {
@@ -31,6 +33,7 @@ class AdminProductItem {
     this.images = item.images;
     this.discount = item.discount;
     this.order = item.order;
+    this.deleteProduct = this.deleteProduct.bind(this);
     this.card = this.createCard();
     this.title = this.card.querySelector('.basic-information');
 
@@ -72,13 +75,15 @@ class AdminProductItem {
     const discountPrice = Number(this.discountPriceInput.value);
     this.discountInput.value = Math.floor(100 - (discountPrice / price) * 100).toString();
   }
-  showDetails() {
-    this.card.classList.add('active-card');
-    this.card.append(detailsRender());
-    this.title.removeEventListener('click', this.showDetails);
-    const cross = this.card.querySelector('.cancel-btn');
-    cross.addEventListener('click', this.hideDetails);
-    this.initDetails();
+  showDetails(event: Event) {
+    if (!(event.target as HTMLElement).classList.contains('delete-button')) {
+      this.card.classList.add('active-card');
+      this.card.append(detailsRender());
+      this.title.removeEventListener('click', this.showDetails);
+      const cross = this.card.querySelector('.cancel-btn');
+      cross.addEventListener('click', this.hideDetails);
+      this.initDetails();
+    }
   }
 
   initDetails() {
@@ -107,7 +112,7 @@ class AdminProductItem {
     this.discountInput.value = this.item.discount.toString();
     nameInput.value = this.item.name;
     descriptionInput.value = this.item.details;
-    imagesInput.value = this.item.images[0] as string;
+    imagesInput.value = this.item.images.join('\r\n');
     orderInput.value = this.item.order ? this.item.order.toString() : '';
 
     showDiscount.querySelectorAll('option').forEach((element: HTMLOptionElement) => {
@@ -163,6 +168,27 @@ class AdminProductItem {
     this.title.addEventListener('click', this.showDetails);
   }
 
+  deleteProduct(){
+    appController.spinner.show();
+    adminService.deleteProduct(this.id)
+      .then(() => mainApiService.getProducts())
+      .then((products) => {
+        storage.setProducts(products);
+        const listOfProducts = document.querySelector('.items-menu__items-field');
+        listOfProducts.replaceChildren(listOfProducts.firstElementChild);
+        storage.products.forEach((item) => {
+          listOfProducts.append(new AdminProductItem(item).render());
+        });
+      })
+      .then(() => authUserService.updateUserState())
+      .then(() => {
+        headerComponent.updateCartCount();
+        headerComponent.updateFavoritesCount();
+      })
+      .catch((error) => popup.open(error.message))
+      .finally(() => appController.spinner.hide());
+  }
+
   createCard() {
     const card = document.createElement('article');
     card.classList.add('item-card');
@@ -179,6 +205,8 @@ class AdminProductItem {
                 </svg>
               </div>
     `;
+    const deleteButton = card.querySelector('.delete-button');
+    deleteButton.addEventListener('click', this.deleteProduct);
     return card;
   }
 
