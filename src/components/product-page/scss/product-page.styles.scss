@@ -33,7 +33,9 @@
       position: absolute;
       top: 20px;
       right: 20px;
-      width: 100px;
+      z-index: 10;
+      width: fit-content;
+      padding: 0 10px;
       background: $discount-background;
       color: $discount-text-color;
       font-size: 22px;
@@ -158,10 +160,10 @@
 
     &__main-info {
       .discount {
-        top: 15px;
-        right: 15px;
-        width: 70px;
-        font-size: 18px;
+        top: 13px;
+        right: 13px;
+        padding: 0 7px;
+        font-size: 15px;
         line-height: 30px;
       }
 
@@ -330,14 +332,17 @@
     }
   }
 }
+
 @media (hover: hover) {
-  .like-btn__icon:hover {
-    fill: #fff;
-    transition: $app-standard-transition;
+  .item-specifications {
+    .like-btn__icon:hover {
+      fill: #fff;
+      transition: $app-standard-transition;
+    }
   }
 
   .purchase-btn:hover {
-    background-color: $purchase-button-background;
+    background-color: $purchase-button-hover-background;
   }
 
   .purchase-btn__active:hover {

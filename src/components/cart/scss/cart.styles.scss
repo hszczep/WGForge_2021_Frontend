@@ -95,7 +95,7 @@
       flex-direction: column;
       justify-content: center;
       height: 150px;
-      margin-left: 70px;
+      margin-left: 60px;
     }
 
     &__price-block {
@@ -106,7 +106,7 @@
       .price {
         display: inline-block;
         font-family: $app-font-family;
-        font-size: 18px;
+        font-size: 16px;
         line-height: 1.2;
         font-weight: 400;
         text-transform: uppercase;
@@ -150,25 +150,39 @@
     }
 
     .discount {
+      position: absolute;
+      background: $discount-background;
+      color: $discount-text-color;
+    }
+
+    .discount-percent {
       clip-path: circle(60% at 1% 0);
       width: 90px;
       height: 90px;
-      position: absolute;
       top: 0;
       left: 0;
-      background: $discount-background;
       border-top-left-radius: 10px;
-      font-size: 15px;
-      color: $discount-text-color;
+      font-size: 14px;
       padding: 14px 0 0 9px;
+    }
+
+    .discount-price {
+      width: fit-content;
+      height: 24px;
+      top: 10px;
+      left: 10px;
+      padding: 0 12px;
+      border-radius: 5px;
+      font-size: 13px;
+      line-height: 24px;
     }
 
     .cart__delete-button {
       position: absolute;
       width: 40px;
       height: 40px;
-      top: 14px;
-      right: 20px;
+      top: 10px;
+      right: 15px;
       fill: #999;
       padding: 6px;
       cursor: pointer;
@@ -184,7 +198,7 @@
 
   .cart-order-button {
     align-self: center;
-    width: 150px;
+    width: 400px;
     height: 45px;
     margin-bottom: 15px;
     bottom: 30px;
@@ -237,9 +251,9 @@
       }
 
       &__text-block {
-        width: 380px;
+        width: 420px;
         height: 150px;
-        margin-left: 30px;
+        margin-left: 40px;
       }
 
       &__text {
@@ -258,10 +272,11 @@
 
       &__price-block {
         margin-top: 10px;
+        flex-wrap: wrap;
 
         .price {
           margin-right: 5px;
-          font-size: 16px;
+          font-size: 15px;
           margin-bottom: 10px;
         }
 
@@ -271,17 +286,23 @@
       }
 
       .like-btn {
-        left: 160px;
+        left: 170px;
         align-self: flex-start;
         margin-left: 35px;
       }
 
-      .discount {
+      .discount-percent {
         clip-path: circle(60% at 1% 0);
         width: 80px;
         height: 80px;
-        font-size: 14px;
-        padding: 13px 0 0 9px;
+        font-size: 13px;
+        padding: 12px 0 0 9px;
+      }
+      .discount-price {
+        top: 0;
+        left: 0;
+        border-radius: 10px 0;
+        font-size: 12px;
       }
 
       .cart__delete-button {
@@ -291,6 +312,9 @@
         right: 10px;
         padding: 4px;
       }
+    }
+    .cart-order-button {
+      width: 300px;
     }
   }
 }
@@ -359,7 +383,7 @@
         .price {
           margin-right: 5px;
           font-size: 14px;
-          margin-bottom: 10px;
+          margin-bottom: 4px;
         }
       }
 
@@ -371,12 +395,21 @@
         margin: 0;
       }
 
-      .discount {
+      .discount-percent {
         clip-path: circle(60% at 1% 0);
-        width: 50px;
-        height: 50px;
-        font-size: 10px;
+        width: 60px;
+        height: 60px;
+        font-size: 12px;
         padding: 7px 0 0 5px;
+      }
+      .discount-price {
+        top: 0;
+        left: 0;
+        border-radius: 10px 0;
+        padding: 0 8px;
+        height: 15px;
+        line-height: 15px;
+        font-size: 8px;
       }
 
       .cart__delete-button {
@@ -386,12 +419,19 @@
         right: 5px;
       }
     }
+    .cart-order-button {
+      width: 200px;
+    }
   }
 }
 
 @media (hover: hover) {
-  .like-btn__icon:hover {
-    fill: #fff;
-    transition: $app-standard-transition;
+  .cart-field {
+    .cart-item {
+      .like-btn__icon:hover {
+        fill: #fff;
+        transition: $app-standard-transition;
+      }
+    }
   }
 }
