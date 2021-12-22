@@ -17,7 +17,7 @@ class AdminService {
     return mainApiService.changeCurrency(AdminService.#getAdminToken(), { currencyCode });
   }
   async deleteProduct(id: string) {
-    return mainApiService.deleteProduct(AdminService.#getAdminToken(), id)
+    return mainApiService.deleteProduct(AdminService.#getAdminToken(), id);
   }
 }
 
