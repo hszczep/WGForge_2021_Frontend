@@ -154,6 +154,9 @@ class AdminProductItem {
     const vehicleCheckbox = this.card.querySelector(`[data-type=${vehicle}]`) as HTMLInputElement;
     vehicleCheckbox.onchange = () => {
       tankInfo.style.display = vehicleCheckbox.checked ? 'flex' : 'none';
+      tankInputs.forEach((el: HTMLInputElement) => {
+        el.disabled = !vehicleCheckbox.checked;
+      });
     };
     this.form = document.querySelector('#product-form');
     this.form.addEventListener('submit', this.submitForm);
