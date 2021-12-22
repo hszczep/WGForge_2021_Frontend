@@ -21,11 +21,7 @@ export const renderCartItem = (cartItem: ProductItemInterface): string => {
 
   return `
     <article class="cart-item" data-id="${cartItem.id}">
-      ${
-  cartItem.discount
-    ? `<div class="discount ${discountClass}">${discountFormatted}</div>`
-    : ''
-}
+      ${cartItem.discount ? `<div class="discount ${discountClass}">${discountFormatted}</div>` : ''}
 
       <svg class="cart__delete-button">
         <use xlink:href="assets/images/sprite.svg#close"></use>

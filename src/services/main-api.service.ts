@@ -47,7 +47,7 @@ class MainApiService {
     return putResourse(MAIN_API_URLS.ADMIN.CURRENCY, { token, params });
   }
   deleteProduct(token: string, product_id: string) {
-    return deleteResourse(`${MAIN_API_URLS.ADMIN.PRODUCT}/${product_id}`, { token })
+    return deleteResourse(`${MAIN_API_URLS.ADMIN.PRODUCT}/${product_id}`, { token });
   }
 }
 

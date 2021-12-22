@@ -169,21 +169,74 @@
 
     &__single {
       .card-img {
-        width: 140px;
-      }
-
-      .like-btn {
-        right: 5px;
+        width: 160px;
       }
     }
 
-    &__double {
-      .card-img {
-        width: 240px;
+    .like-btn {
+      width: 28px;
+      top: 8px;
+      right: 8px;
+    }
+
+    .card-info {
+      .card-specifications {
+        left: 14px;
+        bottom: 14px;
+
+        .discount {
+          padding: 0 8px;
+          font-size: 14px;
+          line-height: 18px;
+          margin-bottom: 6px;
+        }
+
+        .item-text {
+          font-size: 15px;
+          align-items: baseline;
+          margin-bottom: 4px;
+
+          .flag,
+          .tank-type,
+          .level {
+            margin-right: 3px;
+          }
+
+          .item-name {
+            white-space: nowrap;
+            max-width: 70px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+
+          .flag,
+          .tank-type {
+            transform: scale(0.8);
+          }
+        }
       }
 
-      .like-btn {
-        right: 3px;
+      .price {
+        font-size: 15px;
+      }
+    }
+
+    .purchase-btn {
+      width: 100px;
+      height: 45px;
+      bottom: 30px;
+      font-size: 14px;
+      left: 14px;
+    }
+  }
+}
+@media all and (max-width: $app-tablet-media-query) {
+  .card {
+    background-color: $card-hover-background;
+
+    &__single {
+      .card-img {
+        width: 140px;
       }
     }
 
@@ -255,37 +308,39 @@
   transition: 500ms ease-in-out;
 }
 @media (hover: hover) {
-  .like-btn__icon:hover {
-    fill: #fff;
-    transition: $app-standard-transition;
-  }
-
-  .purchase-btn:hover {
-    background-color: $purchase-button-background;
-  }
-
-  .purchase-btn__active:hover {
-    color: $purchase-button-background;
-    background-color: $purchase-text-color;
-  }
-
-  .card:hover {
-    background-color: $card-hover-background;
-    transition: $card-transition;
-
-    .card-img {
-      opacity: 0.65;
-      transition: $card-transition;
+  .card {
+    .like-btn__icon:hover {
+      fill: #fff;
+      transition: $app-standard-transition;
     }
 
-    & .card-specifications {
-      bottom: 85px;
-      transition: $card-transition;
+    .purchase-btn:hover {
+      background-color: $purchase-button-background;
     }
 
-    .purchase-btn {
-      opacity: 1;
-      transition: all 600ms;
+    .purchase-btn__active:hover {
+      color: $purchase-button-background;
+      background-color: $purchase-text-color;
+    }
+
+    &:hover {
+      background-color: $card-hover-background;
+      transition: $card-transition;
+
+      &-img {
+        opacity: 0.65;
+        transition: $card-transition;
+      }
+
+      .card-specifications {
+        bottom: 85px;
+        transition: $card-transition;
+      }
+
+      .purchase-btn {
+        opacity: 1;
+        transition: all 600ms;
+      }
     }
   }
 }

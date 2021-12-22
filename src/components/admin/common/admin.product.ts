@@ -168,9 +168,10 @@ class AdminProductItem {
     this.title.addEventListener('click', this.showDetails);
   }
 
-  deleteProduct(){
+  deleteProduct() {
     appController.spinner.show();
-    adminService.deleteProduct(this.id)
+    adminService
+      .deleteProduct(this.id)
       .then(() => mainApiService.getProducts())
       .then((products) => {
         storage.setProducts(products);
