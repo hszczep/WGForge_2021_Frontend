@@ -93,7 +93,6 @@
         line-height: 1.2;
         font-weight: 400;
         text-transform: uppercase;
-        letter-spacing: 0.1em;
         text-shadow: 0 1px 0 rgba(0, 0, 0, 0.33);
         color: $title-text-color;
 
@@ -214,17 +213,16 @@
           .tank-type,
           .level {
             margin-right: 3px;
+            align-self: center;
           }
 
           .item-name {
-            white-space: nowrap;
-            max-width: 70px;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            overflow-wrap: anywhere;
           }
 
           .flag,
           .tank-type {
+            margin-bottom: 1px;
             transform: scale(0.8);
           }
         }
