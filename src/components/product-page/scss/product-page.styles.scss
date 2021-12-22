@@ -234,7 +234,7 @@
 @media all and (max-width: $app-medium-media-query) {
   .item-block {
     width: $app-min-width;
-
+    margin: auto;
     &__main-info {
       display: block;
 

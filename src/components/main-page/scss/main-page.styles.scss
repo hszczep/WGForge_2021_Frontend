@@ -80,8 +80,8 @@
     margin-bottom: 20px;
 
     .content-menu {
-      width: $app-min-width;
-      margin: 10px 0;
+      width: calc(100% - 20px);
+      margin: 10px auto;
 
       .WoT_logo {
         margin: 10px 0 0 10px;
