@@ -80,6 +80,40 @@
     margin-bottom: 20px;
 
     .content-menu {
+      width: 600px;
+      margin: 10px auto;
+
+      .WoT_logo {
+        margin: 10px 0 0 10px;
+
+        &::before {
+          content: url('../../../assets/images/miniWoTLogo.png');
+        }
+
+        img {
+          display: none;
+        }
+      }
+
+      .content-menu__buttons {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        margin-top: 5px;
+
+        button {
+          margin-left: 20px;
+          margin-bottom: 5px;
+        }
+      }
+    }
+  }
+}
+@media all and (max-width: $app-tablet-media-query) {
+  .app {
+    margin-bottom: 20px;
+
+    .content-menu {
       width: calc(100% - 20px);
       margin: 10px auto;
 

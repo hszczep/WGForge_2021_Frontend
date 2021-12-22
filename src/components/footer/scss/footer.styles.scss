@@ -72,16 +72,38 @@
 @media all and (max-width: $app-medium-media-query) {
   .footer {
     .footer-info {
-      width: $app-min-width;
-      height: 70px;
+      width: $app-tablet-width;
+      height: 60px;
 
       .forge-logo {
-        width: 100px;
-        height: 37px;
+        width: 110px;
+        height: 40px;
       }
 
       .create-date {
         display: none;
+      }
+
+      .social-networks-block {
+        width: $footer-social-networks-tablet-width;
+
+        .networks-logo {
+          width: 34px;
+          height: 34px;
+        }
+      }
+    }
+  }
+}
+@media all and (max-width: $app-tablet-media-query) {
+  .footer {
+    .footer-info {
+      width: 88vw;
+      height: 60px;
+
+      .forge-logo {
+        width: 100px;
+        height: 37px;
       }
 
       .social-networks-block {

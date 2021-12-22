@@ -156,7 +156,7 @@
 
 @media all and (max-width: $app-max-media-query) {
   .item-block {
-    width: $app-medium-width;
+    width: $app-tablet-width;
 
     &__main-info {
       .discount {
@@ -226,6 +226,7 @@
       }
 
       &__text {
+        width: 90%;
         margin-top: 25px;
         font-size: 16px;
       }
@@ -233,10 +234,11 @@
   }
 }
 
-@media all and (max-width: $app-medium-media-query) {
+@media all and (max-width: $app-tablet-media-query) {
   .item-block {
     width: $app-min-width;
     margin: auto;
+
     &__main-info {
       display: block;
 
@@ -334,19 +336,21 @@
 }
 
 @media (hover: hover) {
-  .item-specifications {
-    .like-btn__icon:hover {
-      fill: #fff;
-      transition: $app-standard-transition;
+  .item-block {
+    .item-specifications {
+      .like-btn__icon:hover {
+        fill: #fff;
+        transition: $app-standard-transition;
+      }
     }
-  }
 
-  .purchase-btn:hover {
-    background-color: $purchase-button-hover-background;
-  }
+    .purchase-btn:hover {
+      background-color: $purchase-button-hover-background;
+    }
 
-  .purchase-btn__active:hover {
-    color: $purchase-button-background;
-    background-color: $purchase-text-color;
+    .purchase-btn__active:hover {
+      color: $purchase-button-background;
+      background-color: $purchase-text-color;
+    }
   }
 }
