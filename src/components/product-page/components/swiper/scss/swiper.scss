@@ -121,13 +121,18 @@
     height: 50px;
   }
 }
-@media all and (max-width: $app-tablet-media-query) {
+@media all and (max-width: $app-medium-media-query) {
   .swiper {
     width: 100%;
   }
 
   .control-wrapper {
     display: none;
+  }
+  .item-block {
+    .item-image {
+      width: 200%;
+    }
   }
 
   .slide-image {
