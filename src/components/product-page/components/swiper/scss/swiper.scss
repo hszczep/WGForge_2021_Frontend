@@ -129,4 +129,13 @@
   .control-wrapper {
     display: none;
   }
+
+  .slide-image {
+    width: 200%;
+  }
+}
+@media all and (max-width: $app-tablet-media-query) {
+  .slide-image {
+    width: 100%;
+  }
 }

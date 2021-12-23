@@ -1,7 +1,7 @@
 import { CATEGORIES, NATIONS, TANK_TYPES } from './admin.constants';
 import storage from '../../app/components/storage/storage';
 
-export default function detailsRender() {
+export default function detailsRender(productId: string) {
   const detailInfo = document.createElement('div');
   detailInfo.classList.add('full-information');
   let categories = '';
@@ -26,7 +26,7 @@ export default function detailsRender() {
   }
 
   detailInfo.innerHTML = `
-              <form id='product-form'>
+              <form id='product-form-${productId}'>
                 <div class='price-block'>
                   <label>Base Price:
                     <input required name='base_price' type='number' min='1' step='any' class='input-price'/>
