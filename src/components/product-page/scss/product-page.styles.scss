@@ -160,7 +160,7 @@
 
 @media all and (max-width: $app-max-media-query) {
   .item-block {
-    width: $app-tablet-width;
+    width: $app-medium-media-query;
 
     &__main-info {
       .discount {
@@ -235,6 +235,11 @@
         font-size: 16px;
       }
     }
+  }
+}
+@media all and (max-width: $app-medium-media-query) {
+  .item-block {
+    width: $app-tablet-width;
   }
 }
 
